@@ -1,6 +1,8 @@
 package Resources;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.swing.JOptionPane;
@@ -47,13 +49,12 @@ public class DateResource {
     }
 
     public static Date unformatDateString(String text){
-        String digitsOnly = text.replaceAll("\\D", "");
-        if(digitsOnly.length() < 8){
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return format.parse(text);
+        } catch (ParseException e) {
+            e.printStackTrace();
             return null;
         }
-        String year = digitsOnly.substring(4, 8);
-        String month = digitsOnly.substring(2, 4);
-        String day = digitsOnly.substring(0, 2);
-        return Date.valueOf(year + "-" + month + "-" + day);
     }
 }

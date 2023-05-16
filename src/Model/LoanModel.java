@@ -1,6 +1,6 @@
 package Model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import DAO.LoansDAO;
 import Resources.ToolboxResource;
@@ -13,15 +13,25 @@ public class LoanModel {
     private Date startDate;
     private Date endDate;
     private boolean returned;
+    private double price;
 
     public LoanModel(){
     }
 
-    public LoanModel(Integer id, Date startDate, Date endDate, boolean returned){
+    public LoanModel(Integer id, Date startDate, Date endDate, boolean returned, double price){
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
         this.returned = returned;
+        this.price = price;
+        tools = new ToolboxResource();
+    }
+
+    public LoanModel(Date startDate, Date endDate, boolean returned, double price){
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.returned = returned;
+        this.price = price;
         tools = new ToolboxResource();
     }
 
@@ -29,8 +39,18 @@ public class LoanModel {
         return this.id;
     }
 
+    public void setId(Integer id){
+        if(this.id == null){
+            this.id = id;
+        }
+    }
+
     public FriendModel getFriend(){
         return LoansDAO.getInstance().getFriendByLoanId(id);
+    }
+
+    public double getPrice(){
+        return this.price;
     }
 
     public Date getStartDate(){

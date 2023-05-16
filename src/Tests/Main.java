@@ -51,15 +51,6 @@ public class Main {
         FriendModel friendExample3 = new FriendModel("Amigo 3", addressExample, "48996755251");
         FriendModel friendExample4 = new FriendModel("Amigo 4", addressExample, "48996755251");
 
-        //LoanModel(Integer id, FriendModel friend, Date startDate, Date endDate, boolean returned)
-        LoanModel loanExample = new LoanModel(1, new java.sql.Date(System.currentTimeMillis()), new java.sql.Date(System.currentTimeMillis() + 7*24*60*60*1000), false);
-
-        //add tool to loan
-        loanExample.addTool(toolExample);
-
-        //start loan
-        loans.addLoan(loanExample, friendExample);
-
         friends.addFriend(friendExample);
         friends.addFriend(friendExample2);
         friends.addFriend(friendExample3);

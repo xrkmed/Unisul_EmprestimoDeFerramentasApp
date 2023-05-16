@@ -28,6 +28,10 @@ public class LoansDAO {
 
     //Methods
     public void addLoan(LoanModel e, FriendModel x) throws IllegalArgumentException{
+        if(e.getId() == null){
+            e.setId(loans.size() + 1);
+        }
+        
         if(getLoan(e.getId()) != null){
             throw new IllegalArgumentException("Loan with id " + e.getId() + " already exists");
         }

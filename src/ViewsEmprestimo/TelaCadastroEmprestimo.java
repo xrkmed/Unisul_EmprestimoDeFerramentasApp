@@ -23,8 +23,10 @@ import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
 
+import DAO.LoansDAO;
 import DAO.ToolsDAO;
 import Model.FriendModel;
+import Model.LoanModel;
 import Model.ToolModel;
 
 import javax.swing.event.DocumentEvent;
@@ -614,8 +616,8 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
     private void btnCadastrarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarEmprestimoActionPerformed
         if(selectedFriend != null){
             try{
-            Date date = DateResource.unformatDateString(textDataDevolucao.getText());
-            if(date.before(new Date())){
+            Date endDate = DateResource.unformatDateString(textDataDevolucao.getText());
+            if(endDate.before(new Date())){
                 JOptionPane.showMessageDialog(this, "A data de devolução não pode ser anterior a data de hoje!", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -630,8 +632,14 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "O valor a receber deve ser de no minimo zero reais.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            //LoanModel(Date startDate, Date endDate, boolean returned)
+            LoanModel loan = new LoanModel(new Date(), endDate, false, valorReceber);
+            for(ToolModel tool : toolsList){
+                loan.addTool(tool);
+            }
 
-            JOptionPane.showMessageDialog(this, "Emprestimo criado com sucesso!");
+            LoansDAO.getInstance().addLoan(loan, selectedFriend);
+            JOptionPane.showMessageDialog(this, "Emprestimo finalizado com sucesso!");
             this.dispose();
         }catch(ParseException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
