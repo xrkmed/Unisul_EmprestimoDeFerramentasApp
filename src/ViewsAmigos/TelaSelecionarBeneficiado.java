@@ -19,6 +19,7 @@ import Model.FriendModel;
 import Model.LoanModel;
 import Resources.CEPResource;
 import Resources.EditFriendCadResource;
+import Resources.PhoneValidResource;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
 
 /**
@@ -547,7 +548,7 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
                 }
 
                     
-             model.addRow(new Object[]{friend.getId(), "-", friend.getName(), CEPResource.returnTelefoneFormat(friend.getPhone()), friend.getAddress(), "0", "0"});
+             model.addRow(new Object[]{friend.getId(), "-", friend.getName(), PhoneValidResource.formatPhoneNumber(friend.getPhone()), friend.getAddress(), "0", "0"});
                     
         }
     }
