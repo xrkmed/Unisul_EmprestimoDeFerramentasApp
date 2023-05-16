@@ -14,12 +14,6 @@ public class FriendModel {
 
     }
 
-    public FriendModel(String name, AddressResource address, String phone){
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
-    }
-
     public FriendModel(Integer id, String name, AddressResource address, String phone){
         this.id = id;
         this.name = name;
@@ -29,11 +23,6 @@ public class FriendModel {
 
     public Integer getId(){
         return this.id;
-    }
-
-    public void setId(int id){
-        if(this.id == null)
-            this.id = id;
     }
 
     public String getName(){

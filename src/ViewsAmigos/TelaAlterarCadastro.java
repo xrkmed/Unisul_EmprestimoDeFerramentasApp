@@ -143,6 +143,11 @@ public class TelaAlterarCadastro extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel6.setText("CEP");
 
+        textCEP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textCEPActionPerformed(evt);
+            }
+        });
         textCEP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 textCEPKeyPressed(evt);
@@ -473,18 +478,19 @@ public class TelaAlterarCadastro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "[+] Alguns erros foram encontrados: \n\n\n" + mensagem);
         }else{
             try{
-                AddressResource address = new AddressResource(textRua.getText(), textBairro.getText(), textCidade.getText(), textEstado.getText(), Integer.parseInt(textCEP.getText()), textComplemento.getText(), Integer.parseInt(textNumero.getText()));
+                AddressResource address = new AddressResource(textRua.getText(), textBairro.getText(), textCidade.getText(), textEstado.getText(), Integer.parseInt(textNumero.getText()), textComplemento.getText(), Integer.parseInt(textCEP.getText()));
                 FriendModel friendModel = FriendsDAO.getInstance().getFriend(friend.getId());
                 if(friendModel == null){
                     throw new Exception("Amigo não encontrado");
                 }
 
                 friendModel.setName(textNome.getText().toUpperCase());
-                friendModel.setPhone(textTelefone.getText());
+                friendModel.setPhone(PhoneValidResource.unformatPhoneNumber(textTelefone.getText()));
                 friendModel.updateAddress(address);
 
+                FriendsDAO.getInstance().updateFriend(friendModel.getId(), friendModel);
+
                 JOptionPane.showMessageDialog(null, "Amigo alterado com sucesso!");
-                FriendsDAO.getInstance().logFriends();
                 this.dispose();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null, e.getMessage());
@@ -505,6 +511,10 @@ public class TelaAlterarCadastro extends javax.swing.JFrame {
             break;
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void textCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCEPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textCEPActionPerformed
 
     /**
      * @param args the command line arguments

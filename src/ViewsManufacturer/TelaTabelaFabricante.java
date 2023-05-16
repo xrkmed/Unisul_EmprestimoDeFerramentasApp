@@ -39,6 +39,14 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
      */
     public TelaTabelaFabricante() {
         initComponents();
+
+        Thread loadValues = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                loadValores();
+            }
+        });
+        loadValues.start();
     }
 
     /**
@@ -61,6 +69,7 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
         filtroFiltrarNome = new javax.swing.JCheckBox();
         textFiltrarNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        btnBuscar1 = new javax.swing.JButton();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -206,9 +215,17 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel3.setText("FILTROS");
 
+        btnBuscar1.setText("Buscar");
+        btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscar1ActionPerformed(evt);
+            }
+        });
+
         jLayeredPane2.setLayer(filtroFiltrarNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(textFiltrarNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(btnBuscar1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -223,6 +240,10 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(77, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBuscar1)
+                .addGap(16, 16, 16))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +254,9 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(filtroFiltrarNome)
                     .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBuscar1)
+                .addContainerGap())
         );
 
         jLayeredPane3.setBackground(new java.awt.Color(153, 153, 153));
@@ -392,6 +415,10 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
     }//GEN-LAST:event_textFiltrarNomeActionPerformed
 
     private void loadValores(){
+        selecionadoCNPJ.setText("");
+        selecionadoNome.setText("");
+        selectedManufacturer = null;
+        
         ManufacturerDAO dao = ManufacturerDAO.getInstance();
         ArrayList<ManufacturerResource> manufacturers = dao.getManufacturers();
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
@@ -409,61 +436,46 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
                 }
             }
         });
-        
-        //Desvia para outro thread para nao travar a tela
-        Thread p = new Thread(new Runnable(){
-            @Override
-            public void run() {
 
-                StatusRenderer statusRed = new StatusRenderer();
-                //statusRed.addHighlightedRow(1, Color.RED);
-                //statusRed.addHighlightedRow(3, Color.YELLOW);
+        StatusRenderer statusRed = new StatusRenderer();
                 
-                ArrayList<Integer> lowestSize = new ArrayList<>(Arrays.asList(0, 1));
-                for(Integer i : lowestSize){
-                    jTable2.getColumnModel().getColumn(i).setPreferredWidth(35);
-                    jTable2.getColumnModel().getColumn(i).setMinWidth(35);
-                    jTable2.getColumnModel().getColumn(i).setMaxWidth(35);
-                }
-
-                
-                for(ManufacturerResource manufacturer : manufacturers){
-                    if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
-                        if(!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
-                            continue;
-                        }
-                    }
-
-                    ArrayList<ToolModel> tools = ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId());
-                    int ferramentasEmUso = 0;
-                    for(ToolModel tool : tools){
-                        if(!tool.isAvailable()){
-                            ++ferramentasEmUso;   
-                        }
-                    }
-
-                    if(ferramentasEmUso == tools.size() && tools.size() > 0){
-                        statusRed.addHighlightedRow(model.getRowCount(), Color.RED);
-                        jTable2.getColumnModel().getColumn(1).setCellRenderer(statusRed);
-                    }
-
-                    model.addRow(new Object[]{manufacturer.getId(), "-", manufacturer.getName(), CNPJResource.returnCNPJFormat(manufacturer.getCNPJ()),"" + tools.size(), "" + ferramentasEmUso});
-                    
-                }
+        ArrayList<Integer> lowestSize = new ArrayList<>(Arrays.asList(0, 1));
+            for(Integer i : lowestSize){
+                jTable2.getColumnModel().getColumn(i).setPreferredWidth(35);
+                jTable2.getColumnModel().getColumn(i).setMinWidth(35);
+                jTable2.getColumnModel().getColumn(i).setMaxWidth(35);
             }
-        });
-        
-        p.start();
+
+                
+            for(ManufacturerResource manufacturer : manufacturers){
+                if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
+                    if(!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
+                         continue;
+                    }
+                }
+
+                ArrayList<ToolModel> tools = ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId());
+                int ferramentasEmUso = 0;
+                for(ToolModel tool : tools){
+                    if(!tool.isAvailable()){
+                        ++ferramentasEmUso;   
+                    }
+                }
+
+                if(ferramentasEmUso == tools.size() && tools.size() > 0){
+                    statusRed.addHighlightedRow(model.getRowCount(), Color.RED);
+                    jTable2.getColumnModel().getColumn(1).setCellRenderer(statusRed);
+                }
+
+                model.addRow(new Object[]{manufacturer.getId(), "-", manufacturer.getName(), CNPJResource.returnCNPJFormat(manufacturer.getCNPJ()),"" + tools.size(), "" + ferramentasEmUso});
+                    
+            }
     }
 
     private void textFiltrarNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFiltrarNomeKeyReleased
-        if(filtroFiltrarNome.isSelected()){
-            loadValores();
-        }
     }//GEN-LAST:event_textFiltrarNomeKeyReleased
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        loadValores();
     }//GEN-LAST:event_formWindowActivated
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
@@ -480,9 +492,6 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
                 
                 ManufacturerDAO.getInstance().removeManufacturer(selectedManufacturer.getId());
                 loadValores();
-                selectedManufacturer = null;
-                selecionadoNome.setText("");
-                selecionadoCNPJ.setText("");
             }
         }
     }//GEN-LAST:event_btnRemoverCadastroActionPerformed
@@ -491,8 +500,19 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
         if(selectedManufacturer != null){
             TelaPainelFerramentas tela = new TelaPainelFerramentas(selectedManufacturer);
             tela.setVisible(true);
+
+            tela.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                    loadValores();
+                }
+            });
         }
     }//GEN-LAST:event_btnRelatorioFerramentasActionPerformed
+
+    private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
+        loadValores();
+    }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -533,6 +553,8 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnBuscar1;
     private javax.swing.JButton btnRelatorioFerramentas;
     private javax.swing.JButton btnRemoverCadastro;
     private java.awt.Canvas canvas1;

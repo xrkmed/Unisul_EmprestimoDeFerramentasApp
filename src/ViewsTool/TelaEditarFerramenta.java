@@ -329,9 +329,8 @@ public class TelaEditarFerramenta extends javax.swing.JFrame {
                 return;
             }
 
-            tool.setNome(textFerramentaNome.getText());
-            tool.setPrice(price);
-            tool.updateManufacturer(selectedManufacturer);
+            ToolModel newTool = new ToolModel(0, textFerramentaNome.getText().toUpperCase(), selectedManufacturer, price, 0);
+            ToolsDAO.getInstance().updateTool(tool.getId(), newTool);
     
             JOptionPane.showMessageDialog(null, "Ferramenta alterada com sucesso!");
             this.dispose();

@@ -27,22 +27,8 @@ public class LoanModel {
         tools = new ToolboxResource();
     }
 
-    public LoanModel(Date startDate, Date endDate, boolean returned, double price){
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.returned = returned;
-        this.price = price;
-        tools = new ToolboxResource();
-    }
-
     public Integer getId(){
         return this.id;
-    }
-
-    public void setId(Integer id){
-        if(this.id == null){
-            this.id = id;
-        }
     }
 
     public FriendModel getFriend(){

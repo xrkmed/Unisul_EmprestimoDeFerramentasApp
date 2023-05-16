@@ -10,40 +10,26 @@ public class ToolModel {
     private ManufacturerResource manufacturer;
     private double price;
     private String nome;
+    private Integer loanId;
 
     public ToolModel(){
 
     }
 
-    public ToolModel(String nome, ManufacturerResource manufacturer, double price){
-        this.nome = nome;
-        this.manufacturer = manufacturer;
-        this.setPrice(price);
-    }
-
-    public ToolModel(Integer id, String nome, ManufacturerResource manufacturer, double price){
+    public ToolModel(Integer id, String nome, ManufacturerResource manufacturer, double price, Integer loanId){
         this.id = id;
         this.nome = nome;
         this.manufacturer = manufacturer;
-        this.setPrice(price);
+        this.price = price;
+        this.loanId = loanId;
     }
 
     public Integer getId(){
         return this.id;
     }
 
-    public void setId(int id){
-        if(this.id == null){
-            this.id = id;
-        }
-    }
-
     public ManufacturerResource getManufacturer(){
         return this.manufacturer;
-    }
-
-    public void updateManufacturer(ManufacturerResource manufacturer){
-        this.manufacturer = manufacturer;
     }
 
     public double getPrice(){
@@ -54,20 +40,12 @@ public class ToolModel {
         return this.nome;
     }
 
-    public void setNome(String newName){
-        this.nome = newName;
-    }
-
-    public void setPrice(double newPrice){
-        this.price = newPrice;
-    }
-
     public LoanModel getLoan(){
         return LoansDAO.getInstance().getLoanByToolId(id);
     }
 
     public boolean isAvailable(){
-        return getLoan() == null;
+        return loanId == 0;
     }
 
     @Override

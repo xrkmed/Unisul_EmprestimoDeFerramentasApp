@@ -32,6 +32,42 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
      */
     public TelaTabelaAmigos() {
         initComponents();
+
+
+        jTable2.getColumnModel().getColumn(1).setPreferredWidth(35);
+        jTable2.getColumnModel().getColumn(1).setMinWidth(35);
+        jTable2.getColumnModel().getColumn(1).setMaxWidth(35);
+
+        jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
+        jTable2.getColumnModel().getColumn(0).setMinWidth(35);
+        jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
+
+        ((DefaultTableModel) jTable2.getModel()).setRowCount(0);
+        jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        jTable2.getSelectionModel().addListSelectionListener(x -> {
+            if (!x.getValueIsAdjusting()) {
+                int selectedRow = jTable2.getSelectedRow();
+                if (selectedRow != -1) {
+                    selectedFriend = FriendsDAO.getInstance().getFriend(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
+                    selecionadoNome.setText(selectedFriend.getName().toUpperCase());
+                    selecionadoTelefone.setText(CEPResource.returnTelefoneFormat(selectedFriend.getPhone()));
+                }else{
+                    selectedFriend = null;
+                    selecionadoNome.setText("");
+                    selecionadoTelefone.setText("");
+                }
+            }
+        });
+
+        Thread loadValues = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                loadValores();
+            }
+        });
+
+        loadValues.start();
     }
 
     /**
@@ -61,6 +97,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         textFiltrarEndereco = new javax.swing.JTextField();
         filtroEndereco = new javax.swing.JCheckBox();
+        btnBuscar = new javax.swing.JButton();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -246,6 +283,13 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             }
         });
 
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
         jLayeredPane2.setLayer(filtroFiltrarNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(textFiltrarNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(filtroAmigosSemEmprestimoAberto, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -254,6 +298,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         jLayeredPane2.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(textFiltrarEndereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(filtroEndereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(btnBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -262,19 +307,24 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(filtroAmigosDevolverFerramenta)
-                    .addComponent(filtroAmigosEmEmprestimo)
-                    .addComponent(filtroAmigosSemEmprestimoAberto)
-                    .addComponent(jLabel3)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(filtroFiltrarNome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filtroAmigosDevolverFerramenta)
+                            .addComponent(filtroAmigosEmEmprestimo)
+                            .addComponent(filtroAmigosSemEmprestimoAberto)
+                            .addComponent(jLabel3)
+                            .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                                .addComponent(filtroFiltrarNome)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(29, Short.MAX_VALUE))
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addComponent(filtroEndereco)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textFiltrarEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addComponent(textFiltrarEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBuscar)
+                        .addGap(14, 14, 14))))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,7 +344,8 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(filtroEndereco)
-                    .addComponent(textFiltrarEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFiltrarEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar))
                 .addContainerGap())
         );
 
@@ -464,8 +515,6 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         }else{
             textFiltrarNome.setEnabled(false);
         }
-
-        loadValores();
     }//GEN-LAST:event_filtroFiltrarNomeActionPerformed
 
     private void textFiltrarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFiltrarNomeActionPerformed
@@ -473,77 +522,44 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_textFiltrarNomeActionPerformed
 
     private void loadValores(){
-        FriendsDAO dao = FriendsDAO.getInstance();
-        ArrayList<FriendModel> friends = dao.getFriends();
+        ArrayList<FriendModel> friends = FriendsDAO.getInstance().getFriends();
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         //CONFIGURACOES DA TABELA
         model.setRowCount(0);
         selectedFriend = null;
-        jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        selecionadoNome.setText("");
+        selecionadoTelefone.setText("");
 
-        jTable2.getSelectionModel().addListSelectionListener(x -> {
-            if (!x.getValueIsAdjusting()) {
-                int selectedRow = jTable2.getSelectedRow();
-                if (selectedRow != -1) {
-                    selectedFriend = dao.getFriend(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
-                    selecionadoNome.setText(selectedFriend.getName().toUpperCase());
-                    selecionadoTelefone.setText(CEPResource.returnTelefoneFormat(selectedFriend.getPhone()));
-                }else{
-                    selectedFriend = null;
-                    selecionadoNome.setText("");
-                    selecionadoTelefone.setText("");
-                }
-            }
-        });
         
-        //Desvia para outro thread para nao travar a tela
-        Thread p = new Thread(new Runnable(){
-            @Override
-            public void run() {
+        //StatusRenderer statusRed = new StatusRenderer();
+        //statusRed.addHighlightedRow(1, Color.RED);
+        //statusRed.addHighlightedRow(3, Color.YELLOW);
+        //jTable2.getColumnModel().getColumn(1).setCellRenderer(statusRed);
 
-                StatusRenderer statusRed = new StatusRenderer();
-                statusRed.addHighlightedRow(1, Color.RED);
-                statusRed.addHighlightedRow(3, Color.YELLOW);
-                jTable2.getColumnModel().getColumn(1).setCellRenderer(statusRed);
-                jTable2.getColumnModel().getColumn(1).setPreferredWidth(35);
-                jTable2.getColumnModel().getColumn(1).setMinWidth(35);
-                jTable2.getColumnModel().getColumn(1).setMaxWidth(35);
-
-                jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
-                jTable2.getColumnModel().getColumn(0).setMinWidth(35);
-                jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
                 
-                for(FriendModel friend : friends){
-                    if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
-                        if(!friend.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
-                            continue;
-                        }
-                    }
-
-                    if(filtroEndereco.isSelected() && textFiltrarEndereco.getText().trim().length() > 0){
-                        if(!friend.getAddress().toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())){
-                            continue;
-                        }
-                    }
-
-                    
-                    model.addRow(new Object[]{friend.getId(), "-", friend.getName(), CEPResource.returnTelefoneFormat(friend.getPhone()), friend.getAddress(), "0", "0"});
-                    
+        for(FriendModel friend : friends){
+            if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
+                if(!friend.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
+                    continue;
                 }
             }
-        });
-        
-        p.start();
+
+            if(filtroEndereco.isSelected() && textFiltrarEndereco.getText().trim().length() > 0){
+                if(!friend.getAddress().toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())){
+                    continue;
+                }
+            }
+
+                    
+             model.addRow(new Object[]{friend.getId(), "-", friend.getName(), CEPResource.returnTelefoneFormat(friend.getPhone()), friend.getAddress(), "0", "0"});
+                    
+        }
     }
 
     private void textFiltrarNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFiltrarNomeKeyReleased
-        if(filtroFiltrarNome.isSelected()){
-            loadValores();
-        }
     }//GEN-LAST:event_textFiltrarNomeKeyReleased
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        loadValores();
     }//GEN-LAST:event_formWindowActivated
 
     private void btnVerTodosEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerTodosEmprestimosActionPerformed
@@ -557,14 +573,8 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
     private void btnDadosCadastraisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDadosCadastraisActionPerformed
         if(selectedFriend != null){
-            Thread editCad = new Thread(new Runnable(){
-                @Override
-                public void run() {
-                    EditFriendCadResource.editFriendCadResource(selectedFriend);
-                }
-            });
-
-            editCad.start();
+            EditFriendCadResource.editFriendCadResource(selectedFriend);
+            loadValores();
         }
     }//GEN-LAST:event_btnDadosCadastraisActionPerformed
 
@@ -573,9 +583,6 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_textFiltrarEnderecoActionPerformed
 
     private void textFiltrarEnderecoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFiltrarEnderecoKeyReleased
-        if(filtroEndereco.isSelected()){
-            loadValores();
-        }
     }//GEN-LAST:event_textFiltrarEnderecoKeyReleased
 
     private void filtroEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroEnderecoActionPerformed
@@ -584,8 +591,6 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         }else{
             textFiltrarEndereco.setEnabled(false);
         }
-
-        loadValores();
     }//GEN-LAST:event_filtroEnderecoActionPerformed
 
     private void btnRemoverCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverCadastroActionPerformed
@@ -593,8 +598,8 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             int dialogResult = JOptionPane.showConfirmDialog (null, "Deseja realmente remover o cadastro de " + selectedFriend.getName() + "?","Atenção",JOptionPane.YES_NO_OPTION);
             if(dialogResult == JOptionPane.YES_OPTION){
                 LoansDAO loansDAO = LoansDAO.getInstance();
-                for(LoanModel loan : loansDAO.getLoans()){
-                    if(loan.getFriend().getId() == selectedFriend.getId()){
+                for(LoanModel loan : loansDAO.getAllLoans()){
+                    if(loan.getFriend().getId() == selectedFriend.getId() && loan.getReturned() == false){
                         JOptionPane.showMessageDialog(null, "Não é possível remover o cadastro de " + selectedFriend.getName() + " pois ele possui empréstimos pendentes.");
                         return;
                     }
@@ -602,9 +607,14 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
                 FriendsDAO dao = FriendsDAO.getInstance();
                 dao.removeFriend(selectedFriend);
+                loadValores();
             }
         }
     }//GEN-LAST:event_btnRemoverCadastroActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        loadValores();
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -643,6 +653,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnDadosCadastrais;
     private javax.swing.JButton btnRelatorioFerramentas;
     private javax.swing.JButton btnRemoverCadastro;

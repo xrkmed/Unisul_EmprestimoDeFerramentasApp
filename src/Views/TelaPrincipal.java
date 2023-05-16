@@ -27,32 +27,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
-
-        initAlert();
-    }
-
-    public void initAlert(){
-        new EventScheduler().addEvent(2000, () -> initAlert());
-
-        lblAlert.setVisible(false);
-        ToolsDAO toolsDAO = ToolsDAO.getInstance();
-        ArrayList<ToolModel> tools = toolsDAO.getTools();
-
-        int count = 0;
-        for(ToolModel obj : tools){
-            if(!obj.isAvailable() && obj.getLoan().getEndDate().before(new Date(System.currentTimeMillis()))){
-                count++;
-            }
-
-            count++;
-        }
-
-        if(count > 0){
-            lblAlert.setText(count + " AMIGOS ESTAO COM FERRAMENTAS PENDENTES DE DEVOLUÇAO!!!");
-            lblAlert.setVisible(true);
-            new EventScheduler().addEvent(1300, () -> lblAlert.setVisible(false));
-        }
-        
     }
 
     /**
@@ -64,7 +38,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblAlert = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         fileMenu1 = new javax.swing.JMenu();
@@ -100,10 +73,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Grupo Supimpa - Aplicativo de gerenciamento de emprestimo de ferramentas");
-
-        lblAlert.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        lblAlert.setForeground(new java.awt.Color(255, 0, 0));
-        lblAlert.setText("1 AMIGOS ESTAO COM FERRAMENTAS PARA DEVOLUÇAO!!!");
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Administrativo");
@@ -288,17 +257,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(390, Short.MAX_VALUE)
-                .addComponent(lblAlert)
-                .addGap(32, 32, 32))
+            .addGap(0, 1136, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(lblAlert)
-                .addContainerGap(492, Short.MAX_VALUE))
+            .addGap(0, 543, Short.MAX_VALUE)
         );
 
         pack();
@@ -481,7 +444,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator7;
     private javax.swing.JPopupMenu.Separator jSeparator8;
     private javax.swing.JPopupMenu.Separator jSeparator9;
-    private javax.swing.JLabel lblAlert;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 

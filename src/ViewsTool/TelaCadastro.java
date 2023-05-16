@@ -311,8 +311,8 @@ public class TelaCadastro extends javax.swing.JFrame {
                 return;
             }
 
-            ToolModel registeredTool = new ToolModel(textFerramentaNome.getText().toUpperCase(), selectedManufacturer, price);
-            ToolsDAO.getInstance().addTool(registeredTool);
+            ToolsDAO.getInstance().addTool(textFerramentaNome.getText().toUpperCase(), price, (selectedManufacturer != null ? selectedManufacturer.getId() : -1));
+            
     
             JOptionPane.showMessageDialog(null, "Ferramenta cadastrada com sucesso!");
             this.dispose();

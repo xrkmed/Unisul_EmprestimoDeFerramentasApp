@@ -1,6 +1,7 @@
 package Resources;
 
 import java.util.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -56,5 +57,20 @@ public class DateResource {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static String convertDatabaseData(String data) {
+        String dataConvertida = null;
+        DateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy");
+        
+        try {
+            Date date = formatoEntrada.parse(data);
+            dataConvertida = formatoSaida.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        return dataConvertida;
     }
 }

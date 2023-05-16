@@ -42,6 +42,33 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
      */
     public TelaSelecionarFabricante() {
         initComponents();
+
+
+        ManufacturerDAO dao = ManufacturerDAO.getInstance();
+        jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
+        jTable2.getColumnModel().getColumn(0).setMinWidth(35);
+        jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
+
+        ((DefaultTableModel) jTable2.getModel()).setRowCount(0);
+        jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        jTable2.getSelectionModel().addListSelectionListener(x -> {
+            if (!x.getValueIsAdjusting()) {
+                int selectedRow = jTable2.getSelectedRow();
+                if (selectedRow != -1) {
+                    updateManufacturer(dao.getManufacturer(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString())));
+                    selecionadoNome.setText(selectedManufacturer.getName());
+                    selecionadoCNPJ.setText(CNPJResource.returnCNPJFormat(selectedManufacturer.getCNPJ()));
+                }
+            }
+        });
+
+        new Thread(new Runnable() {
+            @Override
+            public void run(){
+                loadValores();
+            }
+        }).start();
     }
 
     public TelaSelecionarFabricante(JFrame parent){
@@ -69,6 +96,7 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
         filtroFiltrarNome = new javax.swing.JCheckBox();
         textFiltrarNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -165,9 +193,17 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel3.setText("FILTROS");
 
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
         jLayeredPane2.setLayer(filtroFiltrarNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(textFiltrarNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(btnBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -182,6 +218,10 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(77, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBuscar)
+                .addGap(21, 21, 21))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +232,9 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(filtroFiltrarNome)
                     .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBuscar)
+                .addGap(15, 15, 15))
         );
 
         jLayeredPane3.setBackground(new java.awt.Color(153, 153, 153));
@@ -289,13 +331,13 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1502, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator1)
-                        .addContainerGap())
+                        .addComponent(jSeparator1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(549, Short.MAX_VALUE))))
+                        .addGap(0, 543, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,52 +386,23 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         //CONFIGURACOES DA TABELA
         model.setRowCount(0);
-        jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        jTable2.getSelectionModel().addListSelectionListener(x -> {
-            if (!x.getValueIsAdjusting()) {
-                int selectedRow = jTable2.getSelectedRow();
-                if (selectedRow != -1) {
-                    updateManufacturer(dao.getManufacturer(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString())));
-                    selecionadoNome.setText(selectedManufacturer.getName());
-                    selecionadoCNPJ.setText(CNPJResource.returnCNPJFormat(selectedManufacturer.getCNPJ()));
-                }
-            }
-        });
-        
-        //Desvia para outro thread para nao travar a tela
-        Thread p = new Thread(new Runnable(){
-            @Override
-            public void run() {                
-                    jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
-                    jTable2.getColumnModel().getColumn(0).setMinWidth(35);
-                    jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
-
                 
-                for(ManufacturerResource manufacturer : manufacturers){
-                    if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
-                        if(!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
-                            continue;
-                        }
-                    }
-
-                    model.addRow(new Object[]{manufacturer.getId(), manufacturer.getName(), CNPJResource.returnCNPJFormat(manufacturer.getCNPJ())});
-                    
+        for(ManufacturerResource manufacturer : manufacturers){
+            if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
+                if(!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
+                    continue;
                 }
             }
-        });
-        
-        p.start();
+
+        model.addRow(new Object[]{manufacturer.getId(), manufacturer.getName(), CNPJResource.returnCNPJFormat(manufacturer.getCNPJ())});
+                    
+        }
     }
 
     private void textFiltrarNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFiltrarNomeKeyReleased
-        if(filtroFiltrarNome.isSelected()){
-            loadValores();
-        }
     }//GEN-LAST:event_textFiltrarNomeKeyReleased
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        loadValores();
     }//GEN-LAST:event_formWindowActivated
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
@@ -413,6 +426,10 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnSelecionarFabricanteActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        loadValores();
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -457,6 +474,7 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnSelecionarFabricante;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;

@@ -403,9 +403,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void btnFinalizarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCadastroActionPerformed
         if(cnpjObject != null && cnpjObject.getStatus().equals("OK")){
             try{
-                ManufacturerResource manufacturer = new ManufacturerResource(cnpjObject.getNome(), CNPJResource.returnCNPJUnformat(cnpjObject.getCNPJ()));
-                ManufacturerDAO manufacturerDAO = ManufacturerDAO.getInstance();
-                manufacturerDAO.addManufacturer(manufacturer);
+                ManufacturerResource manufacturer = ManufacturerDAO.getInstance().addManufacturer(cnpjObject.getNome(), CNPJResource.returnCNPJUnformat(cnpjObject.getCNPJ()));
                 JOptionPane.showMessageDialog(null, "Fabricante " + cnpjObject.getNome() + " (" + cnpjObject.getCNPJ() + ") cadastrado com sucesso!");
                 this.dispose();
             }catch(Exception e){

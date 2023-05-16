@@ -452,11 +452,9 @@ public class TelaCadastro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "[+] Alguns erros foram encontrados: \n\n\n" + mensagem);
         }else{
             try{
-                AddressResource address = new AddressResource(textRua.getText(), textBairro.getText(), textCidade.getText(), textEstado.getText(), Integer.parseInt(textCEP.getText()), textComplemento.getText(), Integer.parseInt(textNumero.getText()));
-                FriendModel friendModel = new FriendModel(textNome.getText().toUpperCase(), address, PhoneValidResource.unformatPhoneNumber(textTelefone.getText()));
-                FriendsDAO.getInstance().addFriend(friendModel);
-                JOptionPane.showMessageDialog(null, "Amigo cadastrado com sucesso!");
-                FriendsDAO.getInstance().logFriends();
+                AddressResource address = new AddressResource(textRua.getText(), textBairro.getText(), textCidade.getText(), textEstado.getText(), Integer.parseInt(textNumero.getText()), textComplemento.getText(), Integer.parseInt(textCEP.getText()));
+                FriendModel friendModel = FriendsDAO.getInstance().addFriend(textNome.getText().toUpperCase(), PhoneValidResource.unformatPhoneNumber(textTelefone.getText()), address);
+                JOptionPane.showMessageDialog(null, "Amigo cadastrado com sucesso! (" + friendModel.getId() + ")");
                 this.dispose();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null, e.getMessage());

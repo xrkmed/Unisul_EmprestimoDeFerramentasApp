@@ -33,6 +33,7 @@ import javax.swing.event.DocumentEvent;
 
 import Resources.BRLResource;
 import Resources.DateResource;
+import Resources.ToolboxResource;
 import ViewsAmigos.TelaSelecionarBeneficiado;
 import ViewsTool.TelaSelecionarFerramenta;
 
@@ -44,7 +45,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
 
     private ToolModel selectedTool = null;
     private FriendModel selectedFriend = null;
-    private ArrayList<ToolModel> toolsList = new ArrayList<>();
+    private ToolboxResource toolsList = new ToolboxResource();
     /**
      * Creates new form TelaCadastroEmprestimo
      */
@@ -54,17 +55,22 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         //today date in string format dd/MM/YYYY
         lblDataHoje.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        ToolsDAO dao = ToolsDAO.getInstance();
         jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         jTable1.getSelectionModel().addListSelectionListener(x -> {
             if (!x.getValueIsAdjusting()) {
                 int selectedRow = jTable1.getSelectedRow();
                 if (selectedRow != -1) {
-                    selectedTool = dao.getTool(((int) jTable1.getValueAt(selectedRow, 0)));
-                    selecionadoNome.setText(selectedTool.getNome());
+                    selecionadoNome.setText(jTable1.getValueAt(selectedRow, 1).toString());
                     selecionadoFabricante.setText(jTable1.getValueAt(selectedRow, 2).toString());
                     btnRemoverFerramenta.setEnabled(true);
+
+                    for(ToolModel tool : toolsList.getTools()){
+                        if(tool.getId() == (int)jTable1.getValueAt(selectedRow, 0)){
+                            selectedTool = tool;
+                            break;
+                        }
+                    }
                 }else{
                     selectedTool = null;
                     selecionadoNome.setText("");
@@ -567,7 +573,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
 
     
     public ArrayList<ToolModel> getToolsList(){
-        return toolsList;
+        return toolsList.getTools();
     }
 
     public void loadFerramentasList(){;
@@ -576,7 +582,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         double totalValue = 0;
-        for (ToolModel tool : toolsList) {
+        for (ToolModel tool : toolsList.getTools()) {
             model.addRow(new Object[]{
                 tool.getId(),
                 tool.getNome(),
@@ -593,8 +599,8 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         if(selectedTool != null){
             selecionadoFabricante.setText("");
             selecionadoNome.setText("");
-            if(toolsList.contains(selectedTool)){
-                toolsList.remove(selectedTool);
+            if(toolsList.containsTool(selectedTool.getId())){
+                toolsList.removeTool(selectedTool);
                 loadFerramentasList();
             }
             selectedTool = null;
@@ -622,7 +628,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 return;
             }
 
-            if(toolsList.isEmpty()){
+            if(toolsList.size() == 0){
                 JOptionPane.showMessageDialog(this, "Você deve adicionar pelo menos uma ferramenta!", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -633,12 +639,11 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 return;
             }
             //LoanModel(Date startDate, Date endDate, boolean returned)
-            LoanModel loan = new LoanModel(new Date(), endDate, false, valorReceber);
-            for(ToolModel tool : toolsList){
-                loan.addTool(tool);
+            LoanModel loan = LoansDAO.getInstance().addLoan(new Date(), endDate, valorReceber, selectedFriend.getId());
+            for(ToolModel tool : toolsList.getTools()){
+                ToolsDAO.getInstance().addToolToLoan(tool.getId(), loan.getId());
             }
-
-            LoansDAO.getInstance().addLoan(loan, selectedFriend);
+            
             JOptionPane.showMessageDialog(this, "Emprestimo finalizado com sucesso!");
             this.dispose();
         }catch(ParseException e){
@@ -648,8 +653,8 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarEmprestimoActionPerformed
 
     public void addFerramenta(ToolModel e){
-        if(!toolsList.contains(e)){
-            toolsList.add(e);
+        if(!toolsList.containsTool(e.getId())){
+            toolsList.addTool(e);
             loadFerramentasList();
         }
     }

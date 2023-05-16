@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import DAO.ManufacturerDAO;
 import DAO.ToolsDAO;
 import Model.ToolModel;
 import Resources.ManufacturerResource;
@@ -246,31 +247,19 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
 
     private void btnCadFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadFabricanteActionPerformed
         if(selectedTool != null && selectedTool.getManufacturer() == null){
-            selectedTool.updateManufacturer(manufacturer);
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    loadFerramentasList();
-                    loadFerramentasSemFabricantes();
-                }
-            });
-            t.start();
+            ToolsDAO.getInstance().updateManufacturer(selectedTool.getId(), manufacturer.getId());
+            loadFerramentasList();
+            loadFerramentasSemFabricantes();
         }else{
             JOptionPane.showMessageDialog(null, "Selecione uma ferramenta sem fabricante para adicionar o fabricante selecionado");
         }
     }//GEN-LAST:event_btnCadFabricanteActionPerformed
 
     private void btnRemFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemFabricanteActionPerformed
-        if(selectedTool != null && selectedTool.getManufacturer() == manufacturer){
-            selectedTool.updateManufacturer(null);
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    loadFerramentasList();
-                    loadFerramentasSemFabricantes();
-                }
-            });
-            t.start();
+        if(selectedTool != null && selectedTool.getManufacturer().getId() == manufacturer.getId()){
+            ToolsDAO.getInstance().updateManufacturer(selectedTool.getId(), -1);
+            loadFerramentasList();
+            loadFerramentasSemFabricantes();
         }else{
             JOptionPane.showMessageDialog(null, "Selecione uma ferramenta deste fabricante para remover o fabricante");
         }
@@ -299,8 +288,6 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
                 if (selectedRow != -1) {
                     selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasSemFab.getValueAt(selectedRow, 0));
                     ferramentasList.clearSelection();
-                }else{
-                    selectedTool = null;
                 }
             }
         });
@@ -325,8 +312,6 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
                 if (selectedRow != -1) {
                     selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasList.getValueAt(selectedRow, 0));
                     ferramentasSemFab.clearSelection();
-                }else{
-                    selectedTool = null;
                 }
             }
         });
