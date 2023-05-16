@@ -63,9 +63,9 @@ public class Database {
         }
     }
 
+    // Pingar a database a cada 5 segundos para manter a conexão viva
     public void ping(){
         try{
-            System.out.println("ping in...");
             if(conn != null){
              DBQuery.executeQuery("SELECT 1;");
             }
