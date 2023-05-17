@@ -57,6 +57,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLayeredPane1" min="-2" max="-2" attributes="0"/>
                   <Component id="btnVerificarFabricante" min="-2" pref="215" max="-2" attributes="0"/>
+                  <Component id="btnPularVerificacao" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLayeredPane2" max="-2" attributes="0"/>
@@ -72,6 +73,8 @@
                   <Component id="jLayeredPane2" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="jLayeredPane1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnPularVerificacao" min="-2" pref="26" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnVerificarFabricante" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
@@ -346,5 +349,13 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnPularVerificacao">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cadastrar fabricante sem verificar status do CNPJ"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPularVerificacaoActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

@@ -67,6 +67,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         textoRazaoSocial = new javax.swing.JLabel();
         btnFinalizarCadastro = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        btnPularVerificacao = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
@@ -265,6 +266,13 @@ public class TelaCadastro extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnPularVerificacao.setText("Cadastrar fabricante sem verificar status do CNPJ");
+        btnPularVerificacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPularVerificacaoActionPerformed(evt);
+            }
+        });
+
         fileMenu.setMnemonic('f');
         fileMenu.setText("Segurança");
 
@@ -289,7 +297,8 @@ public class TelaCadastro extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVerificarFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnVerificarFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPularVerificacao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -302,6 +311,8 @@ public class TelaCadastro extends javax.swing.JFrame {
                     .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPularVerificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnVerificarFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -395,6 +406,35 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
     }//GEN-LAST:event_formWindowOpened
 
+    private void btnPularVerificacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPularVerificacaoActionPerformed
+        int opcao = JOptionPane.showConfirmDialog(this, "Pular a verificaçao de CNPJ pode resultar em dados incorretos do fabricante, voce tem certeza que deseja cadastrar sem buscar por mais informacoes?", "Confirmar escolha", JOptionPane.YES_NO_OPTION);
+        if(opcao == JOptionPane.NO_OPTION){
+            return;
+        }
+
+        if(textoNomeFantasia.getText().length() == 0){
+            JOptionPane.showMessageDialog(null, "Preencha o nome do fabricante!");
+            return;
+        }
+
+        if(textoNomeFantasia.getText().length() < 3 || textoNomeFantasia.getText().length() > 50){
+            JOptionPane.showMessageDialog(null, "Nome do fabricante inválido!");
+            return;
+        }
+
+        if(CNPJResource.validarCNPJ(textoCNPJ.getText())){
+            try{
+                ManufacturerResource manufacturer = ManufacturerDAO.getInstance().addManufacturer(textoNomeFantasia.getText().toUpperCase(), CNPJResource.returnCNPJUnformat(textoCNPJ.getText()));
+                JOptionPane.showMessageDialog(null, "Fabricante " + manufacturer.getName() + " (" + manufacturer.getCNPJ() + ") cadastrado com sucesso!");
+                this.dispose();
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "CNPJ inválido!");
+        }
+    }//GEN-LAST:event_btnPularVerificacaoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -433,6 +473,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CNPJLabel;
     private javax.swing.JButton btnFinalizarCadastro;
+    private javax.swing.JButton btnPularVerificacao;
     private javax.swing.JButton btnVerificarFabricante;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;

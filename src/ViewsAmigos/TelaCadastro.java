@@ -522,6 +522,11 @@ public class TelaCadastro extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Aguarde enquanto o CEP é consultado...", "Aguarde", JOptionPane.INFORMATION_MESSAGE);
 
         try{
+            int opcao = JOptionPane.showConfirmDialog(this, "Para buscar um CEP, voce precisa ter uma conexao estavel com a internet, deseja procurar um CEP?", "Confirmar busca", JOptionPane.YES_NO_OPTION);
+            if(opcao == JOptionPane.NO_OPTION){
+                return;
+            }
+
             AddressResource cepBuscado = CEPResource.buscarCEP(Integer.parseInt(textCEP.getText()));
             
             selectEstado.setSelectedItem(cepBuscado.getState());
