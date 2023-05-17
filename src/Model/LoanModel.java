@@ -1,8 +1,10 @@
 package Model;
 
+import java.sql.SQLException;
 import java.util.Date;
 
 import DAO.LoansDAO;
+import Exceptions.DatabaseResultQueryException;
 import Resources.ToolboxResource;
 import java.util.Objects;
 
@@ -31,7 +33,7 @@ public class LoanModel {
         return this.id;
     }
 
-    public FriendModel getFriend(){
+    public FriendModel getFriend() throws DatabaseResultQueryException, SQLException{
         return LoansDAO.getInstance().getFriendByLoanId(id);
     }
 

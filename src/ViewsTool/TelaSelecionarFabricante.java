@@ -25,7 +25,6 @@ import Model.FriendModel;
 import Model.ToolModel;
 import Resources.CEPResource;
 import Resources.CNPJResource;
-import Resources.EditFriendCadResource;
 import Resources.ManufacturerResource;
 
 /**
@@ -57,10 +56,14 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
                 jTable2.getSelectionModel().addListSelectionListener(x -> {
                     if (!x.getValueIsAdjusting()) {
                         int selectedRow = jTable2.getSelectedRow();
-                        if (selectedRow != -1) {
-                            updateManufacturer(dao.getManufacturer(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString())));
-                            selecionadoNome.setText(selectedManufacturer.getName());
-                            selecionadoCNPJ.setText(CNPJResource.returnCNPJFormat(selectedManufacturer.getCNPJ()));
+                        try{
+                            if (selectedRow != -1) {
+                                updateManufacturer(dao.getManufacturer(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString())));
+                                selecionadoNome.setText(selectedManufacturer.getName());
+                                selecionadoCNPJ.setText(CNPJResource.returnCNPJFormat(selectedManufacturer.getCNPJ()));
+                            }
+                        }catch(Exception e){
+                            JOptionPane.showMessageDialog(null, "Erro ao selecionar fabricante: " + e.getMessage());
                         }
                     }
                 });
@@ -380,21 +383,25 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
     }
 
     private void loadValores(){
-        ManufacturerDAO dao = ManufacturerDAO.getInstance();
-        ArrayList<ManufacturerResource> manufacturers = dao.getManufacturers();
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        //CONFIGURACOES DA TABELA
-        model.setRowCount(0);
-                
-        for(ManufacturerResource manufacturer : manufacturers){
-            if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
-                if(!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
-                    continue;
-                }
-            }
-
-        model.addRow(new Object[]{manufacturer.getId(), manufacturer.getName(), CNPJResource.returnCNPJFormat(manufacturer.getCNPJ())});
+        try{
+            ManufacturerDAO dao = ManufacturerDAO.getInstance();
+            ArrayList<ManufacturerResource> manufacturers = dao.getManufacturers();
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            //CONFIGURACOES DA TABELA
+            model.setRowCount(0);
                     
+            for(ManufacturerResource manufacturer : manufacturers){
+                if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
+                    if(!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
+                        continue;
+                    }
+                }
+
+            model.addRow(new Object[]{manufacturer.getId(), manufacturer.getName(), CNPJResource.returnCNPJFormat(manufacturer.getCNPJ())});
+                        
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao carregar fabricantes: " + e.getMessage());
         }
     }
 

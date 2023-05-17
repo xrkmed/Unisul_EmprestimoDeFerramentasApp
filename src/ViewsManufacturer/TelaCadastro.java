@@ -363,10 +363,14 @@ public class TelaCadastro extends javax.swing.JFrame {
             return;
         }
 
-        if(ManufacturerDAO.getInstance().getManufacturer(CNPJResource.returnCNPJUnformat(textoCNPJ.getText())) != null){
-            JOptionPane.showMessageDialog(null, "Fabricante com este CNPJ já cadastrado!");
-            textoCNPJ.setText("");
-            return;
+        try{
+            if(ManufacturerDAO.getInstance().getManufacturer(CNPJResource.returnCNPJUnformat(textoCNPJ.getText())) != null){
+                JOptionPane.showMessageDialog(null, "Fabricante com este CNPJ já cadastrado!");
+                textoCNPJ.setText("");
+                return;
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
         
         if(CNPJResource.validarCNPJ(CNPJResource.returnCNPJUnformat(textoCNPJ.getText()))){

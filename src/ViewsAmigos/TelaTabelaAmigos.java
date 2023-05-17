@@ -21,7 +21,6 @@ import DAO.LoansDAO;
 import Model.FriendModel;
 import Model.LoanModel;
 import Resources.CEPResource;
-import Resources.EditFriendCadResource;
 import Resources.PhoneValidResource;
 
 /**
@@ -53,17 +52,21 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                 jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
                 jTable2.getSelectionModel().addListSelectionListener(x -> {
-                    if (!x.getValueIsAdjusting()) {
-                        int selectedRow = jTable2.getSelectedRow();
-                        if (selectedRow != -1) {
-                            selectedFriend = FriendsDAO.getInstance().getFriend(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
-                            selecionadoNome.setText(selectedFriend.getName().toUpperCase());
-                            selecionadoTelefone.setText(CEPResource.returnTelefoneFormat(selectedFriend.getPhone()));
-                        }else{
-                            selectedFriend = null;
-                            selecionadoNome.setText("");
-                            selecionadoTelefone.setText("");
+                    try{
+                        if (!x.getValueIsAdjusting()) {
+                            int selectedRow = jTable2.getSelectedRow();
+                            if (selectedRow != -1) {
+                                selectedFriend = FriendsDAO.getInstance().getFriend(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
+                                selecionadoNome.setText(selectedFriend.getName().toUpperCase());
+                                selecionadoTelefone.setText(CEPResource.returnTelefoneFormat(selectedFriend.getPhone()));
+                            }else{
+                                selectedFriend = null;
+                                selecionadoNome.setText("");
+                                selecionadoTelefone.setText("");
+                            }
                         }
+                    }catch(Exception e){
+                        JOptionPane.showMessageDialog(null, e.getMessage());
                     }
                 });
 
@@ -532,46 +535,50 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_textFiltrarNomeActionPerformed
 
     private void loadValores(){
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        //CONFIGURACOES DA TABELA
-        model.setRowCount(0);
-        selectedFriend = null;
-        selecionadoNome.setText("");
-        selecionadoTelefone.setText("");
+        try{
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            //CONFIGURACOES DA TABELA
+            model.setRowCount(0);
+            selectedFriend = null;
+            selecionadoNome.setText("");
+            selecionadoTelefone.setText("");
 
-        StatusRenderer renderer = new StatusRenderer();
-        //statusRed.addHighlightedRow(1, Color.RED);
+            StatusRenderer renderer = new StatusRenderer();
+            //statusRed.addHighlightedRow(1, Color.RED);
 
-                
-        for(Object[] data : FriendsDAO.getInstance().loadFriendsTabela()){
-            if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
-                if(!data[2].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
-                    continue;
-                }
-            }
-
-            if(filtroEndereco.isSelected() && textFiltrarEndereco.getText().trim().length() > 0){
-                if(!data[4].toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())){
-                    continue;
-                }
-            }
-
-            if(Integer.parseInt(data[5].toString()) > 0){
-                renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
-                for(int i = 0; i < jTable2.getColumnCount(); i++){
-                    jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
-                }
-            }
-
-            if(Integer.parseInt(data[6].toString()) > 0){
-                renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
-                for(int i = 0; i < jTable2.getColumnCount(); i++){
-                    jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
-                }
-            }
                     
-             model.addRow(data);
-                    
+            for(Object[] data : FriendsDAO.getInstance().loadFriendsTabela()){
+                if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
+                    if(!data[2].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
+                        continue;
+                    }
+                }
+
+                if(filtroEndereco.isSelected() && textFiltrarEndereco.getText().trim().length() > 0){
+                    if(!data[4].toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())){
+                        continue;
+                    }
+                }
+
+                if(Integer.parseInt(data[5].toString()) > 0){
+                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
+                    for(int i = 0; i < jTable2.getColumnCount(); i++){
+                        jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
+                    }
+                }
+
+                if(Integer.parseInt(data[6].toString()) > 0){
+                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
+                    for(int i = 0; i < jTable2.getColumnCount(); i++){
+                        jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
+                    }
+                }
+                        
+                model.addRow(data);
+                        
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao carregar os dados da tabela: " + e.getMessage());
         }
     }
 
@@ -624,21 +631,25 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_filtroEnderecoActionPerformed
 
     private void btnRemoverCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverCadastroActionPerformed
-        if(selectedFriend != null){
-            int dialogResult = JOptionPane.showConfirmDialog (null, "Deseja realmente remover o cadastro de " + selectedFriend.getName() + "?","Atenção",JOptionPane.YES_NO_OPTION);
-            if(dialogResult == JOptionPane.YES_OPTION){
-                LoansDAO loansDAO = LoansDAO.getInstance();
-                for(LoanModel loan : loansDAO.getAllLoans()){
-                    if(loan.getFriend().getId() == selectedFriend.getId() && loan.getReturned() == false){
-                        JOptionPane.showMessageDialog(null, "Não é possível remover o cadastro de " + selectedFriend.getName() + " pois ele possui empréstimos pendentes.");
-                        return;
+        try{
+            if(selectedFriend != null){
+                int dialogResult = JOptionPane.showConfirmDialog (null, "Deseja realmente remover o cadastro de " + selectedFriend.getName() + "?","Atenção",JOptionPane.YES_NO_OPTION);
+                if(dialogResult == JOptionPane.YES_OPTION){
+                    LoansDAO loansDAO = LoansDAO.getInstance();
+                    for(LoanModel loan : loansDAO.getAllLoans()){
+                        if(loan.getFriend().getId() == selectedFriend.getId() && loan.getReturned() == false){
+                            JOptionPane.showMessageDialog(null, "Não é possível remover o cadastro de " + selectedFriend.getName() + " pois ele possui empréstimos pendentes.");
+                            return;
+                        }
                     }
-                }
 
-                FriendsDAO dao = FriendsDAO.getInstance();
-                dao.removeFriend(selectedFriend);
-                loadValores();
+                    FriendsDAO dao = FriendsDAO.getInstance();
+                    dao.removeFriend(selectedFriend);
+                    loadValores();
+                }
             }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao remover o cadastro: " + e.getMessage());
         }
     }//GEN-LAST:event_btnRemoverCadastroActionPerformed
 

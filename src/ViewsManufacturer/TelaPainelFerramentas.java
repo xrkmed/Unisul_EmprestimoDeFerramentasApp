@@ -42,32 +42,44 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
         Thread pStart = new Thread(new Runnable(){
             @Override
             public void run(){
-                ferramentasSemFab.getSelectionModel().addListSelectionListener(x -> {
-                    if (!x.getValueIsAdjusting()) {
-                        int selectedRow = ferramentasSemFab.getSelectedRow();
-                        if (selectedRow != -1) {
-                            selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasSemFab.getValueAt(selectedRow, 0));
-                            ferramentasList.clearSelection();
+                    ferramentasSemFab.getSelectionModel().addListSelectionListener(x -> {
+                        if (!x.getValueIsAdjusting()) {
+                            int selectedRow = ferramentasSemFab.getSelectedRow();
+                            if (selectedRow != -1) {
+                                try{
+                                    selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasSemFab.getValueAt(selectedRow, 0));
+                                    ferramentasList.clearSelection();
+                                }catch(Exception e){
+                                    JOptionPane.showMessageDialog(null, "Erro ao selecionar ferramenta: " + e.getMessage());
+                                }
+                            }
                         }
-                    }
-                });
-                ((DefaultTableModel) ferramentasSemFab.getModel()).setRowCount(0);
-                ferramentasSemFab.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
-                ferramentasList.getSelectionModel().addListSelectionListener(x -> {
-                    if (!x.getValueIsAdjusting()) {
-                        int selectedRow = ferramentasList.getSelectedRow();
-                        if (selectedRow != -1) {
-                            selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasList.getValueAt(selectedRow, 0));
-                            ferramentasSemFab.clearSelection();
+                    });
+                    ((DefaultTableModel) ferramentasSemFab.getModel()).setRowCount(0);
+                    ferramentasSemFab.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            
+                    ferramentasList.getSelectionModel().addListSelectionListener(x -> {
+                        if (!x.getValueIsAdjusting()) {
+                            int selectedRow = ferramentasList.getSelectedRow();
+                            if (selectedRow != -1) {
+                                try{
+                                    selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasList.getValueAt(selectedRow, 0));
+                                    ferramentasSemFab.clearSelection();
+                                }catch(Exception e){
+                                    JOptionPane.showMessageDialog(null, "Erro ao selecionar ferramenta: " + e.getMessage());
+                                }
+                            }
                         }
-                    }
-                });
-                ((DefaultTableModel) ferramentasList.getModel()).setRowCount(0);
-                ferramentasList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                    });
+                    ((DefaultTableModel) ferramentasList.getModel()).setRowCount(0);
+                    ferramentasList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-                loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
-                loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
+                    try{
+                        loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
+                        loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
+                    }catch(Exception e){
+                        JOptionPane.showMessageDialog(null, "Erro ao carregar ferramentas: " + e.getMessage());
+                    }
             }
         });
         pStart.start();
@@ -346,22 +358,30 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadFabricanteActionPerformed
-        if(selectedTool != null && selectedTool.getManufacturer() == null){
-            ToolsDAO.getInstance().updateManufacturer(selectedTool.getId(), manufacturer.getId());
-            loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
-            loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
-        }else{
-            JOptionPane.showMessageDialog(null, "Selecione uma ferramenta sem fabricante para adicionar o fabricante selecionado");
+        try{
+            if(selectedTool != null && selectedTool.getManufacturer() == null){
+                ToolsDAO.getInstance().updateManufacturer(selectedTool.getId(), manufacturer.getId());
+                loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
+                loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
+            }else{
+                JOptionPane.showMessageDialog(null, "Selecione uma ferramenta sem fabricante para adicionar o fabricante selecionado");
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao adicionar fabricante: " + e.getMessage());
         }
     }//GEN-LAST:event_btnCadFabricanteActionPerformed
 
     private void btnRemFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemFabricanteActionPerformed
-        if(selectedTool != null && selectedTool.getManufacturer().getId() == manufacturer.getId()){
-            ToolsDAO.getInstance().updateManufacturer(selectedTool.getId(), -1);
-            loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
-            loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
-        }else{
-            JOptionPane.showMessageDialog(null, "Selecione uma ferramenta deste fabricante para remover o fabricante");
+        try{
+            if(selectedTool != null && selectedTool.getManufacturer().getId() == manufacturer.getId()){
+                ToolsDAO.getInstance().updateManufacturer(selectedTool.getId(), -1);
+                loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
+                loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
+            }else{
+                JOptionPane.showMessageDialog(null, "Selecione uma ferramenta deste fabricante para remover o fabricante");
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao remover fabricante: " + e.getMessage());
         }
     }//GEN-LAST:event_btnRemFabricanteActionPerformed
 

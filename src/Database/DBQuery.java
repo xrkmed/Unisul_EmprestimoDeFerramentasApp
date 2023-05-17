@@ -9,19 +9,27 @@ import Exceptions.DatabaseResultQueryException;
 
 public class DBQuery {
 
-    public static ResultSet executeQuery(String query) throws DatabaseResultQueryException{
-        try{
-            final Statement statement = Database.getInstance().getConnection().createStatement();
+    public static ResultSet executeQuery(String query, Object... params) throws DatabaseResultQueryException{
+        try {
+            PreparedStatement statement = Database.getInstance().getConnection().prepareStatement(query);
 
-            return statement.executeQuery(query);
-        }catch(SQLException e){
+            for (int i = 0; i < params.length; i++) {
+                statement.setObject(i + 1, params[i]);
+            }
+
+            return statement.executeQuery();
+        } catch (SQLException e) {
             throw new DatabaseResultQueryException(e.getMessage());
         }
     }
 
-    public static ResultSet insertOrUpdateQuery(String query) throws DatabaseResultQueryException{
+    public static ResultSet insertOrUpdateQuery(String query, Object... params) throws DatabaseResultQueryException{
         try{
-            final PreparedStatement statement = Database.getInstance().getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = Database.getInstance().getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            for (int i = 0; i < params.length; i++) {
+                statement.setObject(i + 1, params[i]);
+            }
+
             int rowsAffected = statement.executeUpdate();
             if(rowsAffected > 0){
                 ResultSet result = statement.getGeneratedKeys();

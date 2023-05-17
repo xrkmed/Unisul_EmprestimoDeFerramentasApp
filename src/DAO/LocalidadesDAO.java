@@ -48,41 +48,35 @@ public class LocalidadesDAO {
         return estados;
     }
     
-    public static Object[] obterCidadesAPI(String estadoUF) {
-        try {
-            URL url = new URL("https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + estadoUF + "/municipios");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
-    
-            if (conn.getResponseCode() != 200) {
-                throw new RuntimeException("Erro ao obter a lista de cidades: " + conn.getResponseCode());
-            }
-    
-            BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
-            StringBuilder response = new StringBuilder();
-            String output;
-            while ((output = br.readLine()) != null) {
-                response.append(output);
-            }
-    
-            conn.disconnect();
-            ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-            String script = "JSON.parse('" + response.toString().replaceAll("'", "") + "')";
-            JSObject jsObject = (JSObject) engine.eval(script);
+    public static Object[] obterCidadesAPI(String estadoUF) throws IOException, ScriptException{
+        URL url = new URL("https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + estadoUF + "/municipios");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Accept", "application/json");
 
-            Object[] cidades = new Object[Integer.parseInt(jsObject.getMember("length").toString())];
-            for(int i = 0; i < cidades.length; i++){
-                ScriptObjectMirror mirror = (ScriptObjectMirror) jsObject.getSlot(i);
-                cidades[i] = mirror.getMember("nome");
-            }
-           
-            return cidades;
-        } catch (IOException | ScriptException e) {
-            e.printStackTrace();
+        if (conn.getResponseCode() != 200) {
+            throw new RuntimeException("Erro ao obter a lista de cidades: " + conn.getResponseCode());
         }
-        
-        return new Object[0]; // Retorna um array vazio caso ocorra algum erro ou não seja possível obter a lista de cidades
+
+        BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+        StringBuilder response = new StringBuilder();
+        String output;
+        while ((output = br.readLine()) != null) {
+            response.append(output);
+        }
+
+        conn.disconnect();
+        ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+        String script = "JSON.parse('" + response.toString().replaceAll("'", "") + "')";
+        JSObject jsObject = (JSObject) engine.eval(script);
+
+        Object[] cidades = new Object[Integer.parseInt(jsObject.getMember("length").toString())];
+        for(int i = 0; i < cidades.length; i++){
+            ScriptObjectMirror mirror = (ScriptObjectMirror) jsObject.getSlot(i);
+            cidades[i] = mirror.getMember("nome");
+        }
+           
+        return cidades;
     }
 
 

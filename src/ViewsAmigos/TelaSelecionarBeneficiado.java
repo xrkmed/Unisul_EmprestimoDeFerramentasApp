@@ -18,7 +18,6 @@ import DAO.LoansDAO;
 import Model.FriendModel;
 import Model.LoanModel;
 import Resources.CEPResource;
-import Resources.EditFriendCadResource;
 import Resources.PhoneValidResource;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
 
@@ -523,33 +522,37 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
     }//GEN-LAST:event_textFiltrarNomeActionPerformed
 
     private void loadValores(){
-        FriendsDAO dao = FriendsDAO.getInstance();
-        ArrayList<FriendModel> friends = dao.getFriends();
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        //CONFIGURACOES DA TABELA
-        model.setRowCount(0);
-        selectedFriend = null;
+        try{
+            FriendsDAO dao = FriendsDAO.getInstance();
+            ArrayList<FriendModel> friends = dao.getFriends();
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            //CONFIGURACOES DA TABELA
+            model.setRowCount(0);
+            selectedFriend = null;
 
-        //StatusRenderer statusRed = new StatusRenderer();
-        //jTable2.getColumnModel().getColumn(1).setCellRenderer(statusRed);
-
-                
-        for(FriendModel friend : friends){
-            if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
-                   if(!friend.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
-                        continue;
-                    }
-                }
-
-                if(filtroEndereco.isSelected() && textFiltrarEndereco.getText().trim().length() > 0){
-                    if(!friend.getAddress().toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())){
-                        continue;
-                    }
-                }
+            //StatusRenderer statusRed = new StatusRenderer();
+            //jTable2.getColumnModel().getColumn(1).setCellRenderer(statusRed);
 
                     
-             model.addRow(new Object[]{friend.getId(), "-", friend.getName(), PhoneValidResource.formatPhoneNumber(friend.getPhone()), friend.getAddress(), "0", "0"});
-                    
+            for(FriendModel friend : friends){
+                if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
+                    if(!friend.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
+                            continue;
+                        }
+                    }
+
+                    if(filtroEndereco.isSelected() && textFiltrarEndereco.getText().trim().length() > 0){
+                        if(!friend.getAddress().toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())){
+                            continue;
+                        }
+                    }
+
+                        
+                model.addRow(new Object[]{friend.getId(), "-", friend.getName(), PhoneValidResource.formatPhoneNumber(friend.getPhone()), friend.getAddress(), "0", "0"});
+                        
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 

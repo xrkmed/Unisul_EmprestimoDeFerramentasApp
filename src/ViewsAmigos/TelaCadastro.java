@@ -64,10 +64,17 @@ public class TelaCadastro extends javax.swing.JFrame {
             }
         });
 
-        selectEstado.removeAllItems();
-        for(Object estado : LocalidadesDAO.getEstados()){
-            selectEstado.addItem(estado.toString());
-        }
+        //evitar travamento de janela ao carregar os dados
+        Thread pThread = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                selectEstado.removeAllItems();
+                for(Object estado : LocalidadesDAO.getEstados()){
+                    selectEstado.addItem(estado.toString());
+                }
+            }
+        });
+        pThread.start();
     }
 
     /**

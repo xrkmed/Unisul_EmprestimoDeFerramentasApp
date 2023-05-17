@@ -5,31 +5,23 @@
 package ViewsEmprestimo;
 
 import java.util.Date;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
-import javax.swing.text.PlainDocument;
 
 import DAO.LoansDAO;
 import DAO.ToolsDAO;
 import Model.FriendModel;
 import Model.LoanModel;
 import Model.ToolModel;
-
-import javax.swing.event.DocumentEvent;
 
 import Resources.BRLResource;
 import Resources.DateResource;
@@ -638,6 +630,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "O valor a receber deve ser de no minimo zero reais.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            
             //LoanModel(Date startDate, Date endDate, boolean returned)
             LoanModel loan = LoansDAO.getInstance().addLoan(new Date(), endDate, valorReceber, selectedFriend.getId());
             for(ToolModel tool : toolsList.getTools()){
@@ -646,7 +639,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(this, "Emprestimo finalizado com sucesso!");
             this.dispose();
-        }catch(ParseException e){
+        }catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
         }

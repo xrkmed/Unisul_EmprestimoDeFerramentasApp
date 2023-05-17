@@ -26,7 +26,6 @@ import Model.ToolModel;
 import Resources.BRLResource;
 import Resources.CEPResource;
 import Resources.CNPJResource;
-import Resources.EditFriendCadResource;
 import Resources.ManufacturerResource;
 
 /**
@@ -59,10 +58,14 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
                 jTable2.getSelectionModel().addListSelectionListener(x -> {
                     if (!x.getValueIsAdjusting()) {
                         int selectedRow = jTable2.getSelectedRow();
-                        if (selectedRow != -1) {
-                            selectedManufacturer = ManufacturerDAO.getInstance().getManufacturer(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
-                            selecionadoNome.setText(selectedManufacturer.getName());
-                            selecionadoCNPJ.setText(CNPJResource.returnCNPJFormat(selectedManufacturer.getCNPJ()));
+                        try{
+                            if (selectedRow != -1) {
+                                selectedManufacturer = ManufacturerDAO.getInstance().getManufacturer(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
+                                selecionadoNome.setText(selectedManufacturer.getName());
+                                selecionadoCNPJ.setText(CNPJResource.returnCNPJFormat(selectedManufacturer.getCNPJ()));
+                            }
+                        }catch(Exception e){
+                            JOptionPane.showMessageDialog(null, "Erro ao selecionar fabricante", "Erro", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 });
@@ -458,46 +461,49 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
     }//GEN-LAST:event_textFiltrarNomeActionPerformed
 
     private void loadValores(){
-        selecionadoCNPJ.setText("");
-        selecionadoNome.setText("");
-        selectedManufacturer = null;
-        ArrayList<ManufacturerResource> manufacturers = ManufacturerDAO.getInstance().getManufacturers();
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        model.setRowCount(0);
+        try{
+            selecionadoCNPJ.setText("");
+            selecionadoNome.setText("");
+            selectedManufacturer = null;
+            ArrayList<ManufacturerResource> manufacturers = ManufacturerDAO.getInstance().getManufacturers();
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            model.setRowCount(0);
 
-        StatusRenderer statusRed = new StatusRenderer();   
-        for(ManufacturerResource manufacturer : manufacturers){
-            if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
-                if(!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
-                        continue;
+            StatusRenderer statusRed = new StatusRenderer();   
+            for(ManufacturerResource manufacturer : manufacturers){
+                if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
+                    if(!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
+                            continue;
+                    }
                 }
+
+                ArrayList<ToolModel> tools = ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId());
+                int ferramentasEmUso = 0;
+                double valorTotal = 0.;
+                for(ToolModel tool : tools){
+                    if(!tool.isAvailable()){
+                        ++ferramentasEmUso;   
+                    }
+
+                    valorTotal += tool.getPrice();
+                }
+
+                if(ferramentasEmUso == tools.size() && tools.size() > 0){
+                    statusRed.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
+                    for(int i = 0; i < jTable2.getColumnCount(); i++){
+                        jTable2.getColumnModel().getColumn(i).setCellRenderer(statusRed);
+                    }
+                }else if(tools.size() == 0){
+                    statusRed.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightOrange);
+                    for(int i = 0; i < jTable2.getColumnCount(); i++){
+                        jTable2.getColumnModel().getColumn(i).setCellRenderer(statusRed);
+                    }
+                }
+
+                model.addRow(new Object[]{manufacturer.getId(), "-", manufacturer.getName(), CNPJResource.returnCNPJFormat(manufacturer.getCNPJ()),"" + tools.size(), "" + ferramentasEmUso, "R$ " + BRLResource.PRICE_FORMATTER.format(valorTotal)});    
             }
-
-            ArrayList<ToolModel> tools = ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId());
-            int ferramentasEmUso = 0;
-            double valorTotal = 0.;
-            for(ToolModel tool : tools){
-                if(!tool.isAvailable()){
-                    ++ferramentasEmUso;   
-                }
-
-                valorTotal += tool.getPrice();
-            }
-
-            if(ferramentasEmUso == tools.size() && tools.size() > 0){
-                statusRed.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
-                for(int i = 0; i < jTable2.getColumnCount(); i++){
-                    jTable2.getColumnModel().getColumn(i).setCellRenderer(statusRed);
-                }
-            }else if(tools.size() == 0){
-                statusRed.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightOrange);
-                for(int i = 0; i < jTable2.getColumnCount(); i++){
-                    jTable2.getColumnModel().getColumn(i).setCellRenderer(statusRed);
-                }
-            }
-
-            model.addRow(new Object[]{manufacturer.getId(), "-", manufacturer.getName(), CNPJResource.returnCNPJFormat(manufacturer.getCNPJ()),"" + tools.size(), "" + ferramentasEmUso, "R$ " + BRLResource.PRICE_FORMATTER.format(valorTotal)});
-                
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao carregar fabricantes", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -511,17 +517,21 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void btnRemoverCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverCadastroActionPerformed
-        if(selectedManufacturer != null){
-            int dialogResult = JOptionPane.showConfirmDialog (null, "Deseja realmente remover o fabricante " + selectedManufacturer.getName() + "?","Atenção",JOptionPane.YES_NO_OPTION);
-            if(dialogResult == JOptionPane.YES_OPTION){
-                if(ToolsDAO.getInstance().getToolsByManufacturer(selectedManufacturer.getId()).size() > 0){
-                    JOptionPane.showMessageDialog(null, "Não é possível remover um fabricante que possui ferramentas cadastradas!");
-                    return;
+        try{
+            if(selectedManufacturer != null){
+                int dialogResult = JOptionPane.showConfirmDialog (null, "Deseja realmente remover o fabricante " + selectedManufacturer.getName() + "?","Atenção",JOptionPane.YES_NO_OPTION);
+                if(dialogResult == JOptionPane.YES_OPTION){
+                    if(ToolsDAO.getInstance().getToolsByManufacturer(selectedManufacturer.getId()).size() > 0){
+                        JOptionPane.showMessageDialog(null, "Não é possível remover um fabricante que possui ferramentas cadastradas!");
+                        return;
+                    }
+                    
+                    ManufacturerDAO.getInstance().removeManufacturer(selectedManufacturer.getId());
+                    loadValores();
                 }
-                
-                ManufacturerDAO.getInstance().removeManufacturer(selectedManufacturer.getId());
-                loadValores();
             }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro ao remover fabricante", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRemoverCadastroActionPerformed
 

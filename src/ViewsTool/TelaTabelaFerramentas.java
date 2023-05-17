@@ -32,7 +32,6 @@ import Model.ToolModel;
 import Resources.BRLResource;
 import Resources.CEPResource;
 import Resources.CNPJResource;
-import Resources.EditFriendCadResource;
 import Resources.ManufacturerResource;
 
 /**
@@ -59,15 +58,19 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
                 jTable2.getSelectionModel().addListSelectionListener(x -> {
                     if (!x.getValueIsAdjusting()) {
                         int selectedRow = jTable2.getSelectedRow();
-                        if (selectedRow != -1) {
-                            selecionadoNome.setText(jTable2.getValueAt(selectedRow, 2).toString());
-                            selecionadoManufacturer.setText(jTable2.getValueAt(selectedRow, 3).toString());
-                            
-                            selectedTool = ToolsDAO.getInstance().getTool(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
-                        }else{
-                            selectedTool = null;
-                            selecionadoNome.setText("");
-                            selecionadoManufacturer.setText("");
+                        try{
+                            if (selectedRow != -1) {
+                                selecionadoNome.setText(jTable2.getValueAt(selectedRow, 2).toString());
+                                selecionadoManufacturer.setText(jTable2.getValueAt(selectedRow, 3).toString());
+                                
+                                selectedTool = ToolsDAO.getInstance().getTool(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
+                            }else{
+                                selectedTool = null;
+                                selecionadoNome.setText("");
+                                selecionadoManufacturer.setText("");
+                            }
+                        }catch(Exception e){
+                            JOptionPane.showMessageDialog(null, e.getMessage());
                         }
                     }
                 });
@@ -604,55 +607,59 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
     }//GEN-LAST:event_textFiltrarNomeActionPerformed
 
     private void loadValores(){
-        selectedTool = null;
-        selecionadoNome.setText("");
-        selecionadoManufacturer.setText("");
+        try{
+            selectedTool = null;
+            selecionadoNome.setText("");
+            selecionadoManufacturer.setText("");
 
-        ArrayList<Object[]> datas = ToolsDAO.getInstance().getFerramentasValue();
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        model.setRowCount(0);
+            ArrayList<Object[]> datas = ToolsDAO.getInstance().getFerramentasValue();
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            model.setRowCount(0);
 
-        StatusRenderer statusRenderer = new StatusRenderer();
-        //new Object[]{result.getInt("id"), "-", result.getString("name"), result.getString("razao_social"), BRLResource.PRICE_FORMATTER.format(result.getDouble("price")), result.getString("nome"), new SimpleDateFormat("dd/MM/yyyy").format(result.getDate("endDate").toString())});
-        for(Object[] data : datas){
-            if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
-                if(!data[2].toString().toLowerCase().contains(textFiltrarNome.getText().toLowerCase())){
-                    continue;
+            StatusRenderer statusRenderer = new StatusRenderer();
+            //new Object[]{result.getInt("id"), "-", result.getString("name"), result.getString("razao_social"), BRLResource.PRICE_FORMATTER.format(result.getDouble("price")), result.getString("nome"), new SimpleDateFormat("dd/MM/yyyy").format(result.getDate("endDate").toString())});
+            for(Object[] data : datas){
+                if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
+                    if(!data[2].toString().toLowerCase().contains(textFiltrarNome.getText().toLowerCase())){
+                        continue;
+                    }
                 }
-            }
 
-            if(filtroFiltrarUso.isSelected() && textFiltrarUso.getText().trim().length() > 0){
-                if(!data[5].toString().toLowerCase().contains(textFiltrarUso.getText().toLowerCase())){
-                    continue;
+                if(filtroFiltrarUso.isSelected() && textFiltrarUso.getText().trim().length() > 0){
+                    if(!data[5].toString().toLowerCase().contains(textFiltrarUso.getText().toLowerCase())){
+                        continue;
+                    }
                 }
-             }
 
-             if(filtroFabricante.isSelected() && textFiltrarFabricante.getText().trim().length() > 0){
-                if(!data[3].toString().toLowerCase().contains(textFiltrarFabricante.getText().toLowerCase())){
-                    continue;
+                if(filtroFabricante.isSelected() && textFiltrarFabricante.getText().trim().length() > 0){
+                    if(!data[3].toString().toLowerCase().contains(textFiltrarFabricante.getText().toLowerCase())){
+                        continue;
+                    }
                 }
-            }
 
-            if(!data[5].toString().equals("Disponivel")){
-                statusRenderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
-                for(int i = 0; i < jTable2.getColumnCount(); i++){
-                    jTable2.getColumnModel().getColumn(i).setCellRenderer(statusRenderer);
-                }
-            }
-            
-            if(data[3].toString().equalsIgnoreCase("sem fabricante")){
-                if(statusRenderer.getHighlightedRow(model.getRowCount()) == ColorsRenderer.lightYellow){
-                    statusRenderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightOrange);
-                }else{
-                    statusRenderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
+                if(!data[5].toString().equals("Disponivel")){
+                    statusRenderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
+                    for(int i = 0; i < jTable2.getColumnCount(); i++){
+                        jTable2.getColumnModel().getColumn(i).setCellRenderer(statusRenderer);
+                    }
                 }
                 
-                for(int i = 0; i < jTable2.getColumnCount(); i++){
-                    jTable2.getColumnModel().getColumn(i).setCellRenderer(statusRenderer);
+                if(data[3].toString().equalsIgnoreCase("sem fabricante")){
+                    if(statusRenderer.getHighlightedRow(model.getRowCount()) == ColorsRenderer.lightYellow){
+                        statusRenderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightOrange);
+                    }else{
+                        statusRenderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
+                    }
+                    
+                    for(int i = 0; i < jTable2.getColumnCount(); i++){
+                        jTable2.getColumnModel().getColumn(i).setCellRenderer(statusRenderer);
+                    }
                 }
-            }
 
-            model.addRow(data);
+                model.addRow(data);
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -675,17 +682,21 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
                     return;
                 }
                 
-                ToolsDAO.getInstance().removeTool(selectedTool);
-                ((DefaultTableModel) jTable2.getModel()).setRowCount(0);
-                selectedTool = null;
-                selecionadoNome.setText("");
-                selecionadoManufacturer.setText("");
-                new Thread(new Runnable() {
-                    @Override
-                    public void run(){
-                        loadValores();
-                    }
-                }).start();
+                try{
+                    ToolsDAO.getInstance().removeTool(selectedTool);
+                    ((DefaultTableModel) jTable2.getModel()).setRowCount(0);
+                    selectedTool = null;
+                    selecionadoNome.setText("");
+                    selecionadoManufacturer.setText("");
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run(){
+                            loadValores();
+                        }
+                    }).start();
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
             }
         }
     }//GEN-LAST:event_btnRemoverCadastroActionPerformed

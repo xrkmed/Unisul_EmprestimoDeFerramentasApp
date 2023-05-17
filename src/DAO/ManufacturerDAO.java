@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import Database.DBQuery;
+import Database.DBTreatment;
+import Database.Database;
+import Exceptions.DatabaseResultQueryException;
 import Resources.CNPJResource;
 import Resources.ManufacturerResource;
 
@@ -27,78 +30,58 @@ public class ManufacturerDAO {
     }
     
     //methods
-    public ManufacturerResource addManufacturer(String razaoSocial, String CNPJ) throws IllegalArgumentException{
+    public ManufacturerResource addManufacturer(String razaoSocial, String CNPJ) throws IllegalArgumentException, SQLException, DatabaseResultQueryException{
         if(!CNPJResource.validarCNPJ(CNPJ)){
             throw new IllegalArgumentException("Invalid CNPJ");
         }
 
-        try{
-            ResultSet result = DBQuery.insertOrUpdateQuery("INSERT INTO tb_fabricantes (razao_social, cnpj) VALUES ('" + razaoSocial.toUpperCase() + "', '" + CNPJ + "');");
-            while(result.next()){
-                ManufacturerResource manufacturer = new ManufacturerResource(result.getInt(1), razaoSocial.toUpperCase(), CNPJ + "");
-                return manufacturer;
-            }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+        ResultSet result = DBQuery.insertOrUpdateQuery("INSERT INTO tb_fabricantes (razao_social, cnpj) VALUES (?, ?);", razaoSocial.toUpperCase(), CNPJ + "");
+        while(result.next()){
+            ManufacturerResource manufacturer = new ManufacturerResource(result.getInt(1), razaoSocial.toUpperCase(), CNPJ + "");
+            return manufacturer;
         }
 
         return null;
     }
 
-    public void removeManufacturer(ManufacturerResource e){
+    public void removeManufacturer(ManufacturerResource e) throws DatabaseResultQueryException{
         getInstance().removeManufacturer(e.getId());
     }
 
-    public void removeManufacturer(int id){
-        try{
-            DBQuery.insertOrUpdateQuery("DELETE FROM tb_fabricantes WHERE id = '" + id + "';");
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+    public void removeManufacturer(int id) throws DatabaseResultQueryException{
+        DBQuery.insertOrUpdateQuery("DELETE FROM tb_fabricantes WHERE id = ?;", id);
     }
     
-    public ArrayList<ManufacturerResource> getManufacturers(){
+    public ArrayList<ManufacturerResource> getManufacturers() throws SQLException, DatabaseResultQueryException{
         ArrayList<ManufacturerResource> fabricantes = new ArrayList<>(); 
-        try{
-            ResultSet manufacturers = DBQuery.executeQuery("SELECT id, razao_social, cnpj FROM tb_fabricantes;");
+        ResultSet manufacturers = DBQuery.executeQuery("SELECT id, razao_social, cnpj FROM tb_fabricantes;");
 
-            while(manufacturers.next()){
-                ManufacturerResource manufacturer = new ManufacturerResource(manufacturers.getInt("id"), manufacturers.getString("razao_social"), manufacturers.getLong("cnpj") + "");
-                fabricantes.add(manufacturer);
-            }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
+        while(manufacturers.next()){
+            ManufacturerResource manufacturer = new ManufacturerResource(manufacturers.getInt("id"), manufacturers.getString("razao_social"), manufacturers.getLong("cnpj") + "");
+            fabricantes.add(manufacturer);
         }
 
         return fabricantes;
     }
 
-    public ManufacturerResource getManufacturer(int id){
-        try{
-            ResultSet manufacturers = DBQuery.executeQuery("SELECT id, razao_social, cnpj FROM tb_fabricantes WHERE id = '" + id + "' LIMIT 1;");
- 
-            while(manufacturers.next()){
-                ManufacturerResource manufacturer = new ManufacturerResource(manufacturers.getInt("id"), manufacturers.getString("razao_social"), manufacturers.getLong("cnpj") + "");
-                return manufacturer;
-            }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
+    public ManufacturerResource getManufacturer(int id) throws SQLException, DatabaseResultQueryException{
+        ResultSet manufacturers = DBQuery.executeQuery("SELECT id, razao_social, cnpj FROM tb_fabricantes WHERE id = ? LIMIT 1;", id);
+
+        while(manufacturers.next()){
+            ManufacturerResource manufacturer = new ManufacturerResource(manufacturers.getInt("id"), manufacturers.getString("razao_social"), manufacturers.getLong("cnpj") + "");
+            return manufacturer;
         }
 
         return null;
     }
 
-    public ManufacturerResource getManufacturer(String cnpj){
+    public ManufacturerResource getManufacturer(String cnpj) throws DatabaseResultQueryException, SQLException{
         if(CNPJResource.validarCNPJ(cnpj)){
-            try{
-                ResultSet manufacturers = DBQuery.executeQuery("SELECT id, razao_social, cnpj FROM tb_fabricantes WHERE cnpj = '" + cnpj + "' LIMIT 1;");
+            ResultSet manufacturers = DBQuery.executeQuery("SELECT id, razao_social, cnpj FROM tb_fabricantes WHERE cnpj = ? LIMIT 1;", cnpj);
 
-                while(manufacturers.next()){
-                    ManufacturerResource manufacturer = new ManufacturerResource(manufacturers.getInt("id"), manufacturers.getString("razao_social"), manufacturers.getLong("cnpj") + "");
-                    return manufacturer;
-                }
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(null, e.getMessage());
+            while(manufacturers.next()){
+                ManufacturerResource manufacturer = new ManufacturerResource(manufacturers.getInt("id"), manufacturers.getString("razao_social"), manufacturers.getLong("cnpj") + "");
+                return manufacturer;
             }
         }
 

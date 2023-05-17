@@ -1,7 +1,10 @@
 package Model;
 
 import DAO.LoansDAO;
+import Exceptions.DatabaseResultQueryException;
 import Resources.ManufacturerResource;
+
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class ToolModel {
@@ -40,7 +43,7 @@ public class ToolModel {
         return this.nome;
     }
 
-    public LoanModel getLoan(){
+    public LoanModel getLoan() throws DatabaseResultQueryException, SQLException{
         return LoansDAO.getInstance().getLoanByToolId(id);
     }
 

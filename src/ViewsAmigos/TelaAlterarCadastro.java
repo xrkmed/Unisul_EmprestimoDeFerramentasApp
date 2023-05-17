@@ -65,10 +65,17 @@ public class TelaAlterarCadastro extends javax.swing.JFrame {
             }
         });
 
-        selectEstado.removeAllItems();
-        for(Object estado : LocalidadesDAO.getEstados()){
-            selectEstado.addItem(estado.toString());
-        }
+        //evitar travamento da janela ao carregar os dados
+        Thread pThread = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                selectEstado.removeAllItems();
+                for(Object estado : LocalidadesDAO.getEstados()){
+                    selectEstado.addItem(estado.toString());
+                }
+            }
+        });
+        pThread.start();
     }
 
     public TelaAlterarCadastro(TelaTabelaAmigos e){
@@ -462,7 +469,6 @@ public class TelaAlterarCadastro extends javax.swing.JFrame {
                 friendModel.updateAddress(address);
 
                 FriendsDAO.getInstance().updateFriend(friendModel.getId(), friendModel);
-
                 JOptionPane.showMessageDialog(null, "Amigo alterado com sucesso!");
                 this.dispose();
             }catch(Exception e){
