@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
-import javax.swing.text.Document;
-import javax.swing.text.DocumentFilter;
 
 import DAO.FriendsDAO;
 import DAO.LocalidadesDAO;

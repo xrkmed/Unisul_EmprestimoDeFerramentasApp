@@ -6,8 +6,6 @@ package ViewsManufacturer;
 
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
-import javax.swing.text.Document;
-import javax.swing.text.DocumentFilter;
 import javax.xml.ws.http.HTTPException;
 
 import Controllers.CNPJEntity;

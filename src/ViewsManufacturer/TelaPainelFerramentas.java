@@ -4,7 +4,6 @@
  */
 package ViewsManufacturer;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -14,7 +13,6 @@ import javax.swing.table.DefaultTableModel;
 
 import Controllers.ColorsRenderer;
 import Controllers.StatusRenderer;
-import DAO.ManufacturerDAO;
 import DAO.ToolsDAO;
 import Model.ToolModel;
 import Resources.ManufacturerResource;

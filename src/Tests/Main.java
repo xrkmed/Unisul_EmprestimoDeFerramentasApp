@@ -1,20 +1,9 @@
 package Tests;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
-import DAO.LocalidadesDAO;
-import DAO.ManufacturerDAO;
 import DAO.ToolsDAO;
-import Database.DBQuery;
 import Database.Database;
-import Model.FriendModel;
-import Model.LoanModel;
-import Model.ToolModel;
-import Resources.AddressResource;
-import Resources.ManufacturerResource;
 import Views.TelaPrincipal;
 
 public class Main {

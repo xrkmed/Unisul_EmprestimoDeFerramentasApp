@@ -1,7 +1,5 @@
 package Controllers;
 
-import Resources.AddressResource;
-
 public class CNPJEntity {
 
     private String nome;

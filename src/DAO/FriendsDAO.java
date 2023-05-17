@@ -3,11 +3,7 @@ package DAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
-
 import Database.DBQuery;
-import Database.Database;
 import Exceptions.DatabaseResultQueryException;
 import Model.FriendModel;
 import Resources.AddressResource;
