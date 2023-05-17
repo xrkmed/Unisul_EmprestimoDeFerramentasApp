@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
+import DAO.LocalidadesDAO;
 import DAO.ManufacturerDAO;
 import DAO.ToolsDAO;
 import Database.DBQuery;
