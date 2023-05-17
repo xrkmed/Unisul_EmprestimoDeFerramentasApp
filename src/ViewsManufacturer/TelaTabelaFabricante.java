@@ -464,49 +464,40 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
     }//GEN-LAST:event_textFiltrarNomeActionPerformed
 
     private void loadValores(){
+        selecionadoCNPJ.setText("");
+        selecionadoNome.setText("");
+        selectedManufacturer = null;
         try{
-            selecionadoCNPJ.setText("");
-            selecionadoNome.setText("");
-            selectedManufacturer = null;
-            ArrayList<ManufacturerResource> manufacturers = ManufacturerDAO.getInstance().getManufacturers();
+            StatusRenderer renderer = new StatusRenderer();   
+            ArrayList<Object[]> manufacturerData = ManufacturerDAO.getInstance().getFabricantesData();
+
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             model.setRowCount(0);
 
-            StatusRenderer statusRed = new StatusRenderer();   
-            for(ManufacturerResource manufacturer : manufacturers){
+            for(Object[] data : manufacturerData){
                 if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
-                    if(!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
+                    if(!data[2].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
                             continue;
                     }
                 }
 
-                ArrayList<ToolModel> tools = ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId());
-                int ferramentasEmUso = 0;
-                double valorTotal = 0.;
-                for(ToolModel tool : tools){
-                    if(!tool.isAvailable()){
-                        ++ferramentasEmUso;   
+                if(Integer.parseInt(data[4].toString()) == Integer.parseInt(data[5].toString())){
+                    if(Integer.parseInt(data[4].toString()) > 0){
+                        renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
+                    }else{
+                        renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightOrange);
                     }
 
-                    valorTotal += tool.getPrice();
+                    for(int i = 0; i < jTable2.getColumnCount(); i++){
+                        jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
+                    }
+                    
                 }
 
-                if(ferramentasEmUso == tools.size() && tools.size() > 0){
-                    statusRed.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
-                    for(int i = 0; i < jTable2.getColumnCount(); i++){
-                        jTable2.getColumnModel().getColumn(i).setCellRenderer(statusRed);
-                    }
-                }else if(tools.size() == 0){
-                    statusRed.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightOrange);
-                    for(int i = 0; i < jTable2.getColumnCount(); i++){
-                        jTable2.getColumnModel().getColumn(i).setCellRenderer(statusRed);
-                    }
-                }
-
-                model.addRow(new Object[]{manufacturer.getId(), "-", manufacturer.getName(), CNPJResource.returnCNPJFormat(manufacturer.getCNPJ()),"" + tools.size(), "" + ferramentasEmUso, "R$ " + BRLResource.PRICE_FORMATTER.format(valorTotal)});    
+                model.addRow(data);
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao carregar fabricantes", "Erro", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
