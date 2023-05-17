@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import Database.DBQuery;
 import Model.FriendModel;
 import Resources.AddressResource;
+import Resources.PhoneValidResource;
 
 public class FriendsDAO {
 
@@ -57,7 +58,8 @@ public class FriendsDAO {
 
     public void removeFriend(FriendModel e){
         try{
-            DBQuery.executeQuery("DELETE FROM tb_amigos WHERE id = '" + e.getId() + "';");
+            DBQuery.insertOrUpdateQuery("DELETE FROM tb_amigos WHERE id = '" + e.getId() + "';");
+            DBQuery.insertOrUpdateQuery("DELETE FROM tb_enderecos WHERE amigo_id = '" + e.getId() + "';");
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
@@ -102,5 +104,20 @@ public class FriendsDAO {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+    }
+
+    public ArrayList<Object[]> loadFriendsTabela(){
+        ArrayList<Object[]> datasObject = new ArrayList<>(); 
+         try{
+         ResultSet result = DBQuery.executeQuery("SELECT tb_amigos.id, tb_amigos.nome, tb_amigos.telefone, tb_enderecos.numero, tb_enderecos.rua, tb_enderecos.bairro, tb_enderecos.cidade, tb_enderecos.uf, tb_enderecos.complemento, tb_enderecos.cep, COUNT(tb_emprestimos.id) AS quantidade_emprestimos, SUM(CASE WHEN tb_emprestimos.endDate < CURDATE() AND tb_emprestimos.finalizado = 0 THEN 1 ELSE 0 END) AS quantidade_emprestimos_atrasados FROM tb_amigos JOIN tb_enderecos ON tb_amigos.id = tb_enderecos.amigo_id LEFT JOIN tb_emprestimos ON tb_amigos.id = tb_emprestimos.amigo_id GROUP BY tb_amigos.id, tb_amigos.nome, tb_amigos.telefone, tb_enderecos.numero, tb_enderecos.rua, tb_enderecos.bairro, tb_enderecos.cidade, tb_enderecos.uf, tb_enderecos.complemento, tb_enderecos.cep;");
+            while(result.next()){
+                AddressResource address = new AddressResource(result.getString("rua"), result.getString("bairro"), result.getString("cidade"), result.getString("uf"), result.getInt("numero"), result.getString("complemento"), result.getInt("cep"));
+                Object[] data = {result.getInt("id"), "-", result.getString("nome"), PhoneValidResource.formatPhoneNumber(result.getLong("telefone") + ""), address, result.getInt("quantidade_emprestimos"), result.getInt("quantidade_emprestimos_atrasados")};
+                datasObject.add(data);
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return datasObject;
     }
 }

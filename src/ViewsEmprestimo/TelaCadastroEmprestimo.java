@@ -52,34 +52,6 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
     public TelaCadastroEmprestimo() {
         initComponents();
 
-        //today date in string format dd/MM/YYYY
-        lblDataHoje.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-
-        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        jTable1.getSelectionModel().addListSelectionListener(x -> {
-            if (!x.getValueIsAdjusting()) {
-                int selectedRow = jTable1.getSelectedRow();
-                if (selectedRow != -1) {
-                    selecionadoNome.setText(jTable1.getValueAt(selectedRow, 1).toString());
-                    selecionadoFabricante.setText(jTable1.getValueAt(selectedRow, 2).toString());
-                    btnRemoverFerramenta.setEnabled(true);
-
-                    for(ToolModel tool : toolsList.getTools()){
-                        if(tool.getId() == (int)jTable1.getValueAt(selectedRow, 0)){
-                            selectedTool = tool;
-                            break;
-                        }
-                    }
-                }else{
-                    selectedTool = null;
-                    selecionadoNome.setText("");
-                    selecionadoFabricante.setText("");
-                    btnRemoverFerramenta.setEnabled(false);
-                }
-            }
-        });
-
         AbstractDocument document = (AbstractDocument) textValorReceber.getDocument();
 
         document.setDocumentFilter(new DocumentFilter() {
@@ -143,6 +115,34 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 super.replace(fb, 0, doc.getLength(), filteredText, attr);
             }
         });
+
+            //today date in string format dd/MM/YYYY
+            lblDataHoje.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+            jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    
+            jTable1.getSelectionModel().addListSelectionListener(x -> {
+                if (!x.getValueIsAdjusting()) {
+                    int selectedRow = jTable1.getSelectedRow();
+                    if (selectedRow != -1) {
+                        selecionadoNome.setText(jTable1.getValueAt(selectedRow, 1).toString());
+                        selecionadoFabricante.setText(jTable1.getValueAt(selectedRow, 2).toString());
+                        btnRemoverFerramenta.setEnabled(true);
+    
+                        for(ToolModel tool : toolsList.getTools()){
+                            if(tool.getId() == (int)jTable1.getValueAt(selectedRow, 0)){
+                                selectedTool = tool;
+                                break;
+                            }
+                        }
+                    }else{
+                        selectedTool = null;
+                        selecionadoNome.setText("");
+                        selecionadoFabricante.setText("");
+                        btnRemoverFerramenta.setEnabled(false);
+                    }
+                }
+            });
 
     }
 

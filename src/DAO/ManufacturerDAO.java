@@ -51,7 +51,7 @@ public class ManufacturerDAO {
 
     public void removeManufacturer(int id){
         try{
-            DBQuery.executeQuery("DELETE FROM tb_fabricantes WHERE id = '" + id + "';");
+            DBQuery.insertOrUpdateQuery("DELETE FROM tb_fabricantes WHERE id = '" + id + "';");
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         }

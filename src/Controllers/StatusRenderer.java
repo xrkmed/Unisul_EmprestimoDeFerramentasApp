@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ViewsAmigos;
+package Controllers;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -25,6 +25,10 @@ public class StatusRenderer  extends DefaultTableCellRenderer {
 
     public void addHighlightedRow(int row, Color color){
         this.highlightMap.put(row, color);
+    }
+
+    public Color getHighlightedRow(int row){
+        return this.highlightMap.getOrDefault(row, null);
     }
 
     @Override

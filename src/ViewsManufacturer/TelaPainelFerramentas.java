@@ -4,12 +4,16 @@
  */
 package ViewsManufacturer;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import Controllers.ColorsRenderer;
+import Controllers.StatusRenderer;
 import DAO.ManufacturerDAO;
 import DAO.ToolsDAO;
 import Model.ToolModel;
@@ -38,8 +42,32 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
         Thread pStart = new Thread(new Runnable(){
             @Override
             public void run(){
-                loadFerramentasList();
-                loadFerramentasSemFabricantes();
+                ferramentasSemFab.getSelectionModel().addListSelectionListener(x -> {
+                    if (!x.getValueIsAdjusting()) {
+                        int selectedRow = ferramentasSemFab.getSelectedRow();
+                        if (selectedRow != -1) {
+                            selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasSemFab.getValueAt(selectedRow, 0));
+                            ferramentasList.clearSelection();
+                        }
+                    }
+                });
+                ((DefaultTableModel) ferramentasSemFab.getModel()).setRowCount(0);
+                ferramentasSemFab.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+                ferramentasList.getSelectionModel().addListSelectionListener(x -> {
+                    if (!x.getValueIsAdjusting()) {
+                        int selectedRow = ferramentasList.getSelectedRow();
+                        if (selectedRow != -1) {
+                            selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasList.getValueAt(selectedRow, 0));
+                            ferramentasSemFab.clearSelection();
+                        }
+                    }
+                });
+                ((DefaultTableModel) ferramentasList.getModel()).setRowCount(0);
+                ferramentasList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                
+                loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
+                loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
             }
         });
         pStart.start();
@@ -57,12 +85,20 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         ferramentasSemFab = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        canvas2 = new java.awt.Canvas();
+        jLabel8 = new javax.swing.JLabel();
+        canvas4 = new java.awt.Canvas();
         jLabel1 = new javax.swing.JLabel();
         btnRemFabricante = new javax.swing.JButton();
         btnCadFabricante = new javax.swing.JButton();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         ferramentasList = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        canvas3 = new java.awt.Canvas();
+        jLabel9 = new javax.swing.JLabel();
+        canvas5 = new java.awt.Canvas();
         jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
@@ -97,7 +133,19 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
             ferramentasSemFab.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        jLabel3.setText("Em uso por algum amigo");
+
+        canvas2.setBackground(new java.awt.Color(255, 255, 224));
+
+        jLabel8.setText("Em manutençao");
+
+        canvas4.setBackground(new java.awt.Color(255, 0, 255));
+
         jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(canvas2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(canvas4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -107,13 +155,33 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(143, 143, 143))
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addComponent(canvas4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(canvas4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -163,7 +231,19 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
             ferramentasList.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        jLabel4.setText("Em uso por algum amigo");
+
+        canvas3.setBackground(new java.awt.Color(255, 255, 224));
+
+        jLabel9.setText("Em manutençao");
+
+        canvas5.setBackground(new java.awt.Color(255, 0, 255));
+
         jLayeredPane2.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(canvas3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(canvas5, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -173,13 +253,33 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(143, 143, 143))
+            .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addComponent(canvas3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4))
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addComponent(canvas5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(canvas3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(canvas5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -228,13 +328,13 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLayeredPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLayeredPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
                             .addComponent(jLayeredPane1))
                         .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
                         .addComponent(btnCadFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(btnRemFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -248,8 +348,8 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
     private void btnCadFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadFabricanteActionPerformed
         if(selectedTool != null && selectedTool.getManufacturer() == null){
             ToolsDAO.getInstance().updateManufacturer(selectedTool.getId(), manufacturer.getId());
-            loadFerramentasList();
-            loadFerramentasSemFabricantes();
+            loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
+            loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
         }else{
             JOptionPane.showMessageDialog(null, "Selecione uma ferramenta sem fabricante para adicionar o fabricante selecionado");
         }
@@ -258,8 +358,8 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
     private void btnRemFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemFabricanteActionPerformed
         if(selectedTool != null && selectedTool.getManufacturer().getId() == manufacturer.getId()){
             ToolsDAO.getInstance().updateManufacturer(selectedTool.getId(), -1);
-            loadFerramentasList();
-            loadFerramentasSemFabricantes();
+            loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
+            loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
         }else{
             JOptionPane.showMessageDialog(null, "Selecione uma ferramenta deste fabricante para remover o fabricante");
         }
@@ -269,52 +369,24 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    public void loadFerramentasSemFabricantes(){
-        ArrayList<ToolModel> tools = ToolsDAO.getInstance().getToolsWithoutManufacturer();
-        DefaultTableModel model = (DefaultTableModel) ferramentasSemFab.getModel();
+    public void loadList(JTable table, ArrayList<ToolModel> tools){
+        StatusRenderer renderer = new StatusRenderer();
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
-        ferramentasSemFab.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         for (ToolModel tool : tools) {
+            if(!tool.isAvailable()){
+                renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
+                for(int i = 0; i < table.getColumnCount(); i++){
+                    table.getColumnModel().getColumn(i).setCellRenderer(renderer);
+                }
+            }
+
             model.addRow(new Object[]{
                 tool.getId(),
                 tool.getNome()
             });
         }
-
-        ferramentasSemFab.getSelectionModel().addListSelectionListener(x -> {
-            if (!x.getValueIsAdjusting()) {
-                int selectedRow = ferramentasSemFab.getSelectedRow();
-                if (selectedRow != -1) {
-                    selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasSemFab.getValueAt(selectedRow, 0));
-                    ferramentasList.clearSelection();
-                }
-            }
-        });
-    }
-
-    public void loadFerramentasList(){
-        ArrayList<ToolModel> tools = ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId());
-        DefaultTableModel model = (DefaultTableModel) ferramentasList.getModel();
-        model.setRowCount(0);
-        ferramentasList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        for (ToolModel tool : tools) {
-            model.addRow(new Object[]{
-                tool.getId(),
-                tool.getNome()
-            });
-        }
-
-        ferramentasList.getSelectionModel().addListSelectionListener(x -> {
-            if (!x.getValueIsAdjusting()) {
-                int selectedRow = ferramentasList.getSelectedRow();
-                if (selectedRow != -1) {
-                    selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasList.getValueAt(selectedRow, 0));
-                    ferramentasSemFab.clearSelection();
-                }
-            }
-        });
     }
 
     /**
@@ -355,11 +427,19 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadFabricante;
     private javax.swing.JButton btnRemFabricante;
+    private java.awt.Canvas canvas2;
+    private java.awt.Canvas canvas3;
+    private java.awt.Canvas canvas4;
+    private java.awt.Canvas canvas5;
     private javax.swing.JTable ferramentasList;
     private javax.swing.JTable ferramentasSemFab;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JScrollPane jScrollPane1;

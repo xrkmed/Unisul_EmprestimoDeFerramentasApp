@@ -43,29 +43,28 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
     public TelaSelecionarFabricante() {
         initComponents();
 
-
-        ManufacturerDAO dao = ManufacturerDAO.getInstance();
-        jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
-        jTable2.getColumnModel().getColumn(0).setMinWidth(35);
-        jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
-
-        ((DefaultTableModel) jTable2.getModel()).setRowCount(0);
-        jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        jTable2.getSelectionModel().addListSelectionListener(x -> {
-            if (!x.getValueIsAdjusting()) {
-                int selectedRow = jTable2.getSelectedRow();
-                if (selectedRow != -1) {
-                    updateManufacturer(dao.getManufacturer(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString())));
-                    selecionadoNome.setText(selectedManufacturer.getName());
-                    selecionadoCNPJ.setText(CNPJResource.returnCNPJFormat(selectedManufacturer.getCNPJ()));
-                }
-            }
-        });
-
         new Thread(new Runnable() {
             @Override
             public void run(){
+                ManufacturerDAO dao = ManufacturerDAO.getInstance();
+                jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
+                jTable2.getColumnModel().getColumn(0).setMinWidth(35);
+                jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
+
+                ((DefaultTableModel) jTable2.getModel()).setRowCount(0);
+                jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+                jTable2.getSelectionModel().addListSelectionListener(x -> {
+                    if (!x.getValueIsAdjusting()) {
+                        int selectedRow = jTable2.getSelectedRow();
+                        if (selectedRow != -1) {
+                            updateManufacturer(dao.getManufacturer(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString())));
+                            selecionadoNome.setText(selectedManufacturer.getName());
+                            selecionadoCNPJ.setText(CNPJResource.returnCNPJFormat(selectedManufacturer.getCNPJ()));
+                        }
+                    }
+                });
+
                 loadValores();
             }
         }).start();

@@ -37,38 +37,38 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
     public TelaSelecionarBeneficiado() {
         initComponents();
 
-        jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        jTable2.getSelectionModel().addListSelectionListener(x -> {
-            if (!x.getValueIsAdjusting()) {
-                int selectedRow = jTable2.getSelectedRow();
-                if (selectedRow != -1) {
-                    selectedFriend = FriendsDAO.getInstance().getFriend(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
-                    if(selectedFriend != null){
-                        selecionadoNome.setText(selectedFriend.getName().toUpperCase());
-                        selecionadoTelefone.setText(CEPResource.returnTelefoneFormat(selectedFriend.getPhone()));
-                    }
-                }else{
-                    selectedFriend = null;
-                    selecionadoNome.setText("");
-                    selecionadoTelefone.setText("");
-                }
-            }
-        });
-
-        jTable2.getColumnModel().getColumn(1).setPreferredWidth(35);
-        jTable2.getColumnModel().getColumn(1).setMinWidth(35);
-        jTable2.getColumnModel().getColumn(1).setMaxWidth(35);
-
-        jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
-        jTable2.getColumnModel().getColumn(0).setMinWidth(35);
-        jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
-
-        ((DefaultTableModel) jTable2.getModel()).setRowCount(0);
-
         new Thread(new Runnable(){
             @Override
             public void run(){
+                jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+                jTable2.getSelectionModel().addListSelectionListener(x -> {
+                    if (!x.getValueIsAdjusting()) {
+                        int selectedRow = jTable2.getSelectedRow();
+                        if (selectedRow != -1) {
+                            selectedFriend = FriendsDAO.getInstance().getFriend(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
+                            if(selectedFriend != null){
+                                selecionadoNome.setText(selectedFriend.getName().toUpperCase());
+                                selecionadoTelefone.setText(CEPResource.returnTelefoneFormat(selectedFriend.getPhone()));
+                            }
+                        }else{
+                            selectedFriend = null;
+                            selecionadoNome.setText("");
+                            selecionadoTelefone.setText("");
+                        }
+                    }
+                });
+        
+                jTable2.getColumnModel().getColumn(1).setPreferredWidth(35);
+                jTable2.getColumnModel().getColumn(1).setMinWidth(35);
+                jTable2.getColumnModel().getColumn(1).setMaxWidth(35);
+        
+                jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
+                jTable2.getColumnModel().getColumn(0).setMinWidth(35);
+                jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
+        
+                ((DefaultTableModel) jTable2.getModel()).setRowCount(0);
+                
                 loadValores();
             }
         }).start();
@@ -94,8 +94,8 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
         canvas1 = new java.awt.Canvas();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        canvas2 = new java.awt.Canvas();
         jLabel7 = new javax.swing.JLabel();
+        canvas2 = new java.awt.Canvas();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         filtroFiltrarNome = new javax.swing.JCheckBox();
         textFiltrarNome = new javax.swing.JTextField();
@@ -185,22 +185,22 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
         jLayeredPane1.setBackground(new java.awt.Color(153, 153, 153));
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        canvas1.setBackground(new java.awt.Color(255, 0, 0));
+        canvas1.setBackground(new java.awt.Color(255, 57, 57));
 
-        jLabel1.setText("DEVOLVER FERRAMENTA");
+        jLabel1.setText("EMPRESTIMO ATRASADO");
 
         jLabel2.setText("Emprestimo em aberto");
-
-        canvas2.setBackground(new java.awt.Color(255, 255, 51));
 
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel7.setText("STATUS");
 
+        canvas2.setBackground(new java.awt.Color(255, 255, 224));
+
         jLayeredPane1.setLayer(canvas1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(canvas2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(canvas2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -234,9 +234,9 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
                     .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

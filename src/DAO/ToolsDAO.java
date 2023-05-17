@@ -53,7 +53,7 @@ public class ToolsDAO {
 
     public void removeTool(ToolModel e){
         try{
-            DBQuery.executeQuery("DELETE FROM tb_ferramentas WHERE id = '" + e.getId() + "';");
+            DBQuery.insertOrUpdateQuery("DELETE FROM tb_ferramentas WHERE id = '" + e.getId() + "';");
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }

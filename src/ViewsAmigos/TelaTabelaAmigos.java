@@ -12,6 +12,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 
+import Controllers.ColorsRenderer;
+import Controllers.StatusRenderer;
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
 import Model.FriendModel;
@@ -34,36 +36,35 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     public TelaTabelaAmigos() {
         initComponents();
 
-
-        jTable2.getColumnModel().getColumn(1).setPreferredWidth(35);
-        jTable2.getColumnModel().getColumn(1).setMinWidth(35);
-        jTable2.getColumnModel().getColumn(1).setMaxWidth(35);
-
-        jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
-        jTable2.getColumnModel().getColumn(0).setMinWidth(35);
-        jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
-
-        ((DefaultTableModel) jTable2.getModel()).setRowCount(0);
-        jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        jTable2.getSelectionModel().addListSelectionListener(x -> {
-            if (!x.getValueIsAdjusting()) {
-                int selectedRow = jTable2.getSelectedRow();
-                if (selectedRow != -1) {
-                    selectedFriend = FriendsDAO.getInstance().getFriend(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
-                    selecionadoNome.setText(selectedFriend.getName().toUpperCase());
-                    selecionadoTelefone.setText(CEPResource.returnTelefoneFormat(selectedFriend.getPhone()));
-                }else{
-                    selectedFriend = null;
-                    selecionadoNome.setText("");
-                    selecionadoTelefone.setText("");
-                }
-            }
-        });
-
         Thread loadValues = new Thread(new Runnable(){
             @Override
             public void run(){
+                jTable2.getColumnModel().getColumn(1).setPreferredWidth(35);
+                jTable2.getColumnModel().getColumn(1).setMinWidth(35);
+                jTable2.getColumnModel().getColumn(1).setMaxWidth(35);
+        
+                jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
+                jTable2.getColumnModel().getColumn(0).setMinWidth(35);
+                jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
+        
+                ((DefaultTableModel) jTable2.getModel()).setRowCount(0);
+                jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+                jTable2.getSelectionModel().addListSelectionListener(x -> {
+                    if (!x.getValueIsAdjusting()) {
+                        int selectedRow = jTable2.getSelectedRow();
+                        if (selectedRow != -1) {
+                            selectedFriend = FriendsDAO.getInstance().getFriend(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
+                            selecionadoNome.setText(selectedFriend.getName().toUpperCase());
+                            selecionadoTelefone.setText(CEPResource.returnTelefoneFormat(selectedFriend.getPhone()));
+                        }else{
+                            selectedFriend = null;
+                            selecionadoNome.setText("");
+                            selecionadoTelefone.setText("");
+                        }
+                    }
+                });
+                
                 loadValores();
             }
         });
@@ -84,11 +85,11 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        canvas1 = new java.awt.Canvas();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         canvas2 = new java.awt.Canvas();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        canvas3 = new java.awt.Canvas();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         filtroFiltrarNome = new javax.swing.JCheckBox();
         textFiltrarNome = new javax.swing.JTextField();
@@ -148,7 +149,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "#", "Nome", "Telefone", "Endereço", "Ferramentas emprestadas", "Ferramentas devolvidas"
+                "ID", "#", "Nome", "Telefone", "Endereço", "Emprestimos em aberto", "Emprestimos atrasados"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -170,31 +171,37 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
             jTable2.getColumnModel().getColumn(1).setResizable(false);
             jTable2.getColumnModel().getColumn(1).setPreferredWidth(0);
+            jTable2.getColumnModel().getColumn(2).setResizable(false);
             jTable2.getColumnModel().getColumn(2).setPreferredWidth(200);
+            jTable2.getColumnModel().getColumn(3).setResizable(false);
+            jTable2.getColumnModel().getColumn(4).setResizable(false);
             jTable2.getColumnModel().getColumn(4).setPreferredWidth(400);
+            jTable2.getColumnModel().getColumn(5).setResizable(false);
             jTable2.getColumnModel().getColumn(5).setPreferredWidth(40);
-            jTable2.getColumnModel().getColumn(6).setPreferredWidth(40);
+            jTable2.getColumnModel().getColumn(6).setResizable(false);
         }
 
         jLayeredPane1.setBackground(new java.awt.Color(153, 153, 153));
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        canvas1.setBackground(new java.awt.Color(255, 0, 0));
-
-        jLabel1.setText("DEVOLVER FERRAMENTA");
-
         jLabel2.setText("Emprestimo em aberto");
 
-        canvas2.setBackground(new java.awt.Color(255, 255, 51));
+        canvas2.setBackground(new java.awt.Color(255, 255, 224));
 
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel7.setText("STATUS");
 
-        jLayeredPane1.setLayer(canvas1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel8.setText("EMPRESTIMO ATRASADO");
+
+        canvas3.setBackground(new java.awt.Color(255, 57, 57));
+
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(canvas2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(canvas3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -203,6 +210,9 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -210,13 +220,10 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2))
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(canvas3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1))))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7)))
-                .addContainerGap(108, Short.MAX_VALUE))
+                                .addComponent(jLabel8)))))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,9 +231,9 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8)
+                    .addComponent(canvas3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -523,7 +530,6 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_textFiltrarNomeActionPerformed
 
     private void loadValores(){
-        ArrayList<FriendModel> friends = FriendsDAO.getInstance().getFriends();
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         //CONFIGURACOES DA TABELA
         model.setRowCount(0);
@@ -531,28 +537,38 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         selecionadoNome.setText("");
         selecionadoTelefone.setText("");
 
-        
-        //StatusRenderer statusRed = new StatusRenderer();
+        StatusRenderer renderer = new StatusRenderer();
         //statusRed.addHighlightedRow(1, Color.RED);
-        //statusRed.addHighlightedRow(3, Color.YELLOW);
-        //jTable2.getColumnModel().getColumn(1).setCellRenderer(statusRed);
 
                 
-        for(FriendModel friend : friends){
+        for(Object[] data : FriendsDAO.getInstance().loadFriendsTabela()){
             if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
-                if(!friend.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
+                if(!data[2].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
                     continue;
                 }
             }
 
             if(filtroEndereco.isSelected() && textFiltrarEndereco.getText().trim().length() > 0){
-                if(!friend.getAddress().toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())){
+                if(!data[4].toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())){
                     continue;
                 }
             }
 
+            if(Integer.parseInt(data[5].toString()) > 0){
+                renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
+                for(int i = 0; i < jTable2.getColumnCount(); i++){
+                    jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
+                }
+            }
+
+            if(Integer.parseInt(data[6].toString()) > 0){
+                renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
+                for(int i = 0; i < jTable2.getColumnCount(); i++){
+                    jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
+                }
+            }
                     
-             model.addRow(new Object[]{friend.getId(), "-", friend.getName(), PhoneValidResource.formatPhoneNumber(friend.getPhone()), friend.getAddress(), "0", "0"});
+             model.addRow(data);
                     
         }
     }
@@ -659,8 +675,8 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     private javax.swing.JButton btnRelatorioFerramentas;
     private javax.swing.JButton btnRemoverCadastro;
     private javax.swing.JButton btnVerTodosEmprestimos;
-    private java.awt.Canvas canvas1;
     private java.awt.Canvas canvas2;
+    private java.awt.Canvas canvas3;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JCheckBox filtroAmigosDevolverFerramenta;
@@ -668,13 +684,13 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     private javax.swing.JCheckBox filtroAmigosSemEmprestimoAberto;
     private javax.swing.JCheckBox filtroEndereco;
     private javax.swing.JCheckBox filtroFiltrarNome;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;

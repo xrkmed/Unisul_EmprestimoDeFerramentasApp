@@ -4,6 +4,8 @@
  */
 package ViewsManufacturer;
 
+import Controllers.ColorsRenderer;
+import Controllers.StatusRenderer;
 import ViewsAmigos.*;
 import java.awt.Color;
 import java.awt.List;
@@ -21,6 +23,7 @@ import DAO.ManufacturerDAO;
 import DAO.ToolsDAO;
 import Model.FriendModel;
 import Model.ToolModel;
+import Resources.BRLResource;
 import Resources.CEPResource;
 import Resources.CNPJResource;
 import Resources.EditFriendCadResource;
@@ -43,6 +46,29 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
         Thread loadValues = new Thread(new Runnable(){
             @Override
             public void run() {
+
+                ArrayList<Integer> lowestSize = new ArrayList<>(Arrays.asList(0, 1));
+                for(Integer i : lowestSize){
+                    jTable2.getColumnModel().getColumn(i).setPreferredWidth(35);
+                    jTable2.getColumnModel().getColumn(i).setMinWidth(35);
+                    jTable2.getColumnModel().getColumn(i).setMaxWidth(35);
+                }
+
+                jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+                jTable2.getSelectionModel().addListSelectionListener(x -> {
+                    if (!x.getValueIsAdjusting()) {
+                        int selectedRow = jTable2.getSelectedRow();
+                        if (selectedRow != -1) {
+                            selectedManufacturer = ManufacturerDAO.getInstance().getManufacturer(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
+                            selecionadoNome.setText(selectedManufacturer.getName());
+                            selecionadoCNPJ.setText(CNPJResource.returnCNPJFormat(selectedManufacturer.getCNPJ()));
+                        }
+                    }
+                });
+
+                ((DefaultTableModel) jTable2.getModel()).setRowCount(0);
+        
                 loadValores();
             }
         });
@@ -92,36 +118,36 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "#", "Nome", "CNPJ", "Ferramentas", "Ferramentas em uso"
+                "ID", "#", "Nome", "CNPJ", "Ferramentas", "Ferramentas em uso", "Valor total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -146,12 +172,13 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
             jTable2.getColumnModel().getColumn(4).setPreferredWidth(100);
             jTable2.getColumnModel().getColumn(5).setResizable(false);
             jTable2.getColumnModel().getColumn(5).setPreferredWidth(100);
+            jTable2.getColumnModel().getColumn(6).setResizable(false);
         }
 
         jLayeredPane1.setBackground(new java.awt.Color(153, 153, 153));
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        canvas1.setBackground(new java.awt.Color(255, 0, 0));
+        canvas1.setBackground(new java.awt.Color(255, 57, 57));
 
         jLabel1.setText("Fabricante sem ferramentas disponiveis");
 
@@ -418,58 +445,39 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
         selecionadoCNPJ.setText("");
         selecionadoNome.setText("");
         selectedManufacturer = null;
-        
-        ManufacturerDAO dao = ManufacturerDAO.getInstance();
-        ArrayList<ManufacturerResource> manufacturers = dao.getManufacturers();
+        ArrayList<ManufacturerResource> manufacturers = ManufacturerDAO.getInstance().getManufacturers();
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        //CONFIGURACOES DA TABELA
         model.setRowCount(0);
-        jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        jTable2.getSelectionModel().addListSelectionListener(x -> {
-            if (!x.getValueIsAdjusting()) {
-                int selectedRow = jTable2.getSelectedRow();
-                if (selectedRow != -1) {
-                    selectedManufacturer = dao.getManufacturer(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
-                    selecionadoNome.setText(selectedManufacturer.getName());
-                    selecionadoCNPJ.setText(CNPJResource.returnCNPJFormat(selectedManufacturer.getCNPJ()));
+        StatusRenderer statusRed = new StatusRenderer();   
+        for(ManufacturerResource manufacturer : manufacturers){
+            if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
+                if(!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
+                        continue;
                 }
             }
-        });
 
-        StatusRenderer statusRed = new StatusRenderer();
+            ArrayList<ToolModel> tools = ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId());
+            int ferramentasEmUso = 0;
+            double valorTotal = 0.;
+            for(ToolModel tool : tools){
+                if(!tool.isAvailable()){
+                    ++ferramentasEmUso;   
+                }
+
+                valorTotal += tool.getPrice();
+            }
+
+            if(ferramentasEmUso == tools.size() && tools.size() > 0){
+                statusRed.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
+                for(int i = 0; i < jTable2.getColumnCount(); i++){
+                    jTable2.getColumnModel().getColumn(i).setCellRenderer(statusRed);
+                }
+            }
+
+            model.addRow(new Object[]{manufacturer.getId(), "-", manufacturer.getName(), CNPJResource.returnCNPJFormat(manufacturer.getCNPJ()),"" + tools.size(), "" + ferramentasEmUso, "R$ " + BRLResource.PRICE_FORMATTER.format(valorTotal)});
                 
-        ArrayList<Integer> lowestSize = new ArrayList<>(Arrays.asList(0, 1));
-            for(Integer i : lowestSize){
-                jTable2.getColumnModel().getColumn(i).setPreferredWidth(35);
-                jTable2.getColumnModel().getColumn(i).setMinWidth(35);
-                jTable2.getColumnModel().getColumn(i).setMaxWidth(35);
-            }
-
-                
-            for(ManufacturerResource manufacturer : manufacturers){
-                if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
-                    if(!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
-                         continue;
-                    }
-                }
-
-                ArrayList<ToolModel> tools = ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId());
-                int ferramentasEmUso = 0;
-                for(ToolModel tool : tools){
-                    if(!tool.isAvailable()){
-                        ++ferramentasEmUso;   
-                    }
-                }
-
-                if(ferramentasEmUso == tools.size() && tools.size() > 0){
-                    statusRed.addHighlightedRow(model.getRowCount(), Color.RED);
-                    jTable2.getColumnModel().getColumn(1).setCellRenderer(statusRed);
-                }
-
-                model.addRow(new Object[]{manufacturer.getId(), "-", manufacturer.getName(), CNPJResource.returnCNPJFormat(manufacturer.getCNPJ()),"" + tools.size(), "" + ferramentasEmUso});
-                    
-            }
+        }
     }
 
     private void textFiltrarNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFiltrarNomeKeyReleased
@@ -553,7 +561,6 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscar1;
     private javax.swing.JButton btnRelatorioFerramentas;
     private javax.swing.JButton btnRemoverCadastro;

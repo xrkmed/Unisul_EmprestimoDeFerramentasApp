@@ -49,7 +49,7 @@ public class LoansDAO {
 
     public void removeLoan(int id){
         try{
-            DBQuery.executeQuery("DELETE FROM tb_emprestimos WHERE id = '" + id + "';");
+            DBQuery.insertOrUpdateQuery("DELETE FROM tb_emprestimos WHERE id = '" + id + "';");
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
