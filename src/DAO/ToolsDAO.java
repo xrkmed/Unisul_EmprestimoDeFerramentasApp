@@ -2,15 +2,9 @@ package DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-
 import Database.DBQuery;
-import Database.DBTreatment;
-import Database.Database;
 import Exceptions.DatabaseResultQueryException;
 import Model.ToolModel;
 import Resources.BRLResource;

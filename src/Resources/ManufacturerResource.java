@@ -1,7 +1,5 @@
 package Resources;
 
-import Controllers.CNPJEntity;
-
 public class ManufacturerResource {
 
     private Integer id;

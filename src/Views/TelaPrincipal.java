@@ -4,15 +4,6 @@
  */
 package Views;
 
-import java.util.Date;
-import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
-
-import Controllers.EventScheduler;
-import DAO.ToolsDAO;
-import Model.ToolModel;
-import ViewsAmigos.TelaCadastro;
 import ViewsAmigos.TelaTabelaAmigos;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
 

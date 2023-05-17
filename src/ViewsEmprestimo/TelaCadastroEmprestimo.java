@@ -24,7 +24,9 @@ import Model.LoanModel;
 import Model.ToolModel;
 
 import Resources.BRLResource;
+import Resources.DateDocument;
 import Resources.DateResource;
+import Resources.PriceDocument;
 import Resources.ToolboxResource;
 import ViewsAmigos.TelaSelecionarBeneficiado;
 import ViewsTool.TelaSelecionarFerramenta;
@@ -43,99 +45,40 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
      */
     public TelaCadastroEmprestimo() {
         initComponents();
+        configFrame();
+    }
 
+    private void configFrame(){
         AbstractDocument document = (AbstractDocument) textValorReceber.getDocument();
 
-        document.setDocumentFilter(new DocumentFilter() {
-            @Override
-            public void remove(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length) throws javax.swing.text.BadLocationException {
-                replace(fb, offset, length, "", null);
-            }
-
-            @Override
-            public void insertString(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, java.lang.String text, javax.swing.text.AttributeSet attr) throws javax.swing.text.BadLocationException {
-                replace(fb, offset, 0, text, attr);
-            }
-
-            @Override
-            public void replace(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length, java.lang.String text, javax.swing.text.AttributeSet attr) throws javax.swing.text.BadLocationException {
-                Document doc = fb.getDocument();
-                StringBuilder sb = new StringBuilder(doc.getText(0, doc.getLength()));
-                sb.replace(offset, offset + length, text);
-                
-                String filteredText = sb.toString().replaceAll("[^\\d]", "");
-                if(filteredText.length() > 9){
-                    return;
-                }
-                
-                try {
-                    if (!filteredText.isEmpty()) {
-                        double value = Double.parseDouble(filteredText) / 100.0;
-                        String formattedText = BRLResource.PRICE_FORMATTER.format(value);
-                        super.replace(fb, 0, doc.getLength(), formattedText, attr);
-                    } else {
-                        super.replace(fb, 0, doc.getLength(), "", attr);
-                    }
-                } catch (Exception ex) {
-                    // Se ocorrer uma exceção ao converter ou formatar, mantém o valor antigo
-                }
-            }
-        });
-
+        document.setDocumentFilter(new PriceDocument());
         document = (AbstractDocument) textDataDevolucao.getDocument();
+        document.setDocumentFilter(new DateDocument());
+        lblDataHoje.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        document.setDocumentFilter(new DocumentFilter() {
-            @Override
-            public void remove(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length) throws javax.swing.text.BadLocationException {
-                replace(fb, offset, length, "", null);
-            }
+        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jTable1.getSelectionModel().addListSelectionListener(x -> {
+            if (!x.getValueIsAdjusting()) {
+                int selectedRow = jTable1.getSelectedRow();
+                if (selectedRow != -1) {
+                    selecionadoNome.setText(jTable1.getValueAt(selectedRow, 1).toString());
+                    selecionadoFabricante.setText(jTable1.getValueAt(selectedRow, 2).toString());
+                    btnRemoverFerramenta.setEnabled(true);
 
-            @Override
-            public void insertString(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, java.lang.String text, javax.swing.text.AttributeSet attr) throws javax.swing.text.BadLocationException {
-                replace(fb, offset, 0, text, attr);
-            }
-
-            @Override
-            public void replace(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length, java.lang.String text, javax.swing.text.AttributeSet attr) throws javax.swing.text.BadLocationException {
-                Document doc = fb.getDocument();
-                StringBuilder sb = new StringBuilder(doc.getText(0, doc.getLength()));
-                sb.replace(offset, offset + length, text);
-
-                String filteredText = DateResource.formatDateString(sb.toString());
-            
-                
-                super.replace(fb, 0, doc.getLength(), filteredText, attr);
+                    for(ToolModel tool : toolsList.getTools()){
+                        if(tool.getId() == (int)jTable1.getValueAt(selectedRow, 0)){
+                            selectedTool = tool;
+                            break;
+                        }
+                    }
+                }else{
+                    selectedTool = null;
+                    selecionadoNome.setText("");
+                    selecionadoFabricante.setText("");
+                    btnRemoverFerramenta.setEnabled(false);
+                }
             }
         });
-
-            //today date in string format dd/MM/YYYY
-            lblDataHoje.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-
-            jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    
-            jTable1.getSelectionModel().addListSelectionListener(x -> {
-                if (!x.getValueIsAdjusting()) {
-                    int selectedRow = jTable1.getSelectedRow();
-                    if (selectedRow != -1) {
-                        selecionadoNome.setText(jTable1.getValueAt(selectedRow, 1).toString());
-                        selecionadoFabricante.setText(jTable1.getValueAt(selectedRow, 2).toString());
-                        btnRemoverFerramenta.setEnabled(true);
-    
-                        for(ToolModel tool : toolsList.getTools()){
-                            if(tool.getId() == (int)jTable1.getValueAt(selectedRow, 0)){
-                                selectedTool = tool;
-                                break;
-                            }
-                        }
-                    }else{
-                        selectedTool = null;
-                        selecionadoNome.setText("");
-                        selecionadoFabricante.setText("");
-                        btnRemoverFerramenta.setEnabled(false);
-                    }
-                }
-            });
-
     }
 
     /**

@@ -5,12 +5,8 @@
 package ViewsAmigos;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTextPane;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
@@ -20,6 +16,7 @@ import DAO.LocalidadesDAO;
 import Model.FriendModel;
 import Resources.AddressResource;
 import Resources.CEPResource;
+import Resources.PhoneDocument;
 import Resources.PhoneValidResource;
 
 /**
@@ -35,47 +32,7 @@ public class TelaAlterarCadastro extends javax.swing.JFrame {
      */
     public TelaAlterarCadastro() {
         initComponents();
-
-        AbstractDocument document = (AbstractDocument) textTelefone.getDocument();
-
-        document.setDocumentFilter(new DocumentFilter() {
-            @Override
-            public void remove(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length) throws javax.swing.text.BadLocationException {
-                replace(fb, offset, length, "", null);
-            }
-
-            @Override
-            public void insertString(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, java.lang.String text, javax.swing.text.AttributeSet attr) throws javax.swing.text.BadLocationException {
-                replace(fb, offset, 0, text, attr);
-            }
-
-            @Override
-            public void replace(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length, java.lang.String text, javax.swing.text.AttributeSet attr) throws javax.swing.text.BadLocationException {
-                Document doc = fb.getDocument();
-                StringBuilder sb = new StringBuilder(doc.getText(0, doc.getLength()));
-                sb.replace(offset, offset + length, text);
-
-                String filteredText = sb.toString().replaceAll("[^\\d]", "");
-
-                if (PhoneValidResource.isValidPhoneNumber(filteredText)) {
-                    super.replace(fb, 0, doc.getLength(), PhoneValidResource.formatPhoneNumber(filteredText), attr);
-                } else {
-                    super.replace(fb, 0, doc.getLength(), filteredText, attr);
-                }
-            }
-        });
-
-        //evitar travamento da janela ao carregar os dados
-        Thread pThread = new Thread(new Runnable(){
-            @Override
-            public void run(){
-                selectEstado.removeAllItems();
-                for(Object estado : LocalidadesDAO.getEstados()){
-                    selectEstado.addItem(estado.toString());
-                }
-            }
-        });
-        pThread.start();
+        configFrame();
     }
 
     public TelaAlterarCadastro(TelaTabelaAmigos e){
@@ -91,6 +48,24 @@ public class TelaAlterarCadastro extends javax.swing.JFrame {
         textComplemento.setText(friend.getAddress().getComplemento());
         textNumero.setText(friend.getAddress().getNumber() + "");
         textTelefone.setText(friend.getPhone());
+    }
+
+    private void configFrame(){
+        AbstractDocument document = (AbstractDocument) textTelefone.getDocument();
+
+        document.setDocumentFilter(new PhoneDocument());
+
+        //evitar travamento da janela ao carregar os dados
+        Thread pThread = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                selectEstado.removeAllItems();
+                for(Object estado : LocalidadesDAO.getEstados()){
+                    selectEstado.addItem(estado.toString());
+                }
+            }
+        });
+        pThread.start();
     }
 
     /**

@@ -35,7 +35,15 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
      */
     public TelaSelecionarBeneficiado() {
         initComponents();
+        configFrame();
+    }
 
+    public TelaSelecionarBeneficiado(JFrame parent) {
+        this();
+        this.parent = parent;
+    }
+
+    private void configFrame(){
         new Thread(new Runnable(){
             @Override
             public void run(){
@@ -44,16 +52,20 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
                 jTable2.getSelectionModel().addListSelectionListener(x -> {
                     if (!x.getValueIsAdjusting()) {
                         int selectedRow = jTable2.getSelectedRow();
-                        if (selectedRow != -1) {
-                            selectedFriend = FriendsDAO.getInstance().getFriend(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
-                            if(selectedFriend != null){
-                                selecionadoNome.setText(selectedFriend.getName().toUpperCase());
-                                selecionadoTelefone.setText(CEPResource.returnTelefoneFormat(selectedFriend.getPhone()));
+                        try{
+                            if (selectedRow != -1) {
+                                selectedFriend = FriendsDAO.getInstance().getFriend(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
+                                if(selectedFriend != null){
+                                    selecionadoNome.setText(selectedFriend.getName().toUpperCase());
+                                    selecionadoTelefone.setText(CEPResource.returnTelefoneFormat(selectedFriend.getPhone()));
+                                }
+                            }else{
+                                selectedFriend = null;
+                                selecionadoNome.setText("");
+                                selecionadoTelefone.setText("");
                             }
-                        }else{
-                            selectedFriend = null;
-                            selecionadoNome.setText("");
-                            selecionadoTelefone.setText("");
+                        }catch(Exception e){
+                            JOptionPane.showMessageDialog(null, e.getMessage());
                         }
                     }
                 });
@@ -71,11 +83,6 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
                 loadValores();
             }
         }).start();
-    }
-
-    public TelaSelecionarBeneficiado(JFrame parent) {
-        this();
-        this.parent = parent;
     }
     /**
      * This method is called from within the constructor to initialize the form.

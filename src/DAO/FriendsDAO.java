@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import Database.DBQuery;
-import Database.DBTreatment;
 import Database.Database;
 import Exceptions.DatabaseResultQueryException;
 import Model.FriendModel;

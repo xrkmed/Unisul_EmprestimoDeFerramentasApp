@@ -33,12 +33,16 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
      */
     public TelaPainelFerramentas() {
         initComponents();
+        configFrame();
     }
 
     public TelaPainelFerramentas(ManufacturerResource manufacturer) {
         this();
         this.manufacturer = manufacturer;
         this.setTitle("Ferramentas do Fabricante " + manufacturer.getName());
+    }
+
+    private void configFrame(){
         Thread pStart = new Thread(new Runnable(){
             @Override
             public void run(){

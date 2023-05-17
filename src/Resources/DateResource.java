@@ -4,10 +4,6 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 public class DateResource {
     public static String formatDateString(String text) {

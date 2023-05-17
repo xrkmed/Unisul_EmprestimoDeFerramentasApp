@@ -36,7 +36,10 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
      */
     public TelaTabelaAmigos() {
         initComponents();
+        configFrame();
+    }
 
+    private void configFrame(){
         Thread loadValues = new Thread(new Runnable(){
             @Override
             public void run(){

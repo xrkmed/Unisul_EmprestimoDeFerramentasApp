@@ -41,7 +41,15 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
      */
     public TelaSelecionarFabricante() {
         initComponents();
+        initFrameConfig();
+    }
 
+    public TelaSelecionarFabricante(JFrame parent){
+        this();
+        this.parent = parent;
+    }
+
+    private void initFrameConfig(){
         new Thread(new Runnable() {
             @Override
             public void run(){
@@ -71,11 +79,6 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
                 loadValores();
             }
         }).start();
-    }
-
-    public TelaSelecionarFabricante(JFrame parent){
-        this();
-        this.parent = parent;
     }
 
     public ManufacturerResource getSelectedManufacturer(){

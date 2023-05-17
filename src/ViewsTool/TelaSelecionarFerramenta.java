@@ -49,7 +49,15 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
      */
     public TelaSelecionarFerramenta() {
         initComponents();
+        initFrameConfig();
+    }
 
+    public TelaSelecionarFerramenta(JFrame parent){
+        this();
+        this.parent = parent;
+    }
+
+    private void initFrameConfig(){
         new Thread(new Runnable(){
             @Override
             public void run(){
@@ -87,11 +95,6 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
                 loadValores();
             }
         }).start();
-    }
-
-    public TelaSelecionarFerramenta(JFrame parent){
-        this();
-        this.parent = parent;
     }
 
     /**

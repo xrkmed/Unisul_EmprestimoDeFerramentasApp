@@ -47,7 +47,10 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
      */
     public TelaTabelaFerramentas() {
         initComponents();
+        initFrameConfig();
+    }
 
+    private void initFrameConfig(){
         new Thread(new Runnable(){
             @Override
             public void run(){

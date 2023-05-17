@@ -10,7 +10,6 @@ import jdk.nashorn.api.scripting.JSObject;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import javax.swing.JOptionPane;
 
 public class CEPResource {
 

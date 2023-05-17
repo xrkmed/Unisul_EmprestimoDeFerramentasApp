@@ -8,7 +8,6 @@ import jdk.nashorn.api.scripting.JSObject;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-import javax.swing.JOptionPane;
 import javax.xml.ws.http.HTTPException;
 
 import Controllers.CNPJEntity;
@@ -86,17 +85,13 @@ public class CNPJResource {
 
     public static CNPJEntity consultarCNPJ(String cnpj) throws CNPJNotFound, HTTPException{
         try {
-            // Monta a URL da API de consulta
             String urlConsulta = "https://www.receitaws.com.br/v1/cnpj/" + cnpj;
 
-            // Faz a requisição GET para a API
             URL url = new URL(urlConsulta);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 
-            // Verifica se a requisição foi bem-sucedida (código 200)
             if (conn.getResponseCode() == 200) {
-                // Lê a resposta da API
                 BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 StringBuilder response = new StringBuilder();
                 String line;
@@ -109,10 +104,8 @@ public class CNPJResource {
                 String script = "JSON.parse('" + response.toString() + "')";
                 JSObject jsObject = (JSObject) engine.eval(script);
 
-                // Verifica se a consulta foi realizada com sucesso
                 if (jsObject.getMember("status").toString().equals("OK")) {
                     String sampleAddressStr = jsObject.getMember("logradouro").toString() + ", " + jsObject.getMember("numero").toString() + " - " + jsObject.getMember("bairro").toString() + ", " + jsObject.getMember("municipio").toString() + " - " + jsObject.getMember("uf").toString() + ", " + jsObject.getMember("cep").toString();
-                    //CNPJEntity(String nome, String telefone, double capitalSocial, String sampleAddress, int status, String situacao, String cnpj)
                     CNPJEntity cnpjObject = new CNPJEntity(jsObject.getMember("nome").toString(), jsObject.getMember("telefone").toString(), Double.parseDouble(jsObject.getMember("capital_social").toString()), sampleAddressStr, jsObject.getMember("status").toString(), jsObject.getMember("situacao").toString(), jsObject.getMember("cnpj").toString());
 
                     conn.disconnect();
@@ -125,9 +118,6 @@ public class CNPJResource {
                 conn.disconnect();
                 throw new HTTPException(conn.getResponseCode());
             }
-
-            // Fecha a conexão
-            
         }catch(Exception e){
             throw new IllegalArgumentException(e.getMessage());
         }

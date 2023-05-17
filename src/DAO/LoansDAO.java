@@ -5,20 +5,13 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 import Database.DBQuery;
-import Database.Database;
 import Exceptions.DatabaseResultQueryException;
 import Model.FriendModel;
 import Model.LoanModel;
-import Model.ToolModel;
 
 public class LoansDAO {
-
-    //Simulated database
-    private final HashMap<LoanModel, FriendModel> loans = new HashMap<>();
-
     //Singleton class
     private static LoansDAO instance;
 

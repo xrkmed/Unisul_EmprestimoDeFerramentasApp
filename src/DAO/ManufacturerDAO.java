@@ -4,11 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 import Database.DBQuery;
-import Database.DBTreatment;
-import Database.Database;
 import Exceptions.DatabaseResultQueryException;
 import Resources.CNPJResource;
 import Resources.ManufacturerResource;

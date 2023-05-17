@@ -41,7 +41,10 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
      */
     public TelaTabelaFabricante() {
         initComponents();
+        initTable();
+    }
 
+    private void initTable(){
         Thread loadValues = new Thread(new Runnable(){
             @Override
             public void run() {
