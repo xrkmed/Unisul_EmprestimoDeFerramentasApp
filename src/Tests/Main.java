@@ -16,6 +16,7 @@ import Model.ToolModel;
 import Resources.AddressResource;
 import Resources.ManufacturerResource;
 import Views.TelaPrincipal;
+import ViewsAmigos.JFrameTest;
 
 public class Main {
 

@@ -5,6 +5,8 @@
 package ViewsAmigos;
 
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -588,10 +590,21 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
     }//GEN-LAST:event_jTable2MouseClicked
 
+    public FriendModel getSelectedFriend(){
+        return selectedFriend;
+    }
+
     private void btnDadosCadastraisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDadosCadastraisActionPerformed
         if(selectedFriend != null){
-            EditFriendCadResource.editFriendCadResource(selectedFriend);
-            loadValores();
+            TelaAlterarCadastro tela = new TelaAlterarCadastro(this);
+            tela.setVisible(true);
+
+            tela.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadValores();
+                }
+            });
         }
     }//GEN-LAST:event_btnDadosCadastraisActionPerformed
 
