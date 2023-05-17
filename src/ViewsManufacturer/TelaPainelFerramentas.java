@@ -65,7 +65,7 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
                 });
                 ((DefaultTableModel) ferramentasList.getModel()).setRowCount(0);
                 ferramentasList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-                
+
                 loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
                 loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
             }
@@ -135,11 +135,11 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
 
         jLabel3.setText("Em uso por algum amigo");
 
-        canvas2.setBackground(new java.awt.Color(255, 255, 224));
+        canvas2.setBackground(ColorsRenderer.lightYellow);
 
         jLabel8.setText("Em manutençao");
 
-        canvas4.setBackground(new java.awt.Color(255, 0, 255));
+        canvas4.setBackground(ColorsRenderer.lightMagenta);
 
         jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);

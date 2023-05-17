@@ -64,7 +64,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                         }
                     }
                 });
-                
+
                 loadValores();
             }
         });
@@ -186,16 +186,16 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
         jLabel2.setText("Emprestimo em aberto");
 
-        canvas2.setBackground(new java.awt.Color(255, 255, 224));
+        canvas2.setBackground(ColorsRenderer.lightYellow);
 
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel7.setText("STATUS");
 
         jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel8.setForeground(ColorsRenderer.red);
         jLabel8.setText("EMPRESTIMO ATRASADO");
 
-        canvas3.setBackground(new java.awt.Color(255, 57, 57));
+        canvas3.setBackground(ColorsRenderer.lightRed);
 
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(canvas2, javax.swing.JLayeredPane.DEFAULT_LAYER);

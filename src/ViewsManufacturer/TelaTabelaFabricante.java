@@ -91,6 +91,8 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
         canvas1 = new java.awt.Canvas();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        canvas2 = new java.awt.Canvas();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         filtroFiltrarNome = new javax.swing.JCheckBox();
         textFiltrarNome = new javax.swing.JTextField();
@@ -178,16 +180,22 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
         jLayeredPane1.setBackground(new java.awt.Color(153, 153, 153));
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        canvas1.setBackground(new java.awt.Color(255, 57, 57));
+        canvas1.setBackground(ColorsRenderer.lightRed);
 
         jLabel1.setText("Fabricante sem ferramentas disponiveis");
 
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel7.setText("STATUS");
 
+        jLabel2.setText("Fabricante sem ferramentas cadastradas");
+
+        canvas2.setBackground(ColorsRenderer.lightOrange);
+
         jLayeredPane1.setLayer(canvas1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(canvas2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -196,14 +204,18 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel7)))
-                .addContainerGap(108, Short.MAX_VALUE))
+                        .addComponent(jLabel7))
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,6 +226,10 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -473,6 +489,11 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
                 for(int i = 0; i < jTable2.getColumnCount(); i++){
                     jTable2.getColumnModel().getColumn(i).setCellRenderer(statusRed);
                 }
+            }else if(tools.size() == 0){
+                statusRed.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightOrange);
+                for(int i = 0; i < jTable2.getColumnCount(); i++){
+                    jTable2.getColumnModel().getColumn(i).setCellRenderer(statusRed);
+                }
             }
 
             model.addRow(new Object[]{manufacturer.getId(), "-", manufacturer.getName(), CNPJResource.returnCNPJFormat(manufacturer.getCNPJ()),"" + tools.size(), "" + ferramentasEmUso, "R$ " + BRLResource.PRICE_FORMATTER.format(valorTotal)});
@@ -565,10 +586,12 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
     private javax.swing.JButton btnRelatorioFerramentas;
     private javax.swing.JButton btnRemoverCadastro;
     private java.awt.Canvas canvas1;
+    private java.awt.Canvas canvas2;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JCheckBox filtroFiltrarNome;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

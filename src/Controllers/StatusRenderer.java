@@ -40,10 +40,20 @@ public class StatusRenderer  extends DefaultTableCellRenderer {
             // Obtenha a cor correspondente da linha destacada
             Color highlightedColor = highlightMap.get(row);
             // Defina a cor de fundo para a cor destacada
+            if(isSelected){
+                highlightedColor = highlightedColor.darker();
+            }
+
             cellComponent.setBackground(highlightedColor);
+            cellComponent.setForeground(Color.BLACK);
         } else {
-            // Defina a cor de fundo padrão para outras linhas
-            cellComponent.setBackground(table.getBackground());
+            if(isSelected){
+                cellComponent.setBackground(table.getSelectionBackground());
+                cellComponent.setForeground(table.getSelectionForeground());
+            }else{
+                cellComponent.setBackground(table.getBackground());
+                cellComponent.setForeground(table.getForeground());
+            }
         }
         
         return cellComponent;

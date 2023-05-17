@@ -204,7 +204,7 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
         jLayeredPane1.setBackground(new java.awt.Color(153, 153, 153));
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        canvas1.setBackground(new java.awt.Color(255, 57, 57));
+        canvas1.setBackground(ColorsRenderer.lightRed);
 
         jLabel1.setText("Sem fabricante");
 
@@ -213,15 +213,15 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
 
         jLabel2.setText("Em uso por algum amigo");
 
-        canvas2.setBackground(new java.awt.Color(255, 255, 224));
+        canvas2.setBackground(ColorsRenderer.lightYellow);
 
         jLabel8.setText("Em manutençao");
 
-        canvas3.setBackground(new java.awt.Color(255, 224, 255));
+        canvas3.setBackground(ColorsRenderer.lightMagenta);
 
         jLabel10.setText("Sem fabricante e em uso");
 
-        canvas4.setBackground(new java.awt.Color(255, 160, 122));
+        canvas4.setBackground(ColorsRenderer.lightOrange);
 
         jLayeredPane1.setLayer(canvas1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -601,7 +601,7 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
                 jTable2.getColumnModel().getColumn(1).setCellRenderer(statusRenderer);
             }
 
-            if(!data[3].toString().equalsIgnoreCase("sem fabricante")){
+            if(data[3].toString().equalsIgnoreCase("sem fabricante")){
                 if(statusRenderer.getHighlightedRow(model.getRowCount()) == ColorsRenderer.lightYellow){
                     statusRenderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightOrange);
                 }else{

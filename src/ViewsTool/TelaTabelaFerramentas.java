@@ -78,7 +78,7 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
                     jTable2.getColumnModel().getColumn(i).setMinWidth(35);
                     jTable2.getColumnModel().getColumn(i).setMaxWidth(35);
                 }
-                
+
                 loadValores();
             }
         }).start();
@@ -205,17 +205,17 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
 
         jLabel1.setText("Sem fabricante");
 
-        canvas1.setBackground(new java.awt.Color(255, 57, 57));
+        canvas1.setBackground(ColorsRenderer.lightRed);
 
-        canvas2.setBackground(new java.awt.Color(255, 255, 224));
+        canvas2.setBackground(ColorsRenderer.lightYellow);
 
         jLabel2.setText("Em uso por algum amigo");
 
         jLabel8.setText("Em manutençao");
 
-        canvas3.setBackground(new java.awt.Color(255, 224, 255));
+        canvas3.setBackground(ColorsRenderer.lightMagenta);
 
-        canvas4.setBackground(new java.awt.Color(255, 160, 122));
+        canvas4.setBackground(ColorsRenderer.lightOrange);
 
         jLabel10.setText("Sem fabricante e em uso");
 
@@ -640,7 +640,7 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
                 }
             }
             
-            if(!data[3].toString().equalsIgnoreCase("sem fabricante")){
+            if(data[3].toString().equalsIgnoreCase("sem fabricante")){
                 if(statusRenderer.getHighlightedRow(model.getRowCount()) == ColorsRenderer.lightYellow){
                     statusRenderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightOrange);
                 }else{
