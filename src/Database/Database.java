@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import javax.swing.JOptionPane;
+
 import Controllers.EventScheduler;
 import Exceptions.DatabaseCloseException;
 import Exceptions.DatabaseConnectException;
@@ -30,7 +32,7 @@ public class Database {
         return instance;
     }
 
-    public Connection getConnection(){
+    public Connection getConnection() throws DatabaseConnectException{
         try{
             if(conn == null || (conn != null && conn.isClosed())){
                 Properties prop = loadProperties();
@@ -43,7 +45,7 @@ public class Database {
         return conn;
     }
 
-    public void closeConnection(){
+    public void closeConnection() throws DatabaseCloseException{
         try{
             if(conn != null){
                 conn.close();
@@ -53,7 +55,7 @@ public class Database {
         }
     }
 
-    private static Properties loadProperties(){
+    private static Properties loadProperties() throws PropertiesException{
         try (FileInputStream fs = new FileInputStream("config.properties")){
             Properties props = new Properties();
             props.load(fs);
@@ -64,14 +66,23 @@ public class Database {
     }
 
     // Pingar a database a cada 5 segundos para manter a conexão viva
-    public void ping(){
+    public void ping() throws DatabaseNotConnectedException{
+        new EventScheduler().addEvent(5000, () -> getInstance().ping());
+
         try{
             if(conn != null){
+                if(conn.isClosed()){
+                   JOptionPane.showMessageDialog(null, "A conexao com o banco de dados se perdeu, tentando reconectar...");
+                   conn = getConnection();
+                   if(conn != null && !conn.isClosed()){
+                          JOptionPane.showMessageDialog(null, "Conexao com o banco de dados restabelecida.");
+                   }
+                   return;
+                }
              DBQuery.executeQuery("SELECT 1;");
             }
-            new EventScheduler().addEvent(5000, () -> getInstance().ping());
         }catch(Exception e){
-            throw new DatabaseNotConnectedException("Erro ao verificar a conexão com o banco de dados: " + e.getMessage());
+            throw new DatabaseNotConnectedException();
         }
     }
 

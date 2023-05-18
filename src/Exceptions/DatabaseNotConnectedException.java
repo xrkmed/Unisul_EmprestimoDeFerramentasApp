@@ -9,5 +9,6 @@ public class DatabaseNotConnectedException extends RuntimeException{
                 public DatabaseNotConnectedException(){
                     super("Banco de dados nao esta conectado.");
                 }
+
     
 }

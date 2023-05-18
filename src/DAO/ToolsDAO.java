@@ -144,5 +144,15 @@ public class ToolsDAO {
         return datas;
     }
 
+    public ArrayList<Object[]> getRelatorioObjectTools() throws DatabaseResultQueryException, SQLException{
+        ArrayList<Object[]> datas = new ArrayList<>();
+        ResultSet result = DBQuery.executeQuery("SELECT tb_ferramentas.id, tb_ferramentas.name, tb_ferramentas.price, SUM(CASE WHEN tb_emprestimos.id > 0 THEN 1 ELSE 0 END) as total_loans FROM tb_ferramentas LEFT JOIN tb_emprestimos ON tb_ferramentas.emprestimo_id = tb_emprestimos.id GROUP BY tb_ferramentas.id, tb_ferramentas.name, tb_ferramentas.price, tb_emprestimos.id;");
+        while(result.next()){
+           datas.add(new Object[]{result.getInt("id"), result.getString("name"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("price")), result.getInt("total_loans")});
+        }
+
+        return datas;
+    }
+
     
 }

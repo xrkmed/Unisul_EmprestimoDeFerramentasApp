@@ -323,7 +323,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRelatorioEmprestimoActionPerformed
 
     private void btnRelatorioFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioFerramentasActionPerformed
-        // TODO add your handling code here:
+        Thread newThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new ViewsTool.TelaRelatorioFerramentas().setVisible(true);
+            }
+        });
+
+        newThread.start();
     }//GEN-LAST:event_btnRelatorioFerramentasActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed

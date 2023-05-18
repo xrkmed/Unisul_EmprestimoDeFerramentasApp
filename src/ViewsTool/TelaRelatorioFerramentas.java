@@ -2,86 +2,63 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/Application.java to edit this template
  */
-package ViewsManufacturer;
+package ViewsTool;
 
+import ViewsManufacturer.*;
+
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import Controllers.ColorsRenderer;
+import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import DAO.ToolsDAO;
 import Model.ToolModel;
+import Resources.BRLResource;
+import Resources.DirectoryChooserFrame;
 import Resources.ManufacturerResource;
 
 /**
  *
  * @author arkmed
  */
-public class TelaPainelFerramentas extends javax.swing.JFrame {
+public class TelaRelatorioFerramentas extends javax.swing.JFrame {
 
-    private ToolModel selectedTool = null;
-    private ManufacturerResource manufacturer = null;
-
+    private String directory = null;
     /**
      * Creates new form TelaPainelFerramentas
      */
-    public TelaPainelFerramentas() {
+    public TelaRelatorioFerramentas() {
         initComponents();
         configFrame();
     }
 
-    public TelaPainelFerramentas(ManufacturerResource manufacturer) {
-        this();
-        this.manufacturer = manufacturer;
-        this.setTitle("Ferramentas do Fabricante " + manufacturer.getName());
-    }
 
     private void configFrame(){
         Thread pStart = new Thread(new Runnable(){
             @Override
             public void run(){
-                    ferramentasSemFab.getSelectionModel().addListSelectionListener(x -> {
-                        if (!x.getValueIsAdjusting()) {
-                            int selectedRow = ferramentasSemFab.getSelectedRow();
-                            if (selectedRow != -1) {
-                                try{
-                                    selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasSemFab.getValueAt(selectedRow, 0));
-                                    ferramentasList.clearSelection();
-                                }catch(Exception e){
-                                    JOptionPane.showMessageDialog(null, "Erro ao selecionar ferramenta: " + e.getMessage());
-                                }
-                            }
-                        }
-                    });
-                    ((DefaultTableModel) ferramentasSemFab.getModel()).setRowCount(0);
-                    ferramentasSemFab.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            
-                    ferramentasList.getSelectionModel().addListSelectionListener(x -> {
-                        if (!x.getValueIsAdjusting()) {
-                            int selectedRow = ferramentasList.getSelectedRow();
-                            if (selectedRow != -1) {
-                                try{
-                                    selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasList.getValueAt(selectedRow, 0));
-                                    ferramentasSemFab.clearSelection();
-                                }catch(Exception e){
-                                    JOptionPane.showMessageDialog(null, "Erro ao selecionar ferramenta: " + e.getMessage());
-                                }
-                            }
-                        }
-                    });
-                    ((DefaultTableModel) ferramentasList.getModel()).setRowCount(0);
-                    ferramentasList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-                    try{
-                        loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
-                        loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
-                    }catch(Exception e){
-                        JOptionPane.showMessageDialog(null, "Erro ao carregar ferramentas: " + e.getMessage());
-                    }
+                try{
+                    loadList(ferramentasRelatorio, ToolsDAO.getInstance().getRelatorioObjectTools());
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, "Erro ao carregar lista de ferramentas: " + e.getMessage());
+                }
             }
         });
         pStart.start();
@@ -98,214 +75,134 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        ferramentasSemFab = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        canvas2 = new java.awt.Canvas();
-        jLabel8 = new javax.swing.JLabel();
-        canvas4 = new java.awt.Canvas();
-        jLabel1 = new javax.swing.JLabel();
-        btnRemFabricante = new javax.swing.JButton();
-        btnCadFabricante = new javax.swing.JButton();
-        jLayeredPane2 = new javax.swing.JLayeredPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        ferramentasList = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
-        canvas3 = new java.awt.Canvas();
-        jLabel9 = new javax.swing.JLabel();
-        canvas5 = new java.awt.Canvas();
+        ferramentasRelatorio = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        menuBar = new javax.swing.JMenuBar();
+        textValorGastoTotal = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Grupo Supimpa - Painel de Ferramentas");
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        ferramentasSemFab.setModel(new javax.swing.table.DefaultTableModel(
+        ferramentasRelatorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Nome"
+                "ID", "Nome", "Preço", "Emprestimos totais"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(ferramentasSemFab);
-        if (ferramentasSemFab.getColumnModel().getColumnCount() > 0) {
-            ferramentasSemFab.getColumnModel().getColumn(0).setResizable(false);
-            ferramentasSemFab.getColumnModel().getColumn(1).setResizable(false);
+        jScrollPane1.setViewportView(ferramentasRelatorio);
+        if (ferramentasRelatorio.getColumnModel().getColumnCount() > 0) {
+            ferramentasRelatorio.getColumnModel().getColumn(0).setResizable(false);
+            ferramentasRelatorio.getColumnModel().getColumn(1).setResizable(false);
+            ferramentasRelatorio.getColumnModel().getColumn(2).setResizable(false);
+            ferramentasRelatorio.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        jLabel3.setText("Em uso por algum amigo");
+        jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
+        jLabel2.setText("Valor gasto ao total");
 
-        canvas2.setBackground(ColorsRenderer.lightYellow);
+        textValorGastoTotal.setEditable(false);
 
-        jLabel8.setText("Em manutençao");
+        jLabel3.setText("R$");
 
-        canvas4.setBackground(ColorsRenderer.lightMagenta);
+        jButton4.setText("Concluir");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(textValorGastoTotal, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(canvas2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(canvas4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(143, 143, 143))
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(canvas4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8))
+                        .addGap(6, 6, 6)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textValorGastoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE)
+                        .addContainerGap())))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                    .addContainerGap(715, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(16, 16, 16)))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textValorGastoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(canvas4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                    .addContainerGap(417, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(16, 16, 16)))
         );
 
-        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        jLabel1.setText("FERRAMENTAS SEM FABRICANTES");
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        jLabel1.setText("RELATORIO DE TODAS AS FERRAMENTAS CADASTRADAS");
 
-        btnRemFabricante.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
-        btnRemFabricante.setText("<");
-        btnRemFabricante.addActionListener(new java.awt.event.ActionListener() {
+        jMenu2.setText("Exportar");
+
+        jMenu4.setText("Exportar relatorio");
+
+        jMenuItem1.setText("Exportar para PDF");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemFabricanteActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
+        jMenu4.add(jMenuItem1);
 
-        btnCadFabricante.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
-        btnCadFabricante.setText(">");
-        btnCadFabricante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadFabricanteActionPerformed(evt);
-            }
-        });
+        jMenu2.add(jMenu4);
 
-        jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jLayeredPane2.setPreferredSize(new java.awt.Dimension(466, 524));
+        jMenuBar1.add(jMenu2);
 
-        ferramentasList.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "ID", "Nome"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(ferramentasList);
-        if (ferramentasList.getColumnModel().getColumnCount() > 0) {
-            ferramentasList.getColumnModel().getColumn(0).setResizable(false);
-            ferramentasList.getColumnModel().getColumn(1).setResizable(false);
-        }
-
-        jLabel4.setText("Em uso por algum amigo");
-
-        canvas3.setBackground(new java.awt.Color(255, 255, 224));
-
-        jLabel9.setText("Em manutençao");
-
-        canvas5.setBackground(new java.awt.Color(255, 0, 255));
-
-        jLayeredPane2.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(canvas3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(canvas5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
-        jLayeredPane2.setLayout(jLayeredPane2Layout);
-        jLayeredPane2Layout.setHorizontalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(143, 143, 143))
-            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(canvas3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4))
-                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(canvas5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jLayeredPane2Layout.setVerticalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(canvas3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(canvas5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        jLabel2.setText("FERRAMENTAS DESTE FABRICANTE");
-
-        jButton3.setText("Concluir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        setJMenuBar(menuBar);
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -315,100 +212,77 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnRemFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCadFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(19, 19, 19))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                        .addGap(6, 6, 6)
+                        .addComponent(jLayeredPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 250, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLayeredPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
-                            .addComponent(jLayeredPane1))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
-                        .addComponent(btnCadFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(btnRemFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(234, 234, 234))))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCadFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadFabricanteActionPerformed
-        try{
-            if(selectedTool != null && selectedTool.getManufacturer() == null){
-                ToolsDAO.getInstance().updateManufacturer(selectedTool.getId(), manufacturer.getId());
-                loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
-                loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
-            }else{
-                JOptionPane.showMessageDialog(null, "Selecione uma ferramenta sem fabricante para adicionar o fabricante selecionado");
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    public void setDirectory(String directory){
+        this.directory = directory;
+    }
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        DirectoryChooserFrame directoryChooserFrame = new DirectoryChooserFrame(this);
+
+        // Funcao que roda quando a visibilidade do directoryChooserFrame é alterada
+        directoryChooserFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                if(directory != null){
+                    try{
+                        Paragraph paragraphDate = PDFEntity.addParagraph("Relatorio efetuado na data " + new SimpleDateFormat("dd/MM/yyyy").format(new Date()), 5);
+                        Paragraph paragraphHeader = PDFEntity.addParagraph("Sistema de relatorio do Grupo Supimpa", 20);
+                        Paragraph paragraphValorGasto = PDFEntity.addParagraph("VALOR GASTO COM TODAS AS FERRAMENTAS", 0);
+                        Paragraph paragraphValor = PDFEntity.addParagraph("R$ " + textValorGastoTotal.getText(), 10);
+                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
+                        String fileName = "RelatorioFerramentas";
+                        PDFEntity.export(directory + "/", fileName, ferramentasRelatorio, paragraphHeader, paragraphDate, paragraphValorGasto, paragraphValor, paragraphRelatorio);
+                        JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directory + "/" + fileName + ".pdf");
+                    }catch(Exception e){
+                        JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente novamente mais tarde...");
+                    }
+                }
             }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao adicionar fabricante: " + e.getMessage());
-        }
-    }//GEN-LAST:event_btnCadFabricanteActionPerformed
+        });
 
-    private void btnRemFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemFabricanteActionPerformed
-        try{
-            if(selectedTool != null && selectedTool.getManufacturer().getId() == manufacturer.getId()){
-                ToolsDAO.getInstance().updateManufacturer(selectedTool.getId(), -1);
-                loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
-                loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
-            }else{
-                JOptionPane.showMessageDialog(null, "Selecione uma ferramenta deste fabricante para remover o fabricante");
-            }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao remover fabricante: " + e.getMessage());
-        }
-    }//GEN-LAST:event_btnRemFabricanteActionPerformed
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    public void loadList(JTable table, ArrayList<ToolModel> tools){
-        StatusRenderer renderer = new StatusRenderer();
+    public void loadList(JTable table, ArrayList<Object[]> dataObject){
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
 
-        for (ToolModel tool : tools) {
-            if(!tool.isAvailable()){
-                renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
-                for(int i = 0; i < table.getColumnCount(); i++){
-                    table.getColumnModel().getColumn(i).setCellRenderer(renderer);
-                }
+        double valorGastoTotal = 0.;
+        try{
+         for (Object[] data : dataObject) {
+                model.addRow(data);
+                double toolPrice = data[2] != null ? BRLResource.PRICE_FORMATTER.parse(data[2].toString().replaceAll("^R\\$", "").trim()).doubleValue() : 0.;
+                valorGastoTotal += toolPrice;
             }
-
-            model.addRow(new Object[]{
-                tool.getId(),
-                tool.getNome()
-            });
+        }catch(ParseException e){
+            JOptionPane.showMessageDialog(null, "Erro ao carregar lista de ferramentas: " + e.getMessage());
         }
+
+        textValorGastoTotal.setText(valorGastoTotal + "");
     }
 
     /**
@@ -428,45 +302,38 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPainelFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPainelFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPainelFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPainelFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPainelFerramentas().setVisible(true);
+                new TelaRelatorioFerramentas().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadFabricante;
-    private javax.swing.JButton btnRemFabricante;
-    private java.awt.Canvas canvas2;
-    private java.awt.Canvas canvas3;
-    private java.awt.Canvas canvas4;
-    private java.awt.Canvas canvas5;
-    private javax.swing.JTable ferramentasList;
-    private javax.swing.JTable ferramentasSemFab;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JTable ferramentasRelatorio;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JLayeredPane jLayeredPane2;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JTextField textValorGastoTotal;
     // End of variables declaration//GEN-END:variables
 
 }
