@@ -5,17 +5,23 @@
         <group>
             <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsTool/TelaCadastro.java</file>
             <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsAmigos/TelaTabelaAmigos.java</file>
+            <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsEmprestimo/TelaEmprestimosAbertos.java</file>
             <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsTool/TelaTabelaFerramentas.java</file>
             <file>file:/home/arkmed/NetBeansProjects/TioApp/src/Views/TelaPrincipal.java</file>
+            <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsTool/TelaRelatorioFerramentas.java</file>
             <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsTool/TelaSelecionarFerramenta.java</file>
             <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsManufacturer/TelaPainelFerramentas.java</file>
             <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsManufacturer/TelaTabelaFabricante.java</file>
+            <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsEmprestimo/TelaAlterarEmprestimo.java</file>
             <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsAmigos/TelaAlterarCadastro.java</file>
             <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsTool/TelaSelecionarFabricante.java</file>
+            <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsEmprestimo/TelaFinalizarEmprestimo.java</file>
             <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsAmigos/TelaSelecionarBeneficiado.java</file>
             <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsEmprestimo/TelaCadastroEmprestimo.java</file>
             <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsTool/TelaEditarFerramenta.java</file>
             <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsAmigos/TelaCadastro.java</file>
+            <file>file:/home/arkmed/NetBeansProjects/TioApp/src/Controllers/PDFEntity.java</file>
+            <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsEmprestimo/TelaRelatorioEmprestimos.java</file>
             <file>file:/home/arkmed/NetBeansProjects/TioApp/src/ViewsManufacturer/TelaCadastro.java</file>
         </group>
     </open-files>

@@ -39,11 +39,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnRankingAmigos = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         fileMenu5 = new javax.swing.JMenu();
-        btnRealizarEmprestimo = new javax.swing.JMenuItem();
-        btnRealizarEmprestimo1 = new javax.swing.JMenuItem();
-        btnRealizarEmprestimo2 = new javax.swing.JMenuItem();
-        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        btnCadastrarEmprestimo = new javax.swing.JMenuItem();
+        btnEmprestimosEmAberto = new javax.swing.JMenuItem();
         btnRelatorioEmprestimo = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        btnControleFinanceiro = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         fileMenu3 = new javax.swing.JMenu();
         btnCadastrarFerramenta = new javax.swing.JMenuItem();
@@ -109,42 +109,42 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu5.setMnemonic('f');
         fileMenu5.setText("Emprestimos");
 
-        btnRealizarEmprestimo.setMnemonic('x');
-        btnRealizarEmprestimo.setText("Cadastrar um novo emprestimo");
-        btnRealizarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrarEmprestimo.setMnemonic('x');
+        btnCadastrarEmprestimo.setText("Cadastrar um novo emprestimo");
+        btnCadastrarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRealizarEmprestimoActionPerformed(evt);
+                btnCadastrarEmprestimoActionPerformed(evt);
             }
         });
-        fileMenu5.add(btnRealizarEmprestimo);
+        fileMenu5.add(btnCadastrarEmprestimo);
 
-        btnRealizarEmprestimo1.setMnemonic('x');
-        btnRealizarEmprestimo1.setText("Emprestimos em aberto");
-        btnRealizarEmprestimo1.addActionListener(new java.awt.event.ActionListener() {
+        btnEmprestimosEmAberto.setMnemonic('x');
+        btnEmprestimosEmAberto.setText("Emprestimos em aberto");
+        btnEmprestimosEmAberto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRealizarEmprestimo1ActionPerformed(evt);
+                btnEmprestimosEmAbertoActionPerformed(evt);
             }
         });
-        fileMenu5.add(btnRealizarEmprestimo1);
-
-        btnRealizarEmprestimo2.setMnemonic('x');
-        btnRealizarEmprestimo2.setText("Historico de Emprestimos");
-        btnRealizarEmprestimo2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRealizarEmprestimo2ActionPerformed(evt);
-            }
-        });
-        fileMenu5.add(btnRealizarEmprestimo2);
-        fileMenu5.add(jSeparator5);
+        fileMenu5.add(btnEmprestimosEmAberto);
 
         btnRelatorioEmprestimo.setMnemonic('x');
-        btnRelatorioEmprestimo.setText("Controle financeiro");
+        btnRelatorioEmprestimo.setText("Relatorio de emprestimos finalizados");
         btnRelatorioEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRelatorioEmprestimoActionPerformed(evt);
             }
         });
         fileMenu5.add(btnRelatorioEmprestimo);
+        fileMenu5.add(jSeparator5);
+
+        btnControleFinanceiro.setMnemonic('x');
+        btnControleFinanceiro.setText("Controle financeiro");
+        btnControleFinanceiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnControleFinanceiroActionPerformed(evt);
+            }
+        });
+        fileMenu5.add(btnControleFinanceiro);
 
         fileMenu.add(fileMenu5);
         fileMenu.add(jSeparator2);
@@ -281,7 +281,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         newThread.start();
     }//GEN-LAST:event_btnViewAmigosCadActionPerformed
 
-    private void btnRealizarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarEmprestimoActionPerformed
+    private void btnCadastrarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarEmprestimoActionPerformed
         Thread newThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -290,7 +290,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         newThread.start();
-    }//GEN-LAST:event_btnRealizarEmprestimoActionPerformed
+    }//GEN-LAST:event_btnCadastrarEmprestimoActionPerformed
 
     private void btnCadastrarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFerramentaActionPerformed
         Thread newThread = new Thread(new Runnable() {
@@ -318,9 +318,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRelatorioAmigosActionPerformed
 
-    private void btnRelatorioEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioEmprestimoActionPerformed
+    private void btnControleFinanceiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnControleFinanceiroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRelatorioEmprestimoActionPerformed
+    }//GEN-LAST:event_btnControleFinanceiroActionPerformed
 
     private void btnRelatorioFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioFerramentasActionPerformed
         Thread newThread = new Thread(new Runnable() {
@@ -367,7 +367,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRelatorioFabricantesActionPerformed
 
-    private void btnRealizarEmprestimo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarEmprestimo1ActionPerformed
+    private void btnEmprestimosEmAbertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmprestimosEmAbertoActionPerformed
          Thread newThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -376,11 +376,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
 
         newThread.start();
-    }//GEN-LAST:event_btnRealizarEmprestimo1ActionPerformed
+    }//GEN-LAST:event_btnEmprestimosEmAbertoActionPerformed
 
-    private void btnRealizarEmprestimo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarEmprestimo2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRealizarEmprestimo2ActionPerformed
+    private void btnRelatorioEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioEmprestimoActionPerformed
+        Thread newThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new ViewsEmprestimo.TelaRelatorioEmprestimos().setVisible(true);
+            }
+        });
+
+        newThread.start();
+    }//GEN-LAST:event_btnRelatorioEmprestimoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -419,15 +426,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem btnCadastrarAmigo;
+    private javax.swing.JMenuItem btnCadastrarEmprestimo;
     private javax.swing.JMenuItem btnCadastrarFabricante;
     private javax.swing.JMenuItem btnCadastrarFerramenta;
     private javax.swing.JMenuItem btnClose;
+    private javax.swing.JMenuItem btnControleFinanceiro;
     private javax.swing.JMenuItem btnControleGastosFabricantes;
+    private javax.swing.JMenuItem btnEmprestimosEmAberto;
     private javax.swing.JMenuItem btnFerramentasCad;
     private javax.swing.JMenuItem btnRankingAmigos;
-    private javax.swing.JMenuItem btnRealizarEmprestimo;
-    private javax.swing.JMenuItem btnRealizarEmprestimo1;
-    private javax.swing.JMenuItem btnRealizarEmprestimo2;
     private javax.swing.JMenuItem btnRelatorioAmigos;
     private javax.swing.JMenuItem btnRelatorioEmprestimo;
     private javax.swing.JMenuItem btnRelatorioFabricantes;

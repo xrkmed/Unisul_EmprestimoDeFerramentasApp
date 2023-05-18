@@ -61,42 +61,42 @@
                 <Property name="text" type="java.lang.String" value="Emprestimos"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="btnRealizarEmprestimo">
+                <MenuItem class="javax.swing.JMenuItem" name="btnCadastrarEmprestimo">
                   <Properties>
                     <Property name="mnemonic" type="int" value="120"/>
                     <Property name="text" type="java.lang.String" value="Cadastrar um novo emprestimo"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRealizarEmprestimoActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarEmprestimoActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="btnRealizarEmprestimo1">
+                <MenuItem class="javax.swing.JMenuItem" name="btnEmprestimosEmAberto">
                   <Properties>
                     <Property name="mnemonic" type="int" value="120"/>
                     <Property name="text" type="java.lang.String" value="Emprestimos em aberto"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRealizarEmprestimo1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEmprestimosEmAbertoActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="btnRealizarEmprestimo2">
+                <MenuItem class="javax.swing.JMenuItem" name="btnRelatorioEmprestimo">
                   <Properties>
                     <Property name="mnemonic" type="int" value="120"/>
-                    <Property name="text" type="java.lang.String" value="Historico de Emprestimos"/>
+                    <Property name="text" type="java.lang.String" value="Relatorio de emprestimos finalizados"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRealizarEmprestimo2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRelatorioEmprestimoActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator5">
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="btnRelatorioEmprestimo">
+                <MenuItem class="javax.swing.JMenuItem" name="btnControleFinanceiro">
                   <Properties>
                     <Property name="mnemonic" type="int" value="120"/>
                     <Property name="text" type="java.lang.String" value="Controle financeiro"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRelatorioEmprestimoActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnControleFinanceiroActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>

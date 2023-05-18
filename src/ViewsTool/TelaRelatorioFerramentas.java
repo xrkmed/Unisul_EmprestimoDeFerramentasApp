@@ -250,13 +250,11 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
                 if(directory != null){
                     try{
-                        Paragraph paragraphDate = PDFEntity.addParagraph("Relatorio efetuado na data " + new SimpleDateFormat("dd/MM/yyyy").format(new Date()), 5);
-                        Paragraph paragraphHeader = PDFEntity.addParagraph("Sistema de relatorio do Grupo Supimpa", 20);
                         Paragraph paragraphValorGasto = PDFEntity.addParagraph("VALOR GASTO COM TODAS AS FERRAMENTAS", 0);
                         Paragraph paragraphValor = PDFEntity.addParagraph("R$ " + textValorGastoTotal.getText(), 10);
                         Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
                         String fileName = "RelatorioFerramentas";
-                        PDFEntity.export(directory + "/", fileName, ferramentasRelatorio, paragraphHeader, paragraphDate, paragraphValorGasto, paragraphValor, paragraphRelatorio);
+                        PDFEntity.export(directory + "/", fileName, ferramentasRelatorio, paragraphValorGasto, paragraphValor, paragraphRelatorio);
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directory + "/" + fileName + ".pdf");
                     }catch(Exception e){
                         JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente novamente mais tarde...");

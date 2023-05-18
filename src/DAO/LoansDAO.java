@@ -1,10 +1,17 @@
 package DAO;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.lang.reflect.Array;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import Database.DBQuery;
 import Exceptions.DatabaseResultQueryException;
@@ -101,9 +108,22 @@ public class LoansDAO {
         return datas;
     }
 
-    public void finalizarEmprestimo(int loanId, String observacoes) throws DatabaseResultQueryException{
-        DBQuery.insertOrUpdateQuery("UPDATE tb_emprestimos SET finalizado = true WHERE id = ?;", loanId);
-        DBQuery.insertOrUpdateQuery("INSERT INTO tb_emprestimos_historico (emprestimo_id, finalizadoData, observacoes) VALUES (?, ?, ?)", loanId, new Date(), observacoes);
+    public void finalizarEmprestimo(LoanModel e, String observacoes) throws DatabaseResultQueryException, SQLException{
+        List<String> ferramentasNome = new ArrayList<>();
+        double totalValorFerramentas = 0.;
+        for(ToolModel tool : getTools(e.getId()).getTools()){
+            ferramentasNome.add(tool.getNome() + " por R$ " + BRLResource.PRICE_FORMATTER.format(tool.getPrice()) + " (" + new SimpleDateFormat("dd/MM/yyyy").format(new Date()) + ")");
+            DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET emprestimo_id = NULL WHERE id = ?;", tool.getId());
+            totalValorFerramentas += tool.getPrice();
+        }
+        try{
+            byte[] blobObject = DBQuery.prepareBlob(ferramentasNome);
+
+            DBQuery.insertOrUpdateQuery("UPDATE tb_emprestimos SET finalizado = true WHERE id = ?;", e.getId());
+            DBQuery.insertOrUpdateQuery("INSERT INTO tb_emprestimos_historico (emprestimo_id, finalizadoData, observacoes, totalFerramentas, totalValorFerramentas, valorRecebido, ferramentasList) VALUES (?, ?, ?, ?, ?, ?, ?)", e.getId(), new Date(), observacoes, ferramentasNome.size(), totalValorFerramentas, e.getPrice(), new ByteArrayInputStream(blobObject));
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
     }
 
     public ToolboxResource getTools(int loanId) throws DatabaseResultQueryException, SQLException{
@@ -126,6 +146,29 @@ public class LoansDAO {
         }
 
         return origin;
+    }
+
+    public ArrayList<Object[]> relatorioEmprestimos() throws DatabaseResultQueryException, SQLException, IOException, ClassNotFoundException{
+        ResultSet result = DBQuery.executeQuery("SELECT H.emprestimo_id, H.finalizadoData, H.observacoes, H.totalFerramentas, H.totalValorFerramentas, H.ferramentasList, H.valorRecebido, A.nome, E.startDate, E.endDate FROM tb_emprestimos_historico H LEFT JOIN tb_emprestimos E ON E.id = H.emprestimo_id LEFT JOIN tb_amigos A ON A.id = E.amigo_id; ");
+        ArrayList<Object[]> relatorio = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        while(result.next()){
+            String stringFerramentas = "";
+            Blob blob = result.getBlob("ferramentasList");
+            byte[] blobBytes = blob.getBytes(1, (int) blob.length());
+            ByteArrayInputStream bais = new ByteArrayInputStream(blobBytes);
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            List<String> listaStringsLida = (ArrayList<String>) ois.readObject();
+            for(String ferramentaStr : listaStringsLida){
+                stringFerramentas += ferramentaStr + "\n";
+            }
+
+            
+            Object[] datas = new Object[]{result.getInt("emprestimo_id"), result.getString("nome"), sdf.format(result.getDate("startDate")), sdf.format(result.getDate("endDate")), sdf.format(result.getDate("finalizadoData")), result.getString("observacoes"), result.getInt("totalFerramentas"), BRLResource.PRICE_FORMATTER.format(result.getDouble("totalValorFerramentas")), BRLResource.PRICE_FORMATTER.format(result.getDouble("valorRecebido")), stringFerramentas};
+            relatorio.add(datas);
+         }
+
+        return relatorio;
     }
     
 }

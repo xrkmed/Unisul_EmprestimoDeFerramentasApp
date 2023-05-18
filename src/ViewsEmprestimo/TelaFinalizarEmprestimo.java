@@ -171,9 +171,10 @@ public class TelaFinalizarEmprestimo extends javax.swing.JFrame {
     private void btnFinalizarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarEmprestimoActionPerformed
         if(this.loan != null){
             try{
-                LoansDAO.getInstance().finalizarEmprestimo(this.loan.getId(), textObservacoes.getText());
+                LoansDAO.getInstance().finalizarEmprestimo(this.loan, textObservacoes.getText());
                 JOptionPane.showMessageDialog(null, "Emprestimo finalizado com sucesso!");
             }catch(Exception e){
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Nao foi possivel finalizar o emprestimo por algum erro interno, contacte o administrador do sistema.");
             }
 

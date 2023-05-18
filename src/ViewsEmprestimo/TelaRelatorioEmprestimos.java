@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/Application.java to edit this template
  */
-package ViewsTool;
+package ViewsEmprestimo;
 
+import ViewsTool.*;
 import ViewsManufacturer.*;
 
 import java.sql.Time;
@@ -28,6 +29,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import Controllers.ColorsRenderer;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
+import DAO.LoansDAO;
 import DAO.ToolsDAO;
 import Model.ToolModel;
 import Resources.BRLResource;
@@ -38,13 +40,13 @@ import Resources.ManufacturerResource;
  *
  * @author arkmed
  */
-public class TelaRelatorioFerramentas extends javax.swing.JFrame {
+public class TelaRelatorioEmprestimos extends javax.swing.JFrame {
 
     private String directory = null;
     /**
      * Creates new form TelaPainelFerramentas
      */
-    public TelaRelatorioFerramentas() {
+    public TelaRelatorioEmprestimos() {
         initComponents();
         configFrame();
     }
@@ -55,9 +57,10 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
             @Override
             public void run(){
                 try{
-                    loadList(ferramentasRelatorio, ToolsDAO.getInstance().getRelatorioObjectTools());
+                    loadList(emprestimosRelatorio, LoansDAO.getInstance().relatorioEmprestimos());
                 }catch(Exception e){
-                    JOptionPane.showMessageDialog(null, "Erro ao carregar lista de ferramentas: " + e.getMessage());
+                    JOptionPane.showMessageDialog(null, "Erro ao carregar lista de emprestimos: " + e.getMessage());
+                    e.printStackTrace();
                 }
             }
         });
@@ -75,10 +78,7 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
 
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        ferramentasRelatorio = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        textValorGastoTotal = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        emprestimosRelatorio = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -91,39 +91,43 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        ferramentasRelatorio.setModel(new javax.swing.table.DefaultTableModel(
+        emprestimosRelatorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Preço", "Emprestimos totais"
+                "ID", "Amigo", "Data de inicio", "Data de devoluçao", "Finalizado data", "Observaçoes", "Ferramentas totais", "Valor total em ferramentas", "Valor recebido", "Ferramentas"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(ferramentasRelatorio);
-        if (ferramentasRelatorio.getColumnModel().getColumnCount() > 0) {
-            ferramentasRelatorio.getColumnModel().getColumn(0).setResizable(false);
-            ferramentasRelatorio.getColumnModel().getColumn(1).setResizable(false);
-            ferramentasRelatorio.getColumnModel().getColumn(2).setResizable(false);
-            ferramentasRelatorio.getColumnModel().getColumn(3).setResizable(false);
+        emprestimosRelatorio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                emprestimosRelatorioMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(emprestimosRelatorio);
+        if (emprestimosRelatorio.getColumnModel().getColumnCount() > 0) {
+            emprestimosRelatorio.getColumnModel().getColumn(0).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(1).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(2).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(3).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(4).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(5).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(6).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(7).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(8).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(9).setResizable(false);
         }
-
-        jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
-        jLabel2.setText("Valor gasto ao total");
-
-        textValorGastoTotal.setEditable(false);
-
-        jLabel3.setText("R$");
 
         jButton4.setText("Concluir");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -133,9 +137,6 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
         });
 
         jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(textValorGastoTotal, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -144,20 +145,8 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textValorGastoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE)
-                        .addContainerGap())))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1231, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
                     .addContainerGap(715, Short.MAX_VALUE)
@@ -169,22 +158,16 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textValorGastoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                    .addContainerGap(417, Short.MAX_VALUE)
+                    .addContainerGap(259, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(16, 16, 16)))
         );
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel1.setText("RELATORIO DE TODAS AS FERRAMENTAS CADASTRADAS");
+        jLabel1.setText("RELATORIO DE EMPRESTIMOS FINALIZADOS");
 
         jMenu2.setText("Exportar");
 
@@ -216,7 +199,7 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
                         .addComponent(jLayeredPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 250, Short.MAX_VALUE)))
+                        .addGap(0, 718, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -226,7 +209,7 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 42, Short.MAX_VALUE))
         );
 
         pack();
@@ -250,15 +233,12 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
                 if(directory != null){
                     try{
-                        Paragraph paragraphDate = PDFEntity.addParagraph("Relatorio efetuado na data " + new SimpleDateFormat("dd/MM/yyyy").format(new Date()), 5);
-                        Paragraph paragraphHeader = PDFEntity.addParagraph("Sistema de relatorio do Grupo Supimpa", 20);
-                        Paragraph paragraphValorGasto = PDFEntity.addParagraph("VALOR GASTO COM TODAS AS FERRAMENTAS", 0);
-                        Paragraph paragraphValor = PDFEntity.addParagraph("R$ " + textValorGastoTotal.getText(), 10);
                         Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
-                        String fileName = "RelatorioFerramentas";
-                        PDFEntity.export(directory + "/", fileName, ferramentasRelatorio, paragraphHeader, paragraphDate, paragraphValorGasto, paragraphValor, paragraphRelatorio);
+                        String fileName = "RelatorioEmprestimos";
+                        PDFEntity.export(directory + "/", fileName, emprestimosRelatorio, paragraphRelatorio);
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directory + "/" + fileName + ".pdf");
                     }catch(Exception e){
+                        e.printStackTrace();
                         JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente novamente mais tarde...");
                     }
                 }
@@ -267,22 +247,25 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    public void loadList(JTable table, ArrayList<Object[]> dataObject){
+    private void emprestimosRelatorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emprestimosRelatorioMouseClicked
+        if (evt.getClickCount() == 2) {
+            Object value = emprestimosRelatorio.getValueAt(emprestimosRelatorio.getSelectedRow(), emprestimosRelatorio.getSelectedColumn());
+
+            JOptionPane.showMessageDialog(null, value.toString());
+        }
+    }//GEN-LAST:event_emprestimosRelatorioMouseClicked
+
+    public void loadList(JTable table, ArrayList<Object[]> dataObject) throws ParseException{
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
 
         double valorGastoTotal = 0.;
-        try{
-         for (Object[] data : dataObject) {
-                model.addRow(data);
-                double toolPrice = data[2] != null ? BRLResource.PRICE_FORMATTER.parse(data[2].toString().replaceAll("^R\\$", "").trim()).doubleValue() : 0.;
-                valorGastoTotal += toolPrice;
-            }
-        }catch(ParseException e){
-            JOptionPane.showMessageDialog(null, "Erro ao carregar lista de ferramentas: " + e.getMessage());
+        for (Object[] data : dataObject) {
+            //Object[] datas = new Object[]{result.getInt("emprestimo_id"), result.getString("nome"), sdf.format(result.getDate("startDate")), sdf.format(result.getDate("endDate")), sdf.format(result.getDate("finalizadoData")), result.getString("observacoes"), result.getInt("totalFerramentas"), result.getDouble("totalValorFerramentas"), result.getDouble("valorRecebido"), result.getBlob("ferramentasList")};
+            model.addRow(data);
+            double toolPrice = data[2] != null ? BRLResource.PRICE_FORMATTER.parse(data[2].toString().replaceAll("^R\\$", "").trim()).doubleValue() : 0.;
+            valorGastoTotal += toolPrice;
         }
-
-        textValorGastoTotal.setText(valorGastoTotal + "");
     }
 
     /**
@@ -302,38 +285,37 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaRelatorioFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioEmprestimos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaRelatorioFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioEmprestimos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaRelatorioFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioEmprestimos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaRelatorioFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaRelatorioEmprestimos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaRelatorioFerramentas().setVisible(true);
+                new TelaRelatorioEmprestimos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable ferramentasRelatorio;
+    private javax.swing.JTable emprestimosRelatorio;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField textValorGastoTotal;
     // End of variables declaration//GEN-END:variables
 
 }

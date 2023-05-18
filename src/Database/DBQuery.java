@@ -1,5 +1,8 @@
 package Database;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,5 +43,13 @@ public class DBQuery {
         }
 
         return null;
+    }
+
+    public static byte[] prepareBlob(Object object) throws IOException{
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(object);
+        byte[] bytes = baos.toByteArray();
+        return bytes;
     }
 }

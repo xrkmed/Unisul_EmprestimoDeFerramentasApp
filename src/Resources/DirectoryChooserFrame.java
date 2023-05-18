@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
+import ViewsEmprestimo.TelaRelatorioEmprestimos;
 import ViewsTool.TelaRelatorioFerramentas;
 
 public class DirectoryChooserFrame extends JFrame {
@@ -24,7 +25,10 @@ public class DirectoryChooserFrame extends JFrame {
             String selectedDirectory = fileChooser.getSelectedFile().getAbsolutePath();
             if(parent instanceof TelaRelatorioFerramentas){
                 ((TelaRelatorioFerramentas) parent).setDirectory(selectedDirectory);
-                fileChooser.setVisible(false);
+                this.dispose();
+            }
+            if(parent instanceof TelaRelatorioEmprestimos){
+                ((TelaRelatorioEmprestimos) parent).setDirectory(selectedDirectory);
                 this.dispose();
             }
         }
