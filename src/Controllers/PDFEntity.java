@@ -39,12 +39,22 @@ public class PDFEntity {
             }
             document.add(new Paragraph(" "));
 
+            // Cabeçalho da tabela
             PdfPTable pdfTable = new PdfPTable(table.getColumnCount());
+            pdfTable.setWidthPercentage(100); // Define a largura da tabela como 100% do espaço disponível
+
+            float[] columnWidths = new float[table.getColumnCount()];
+            for (int i = 0; i < table.getColumnCount(); i++) {
+                columnWidths[i] = 1f; // Define a largura de cada coluna como 1 unidade
+            }
+            pdfTable.setWidths(columnWidths);
+
             for (int i = 0; i < table.getColumnCount(); i++) {
                 PdfPCell cell = new PdfPCell(new Paragraph(table.getColumnName(i), headerFont));
                 pdfTable.addCell(cell);
             }
 
+            // Conteúdo da tabela
             for (int row = 0; row < table.getRowCount(); row++) {
                 for (int column = 0; column < table.getColumnCount(); column++) {
                     Object value = table.getValueAt(row, column);
@@ -53,7 +63,8 @@ public class PDFEntity {
                 }
             }
             document.add(pdfTable);
-            
+
+            // Texto final e data
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             String currentDate = dateFormat.format(new Date());
 
