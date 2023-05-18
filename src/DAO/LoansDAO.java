@@ -10,6 +10,9 @@ import Database.DBQuery;
 import Exceptions.DatabaseResultQueryException;
 import Model.FriendModel;
 import Model.LoanModel;
+import Model.ToolModel;
+import Resources.BRLResource;
+import Resources.ToolboxResource;
 
 public class LoansDAO {
     //Singleton class
@@ -40,6 +43,7 @@ public class LoansDAO {
 
     public void removeLoan(int id) throws DatabaseResultQueryException{
         DBQuery.insertOrUpdateQuery("DELETE FROM tb_emprestimos WHERE id = ?;", id);
+        DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET emprestimo_id = 0 WHERE emprestimo_id = ?", id);
     }
 
     public LoanModel getLoan(int id) throws DatabaseResultQueryException, SQLException{
@@ -84,6 +88,44 @@ public class LoansDAO {
         }
 
         return loans;
+    }
+
+    public ArrayList<Object[]> getEmprestimosEmAberto() throws DatabaseResultQueryException, SQLException{
+        ArrayList<Object[]> datas = new ArrayList<>();
+        ResultSet result = DBQuery.executeQuery("SELECT E.id AS id_emprestimo, A.nome AS nome_amigo, E.startDate, E.endDate, DATEDIFF(E.endDate, CURDATE()) AS dias_restantes, E.valor_receber AS valor_emprestimo, COALESCE(SUM(F.price), 0) AS soma_valor_ferramentas, COUNT(F.id) AS quantidade_ferramentas FROM tb_emprestimos E JOIN tb_amigos A ON E.amigo_id = A.id LEFT JOIN tb_ferramentas F ON E.id = F.emprestimo_id WHERE E.finalizado = 0 GROUP BY E.id, A.nome, E.startDate, E.endDate, E.valor_receber;");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        while(result.next()){
+            datas.add(new Object[]{result.getInt("id_emprestimo"), result.getString("nome_amigo"), sdf.format(result.getDate("startDate")), sdf.format(result.getDate("endDate")), result.getInt("dias_restantes"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("valor_emprestimo")), result.getInt("quantidade_ferramentas"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("soma_valor_ferramentas"))});
+        }
+
+        return datas;
+    }
+
+    public void finalizarEmprestimo(int loanId, String observacoes) throws DatabaseResultQueryException{
+        DBQuery.insertOrUpdateQuery("UPDATE tb_emprestimos SET finalizado = true WHERE id = ?;", loanId);
+        DBQuery.insertOrUpdateQuery("INSERT INTO tb_emprestimos_historico (emprestimo_id, finalizadoData, observacoes) VALUES (?, ?, ?)", loanId, new Date(), observacoes);
+    }
+
+    public ToolboxResource getTools(int loanId) throws DatabaseResultQueryException, SQLException{
+        ResultSet result = DBQuery.executeQuery("SELECT F.id, F.name, F.price, F.fabricante_id, F.emprestimo_id FROM tb_ferramentas F WHERE F.emprestimo_id = ?;", loanId);
+        ToolboxResource data = new ToolboxResource();
+        while(result.next()){
+            ToolModel tool = new ToolModel(result.getInt("id"), result.getString("name"), ManufacturerDAO.getInstance().getManufacturer(result.getInt("fabricante_id")), result.getDouble("price"), loanId);
+            data.addTool(tool);
+        }
+
+        return data;
+
+    }
+
+    public LoanModel updateLoan(LoanModel origin, Date startDate, Date endDate, double valorReceber, int friendId) throws DatabaseResultQueryException, SQLException{
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        ResultSet result = DBQuery.insertOrUpdateQuery("UPDATE tb_emprestimos SET startDate = ?, endDate = ?, finalizado = ?, valor_receber = ?, amigo_id = ? WHERE id = ?", sdf.format(startDate), sdf.format(endDate), origin.getReturned(), valorReceber, friendId, origin.getId());
+        while(result.next()){
+            origin = new LoanModel(origin.getId(), startDate, endDate, origin.getReturned(), valorReceber);
+        }
+
+        return origin;
     }
     
 }

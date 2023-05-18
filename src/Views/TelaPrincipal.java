@@ -368,7 +368,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRelatorioFabricantesActionPerformed
 
     private void btnRealizarEmprestimo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarEmprestimo1ActionPerformed
-        // TODO add your handling code here:
+         Thread newThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new ViewsEmprestimo.TelaEmprestimosAbertos().setVisible(true);
+            }
+        });
+
+        newThread.start();
     }//GEN-LAST:event_btnRealizarEmprestimo1ActionPerformed
 
     private void btnRealizarEmprestimo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarEmprestimo2ActionPerformed

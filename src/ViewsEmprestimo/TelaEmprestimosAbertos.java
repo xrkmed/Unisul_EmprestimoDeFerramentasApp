@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/Application.TelaTabelaAmigos to edit this template
  */
-package ViewsAmigos;
+package ViewsEmprestimo;
 
+import ViewsAmigos.*;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -27,14 +28,14 @@ import Resources.PhoneValidResource;
  *
  * @author arkmed
  */
-public class TelaTabelaAmigos extends javax.swing.JFrame {
+public class TelaEmprestimosAbertos extends javax.swing.JFrame {
 
-    private FriendModel selectedFriend = null;
+    private LoanModel selectedLoan = null;
 
     /**
      * Creates new form java
      */
-    public TelaTabelaAmigos() {
+    public TelaEmprestimosAbertos() {
         initComponents();
         configFrame();
     }
@@ -42,11 +43,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     private void configFrame(){
         Thread loadValues = new Thread(new Runnable(){
             @Override
-            public void run(){
-                jTable2.getColumnModel().getColumn(1).setPreferredWidth(35);
-                jTable2.getColumnModel().getColumn(1).setMinWidth(35);
-                jTable2.getColumnModel().getColumn(1).setMaxWidth(35);
-        
+            public void run(){        
                 jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
                 jTable2.getColumnModel().getColumn(0).setMinWidth(35);
                 jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
@@ -59,13 +56,14 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                         if (!x.getValueIsAdjusting()) {
                             int selectedRow = jTable2.getSelectedRow();
                             if (selectedRow != -1) {
-                                selectedFriend = FriendsDAO.getInstance().getFriend(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
-                                selecionadoNome.setText(selectedFriend.getName().toUpperCase());
-                                selecionadoTelefone.setText(CEPResource.returnTelefoneFormat(selectedFriend.getPhone()));
+                                selecionadoAmigo.setText(jTable2.getValueAt(selectedRow, 1).toString());
+                                selecionadoDataDevolucao.setText(jTable2.getValueAt(selectedRow, 3).toString());
+                                
+                                selectedLoan = LoansDAO.getInstance().getLoan(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
                             }else{
-                                selectedFriend = null;
-                                selecionadoNome.setText("");
-                                selecionadoTelefone.setText("");
+                                selectedLoan = null;
+                                selecionadoAmigo.setText("");
+                                selecionadoDataDevolucao.setText("");
                             }
                         }
                     }catch(Exception e){
@@ -93,31 +91,25 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        jLabel2 = new javax.swing.JLabel();
-        canvas2 = new java.awt.Canvas();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         canvas3 = new java.awt.Canvas();
+        jLabel9 = new javax.swing.JLabel();
+        canvas2 = new java.awt.Canvas();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         filtroFiltrarNome = new javax.swing.JCheckBox();
         textFiltrarNome = new javax.swing.JTextField();
-        filtroAmigosSemEmprestimoAberto = new javax.swing.JCheckBox();
-        filtroAmigosDevolverFerramenta = new javax.swing.JCheckBox();
-        filtroAmigosEmEmprestimo = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
-        textFiltrarEndereco = new javax.swing.JTextField();
-        filtroEndereco = new javax.swing.JCheckBox();
         btnBuscar = new javax.swing.JButton();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        selecionadoNome = new javax.swing.JTextField();
-        btnVerTodosEmprestimos = new javax.swing.JButton();
-        btnDadosCadastrais = new javax.swing.JButton();
+        selecionadoAmigo = new javax.swing.JTextField();
+        btnAlterarEmprestimo = new javax.swing.JButton();
+        selecionadoDataDevolucao = new javax.swing.JTextField();
         btnRemoverCadastro = new javax.swing.JButton();
-        selecionadoTelefone = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        btnRelatorioFerramentas = new javax.swing.JButton();
+        btnFinalizarEmprestimo = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
@@ -132,36 +124,36 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "#", "Nome", "Telefone", "Endereço", "Emprestimos em aberto", "Emprestimos atrasados"
+                "ID", "Amigo", "Data de inicio", "Data de devoluçao", "Dias restantes", "Valor a receber", "Qtd. Ferramentas", "Valor Ferramentas"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -177,39 +169,40 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(30);
             jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setPreferredWidth(0);
             jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setPreferredWidth(200);
             jTable2.getColumnModel().getColumn(3).setResizable(false);
             jTable2.getColumnModel().getColumn(4).setResizable(false);
-            jTable2.getColumnModel().getColumn(4).setPreferredWidth(400);
+            jTable2.getColumnModel().getColumn(4).setPreferredWidth(30);
             jTable2.getColumnModel().getColumn(5).setResizable(false);
-            jTable2.getColumnModel().getColumn(5).setPreferredWidth(40);
             jTable2.getColumnModel().getColumn(6).setResizable(false);
+            jTable2.getColumnModel().getColumn(6).setPreferredWidth(30);
+            jTable2.getColumnModel().getColumn(7).setResizable(false);
         }
 
         jLayeredPane1.setBackground(new java.awt.Color(153, 153, 153));
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel2.setText("Emprestimo em aberto");
-
-        canvas2.setBackground(ColorsRenderer.lightYellow);
-
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel7.setText("STATUS");
 
         jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        jLabel8.setForeground(ColorsRenderer.red);
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setText("EMPRESTIMO ATRASADO");
 
-        canvas3.setBackground(ColorsRenderer.lightRed);
+        canvas3.setBackground(new java.awt.Color(255, 57, 57));
 
-        jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(canvas2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLabel9.setFont(new java.awt.Font("Liberation Sans", 0, 16)); // NOI18N
+        jLabel9.setText("Emprestimo vence em menos de 7 dias");
+
+        canvas2.setBackground(new java.awt.Color(255, 255, 224));
+
         jLayeredPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(canvas3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(canvas2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -226,7 +219,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2))
+                                .addComponent(jLabel9))
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addComponent(canvas3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -243,9 +236,9 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(canvas3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -271,33 +264,8 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             }
         });
 
-        filtroAmigosSemEmprestimoAberto.setText("Apenas amigos sem emprestimos em aberto");
-
-        filtroAmigosDevolverFerramenta.setText("Apenas amigos que devem devolver alguma ferramenta");
-
-        filtroAmigosEmEmprestimo.setText("Apenas amigos que estejam em um emprestimo");
-
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel3.setText("FILTROS");
-
-        textFiltrarEndereco.setEnabled(false);
-        textFiltrarEndereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFiltrarEnderecoActionPerformed(evt);
-            }
-        });
-        textFiltrarEndereco.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                textFiltrarEnderecoKeyReleased(evt);
-            }
-        });
-
-        filtroEndereco.setText("Endereço");
-        filtroEndereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filtroEnderecoActionPerformed(evt);
-            }
-        });
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -308,12 +276,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
         jLayeredPane2.setLayer(filtroFiltrarNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(textFiltrarNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(filtroAmigosSemEmprestimoAberto, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(filtroAmigosDevolverFerramenta, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(filtroAmigosEmEmprestimo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(textFiltrarEndereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(filtroEndereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(btnBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
@@ -323,24 +286,16 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(filtroAmigosDevolverFerramenta)
-                            .addComponent(filtroAmigosEmEmprestimo)
-                            .addComponent(filtroAmigosSemEmprestimoAberto)
-                            .addComponent(jLabel3)
-                            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                                .addComponent(filtroFiltrarNome)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(29, Short.MAX_VALUE))
-                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(filtroEndereco)
+                        .addComponent(filtroFiltrarNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textFiltrarEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBuscar)
-                        .addGap(14, 14, 14))))
+                        .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(63, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBuscar)
+                .addContainerGap())
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,20 +303,11 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(filtroAmigosEmEmprestimo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(filtroAmigosDevolverFerramenta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(filtroAmigosSemEmprestimoAberto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(filtroFiltrarNome)
                     .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(filtroEndereco)
-                    .addComponent(textFiltrarEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
+                .addComponent(btnBuscar)
                 .addContainerGap())
         );
 
@@ -371,47 +317,44 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel6.setText("OPÇOES");
 
-        jLabel4.setText("Nome");
+        jLabel4.setText("Amigo");
 
-        selecionadoNome.setEditable(false);
+        selecionadoAmigo.setEditable(false);
 
-        btnVerTodosEmprestimos.setText("Visualizar todos os emprestimos");
-        btnVerTodosEmprestimos.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterarEmprestimo.setText("Alterar emprestimo");
+        btnAlterarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerTodosEmprestimosActionPerformed(evt);
+                btnAlterarEmprestimoActionPerformed(evt);
             }
         });
 
-        btnDadosCadastrais.setText("Alterar dados cadastrais");
-        btnDadosCadastrais.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDadosCadastraisActionPerformed(evt);
-            }
-        });
+        selecionadoDataDevolucao.setEditable(false);
 
         btnRemoverCadastro.setBackground(new java.awt.Color(255, 102, 102));
-        btnRemoverCadastro.setText("Remover cadastro");
+        btnRemoverCadastro.setText("Cancelar emprestimo");
         btnRemoverCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverCadastroActionPerformed(evt);
             }
         });
 
-        selecionadoTelefone.setEditable(false);
+        jLabel5.setText("Data de devoluçao");
 
-        jLabel5.setText("Telefone");
-
-        btnRelatorioFerramentas.setText("Relatorio de ferramentas");
+        btnFinalizarEmprestimo.setText("Finalizar emprestimo");
+        btnFinalizarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarEmprestimoActionPerformed(evt);
+            }
+        });
 
         jLayeredPane3.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(selecionadoNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(btnVerTodosEmprestimos, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(btnDadosCadastrais, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(selecionadoAmigo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(btnAlterarEmprestimo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(selecionadoDataDevolucao, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(btnRemoverCadastro, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(selecionadoTelefone, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(btnRelatorioFerramentas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(btnFinalizarEmprestimo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
         jLayeredPane3.setLayout(jLayeredPane3Layout);
@@ -420,49 +363,48 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addComponent(selecionadoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(selecionadoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDadosCadastrais)
-                    .addComponent(btnVerTodosEmprestimos)
-                    .addComponent(btnRemoverCadastro)
-                    .addComponent(btnRelatorioFerramentas))
+                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(selecionadoAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(selecionadoDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAlterarEmprestimo, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnFinalizarEmprestimo, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnRemoverCadastro, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         jLayeredPane3Layout.setVerticalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel6)
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(selecionadoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(selecionadoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(btnVerTodosEmprestimos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRelatorioFerramentas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDadosCadastrais)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRemoverCadastro)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selecionadoAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selecionadoDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAlterarEmprestimo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnFinalizarEmprestimo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRemoverCadastro)
+                .addContainerGap())
         );
 
         fileMenu.setMnemonic('f');
@@ -542,35 +484,29 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             //CONFIGURACOES DA TABELA
             model.setRowCount(0);
-            selectedFriend = null;
-            selecionadoNome.setText("");
-            selecionadoTelefone.setText("");
+            selectedLoan = null;
+            selecionadoAmigo.setText("");
+            selecionadoDataDevolucao.setText("");
 
             StatusRenderer renderer = new StatusRenderer();
             //statusRed.addHighlightedRow(1, Color.RED);
 
                     
-            for(Object[] data : FriendsDAO.getInstance().loadFriendsTabela()){
+            for(Object[] data : LoansDAO.getInstance().getEmprestimosEmAberto()){
                 if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
-                    if(!data[2].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
+                    if(!data[1].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
                         continue;
                     }
                 }
 
-                if(filtroEndereco.isSelected() && textFiltrarEndereco.getText().trim().length() > 0){
-                    if(!data[4].toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())){
-                        continue;
-                    }
-                }
-
-                if(Integer.parseInt(data[5].toString()) > 0){
+                if(Integer.parseInt(data[4].toString()) > 0 && Integer.parseInt(data[4].toString()) <= 7){
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                     for(int i = 0; i < jTable2.getColumnCount(); i++){
                         jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
                     }
                 }
 
-                if(Integer.parseInt(data[6].toString()) > 0){
+                if(Integer.parseInt(data[4].toString()) < 0){
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
                     for(int i = 0; i < jTable2.getColumnCount(); i++){
                         jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
@@ -591,24 +527,12 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
     }//GEN-LAST:event_formWindowActivated
 
-    private void btnVerTodosEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerTodosEmprestimosActionPerformed
-        if(selectedFriend != null){
-            JOptionPane.showMessageDialog(null, selectedFriend);
-        }
-    }//GEN-LAST:event_btnVerTodosEmprestimosActionPerformed
-
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
     }//GEN-LAST:event_jTable2MouseClicked
 
-    public FriendModel getSelectedFriend(){
-        return selectedFriend;
-    }
-
-    private void btnDadosCadastraisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDadosCadastraisActionPerformed
-        if(selectedFriend != null){
-            TelaAlterarCadastro tela = new TelaAlterarCadastro(this);
-            tela.setVisible(true);
-
+    private void btnAlterarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarEmprestimoActionPerformed
+        if(selectedLoan != null){
+            TelaAlterarEmprestimo tela = new TelaAlterarEmprestimo(selectedLoan);
             tela.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
@@ -616,49 +540,39 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                 }
             });
         }
-    }//GEN-LAST:event_btnDadosCadastraisActionPerformed
-
-    private void textFiltrarEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFiltrarEnderecoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFiltrarEnderecoActionPerformed
-
-    private void textFiltrarEnderecoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFiltrarEnderecoKeyReleased
-    }//GEN-LAST:event_textFiltrarEnderecoKeyReleased
-
-    private void filtroEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroEnderecoActionPerformed
-        if(filtroEndereco.isSelected()){
-            textFiltrarEndereco.setEnabled(true);
-        }else{
-            textFiltrarEndereco.setEnabled(false);
-        }
-    }//GEN-LAST:event_filtroEnderecoActionPerformed
+    }//GEN-LAST:event_btnAlterarEmprestimoActionPerformed
 
     private void btnRemoverCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverCadastroActionPerformed
         try{
-            if(selectedFriend != null){
-                int dialogResult = JOptionPane.showConfirmDialog (null, "Deseja realmente remover o cadastro de " + selectedFriend.getName() + "?","Atenção",JOptionPane.YES_NO_OPTION);
+            if(selectedLoan != null){
+                int dialogResult = JOptionPane.showConfirmDialog (null, "Deseja realmente remover o emprestimo de " + jTable2.getValueAt(jTable2.getSelectedRow(), 1) + "?","Atenção",JOptionPane.YES_NO_OPTION);
                 if(dialogResult == JOptionPane.YES_OPTION){
-                    LoansDAO loansDAO = LoansDAO.getInstance();
-                    for(LoanModel loan : loansDAO.getAllLoans()){
-                        if(loan.getFriend().getId() == selectedFriend.getId() && loan.getReturned() == false){
-                            JOptionPane.showMessageDialog(null, "Não é possível remover o cadastro de " + selectedFriend.getName() + " pois ele possui empréstimos pendentes.");
-                            return;
-                        }
-                    }
-
-                    FriendsDAO dao = FriendsDAO.getInstance();
-                    dao.removeFriend(selectedFriend);
+                    LoansDAO dao = LoansDAO.getInstance();
+                    dao.removeLoan(selectedLoan.getId());
                     loadValores();
                 }
             }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao remover o cadastro: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao remover o emprestimo: " + e.getMessage());
         }
     }//GEN-LAST:event_btnRemoverCadastroActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         loadValores();
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnFinalizarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarEmprestimoActionPerformed
+        if(selectedLoan != null){
+            TelaFinalizarEmprestimo tela = new TelaFinalizarEmprestimo(selectedLoan, jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString());
+            tela.setVisible(true);
+            tela.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadValores();
+                }
+            });
+        }
+    }//GEN-LAST:event_btnFinalizarEmprestimoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -677,47 +591,44 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            TelaTabelaAmigos.util.logging.Logger.getLogger(TelaTabelaAmigos.class.getName()).log(TelaTabelaAmigos.util.logging.Level.SEVERE, null, ex);
+            TelaEmprestimosAbertos.util.logging.Logger.getLogger(TelaEmprestimosAbertos.class.getName()).log(TelaEmprestimosAbertos.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            TelaTabelaAmigos.util.logging.Logger.getLogger(TelaTabelaAmigos.class.getName()).log(TelaTabelaAmigos.util.logging.Level.SEVERE, null, ex);
+            TelaEmprestimosAbertos.util.logging.Logger.getLogger(TelaEmprestimosAbertos.class.getName()).log(TelaEmprestimosAbertos.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            TelaTabelaAmigos.util.logging.Logger.getLogger(TelaTabelaAmigos.class.getName()).log(TelaTabelaAmigos.util.logging.Level.SEVERE, null, ex);
+            TelaEmprestimosAbertos.util.logging.Logger.getLogger(TelaEmprestimosAbertos.class.getName()).log(TelaEmprestimosAbertos.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            TelaTabelaAmigos.util.logging.Logger.getLogger(TelaTabelaAmigos.class.getName()).log(TelaTabelaAmigos.util.logging.Level.SEVERE, null, ex);
+            TelaEmprestimosAbertos.util.logging.Logger.getLogger(TelaEmprestimosAbertos.class.getName()).log(TelaEmprestimosAbertos.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        TelaTabelaAmigos.awt.EventQueue.invokeLater(new Runnable() {
+        TelaEmprestimosAbertos.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaTabelaAmigos().setVisible(true);
+                new TelaEmprestimosAbertos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterarEmprestimo;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnDadosCadastrais;
-    private javax.swing.JButton btnRelatorioFerramentas;
+    private javax.swing.JButton btnFinalizarEmprestimo;
     private javax.swing.JButton btnRemoverCadastro;
-    private javax.swing.JButton btnVerTodosEmprestimos;
     private java.awt.Canvas canvas2;
     private java.awt.Canvas canvas3;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JCheckBox filtroAmigosDevolverFerramenta;
-    private javax.swing.JCheckBox filtroAmigosEmEmprestimo;
-    private javax.swing.JCheckBox filtroAmigosSemEmprestimoAberto;
-    private javax.swing.JCheckBox filtroEndereco;
     private javax.swing.JCheckBox filtroFiltrarNome;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
@@ -725,9 +636,8 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable2;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JTextField selecionadoNome;
-    private javax.swing.JTextField selecionadoTelefone;
-    private javax.swing.JTextField textFiltrarEndereco;
+    private javax.swing.JTextField selecionadoAmigo;
+    private javax.swing.JTextField selecionadoDataDevolucao;
     private javax.swing.JTextField textFiltrarNome;
     // End of variables declaration//GEN-END:variables
 

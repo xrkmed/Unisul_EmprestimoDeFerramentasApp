@@ -8,6 +8,7 @@ import Controllers.ColorsRenderer;
 import Controllers.StatusRenderer;
 import ViewsManufacturer.*;
 import ViewsAmigos.*;
+import ViewsEmprestimo.TelaAlterarEmprestimo;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
 
 import java.awt.Color;
@@ -113,12 +114,8 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
         canvas1 = new java.awt.Canvas();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        canvas2 = new java.awt.Canvas();
         jLabel8 = new javax.swing.JLabel();
         canvas3 = new java.awt.Canvas();
-        jLabel10 = new javax.swing.JLabel();
-        canvas4 = new java.awt.Canvas();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         filtroFiltrarNome = new javax.swing.JCheckBox();
         textFiltrarNome = new javax.swing.JTextField();
@@ -210,34 +207,22 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
         jLayeredPane1.setBackground(new java.awt.Color(153, 153, 153));
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        canvas1.setBackground(ColorsRenderer.lightRed);
+        canvas1.setBackground(new java.awt.Color(255, 57, 57));
 
         jLabel1.setText("Sem fabricante");
 
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel7.setText("STATUS");
 
-        jLabel2.setText("Em uso por algum amigo");
-
-        canvas2.setBackground(ColorsRenderer.lightYellow);
-
         jLabel8.setText("Em manutençao");
 
-        canvas3.setBackground(ColorsRenderer.lightMagenta);
-
-        jLabel10.setText("Sem fabricante e em uso");
-
-        canvas4.setBackground(ColorsRenderer.lightOrange);
+        canvas3.setBackground(new java.awt.Color(255, 224, 255));
 
         jLayeredPane1.setLayer(canvas1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(canvas2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(canvas3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(canvas4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -252,22 +237,14 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
                         .addGap(19, 19, 19)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2))
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel1))
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addComponent(canvas3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8))
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(canvas4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel10)))))
-                .addContainerGap(108, Short.MAX_VALUE))
+                                .addComponent(jLabel8)))))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,16 +257,8 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(canvas3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(canvas4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -604,16 +573,11 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
                 }
 
                 if(!data[5].toString().equals("Disponivel")){
-                    statusRenderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
-                    jTable2.getColumnModel().getColumn(1).setCellRenderer(statusRenderer);
+                    continue;
                 }
 
                 if(data[3].toString().equalsIgnoreCase("sem fabricante")){
-                    if(statusRenderer.getHighlightedRow(model.getRowCount()) == ColorsRenderer.lightYellow){
-                        statusRenderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightOrange);
-                    }else{
-                        statusRenderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
-                    }
+                    statusRenderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
                     
                     for(int i = 0; i < jTable2.getColumnCount(); i++){
                         jTable2.getColumnModel().getColumn(i).setCellRenderer(statusRenderer);
@@ -641,6 +605,10 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
             if(parent != null){
                 if(parent instanceof TelaCadastroEmprestimo){
                     ((TelaCadastroEmprestimo) parent).addFerramenta(selectedTool);
+                }
+
+                if(parent instanceof TelaAlterarEmprestimo){
+                    ((TelaAlterarEmprestimo) parent).addFerramenta(selectedTool);
                 }
             }
 
@@ -743,17 +711,13 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnSelecionarFerramenta;
     private java.awt.Canvas canvas1;
-    private java.awt.Canvas canvas2;
     private java.awt.Canvas canvas3;
-    private java.awt.Canvas canvas4;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JCheckBox filtroFabricante;
     private javax.swing.JCheckBox filtroFiltrarNome;
     private javax.swing.JCheckBox filtroFiltrarUso;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

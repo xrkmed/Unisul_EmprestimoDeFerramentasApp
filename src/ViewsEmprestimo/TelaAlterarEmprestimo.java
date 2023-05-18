@@ -5,6 +5,7 @@
 package ViewsEmprestimo;
 
 import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -32,17 +33,36 @@ import ViewsTool.TelaSelecionarFerramenta;
  *
  * @author arkmed
  */
-public class TelaCadastroEmprestimo extends javax.swing.JFrame {
+public class TelaAlterarEmprestimo extends javax.swing.JFrame {
 
     private ToolModel selectedTool = null;
     private FriendModel selectedFriend = null;
     private ToolboxResource toolsList = new ToolboxResource();
+    private ToolboxResource parentToolsList = new ToolboxResource();
+    private LoanModel emprestimo = null;
+
     /**
      * Creates new form TelaCadastroEmprestimo
      */
-    public TelaCadastroEmprestimo() {
+    public TelaAlterarEmprestimo() {
         initComponents();
         configFrame();
+    }
+
+    public TelaAlterarEmprestimo(LoanModel emprestimo){
+        this();
+        this.emprestimo = emprestimo;
+        try{
+            setSelectedFriend(emprestimo.getFriend());
+            loadTools(LoansDAO.getInstance().getTools(emprestimo.getId()));
+            this.setVisible(true);
+            textDataDevolucao.setText(new SimpleDateFormat("dd/MM/yyyy").format(emprestimo.getEndDate()));
+            textValorReceber.setText(BRLResource.PRICE_FORMATTER.format(emprestimo.getPrice()));
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Algum erro interno aconteceu no sistema, tente novamente mais tarde ou contacte o administrador!");
+            System.out.println(e.getMessage());
+            this.dispose();
+        }
     }
 
     private void configFrame(){
@@ -115,7 +135,8 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         textValorReceber = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        btnCadastrarEmprestimo = new javax.swing.JButton();
+        btnAlterarEmprestimo = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
@@ -125,7 +146,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel1.setText("Cadastrar um novo emprestimo");
+        jLabel1.setText("Alterar emprestimo");
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -422,12 +443,19 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        btnCadastrarEmprestimo.setBackground(new java.awt.Color(153, 255, 153));
-        btnCadastrarEmprestimo.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        btnCadastrarEmprestimo.setText("Cadastrar emprestimo");
-        btnCadastrarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterarEmprestimo.setBackground(new java.awt.Color(153, 255, 153));
+        btnAlterarEmprestimo.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        btnAlterarEmprestimo.setText("Finalizar alteracao");
+        btnAlterarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarEmprestimoActionPerformed(evt);
+                btnAlterarEmprestimoActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Cancelar alteracao");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -455,8 +483,9 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnCadastrarEmprestimo))
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAlterarEmprestimo))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -472,7 +501,9 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCadastrarEmprestimo)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAlterarEmprestimo)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -551,7 +582,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         new TelaSelecionarBeneficiado(this).setVisible(true);
     }//GEN-LAST:event_btnSelecionarBeneficiadoActionPerformed
 
-    private void btnCadastrarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarEmprestimoActionPerformed
+    private void btnAlterarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarEmprestimoActionPerformed
         if(selectedFriend != null){
             try{
             Date endDate = DateResource.unformatDateString(textDataDevolucao.getText());
@@ -572,7 +603,13 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             }
             
             //LoanModel(Date startDate, Date endDate, boolean returned)
-            LoanModel loan = LoansDAO.getInstance().addLoan(new Date(), endDate, valorReceber, selectedFriend.getId());
+            LoanModel loan = LoansDAO.getInstance().updateLoan(this.emprestimo, new Date(), endDate, valorReceber, selectedFriend.getId());
+
+            for(ToolModel tool : parentToolsList.getTools()){
+                if(!toolsList.containsTool(tool.getId())){
+                    ToolsDAO.getInstance().removeToolFromLoan(tool.getId());
+                }
+            }
             for(ToolModel tool : toolsList.getTools()){
                 ToolsDAO.getInstance().addToolToLoan(tool.getId(), loan.getId());
             }
@@ -580,10 +617,22 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Emprestimo finalizado com sucesso!");
             this.dispose();
         }catch(Exception e){
+            e.printStackTrace();
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
         }
-    }//GEN-LAST:event_btnCadastrarEmprestimoActionPerformed
+    }//GEN-LAST:event_btnAlterarEmprestimoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void loadTools(ToolboxResource toolbox){
+        parentToolsList = toolbox;
+        for(ToolModel tool : toolbox.getTools()){
+            addFerramenta(tool);
+        }
+    }
 
     public void addFerramenta(ToolModel e){
         if(!toolsList.containsTool(e.getId())){
@@ -608,32 +657,34 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAlterarEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAlterarEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAlterarEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaAlterarEmprestimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaCadastroEmprestimo().setVisible(true);
+                new TelaAlterarEmprestimo().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarFerramenta;
-    private javax.swing.JButton btnCadastrarEmprestimo;
+    private javax.swing.JButton btnAlterarEmprestimo;
     private javax.swing.JButton btnRemoverBeneficiado;
     private javax.swing.JButton btnRemoverFerramenta;
     private javax.swing.JButton btnSelecionarBeneficiado;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel15;

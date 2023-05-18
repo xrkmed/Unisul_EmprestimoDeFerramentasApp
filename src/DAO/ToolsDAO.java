@@ -125,12 +125,16 @@ public class ToolsDAO {
         DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET emprestimo_id = '" + loanId + "' WHERE id = '" + toolId + "';");
     }
 
+    public void removeToolFromLoan(int toolId) throws DatabaseResultQueryException{
+        DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET emprestimo_id = NULL WHERE id = '" + toolId + "';");
+    }
+
     public void updateManufacturer(int id, int manufacturerId) throws DatabaseResultQueryException{
         DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET fabricante_id = " + (manufacturerId == -1 ? "NULL" : "'" + manufacturerId + "'" ) + " WHERE id = '" + id + "';");
     }
 
     public void updateTool(Integer id, ToolModel reference) throws DatabaseResultQueryException{
-        DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET name = '" + reference.getNome() + "', price = '" + reference.getPrice() + "', fabricante_id = " + (reference.getManufacturer() != null ? "'" + reference.getManufacturer().getId() + "'" : "NULL") + " WHERE id = '" + id + "';");
+        DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET name = ?, price = ?, fabricante_id = ? WHERE id = ?;", reference.getNome(), reference.getPrice(), (reference.getManufacturer() != null ? reference.getManufacturer().getId() : "NULL"), id);
     }
 
     public ArrayList<Object[]> getFerramentasValue() throws DatabaseResultQueryException, SQLException{
