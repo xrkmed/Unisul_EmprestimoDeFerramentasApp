@@ -1,55 +1,59 @@
 package Resources;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import jdk.nashorn.api.scripting.JSObject;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 public class CEPResource {
+    
+    public static AddressResource buscarCEP(Integer cep) throws IOException{
+        String urlStr = "https://viacep.com.br/ws/" + cep + "/json/";
+        URL url = new URL(urlStr);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Accept", "application/json");
 
-    public static AddressResource buscarCEP(Integer cep) throws IOException, ScriptException{
-            URL url = new URL("https://viacep.com.br/ws/" + cep + "/json/");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
+        if (conn.getResponseCode() != 200) {
+            throw new IOException("Erro ao fazer a requisição HTTP: " + conn.getResponseCode());
+        }
 
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
+        JsonParser parser = new JsonParser();
+        JsonElement jsonElement = parser.parse(new InputStreamReader(conn.getInputStream()));
 
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
+        String rua = jsonElement.getAsJsonObject().get("logradouro").getAsString();
+        String bairro = jsonElement.getAsJsonObject().get("bairro").getAsString();
+        String cidade = jsonElement.getAsJsonObject().get("localidade").getAsString();
+        String uf = jsonElement.getAsJsonObject().get("uf").getAsString();
+        String complemento = jsonElement.getAsJsonObject().get("complemento").getAsString();
 
-                reader.close();
+        if(uf.equalsIgnoreCase("undefined") || cidade.equalsIgnoreCase("undefined")){
+            throw new IOException("CEP inválido");
+        }
 
-                ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-                String script = "JSON.parse('" + response.toString() + "')";
-                JSObject jsObject = (JSObject) engine.eval(script);
+        if(rua.equalsIgnoreCase("undefined")){
+            rua = "";
+        }
 
-                String rua = jsObject.getMember("logradouro").toString().equalsIgnoreCase("undefined") ?  "" : jsObject.getMember("logradouro").toString();
-                String bairro = jsObject.getMember("bairro").toString().equalsIgnoreCase("undefined") ?  "" : jsObject.getMember("bairro").toString();
-                String cidade = jsObject.getMember("localidade").toString();
-                String estado = jsObject.getMember("uf").toString();
-                String complemento = jsObject.getMember("complemento").toString().equalsIgnoreCase("undefined") ?  "" : jsObject.getMember("complemento").toString();
+        if(bairro.equalsIgnoreCase("undefined")){
+            bairro = "";
+        }
 
-                if(estado.equalsIgnoreCase("undefined") || cidade.equalsIgnoreCase("undefined")){
-                    throw new IOException("CEP inválido");
-                }
+        if(complemento.equalsIgnoreCase("undefined")){
+            complemento = "";
+        }
 
-                connection.disconnect();
-                return new AddressResource(rua, bairro, cidade, estado, null, complemento, cep);
-            } else {
-                connection.disconnect();
-                throw new IOException("Erro ao consultar o CEP. Código de resposta: " + responseCode);
-            }
+        conn.disconnect();
+        return new AddressResource(rua, bairro, cidade, uf, null, complemento, cep);
     }
 
     public static boolean verificarNomeCompleto(String nome) {

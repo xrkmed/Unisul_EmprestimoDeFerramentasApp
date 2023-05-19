@@ -5,12 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import jdk.nashorn.api.scripting.JSObject;
-import jdk.nashorn.api.scripting.ScriptObjectMirror;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 public class LocalidadesDAO {
 
@@ -48,7 +47,7 @@ public class LocalidadesDAO {
         return estados;
     }
     
-    public static Object[] obterCidadesAPI(String estadoUF) throws IOException, ScriptException{
+    public static Object[] obterCidadesAPI(String estadoUF) throws IOException {
         URL url = new URL("https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + estadoUF + "/municipios");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
@@ -66,16 +65,16 @@ public class LocalidadesDAO {
         }
 
         conn.disconnect();
-        ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-        String script = "JSON.parse('" + response.toString().replaceAll("'", "") + "')";
-        JSObject jsObject = (JSObject) engine.eval(script);
 
-        Object[] cidades = new Object[Integer.parseInt(jsObject.getMember("length").toString())];
-        for(int i = 0; i < cidades.length; i++){
-            ScriptObjectMirror mirror = (ScriptObjectMirror) jsObject.getSlot(i);
-            cidades[i] = mirror.getMember("nome");
+        JsonArray jsonArray = JsonParser.parseString(response.toString()).getAsJsonArray();
+        Object[] cidades = new Object[jsonArray.size()];
+
+        for (int i = 0; i < cidades.length; i++) {
+            JsonElement jsonElement = jsonArray.get(i);
+            String cidade = jsonElement.getAsJsonObject().get("nome").getAsString();
+            cidades[i] = cidade;
         }
-           
+
         return cidades;
     }
 

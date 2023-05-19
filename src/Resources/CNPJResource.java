@@ -4,14 +4,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import jdk.nashorn.api.scripting.JSObject;
-
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.xml.ws.http.HTTPException;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import Controllers.CNPJEntity;
 import Exceptions.CNPJNotFound;
+import java.net.http.HttpConnectTimeoutException;
 
 public class CNPJResource {
     
@@ -83,7 +81,7 @@ public class CNPJResource {
         return nome.length() > 3 && nome.length() <= 64;
     }
 
-    public static CNPJEntity consultarCNPJ(String cnpj) throws CNPJNotFound, HTTPException{
+    public static CNPJEntity consultarCNPJ(String cnpj) throws CNPJNotFound{
         try {
             String urlConsulta = "https://www.receitaws.com.br/v1/cnpj/" + cnpj;
 
@@ -92,31 +90,23 @@ public class CNPJResource {
             conn.setRequestMethod("GET");
 
             if (conn.getResponseCode() == 200) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-                reader.close();
+                JsonParser parser = new JsonParser();
+                JsonElement jsonElement = parser.parse(new InputStreamReader(conn.getInputStream()));
 
-                ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-                String script = "JSON.parse('" + response.toString() + "')";
-                JSObject jsObject = (JSObject) engine.eval(script);
 
-                if (jsObject.getMember("status").toString().equals("OK")) {
-                    String sampleAddressStr = jsObject.getMember("logradouro").toString() + ", " + jsObject.getMember("numero").toString() + " - " + jsObject.getMember("bairro").toString() + ", " + jsObject.getMember("municipio").toString() + " - " + jsObject.getMember("uf").toString() + ", " + jsObject.getMember("cep").toString();
-                    CNPJEntity cnpjObject = new CNPJEntity(jsObject.getMember("nome").toString(), jsObject.getMember("telefone").toString(), Double.parseDouble(jsObject.getMember("capital_social").toString()), sampleAddressStr, jsObject.getMember("status").toString(), jsObject.getMember("situacao").toString(), jsObject.getMember("cnpj").toString());
+                if (jsonElement.getAsJsonObject().get("logradouro").getAsString().equalsIgnoreCase("ok")) {
+                    String sampleAddressStr = jsonElement.getAsJsonObject().get("logradouro").getAsString() + ", " + jsonElement.getAsJsonObject().get("numero").getAsString() + " - " + jsonElement.getAsJsonObject().get("bairro").getAsString() + ", " + jsonElement.getAsJsonObject().get("municipio").getAsString() + " - " + jsonElement.getAsJsonObject().get("uf").getAsString() + ", " + jsonElement.getAsJsonObject().get("cep").getAsString();
+                    CNPJEntity cnpjObject = new CNPJEntity(jsonElement.getAsJsonObject().get("nome").getAsString(), jsonElement.getAsJsonObject().get("telefone").getAsString(), Double.parseDouble(jsonElement.getAsJsonObject().get("capital_social").getAsString()), sampleAddressStr, jsonElement.getAsJsonObject().get("status").getAsString(), jsonElement.getAsJsonObject().get("situacao").getAsString(), jsonElement.getAsJsonObject().get("cnpj").getAsString());
 
                     conn.disconnect();
                     return cnpjObject;
                 } else {
                     conn.disconnect();
-                    throw new CNPJNotFound(jsObject.getMember("message").toString());
+                    throw new CNPJNotFound("CNPJ Invalido, tente novamente...");
                 }
             } else {
                 conn.disconnect();
-                throw new HTTPException(conn.getResponseCode());
+                throw new HttpConnectTimeoutException("Erro de conexao: " + conn.getResponseCode() + ", contacte o administrador do sistema e verifique sua conexao com a internet.");
             }
         }catch(Exception e){
             throw new IllegalArgumentException(e.getMessage());
