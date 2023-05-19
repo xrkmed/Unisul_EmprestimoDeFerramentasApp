@@ -9,7 +9,6 @@ import com.google.gson.JsonParser;
 
 import Controllers.CNPJEntity;
 import Exceptions.CNPJNotFound;
-import java.net.http.HttpConnectTimeoutException;
 
 public class CNPJResource {
     
@@ -106,7 +105,7 @@ public class CNPJResource {
                 }
             } else {
                 conn.disconnect();
-                throw new HttpConnectTimeoutException("Erro de conexao: " + conn.getResponseCode() + ", contacte o administrador do sistema e verifique sua conexao com a internet.");
+                throw new IllegalArgumentException("Erro de conexao: " + conn.getResponseCode() + ", contacte o administrador do sistema e verifique sua conexao com a internet.");
             }
         }catch(Exception e){
             throw new IllegalArgumentException(e.getMessage());
