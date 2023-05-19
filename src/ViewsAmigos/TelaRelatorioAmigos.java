@@ -89,12 +89,12 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
                 "id", "nome", "telefone", "endereço", "emprestimos realizados", "emprestimos atrasados"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(amigosRelatorio);
@@ -151,24 +151,6 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
        
         
-//                DirectoryChooserFrame directoryChooserFrame = new DirectoryChooserFrame(this);
-//                 directoryChooserFrame.addWindowListener(new java.awt.event.WindowAdapter() {
-//            @Override
-//            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-//                if(directory != null){
-//                    try{
-//                        Paragraph paragraphTitle = PDFEntity.addParagraph("TODOS OS AMIGOS CADASTRADOS", 0);
-//                        Paragraph paragraphSubTitle = PDFEntity.addParagraph("Sexo?", 10);
-//                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
-//                        String fileName = "RelatorioAmigos";
-//                        PDFEntity.export(directory + "/", fileName, amigosRelatorio, paragraphTitle, paragraphSubTitle, paragraphRelatorio);
-//                        JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directory + "/" + fileName + ".pdf");
-//                    }catch(Exception e){
-//                        JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente novamente mais tarde...");
-//                    }
-//                }
-//            }
-//        });
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -179,11 +161,11 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
                 if(directory != null){
                     try{
                         Paragraph paragraphTitle = PDFEntity.addParagraph("TODOS OS AMIGOS CADASTRADOS", 0);
-                        Paragraph paragraphSubTitle = PDFEntity.addParagraph("Sexo?", 10);
+                     
                         Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
                         String fileName = "RelatorioAmigos";
                         System.out.println("roger 1");
-                        PDFEntity.export(directory + "/", fileName, amigosRelatorio, paragraphTitle, paragraphSubTitle, paragraphRelatorio);
+                        PDFEntity.export(directory + "/", fileName, amigosRelatorio, paragraphTitle, paragraphRelatorio);
                         System.out.println("roger 2");
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directory + "/" + fileName + ".pdf");
                     }catch(Exception e){
