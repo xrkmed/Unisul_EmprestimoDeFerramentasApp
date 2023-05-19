@@ -34,21 +34,14 @@ public class CEPResource {
                 String script = "JSON.parse('" + response.toString() + "')";
                 JSObject jsObject = (JSObject) engine.eval(script);
 
-                String rua = jsObject.getMember("logradouro").toString() != "undefined" ? jsObject.getMember("logradouro").toString() : "";
-                String bairro = jsObject.getMember("bairro").toString() != "undefined" ? jsObject.getMember("bairro").toString() : "";
+                String rua = jsObject.getMember("logradouro").toString().equalsIgnoreCase("undefined") ?  "" : jsObject.getMember("logradouro").toString();
+                String bairro = jsObject.getMember("bairro").toString().equalsIgnoreCase("undefined") ?  "" : jsObject.getMember("bairro").toString();
                 String cidade = jsObject.getMember("localidade").toString();
                 String estado = jsObject.getMember("uf").toString();
-                String complemento = jsObject.getMember("complemento").toString() != "undefined" ? jsObject.getMember("complemento").toString() : "";
+                String complemento = jsObject.getMember("complemento").toString().equalsIgnoreCase("undefined") ?  "" : jsObject.getMember("complemento").toString();
 
-                if(estado == "undefined" || cidade == "undefined"){
+                if(estado.equalsIgnoreCase("undefined") || cidade.equalsIgnoreCase("undefined")){
                     throw new IOException("CEP inválido");
-                }
-
-                if(rua == "undefined"){
-                    rua = "";
-                }
-                if(bairro == "undefined"){
-                    bairro = "";
                 }
 
                 connection.disconnect();
