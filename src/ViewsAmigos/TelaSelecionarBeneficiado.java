@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.*;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -615,15 +616,9 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
         loadValores();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+  
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+      
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -632,7 +627,7 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            TelaSelecionarBeneficiado.util.logging.Logger.getLogger(TelaSelecionarBeneficiado.class.getName()).log(TelaSelecionarBeneficiado.util.logging.Level.SEVERE, null, ex);
+           ex.printStackTrace();
         } catch (InstantiationException ex) {
             TelaSelecionarBeneficiado.util.logging.Logger.getLogger(TelaSelecionarBeneficiado.class.getName()).log(TelaSelecionarBeneficiado.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
@@ -646,7 +641,8 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        TelaSelecionarBeneficiado.awt.EventQueue.invokeLater(new Runnable() {
+        //TelaSelecionarBeneficiado.awt.EventQueue.invokeLater(new Runnable() {
+          java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaSelecionarBeneficiado().setVisible(true);
             }

@@ -158,10 +158,10 @@ public class TelaCadastro extends javax.swing.JFrame {
         });
 
         textNumero.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 textNumeroInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         textNumero.addActionListener(new java.awt.event.ActionListener() {
@@ -367,13 +367,50 @@ public class TelaCadastro extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textComplementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textComplementoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textComplementoActionPerformed
+    private void btnBuscarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCepActionPerformed
+        if(textCEP.getText().length() != 8){
+            JOptionPane.showMessageDialog(null, "CEP inválido (Digite apenas números)");
+            textCEP.setText("");
+            textCEP.requestFocus();
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "Aguarde enquanto o CEP é consultado...", "Aguarde", JOptionPane.INFORMATION_MESSAGE);
 
-    private void textNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNumeroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textNumeroActionPerformed
+        try{
+            int opcao = JOptionPane.showConfirmDialog(this, "Para buscar um CEP, voce precisa ter uma conexao estavel com a internet, deseja procurar um CEP?", "Confirmar busca", JOptionPane.YES_NO_OPTION);
+            if(opcao == JOptionPane.NO_OPTION){
+                return;
+            }
+
+            AddressResource cepBuscado = CEPResource.buscarCEP(Integer.parseInt(textCEP.getText()));
+
+            selectEstado.setSelectedItem(cepBuscado.getState());
+            selectCidade.removeAllItems();
+            selectCidade.addItem(cepBuscado.getCity());
+            selectCidade.setSelectedItem(cepBuscado.getCity());
+            selectCidade.setEnabled(false);
+
+            if(cepBuscado.getDistrict().length() > 0){
+                textBairro.setText(cepBuscado.getDistrict());
+                textBairro.setEnabled(false);
+            }
+
+            if(cepBuscado.getStreet().length() > 0){
+                textRua.setText(cepBuscado.getStreet());
+                textRua.setEnabled(false);
+            }
+
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "CEP em formato invalido (Digite apenas números)");
+            textCEP.requestFocus();
+        }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null, "CEP não encontrado");
+            textCEP.requestFocus();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            textCEP.requestFocus();
+        }
+    }//GEN-LAST:event_btnBuscarCepActionPerformed
 
     private void textCEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCEPKeyPressed
         if(textCEP.getText().length() > 8){
@@ -394,18 +431,64 @@ public class TelaCadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_textCEPKeyPressed
 
+    private void selectEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectEstadoActionPerformed
+        if(selectEstado.getSelectedItem() != null && selectEstado.getSelectedItem().toString().length() == 2){
+            selectCidade.setEnabled(false);
+            textBairro.setText("");
+            textRua.setText("");
+            textNumero.setText("");
+            textComplemento.setText("");
+
+            if(textCEP.getText().length() == 0){
+                Thread thread = new Thread(new Runnable(){
+                    @Override
+                    public void run(){
+                        selectCidade.setEnabled(true);
+                        selectCidade.removeAllItems();
+                        for (Object cidade : LocalidadesDAO.obterCidades(selectEstado.getSelectedItem().toString())) {
+                            selectCidade.addItem(cidade.toString());
+                        }
+
+                    }
+                });
+                thread.start();
+            }else{
+                selectCidade.setEnabled(true);
+                selectCidade.removeAllItems();
+                for (Object cidade : LocalidadesDAO.obterCidades(selectEstado.getSelectedItem().toString())) {
+                    selectCidade.addItem(cidade.toString());
+                }
+            }
+        }
+    }//GEN-LAST:event_selectEstadoActionPerformed
+
+    private void selectCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCidadeActionPerformed
+
+    }//GEN-LAST:event_selectCidadeActionPerformed
+
+    private void textNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyReleased
+
+    }//GEN-LAST:event_textNumeroKeyReleased
+
     private void textNumeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyPressed
+
     }//GEN-LAST:event_textNumeroKeyPressed
 
     private void textNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyTyped
+
     }//GEN-LAST:event_textNumeroKeyTyped
+
+    private void textNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textNumeroActionPerformed
 
     private void textNumeroInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_textNumeroInputMethodTextChanged
 
     }//GEN-LAST:event_textNumeroInputMethodTextChanged
 
-    private void textNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyReleased
-    }//GEN-LAST:event_textNumeroKeyReleased
+    private void textComplementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textComplementoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textComplementoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
@@ -430,7 +513,7 @@ public class TelaCadastro extends javax.swing.JFrame {
             erros.add("Número inválido, digite apenas números (Ex: 123)");
             textNumero.setText("");
             textNumero.setEnabled(true);
-       }
+        }
 
         if(!CEPResource.verificarBairro(textBairro.getText())){
             erros.add("Bairro inválido, digite apenas o nome do bairro (Ex: Jardim Paulista)");
@@ -480,86 +563,6 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void btnCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseClicked
 
     }//GEN-LAST:event_btnCadastrarMouseClicked
-
-    private void selectEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectEstadoActionPerformed
-        if(selectEstado.getSelectedItem() != null && selectEstado.getSelectedItem().toString().length() == 2){
-            selectCidade.setEnabled(false);
-            textBairro.setText("");
-            textRua.setText("");
-            textNumero.setText("");
-            textComplemento.setText("");
-
-            if(textCEP.getText().length() == 0){
-                Thread thread = new Thread(new Runnable(){
-                    @Override
-                    public void run(){
-                        selectCidade.setEnabled(true);
-                        selectCidade.removeAllItems();
-                        for (Object cidade : LocalidadesDAO.obterCidades(selectEstado.getSelectedItem().toString())) {
-                            selectCidade.addItem(cidade.toString());
-                        }
-
-                    }
-                });
-                thread.start();
-            }else{
-                selectCidade.setEnabled(true);
-                selectCidade.removeAllItems();
-                for (Object cidade : LocalidadesDAO.obterCidades(selectEstado.getSelectedItem().toString())) {
-                    selectCidade.addItem(cidade.toString());
-                }
-            }
-        }
-    }//GEN-LAST:event_selectEstadoActionPerformed
-
-    private void btnBuscarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCepActionPerformed
-        if(textCEP.getText().length() != 8){
-            JOptionPane.showMessageDialog(null, "CEP inválido (Digite apenas números)");
-            textCEP.setText("");
-            textCEP.requestFocus();
-            return;
-        }
-        JOptionPane.showMessageDialog(null, "Aguarde enquanto o CEP é consultado...", "Aguarde", JOptionPane.INFORMATION_MESSAGE);
-
-        try{
-            int opcao = JOptionPane.showConfirmDialog(this, "Para buscar um CEP, voce precisa ter uma conexao estavel com a internet, deseja procurar um CEP?", "Confirmar busca", JOptionPane.YES_NO_OPTION);
-            if(opcao == JOptionPane.NO_OPTION){
-                return;
-            }
-
-            AddressResource cepBuscado = CEPResource.buscarCEP(Integer.parseInt(textCEP.getText()));
-            
-            selectEstado.setSelectedItem(cepBuscado.getState());
-            selectCidade.removeAllItems();
-            selectCidade.addItem(cepBuscado.getCity());
-            selectCidade.setSelectedItem(cepBuscado.getCity());
-            selectCidade.setEnabled(false);
-
-            if(cepBuscado.getDistrict().length() > 0){
-                textBairro.setText(cepBuscado.getDistrict());
-                textBairro.setEnabled(false);
-            }
-
-            if(cepBuscado.getStreet().length() > 0){
-                textRua.setText(cepBuscado.getStreet());
-                textRua.setEnabled(false);
-            }
-
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "CEP em formato invalido (Digite apenas números)");
-            textCEP.requestFocus();
-        }catch(NullPointerException e){
-            JOptionPane.showMessageDialog(null, "CEP não encontrado");
-            textCEP.requestFocus();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            textCEP.requestFocus();
-        }
-
-    }//GEN-LAST:event_btnBuscarCepActionPerformed
-
-    private void selectCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCidadeActionPerformed
-    }//GEN-LAST:event_selectCidadeActionPerformed
 
     /**
      * @param args the command line arguments
