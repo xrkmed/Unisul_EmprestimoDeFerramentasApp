@@ -55,6 +55,7 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
             @Override
             public void run(){
                 try{
+                    System.out.println(ToolsDAO.getInstance().getRelatorioObjectTools().get(0).toString());
                     loadList(ferramentasRelatorio, ToolsDAO.getInstance().getRelatorioObjectTools());
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, "Erro ao carregar lista de ferramentas: " + e.getMessage());
@@ -73,6 +74,7 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         ferramentasRelatorio = new javax.swing.JTable();
@@ -85,6 +87,8 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Grupo Supimpa - Painel de Ferramentas");
@@ -175,7 +179,7 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textValorGastoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
                     .addContainerGap(417, Short.MAX_VALUE)
@@ -187,6 +191,11 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
         jLabel1.setText("RELATORIO DE TODAS AS FERRAMENTAS CADASTRADAS");
 
         jMenu2.setText("Exportar");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
 
         jMenu4.setText("Exportar relatorio");
 
@@ -265,6 +274,10 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
     public void loadList(JTable table, ArrayList<Object[]> dataObject){
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
@@ -326,6 +339,7 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;

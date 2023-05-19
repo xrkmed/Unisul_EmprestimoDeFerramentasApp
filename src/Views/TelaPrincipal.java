@@ -315,7 +315,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFerramentasCadActionPerformed
 
     private void btnRelatorioAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioAmigosActionPerformed
-        // TODO add your handling code here:
+        Thread newTheread = new Thread(new Runnable() {
+        @Override
+        public void run(){
+        new ViewsAmigos.TelaRelatorioAmigos().setVisible(true);
+        }
+        });
+        newTheread.start();
+        
+        
     }//GEN-LAST:event_btnRelatorioAmigosActionPerformed
 
     private void btnControleFinanceiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnControleFinanceiroActionPerformed
