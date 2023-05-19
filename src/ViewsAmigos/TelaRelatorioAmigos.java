@@ -33,22 +33,8 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
                 try{
                     loadList(amigosRelatorio, FriendsDAO.getInstance().loadFriendsTabela());
                 }catch(Exception e){
-                    JOptionPane.showMessageDialog(null, "Erro ao carregar lista de amigos: " + e);
+                    JOptionPane.showMessageDialog(null, "Erro ao carregar relatorio de amigos: " + e);
                 }
-            }
-
-            private void loadList(JTable table, ArrayList<Object[]> dataObjects) {
-            
-                 DefaultTableModel model = (DefaultTableModel) table.getModel();
-                 model.setRowCount(0);
-                 try{
-                      for (Object[] data : dataObjects) {
-                model.addRow(data);
-                      }
-                 }catch(Exception e){
-                 JOptionPane.showMessageDialog(null, "Erro na tabela de amigos muito ruim aqui no load "+e.getMessage());
-                 }
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
         pStart.start();
@@ -147,6 +133,14 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loadList(JTable table, ArrayList<Object[]> dataObjects) {   
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        for (Object[] data : dataObjects) {
+            model.addRow(data);
+        }
+    }
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
        
