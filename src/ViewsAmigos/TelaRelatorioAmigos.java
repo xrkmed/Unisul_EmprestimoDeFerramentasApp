@@ -26,6 +26,11 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
         initComponents();
         configFrame();
     }
+    
+    public void setDirectory(String directory){
+        this.directory = directory;
+    }
+    
  private void configFrame(){
         Thread pStart = new Thread(new Runnable(){
             @Override

@@ -43,10 +43,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         Thread loadValues = new Thread(new Runnable(){
             @Override
             public void run(){
-                jTable2.getColumnModel().getColumn(1).setPreferredWidth(35);
-                jTable2.getColumnModel().getColumn(1).setMinWidth(35);
-                jTable2.getColumnModel().getColumn(1).setMaxWidth(35);
-        
+
                 jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
                 jTable2.getColumnModel().getColumn(0).setMinWidth(35);
                 jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
@@ -132,36 +129,36 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "#", "Nome", "Telefone", "Endereço", "Emprestimos em aberto", "Emprestimos atrasados"
+                "ID", "Nome", "Telefone", "Endereço", "Emprestimos em aberto", "Emprestimos atrasados"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -178,15 +175,13 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
             jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setPreferredWidth(0);
+            jTable2.getColumnModel().getColumn(1).setPreferredWidth(200);
             jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setPreferredWidth(200);
             jTable2.getColumnModel().getColumn(3).setResizable(false);
+            jTable2.getColumnModel().getColumn(3).setPreferredWidth(400);
             jTable2.getColumnModel().getColumn(4).setResizable(false);
-            jTable2.getColumnModel().getColumn(4).setPreferredWidth(400);
+            jTable2.getColumnModel().getColumn(4).setPreferredWidth(40);
             jTable2.getColumnModel().getColumn(5).setResizable(false);
-            jTable2.getColumnModel().getColumn(5).setPreferredWidth(40);
-            jTable2.getColumnModel().getColumn(6).setResizable(false);
         }
 
         jLayeredPane1.setBackground(new java.awt.Color(153, 153, 153));
@@ -194,16 +189,16 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
         jLabel2.setText("Emprestimo em aberto");
 
-        canvas2.setBackground(ColorsRenderer.lightYellow);
+        canvas2.setBackground(new java.awt.Color(255, 255, 224));
 
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel7.setText("STATUS");
 
         jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        jLabel8.setForeground(ColorsRenderer.red);
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setText("EMPRESTIMO ATRASADO");
 
-        canvas3.setBackground(ColorsRenderer.lightRed);
+        canvas3.setBackground(new java.awt.Color(255, 57, 57));
 
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(canvas2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -552,25 +547,25 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                     
             for(Object[] data : FriendsDAO.getInstance().loadFriendsTabela()){
                 if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
-                    if(!data[2].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
+                    if(!data[1].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
                         continue;
                     }
                 }
 
                 if(filtroEndereco.isSelected() && textFiltrarEndereco.getText().trim().length() > 0){
-                    if(!data[4].toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())){
+                    if(!data[3].toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())){
                         continue;
                     }
                 }
 
-                if(Integer.parseInt(data[5].toString()) > 0){
+                if(Integer.parseInt(data[4].toString()) > 0){
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                     for(int i = 0; i < jTable2.getColumnCount(); i++){
                         jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
                     }
                 }
 
-                if(Integer.parseInt(data[6].toString()) > 0){
+                if(Integer.parseInt(data[5].toString()) > 0){
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
                     for(int i = 0; i < jTable2.getColumnCount(); i++){
                         jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
