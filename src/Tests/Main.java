@@ -5,6 +5,8 @@ import DAO.LoansDAO;
 import DAO.ToolsDAO;
 import Database.Database;
 import Views.TelaPrincipal;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import javax.swing.UIManager;
 
 public class Main {
 
@@ -13,23 +15,12 @@ public class Main {
     public static ToolsDAO tools = ToolsDAO.getInstance();
 
     public static void main(String[] args) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        try{
+            UIManager.setLookAndFeel(new FlatMacLightLaf());
+        }catch(Exception e){
+            e.printStackTrace();
         }
-
+        
         TelaPrincipal tela = new TelaPrincipal();
         tela.setVisible(true);
 
