@@ -93,10 +93,7 @@ public class TelaRelatorioEmprestimos extends javax.swing.JFrame {
 
         emprestimosRelatorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Amigo", "Data de inicio", "Data de devoluçao", "Finalizado data", "Observaçoes", "Ferramentas totais", "Valor total em ferramentas", "Valor recebido", "Ferramentas"
