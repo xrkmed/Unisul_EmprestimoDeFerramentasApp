@@ -274,7 +274,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Thread newThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                new TelaTabelaAmigos().setVisible(true);
+                new ViewsAmigos.TelaTabelaAmigos().setVisible(true);
             }
         });
 
