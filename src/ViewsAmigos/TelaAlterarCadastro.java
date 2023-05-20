@@ -104,6 +104,7 @@ public class TelaAlterarCadastro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alterar cadastro de amigo");
+        setResizable(false);
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
         jLabel3.setText("Dados Pessoais");

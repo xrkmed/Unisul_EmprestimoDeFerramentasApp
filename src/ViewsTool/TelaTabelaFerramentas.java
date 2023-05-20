@@ -122,6 +122,7 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela de ferramentas cadastradas - Grupo Supimpa");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -491,8 +492,7 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
                             .addComponent(btnRemoverCadastro)
                             .addComponent(btnAlterarFerramenta)
                             .addComponent(btnEstadoFerramenta)
-                            .addComponent(btnHistoricoUso))
-                        .addGap(0, 0, 0))))
+                            .addComponent(btnHistoricoUso)))))
         );
         jLayeredPane3Layout.setVerticalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
