@@ -13,11 +13,16 @@
             <MenuItem class="javax.swing.JMenuItem" name="exitMenuItem">
               <Properties>
                 <Property name="mnemonic" type="int" value="120"/>
-                <Property name="text" type="java.lang.String" value="Exit"/>
+                <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitMenuItemActionPerformed"/>
               </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Legenda">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Legenda"/>
+              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -200,9 +205,9 @@
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnVerTodosEmprestimos" max="32767" attributes="0"/>
-                      <Component id="btnRelatorioFerramentas1" max="32767" attributes="0"/>
-                      <Component id="btnSelecionarBeneficiado" max="32767" attributes="0"/>
+                      <Component id="btnVerTodosEmprestimos" pref="200" max="32767" attributes="0"/>
+                      <Component id="btnRelatorioFerramentas1" pref="200" max="32767" attributes="0"/>
+                      <Component id="btnSelecionarBeneficiado" pref="200" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>

@@ -121,6 +121,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela de amigos cadastrados - Grupo Supimpa");
@@ -509,6 +510,9 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         });
         fileMenu.add(exitMenuItem);
 
+        jMenuItem1.setText("Legenda");
+        fileMenu.add(jMenuItem1);
+
         menuBar.add(fileMenu);
 
         setJMenuBar(menuBar);
@@ -763,6 +767,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable2;

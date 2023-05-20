@@ -126,6 +126,7 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
+        Legenda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela de amigos cadastrados - Grupo Supimpa");
@@ -264,9 +265,9 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addGap(237, 237, 237)))
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVerTodosEmprestimos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRelatorioFerramentas1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSelecionarBeneficiado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnVerTodosEmprestimos, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(btnRelatorioFerramentas1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(btnSelecionarBeneficiado, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                 .addGap(15, 15, 15))
         );
         jLayeredPane3Layout.setVerticalGroup(
@@ -489,13 +490,16 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
         fileMenu.setText("Opções");
 
         exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Exit");
+        exitMenuItem.setText("Sair");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitMenuItemActionPerformed(evt);
             }
         });
         fileMenu.add(exitMenuItem);
+
+        Legenda.setText("Legenda");
+        fileMenu.add(Legenda);
 
         menuBar.add(fileMenu);
 
@@ -686,6 +690,7 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Legenda;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnRelatorioFerramentas1;
     private javax.swing.JButton btnSelecionarBeneficiado;
