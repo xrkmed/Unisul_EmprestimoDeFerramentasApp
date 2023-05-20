@@ -121,6 +121,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela de amigos cadastrados - Grupo Supimpa");
@@ -509,6 +510,9 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         });
         fileMenu.add(exitMenuItem);
 
+        jMenuItem1.setText("Legenda");
+        fileMenu.add(jMenuItem1);
+
         menuBar.add(fileMenu);
 
         setJMenuBar(menuBar);
@@ -706,32 +710,9 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            TelaTabelaAmigos.util.logging.Logger.getLogger(TelaTabelaAmigos.class.getName()).log(TelaTabelaAmigos.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            TelaTabelaAmigos.util.logging.Logger.getLogger(TelaTabelaAmigos.class.getName()).log(TelaTabelaAmigos.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            TelaTabelaAmigos.util.logging.Logger.getLogger(TelaTabelaAmigos.class.getName()).log(TelaTabelaAmigos.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            TelaTabelaAmigos.util.logging.Logger.getLogger(TelaTabelaAmigos.class.getName()).log(TelaTabelaAmigos.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
+        
         /* Create and display the form */
-        TelaTabelaAmigos.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaTabelaAmigos().setVisible(true);
             }
@@ -763,6 +744,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable2;
