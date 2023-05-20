@@ -72,7 +72,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu1.setText("Amigos");
 
         btnCadastrarAmigo.setMnemonic('x');
-        btnCadastrarAmigo.setText("Cadastrar um novo amigo");
+        btnCadastrarAmigo.setText("Cadastrar Novo Amigo");
         btnCadastrarAmigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarAmigoActionPerformed(evt);
@@ -81,7 +81,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu1.add(btnCadastrarAmigo);
 
         btnViewAmigosCad.setMnemonic('x');
-        btnViewAmigosCad.setText("Visualizar amigos cadastrados");
+        btnViewAmigosCad.setText("Amigos Cadastrados");
         btnViewAmigosCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewAmigosCadActionPerformed(evt);
@@ -91,7 +91,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu1.add(jSeparator4);
 
         btnRelatorioAmigos.setMnemonic('x');
-        btnRelatorioAmigos.setText("Relatorio de amigos");
+        btnRelatorioAmigos.setText("Relatório de Amigos");
         btnRelatorioAmigos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRelatorioAmigosActionPerformed(evt);
@@ -100,17 +100,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu1.add(btnRelatorioAmigos);
 
         btnRankingAmigos.setMnemonic('x');
-        btnRankingAmigos.setText("Ranking de amigos");
+        btnRankingAmigos.setText("Ranking de Amigos");
+        btnRankingAmigos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRankingAmigosActionPerformed(evt);
+            }
+        });
         fileMenu1.add(btnRankingAmigos);
 
         fileMenu.add(fileMenu1);
         fileMenu.add(jSeparator1);
 
         fileMenu5.setMnemonic('f');
-        fileMenu5.setText("Emprestimos");
+        fileMenu5.setText("Empréstimos");
 
         btnCadastrarEmprestimo.setMnemonic('x');
-        btnCadastrarEmprestimo.setText("Cadastrar um novo emprestimo");
+        btnCadastrarEmprestimo.setText("Cadastrar Novo Empréstimo");
         btnCadastrarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarEmprestimoActionPerformed(evt);
@@ -119,7 +124,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu5.add(btnCadastrarEmprestimo);
 
         btnEmprestimosEmAberto.setMnemonic('x');
-        btnEmprestimosEmAberto.setText("Emprestimos em aberto");
+        btnEmprestimosEmAberto.setText("Empréstimos em Aberto");
         btnEmprestimosEmAberto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEmprestimosEmAbertoActionPerformed(evt);
@@ -128,7 +133,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu5.add(btnEmprestimosEmAberto);
 
         btnRelatorioEmprestimo.setMnemonic('x');
-        btnRelatorioEmprestimo.setText("Relatorio de emprestimos finalizados");
+        btnRelatorioEmprestimo.setText("Relatório Empréstimos Finalizados");
         btnRelatorioEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRelatorioEmprestimoActionPerformed(evt);
@@ -138,7 +143,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu5.add(jSeparator5);
 
         btnControleFinanceiro.setMnemonic('x');
-        btnControleFinanceiro.setText("Controle financeiro");
+        btnControleFinanceiro.setText("Controle Financeiro");
         btnControleFinanceiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnControleFinanceiroActionPerformed(evt);
@@ -153,7 +158,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu3.setText("Ferramentas");
 
         btnCadastrarFerramenta.setMnemonic('x');
-        btnCadastrarFerramenta.setText("Cadastrar uma nova ferramenta");
+        btnCadastrarFerramenta.setText("Cadastrar Ferramenta");
         btnCadastrarFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarFerramentaActionPerformed(evt);
@@ -162,7 +167,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu3.add(btnCadastrarFerramenta);
 
         btnFerramentasCad.setMnemonic('x');
-        btnFerramentasCad.setText("Visualizar todas as ferramentas");
+        btnFerramentasCad.setText("Visualizar Ferramentas");
         btnFerramentasCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFerramentasCadActionPerformed(evt);
@@ -172,7 +177,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu3.add(jSeparator6);
 
         btnRelatorioFerramentas.setMnemonic('x');
-        btnRelatorioFerramentas.setText("Relatorio de ferramentas");
+        btnRelatorioFerramentas.setText("Relatório de Ferramentas");
         btnRelatorioFerramentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRelatorioFerramentasActionPerformed(evt);
@@ -188,7 +193,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu6.setText("Fabricantes");
 
         btnCadastrarFabricante.setMnemonic('x');
-        btnCadastrarFabricante.setText("Cadastrar um fabricante");
+        btnCadastrarFabricante.setText("Cadastrar Fabricante");
         btnCadastrarFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarFabricanteActionPerformed(evt);
@@ -197,7 +202,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu6.add(btnCadastrarFabricante);
 
         btnVisualizarFabricante.setMnemonic('x');
-        btnVisualizarFabricante.setText("Visualizar fabricantes");
+        btnVisualizarFabricante.setText("Visualizar Fabricantes");
         btnVisualizarFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVisualizarFabricanteActionPerformed(evt);
@@ -206,7 +211,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu6.add(btnVisualizarFabricante);
 
         btnControleGastosFabricantes.setMnemonic('x');
-        btnControleGastosFabricantes.setText("Controle de gastos");
+        btnControleGastosFabricantes.setText("Controle de Gastos");
         btnControleGastosFabricantes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnControleGastosFabricantesActionPerformed(evt);
@@ -216,7 +221,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu6.add(jSeparator9);
 
         btnRelatorioFabricantes.setMnemonic('x');
-        btnRelatorioFabricantes.setText("Relatorio de fabricantes");
+        btnRelatorioFabricantes.setText("Relatório de Fabricantes");
         btnRelatorioFabricantes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRelatorioFabricantesActionPerformed(evt);
@@ -231,7 +236,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu4.setMnemonic('f');
         fileMenu4.setText("Segurança");
 
-        btnClose.setText("Sair do programa");
+        btnClose.setText("Sair do Programa");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);
@@ -388,6 +393,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         newThread.start();
     }//GEN-LAST:event_btnRelatorioEmprestimoActionPerformed
+
+    private void btnRankingAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRankingAmigosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRankingAmigosActionPerformed
 
     /**
      * @param args the command line arguments
