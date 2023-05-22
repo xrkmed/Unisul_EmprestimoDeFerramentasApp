@@ -492,7 +492,7 @@ public class TelaEmprestimosAbertos extends javax.swing.JFrame {
 
     private void btnAlterarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarEmprestimoActionPerformed
         if(selectedLoan != null){
-            TelaAlterarEmprestimo tela = new TelaAlterarEmprestimo(selectedLoan);
+            TelaCadastroEmprestimo tela = new TelaCadastroEmprestimo(selectedLoan);
             tela.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {

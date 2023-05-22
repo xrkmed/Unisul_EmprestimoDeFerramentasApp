@@ -4,7 +4,6 @@ import Controllers.ColorsRenderer;
 import Controllers.StatusRenderer;
 import ViewsManufacturer.*;
 import ViewsAmigos.*;
-import ViewsEmprestimo.TelaAlterarEmprestimo;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
 
 import java.awt.Color;
@@ -588,10 +587,6 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
             if (parent != null) {
                 if (parent instanceof TelaCadastroEmprestimo) {
                     ((TelaCadastroEmprestimo) parent).addFerramenta(selectedTool);
-                }
-
-                if (parent instanceof TelaAlterarEmprestimo) {
-                    ((TelaAlterarEmprestimo) parent).addFerramenta(selectedTool);
                 }
             }
 
