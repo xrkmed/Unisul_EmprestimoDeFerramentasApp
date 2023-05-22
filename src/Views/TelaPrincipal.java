@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/Application.java to edit this template
  */
 package Views;
-
+import ViewsAmigos.TelaRankAmigos;
 import ViewsAmigos.TelaTabelaAmigos;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
 
@@ -101,6 +101,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btnRankingAmigos.setMnemonic('x');
         btnRankingAmigos.setText("Ranking de amigos");
+        btnRankingAmigos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRankingAmigosActionPerformed(evt);
+            }
+        });
         fileMenu1.add(btnRankingAmigos);
 
         fileMenu.add(fileMenu1);
@@ -320,6 +325,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         public void run(){
         new ViewsAmigos.TelaRelatorioAmigos().setVisible(true);
         }
+      
         });
         newTheread.start();
         
@@ -396,6 +402,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         newThread.start();
     }//GEN-LAST:event_btnRelatorioEmprestimoActionPerformed
+
+    private void btnRankingAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRankingAmigosActionPerformed
+         Thread newThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new ViewsAmigos.TelaRankAmigos().setVisible(true);
+            }
+        });
+         newThread.run();
+    }//GEN-LAST:event_btnRankingAmigosActionPerformed
 
     /**
      * @param args the command line arguments
