@@ -130,11 +130,11 @@ public class ToolsDAO {
     }
 
     public void updateManufacturer(int id, int manufacturerId) throws DatabaseResultQueryException{
-        DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET fabricante_id = " + (manufacturerId == -1 ? "NULL" : "'" + manufacturerId + "'" ) + " WHERE id = '" + id + "';");
+        DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET fabricante_id = " + (manufacturerId == -1 ? null : "'" + manufacturerId + "'" ) + " WHERE id = '" + id + "';");
     }
 
     public void updateTool(Integer id, ToolModel reference) throws DatabaseResultQueryException{
-        DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET name = ?, price = ?, fabricante_id = ? WHERE id = ?;", reference.getNome(), reference.getPrice(), (reference.getManufacturer() != null ? reference.getManufacturer().getId() : "NULL"), id);
+        DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET name = ?, price = ?, fabricante_id = ? WHERE id = ?;", reference.getNome(), reference.getPrice(), (reference.getManufacturer() != null ? reference.getManufacturer().getId() : null), id);
     }
 
     public ArrayList<Object[]> getFerramentasValue() throws DatabaseResultQueryException, SQLException{

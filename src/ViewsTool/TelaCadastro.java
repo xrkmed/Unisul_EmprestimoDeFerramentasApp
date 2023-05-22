@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
 
 import DAO.ToolsDAO;
+import Model.ToolModel;
 import Resources.BRLResource;
 import Resources.ManufacturerResource;
 import Resources.PriceDocument;
@@ -19,7 +20,7 @@ import Resources.PriceDocument;
 public class TelaCadastro extends javax.swing.JFrame {
 
     private ManufacturerResource selectedManufacturer = null;
-
+    private ToolModel tool = null;
     
     /**
      * Creates new form TelaCadastro
@@ -27,6 +28,24 @@ public class TelaCadastro extends javax.swing.JFrame {
     public TelaCadastro() {
         initComponents();
         initFrameConfig();
+    }
+
+    public TelaCadastro(ToolModel tool){
+        this();
+        this.tool = tool;
+
+        this.setTitle("Alteraçao da ferramenta " + tool.getNome());
+        this.textFerramentaNome.setText(tool.getNome());
+        this.textFerramentaValor.setText(BRLResource.PRICE_FORMATTER.format(tool.getPrice()));
+        this.selectedManufacturer = tool.getManufacturer();
+        btnConcluirCad.setText("Concluir alteração");
+        btnCancelarCad.setText("Cancelar alteração");
+
+        if(this.selectedManufacturer != null){
+            this.textSelecionado.setText("Selecionado: " + this.selectedManufacturer.getName());
+            this.btnRemoverFabricante.setEnabled(true);
+        }
+
     }
 
     private void initFrameConfig(){
@@ -273,11 +292,16 @@ public class TelaCadastro extends javax.swing.JFrame {
                 return;
             }
 
-            ToolsDAO.getInstance().addTool(textFerramentaNome.getText().toUpperCase(), price, (selectedManufacturer != null ? selectedManufacturer.getId() : -1));
-            
-    
-            JOptionPane.showMessageDialog(null, "Ferramenta cadastrada com sucesso!");
-            this.dispose();
+            if(this.tool == null){
+                ToolsDAO.getInstance().addTool(textFerramentaNome.getText().toUpperCase(), price, (selectedManufacturer != null ? selectedManufacturer.getId() : -1));
+                JOptionPane.showMessageDialog(null, "Ferramenta cadastrada com sucesso!");
+                this.dispose();
+            }else{
+                ToolModel newTool = new ToolModel(0, textFerramentaNome.getText().toUpperCase(), selectedManufacturer, price, 0);
+                ToolsDAO.getInstance().updateTool(tool.getId(), newTool);
+                JOptionPane.showMessageDialog(null, "Ferramenta alterada com sucesso!");
+                this.dispose();
+            }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "O valor da ferramenta deve ser um número!");
             return;

@@ -691,7 +691,7 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
 
     private void btnAlterarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarFerramentaActionPerformed
         if (selectedTool != null) {
-            TelaEditarFerramenta tela = new TelaEditarFerramenta(selectedTool);
+            TelaCadastro tela = new TelaCadastro(selectedTool);
             tela.setVisible(true);
             tela.addWindowListener(new WindowAdapter() {
                 @Override
