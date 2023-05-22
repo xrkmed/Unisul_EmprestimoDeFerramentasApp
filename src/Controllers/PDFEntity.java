@@ -26,6 +26,7 @@ public class PDFEntity {
     }
 
     public static void export(String directory, String filename, JTable table, Paragraph... extraParagraph) throws Exception{
+        System.out.println("entrei na exportação");
             Document document = new Document(PageSize.A4);
 
             PdfWriter.getInstance(document, new FileOutputStream(directory + filename + ".pdf"));

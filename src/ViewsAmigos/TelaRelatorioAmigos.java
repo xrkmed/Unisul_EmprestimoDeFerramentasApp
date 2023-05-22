@@ -149,16 +149,18 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         DirectoryChooserFrame directoryChooserFrame = new DirectoryChooserFrame(this);
+      
                  directoryChooserFrame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                   System.out.println("roger 1");
                 if(directory != null){
                     try{
                         Paragraph paragraphTitle = PDFEntity.addParagraph("TODOS OS AMIGOS CADASTRADOS", 0);
                      
                         Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
                         String fileName = "RelatorioAmigos";
-                        System.out.println("roger 1");
+                        
                         PDFEntity.export(directory + "/", fileName, amigosRelatorio, paragraphTitle, paragraphRelatorio);
                         System.out.println("roger 2");
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directory + "/" + fileName + ".pdf");
@@ -166,6 +168,7 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente novamente mais tarde...");
                     }
                 }
+               
             }
         });
     }//GEN-LAST:event_jMenuItem1ActionPerformed
