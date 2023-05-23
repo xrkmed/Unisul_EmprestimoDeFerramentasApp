@@ -64,7 +64,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                             if (selectedRow != -1) {
                                 selectedFriend = FriendsDAO.getInstance().getFriend(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
                                 selecionadoNome.setText(selectedFriend.getName().toUpperCase());
-                                selecionadoTelefone.setText(CEPResource.returnTelefoneFormat(selectedFriend.getPhone()));
+                                selecionadoTelefone.setText(PhoneValidResource.formatPhoneNumber(selectedFriend.getPhone()));
                             }else{
                                 selectedFriend = null;
                                 selecionadoNome.setText("");

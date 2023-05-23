@@ -58,7 +58,7 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
                                 selectedFriend = FriendsDAO.getInstance().getFriend(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
                                 if(selectedFriend != null){
                                     selecionadoNome.setText(selectedFriend.getName().toUpperCase());
-                                    selecionadoTelefone.setText(CEPResource.returnTelefoneFormat(selectedFriend.getPhone()));
+                                    selecionadoTelefone.setText(PhoneValidResource.formatPhoneNumber(selectedFriend.getPhone()));
                                 }
                             }else{
                                 selectedFriend = null;
