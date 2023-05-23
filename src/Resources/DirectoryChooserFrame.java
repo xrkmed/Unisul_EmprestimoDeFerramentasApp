@@ -40,5 +40,6 @@ public class DirectoryChooserFrame extends JFrame {
                 ((TelaRelatorioFabricante) parent).setDirectory(selectedDirectory);
                 this.dispose();
             }
+        }
     }
 }
