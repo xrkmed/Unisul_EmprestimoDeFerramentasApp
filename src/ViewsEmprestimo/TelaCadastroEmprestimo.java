@@ -5,6 +5,7 @@
 package ViewsEmprestimo;
 
 import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -37,12 +38,40 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
     private ToolModel selectedTool = null;
     private FriendModel selectedFriend = null;
     private ToolboxResource toolsList = new ToolboxResource();
+
+    private ToolboxResource parentToolsList = new ToolboxResource();
+    private LoanModel emprestimo = null;
     /**
      * Creates new form TelaCadastroEmprestimo
      */
     public TelaCadastroEmprestimo() {
         initComponents();
         configFrame();
+    }
+
+    public TelaCadastroEmprestimo(LoanModel emprestimo){
+        this();
+        this.emprestimo = emprestimo;
+        try{
+            setSelectedFriend(emprestimo.getFriend());
+            loadTools(LoansDAO.getInstance().getTools(emprestimo.getId()));
+            this.setVisible(true);
+            textDataDevolucao.setText(new SimpleDateFormat("dd/MM/yyyy").format(emprestimo.getEndDate()));
+            textValorReceber.setText(BRLResource.PRICE_FORMATTER.format(emprestimo.getPrice()));
+            jLabel1.setText("Alterar emprestimo");
+            btnCadastrarEmprestimo.setText("Alterar emprestimo");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Algum erro interno aconteceu no sistema, tente novamente mais tarde ou contacte o administrador!");
+            System.out.println(e.getMessage());
+            this.dispose();
+        }
+    }
+
+    public void loadTools(ToolboxResource toolbox){
+        parentToolsList = toolbox;
+        for(ToolModel tool : toolbox.getTools()){
+            addFerramenta(tool);
+        }
     }
 
     private void configFrame(){
@@ -563,14 +592,30 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 return;
             }
             
-            //LoanModel(Date startDate, Date endDate, boolean returned)
-            LoanModel loan = LoansDAO.getInstance().addLoan(new Date(), endDate, valorReceber, selectedFriend.getId());
-            for(ToolModel tool : toolsList.getTools()){
-                ToolsDAO.getInstance().addToolToLoan(tool.getId(), loan.getId());
+            if(this.emprestimo == null){
+                //LoanModel(Date startDate, Date endDate, boolean returned)
+                LoanModel loan = LoansDAO.getInstance().addLoan(new Date(), endDate, valorReceber, selectedFriend.getId());
+                for(ToolModel tool : toolsList.getTools()){
+                    ToolsDAO.getInstance().addToolToLoan(tool.getId(), loan.getId());
+                }
+                
+                JOptionPane.showMessageDialog(this, "Emprestimo finalizado com sucesso!");
+                this.dispose();
+            }else{
+                LoanModel loan = LoansDAO.getInstance().updateLoan(this.emprestimo, new Date(), endDate, valorReceber, selectedFriend.getId());
+
+                for(ToolModel tool : parentToolsList.getTools()){
+                    if(!toolsList.containsTool(tool.getId())){
+                        ToolsDAO.getInstance().removeToolFromLoan(tool.getId());
+                    }
+                }
+                for(ToolModel tool : toolsList.getTools()){
+                    ToolsDAO.getInstance().addToolToLoan(tool.getId(), loan.getId());
+                }
+                
+                JOptionPane.showMessageDialog(this, "Emprestimo finalizado com sucesso!");
+                this.dispose();
             }
-            
-            JOptionPane.showMessageDialog(this, "Emprestimo finalizado com sucesso!");
-            this.dispose();
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }

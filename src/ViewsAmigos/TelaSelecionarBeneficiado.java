@@ -20,7 +20,6 @@ import Model.FriendModel;
 import Model.LoanModel;
 import Resources.CEPResource;
 import Resources.PhoneValidResource;
-import ViewsEmprestimo.TelaAlterarEmprestimo;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
 
 /**
@@ -577,10 +576,6 @@ public class TelaSelecionarBeneficiado extends javax.swing.JFrame {
             if(parent != null){
                 if(parent instanceof TelaCadastroEmprestimo){
                     ((TelaCadastroEmprestimo) parent).setSelectedFriend(selectedFriend);
-                }
-
-                if(parent instanceof TelaAlterarEmprestimo){
-                    ((TelaAlterarEmprestimo) parent).setSelectedFriend(selectedFriend);
                 }
             }
             this.dispose();
