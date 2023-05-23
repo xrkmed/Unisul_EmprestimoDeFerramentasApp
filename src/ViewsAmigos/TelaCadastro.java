@@ -113,7 +113,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel9.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
-        jLabel9.setText("Endereçço");
+        jLabel9.setText("Endereço");
 
         jLabel6.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel6.setText("CEP:");
