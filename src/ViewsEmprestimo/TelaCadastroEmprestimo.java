@@ -5,6 +5,8 @@
 package ViewsEmprestimo;
 
 import java.util.Date;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +28,7 @@ import Resources.DateDocument;
 import Resources.DateResource;
 import Resources.PriceDocument;
 import Resources.ToolboxResource;
-import ViewsAmigos.TelaSelecionarBeneficiado;
+import ViewsAmigos.TelaTabelaAmigos;
 import ViewsTool.TelaSelecionarFerramenta;
 
 /**
@@ -543,7 +545,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
 
 
     public void setSelectedFriend(FriendModel e){
-        lblSelecionadoBeneficiado.setText("Selecionado: " + e.getName());
+        lblSelecionadoBeneficiado.setText(e.getName().toUpperCase());
         selectedFriend = e;
         btnRemoverBeneficiado.setEnabled(true);
     }
@@ -623,13 +625,24 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarEmprestimoActionPerformed
 
     private void btnSelecionarBeneficiadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarBeneficiadoActionPerformed
-        new TelaSelecionarBeneficiado(this).setVisible(true);
+        TelaTabelaAmigos tela = new  TelaTabelaAmigos(this);
+        tela.setVisible(true);
+
+        tela.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(tela.getSelectedFriend() != null){
+                    setSelectedFriend(tela.getSelectedFriend());
+                    btnRemoverBeneficiado.setEnabled(true);
+                }
+            }
+        });
     }//GEN-LAST:event_btnSelecionarBeneficiadoActionPerformed
 
     private void btnRemoverBeneficiadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverBeneficiadoActionPerformed
         if(selectedFriend != null){
             selectedFriend = null;
-            lblSelecionadoBeneficiado.setText("Selecionado: Nenhum");
+            lblSelecionadoBeneficiado.setText("Nenhum");
             btnRemoverBeneficiado.setEnabled(false);
         }
     }//GEN-LAST:event_btnRemoverBeneficiadoActionPerformed

@@ -12,6 +12,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -25,6 +26,7 @@ import Model.FriendModel;
 import Model.LoanModel;
 import Resources.CEPResource;
 import Resources.PhoneValidResource;
+import ViewsEmprestimo.TelaCadastroEmprestimo;
 
 /**
  *
@@ -33,6 +35,7 @@ import Resources.PhoneValidResource;
 public class TelaTabelaAmigos extends javax.swing.JFrame {
 
     private FriendModel selectedFriend = null;
+    private JFrame parent = null;
 
     /**
      * Creates new form java
@@ -40,6 +43,14 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     public TelaTabelaAmigos() {
         initComponents();
         configFrame();
+        btnSelecionar.setVisible(false);
+    }
+
+    public TelaTabelaAmigos(JFrame parent){
+        this();
+        this.parent = parent;
+        btnSelecionar.setVisible(true);
+        btnSelecionar.setEnabled(true);
     }
 
     private void configFrame() {
@@ -123,6 +134,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         selecionadoNome = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         selecionadoTelefone = new javax.swing.JTextField();
+        btnSelecionar = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
@@ -385,7 +397,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(filtrarRanque)
                     .addComponent(rankType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(filtroFiltrarNome)
                     .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -454,6 +466,21 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         selecionadoTelefone.setEditable(false);
         selecionadoTelefone.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
 
+        btnSelecionar.setBackground(new java.awt.Color(102, 255, 102));
+        btnSelecionar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSelecionar.setForeground(new java.awt.Color(51, 51, 51));
+        btnSelecionar.setText("Selecionar amigo");
+        btnSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecionarActionPerformed(evt);
+            }
+        });
+        btnSelecionar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                btnSelecionarKeyReleased(evt);
+            }
+        });
+
         jLayeredPane3.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(btnVerTodosEmprestimos, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(btnDadosCadastrais, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -463,6 +490,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         jLayeredPane3.setLayer(selecionadoNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(selecionadoTelefone, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(btnSelecionar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
         jLayeredPane3.setLayout(jLayeredPane3Layout);
@@ -476,12 +504,18 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                     .addComponent(selecionadoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(selecionadoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(20, 20, 20)
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRemoverCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRelatorioFerramentas, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVerTodosEmprestimos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDadosCadastrais, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRelatorioFerramentas, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVerTodosEmprestimos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDadosCadastrais, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRemoverCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(15, 15, 15))
         );
         jLayeredPane3Layout.setVerticalGroup(
@@ -494,20 +528,23 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                         .addGap(46, 46, 46)
                         .addComponent(jLabel4)
                         .addGap(10, 10, 10)
-                        .addComponent(selecionadoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(selecionadoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel5)
+                        .addGap(10, 10, 10)
+                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(selecionadoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSelecionar)))
                     .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
                         .addComponent(btnVerTodosEmprestimos)
-                        .addGap(20, 20, 20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRelatorioFerramentas)
-                        .addGap(20, 20, 20)
-                        .addComponent(btnDadosCadastrais)))
-                .addGap(20, 20, 20)
-                .addComponent(jLabel5)
-                .addGap(10, 10, 10)
-                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(selecionadoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRemoverCadastro))
-                .addGap(15, 15, 15))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDadosCadastrais)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRemoverCadastro)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         fileMenu.setMnemonic('f');
@@ -775,6 +812,18 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_filtroAmigosSemEmprestimoAbertoActionPerformed
 
+    private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
+        if(selectedFriend != null){
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione um beneficiado");
+        }
+    }//GEN-LAST:event_btnSelecionarActionPerformed
+
+    private void btnSelecionarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSelecionarKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSelecionarKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -793,6 +842,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     private javax.swing.JButton btnDadosCadastrais;
     private javax.swing.JButton btnRelatorioFerramentas;
     private javax.swing.JButton btnRemoverCadastro;
+    private javax.swing.JButton btnSelecionar;
     private javax.swing.JButton btnVerTodosEmprestimos;
     private java.awt.Canvas canvas2;
     private java.awt.Canvas canvas3;
