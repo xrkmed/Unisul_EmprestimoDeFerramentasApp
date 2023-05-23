@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import ViewsEmprestimo.TelaRelatorioEmprestimos;
 import ViewsTool.TelaRelatorioFerramentas;
 import ViewsAmigos.TelaRelatorioAmigos;
+import ViewsManufacturer.TelaRelatorioFabricante;
 public class DirectoryChooserFrame extends JFrame {
     public DirectoryChooserFrame(){
         super();
@@ -35,6 +36,9 @@ public class DirectoryChooserFrame extends JFrame {
                 ((TelaRelatorioAmigos) parent).setDirectory(selectedDirectory);
                 this.dispose();
             }
-        }
+            if(parent instanceof TelaRelatorioFabricante){
+                ((TelaRelatorioFabricante) parent).setDirectory(selectedDirectory);
+                this.dispose();
+            }
     }
 }
