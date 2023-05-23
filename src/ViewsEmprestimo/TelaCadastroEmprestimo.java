@@ -150,7 +150,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Grupo Supimpa - Cadastro de Emprestimo");
+        setTitle("Grupo Supimpa - Cadastro de Empréstimo");
 
         btnCadastrarEmprestimo.setBackground(new java.awt.Color(153, 255, 153));
         btnCadastrarEmprestimo.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -176,7 +176,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             }
         });
 
-        lblSelecionadoBeneficiado.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        lblSelecionadoBeneficiado.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         lblSelecionadoBeneficiado.setText("Nenhum");
 
         btnRemoverBeneficiado.setBackground(new java.awt.Color(255, 102, 102));
@@ -195,6 +195,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
 
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jTable1.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -211,22 +212,31 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setShowHorizontalLines(true);
+        jTable1.setShowVerticalLines(true);
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(40);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(460);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(280);
+        }
 
         jLayeredPane4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jLabel6.setText("FERRAMENTA SELECIONADA");
+        jLabel6.setText("Ferramenta Selecionada");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel7.setText("Nome:");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel8.setText("Fabricante:");
 
         selecionadoNome.setEditable(false);
+        selecionadoNome.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
 
         selecionadoFabricante.setEditable(false);
+        selecionadoFabricante.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         selecionadoFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selecionadoFabricanteActionPerformed(evt);
@@ -234,7 +244,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         });
 
         btnRemoverFerramenta.setBackground(new java.awt.Color(255, 102, 102));
-        btnRemoverFerramenta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRemoverFerramenta.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnRemoverFerramenta.setForeground(new java.awt.Color(51, 51, 51));
         btnRemoverFerramenta.setText("Remover Ferramenta");
         btnRemoverFerramenta.setEnabled(false);
@@ -256,20 +266,24 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jLayeredPane4Layout.setHorizontalGroup(
             jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane4Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel6)
+                    .addComponent(selecionadoNome)
+                    .addComponent(selecionadoFabricante))
+                .addGap(15, 15, 15))
+            .addGroup(jLayeredPane4Layout.createSequentialGroup()
                 .addGroup(jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane4Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addGroup(jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(btnRemoverFerramenta)
-                            .addComponent(jLabel6)))
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel8))
                     .addGroup(jLayeredPane4Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addGroup(jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7)
-                            .addComponent(selecionadoNome, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
-                            .addComponent(selecionadoFabricante))))
-                .addGap(15, 15, 15))
+                        .addComponent(jLabel7))
+                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jLayeredPane4Layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(btnRemoverFerramenta)))
+                .addGap(116, 116, 116))
         );
         jLayeredPane4Layout.setVerticalGroup(
             jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,15 +298,15 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addGap(10, 10, 10)
                 .addComponent(selecionadoFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(15, 15, 15)
                 .addComponent(btnRemoverFerramenta)
                 .addGap(15, 15, 15))
         );
 
-        lblValorFerramentas.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        lblValorFerramentas.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         lblValorFerramentas.setText("Valor total das ferramentas emprestadas: R$ 0,00");
 
-        lblValorReceber.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        lblValorReceber.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         lblValorReceber.setText("Valor a receber: R$ 0,00");
 
         btnAdicionarFerramenta.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
@@ -316,23 +330,20 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addComponent(jLayeredPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
+                                .addGap(195, 195, 195)
+                                .addComponent(btnAdicionarFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                                .addGap(323, 323, 323)
-                                .addComponent(btnAdicionarFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10))
-                            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addGap(10, 10, 10)
                                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblValorFerramentas, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblValorReceber))
-                                .addGap(133, 133, 133))))))
+                                    .addComponent(lblValorReceber)
+                                    .addComponent(lblValorFerramentas, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(10, 10, 10))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,35 +353,35 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(jLayeredPane4)
-                        .addContainerGap())
-                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addComponent(btnAdicionarFerramenta)
-                        .addGap(142, 142, 142)
+                        .addGap(150, 150, 150)
                         .addComponent(lblValorFerramentas)
-                        .addGap(15, 15, 15)
-                        .addComponent(lblValorReceber)
-                        .addGap(19, 19, 19))))
+                        .addGap(10, 10, 10)
+                        .addComponent(lblValorReceber))
+                    .addComponent(jLayeredPane4))
+                .addGap(10, 10, 10))
         );
 
         jLabel9.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jLabel9.setText("Data de inicio:");
+        jLabel9.setText("Data Início:");
 
         jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jLabel10.setText("Data de Devolução (Dia/Mês/Ano):");
+        jLabel10.setText("Data Devolução (Dia/Mês/Ano):");
 
+        textDataDevolucao.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textDataDevolucao.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textDataDevolucaoKeyReleased(evt);
             }
         });
 
-        lblDataHoje.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblDataHoje.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         lblDataHoje.setText("Data de Hoje");
 
         jLabel15.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jLabel15.setText("Valor a receber:");
+        jLabel15.setText("Valor a Receber:");
 
+        textValorReceber.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textValorReceber.setText("0,00");
         textValorReceber.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -378,7 +389,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             }
         });
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel16.setText("R$");
 
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -399,78 +410,68 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLayeredPane2)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                                .addGap(372, 372, 372)
-                                .addComponent(jLabel4)
-                                .addGap(360, 360, 360))))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addGap(663, 663, 663)
-                                .addComponent(btnSelecionarBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(15, 15, 15))
+                                .addComponent(jLabel10)
+                                .addGap(5, 5, 5)
+                                .addComponent(textDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(200, 200, 200)
+                                .addComponent(jLabel15)
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel16)
+                                .addGap(5, 5, 5)
+                                .addComponent(textValorReceber, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
                                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
+                                        .addGap(5, 5, 5)
                                         .addComponent(lblSelecionadoBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(textDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                         .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGap(5, 5, 5)
                                         .addComponent(lblDataHoje)))
-                                .addGap(393, 393, 393)))
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnRemoverBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textValorReceber, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel15))))
-                .addGap(10, 10, 10))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnSelecionarBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(btnRemoverBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addGap(304, 304, 304)))
+                .addGap(0, 0, 0))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel2)
-                                .addComponent(lblSelecionadoBeneficiado))
-                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnSelecionarBeneficiado)
-                                .addComponent(btnRemoverBeneficiado)))
-                        .addGap(20, 20, 20)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(lblDataHoje))
-                        .addGap(20, 20, 20)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(textDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textValorReceber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16))))
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel2)
+                    .addComponent(lblSelecionadoBeneficiado)
+                    .addComponent(btnSelecionarBeneficiado)
+                    .addComponent(btnRemoverBeneficiado))
+                .addGap(10, 10, 10)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(lblDataHoje))
+                .addGap(10, 10, 10)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(textDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel16)
+                    .addComponent(textValorReceber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addComponent(jLabel4)
-                .addGap(15, 15, 15)
-                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
@@ -508,21 +509,21 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(300, 300, 300)
+                            .addGap(250, 250, 250)
                             .addComponent(btnCadastrarEmprestimo))
                         .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel3)
                 .addGap(20, 20, 20)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -530,7 +531,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrarEmprestimo)
                     .addComponent(jButton1))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         pack();
