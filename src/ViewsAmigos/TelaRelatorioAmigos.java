@@ -86,36 +86,54 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
 
         amigosRelatorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "id", "nome", "telefone", "endereço", "emprestimos realizados", "emprestimos atrasados"
+                "ID", "-", "Nome", "Telefone", "Endereço", "Emprestimos em aberto", "Emprestimos atrasados"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane1.setViewportView(amigosRelatorio);
+        if (amigosRelatorio.getColumnModel().getColumnCount() > 0) {
+            amigosRelatorio.getColumnModel().getColumn(0).setResizable(false);
+            amigosRelatorio.getColumnModel().getColumn(0).setPreferredWidth(30);
+            amigosRelatorio.getColumnModel().getColumn(1).setResizable(false);
+            amigosRelatorio.getColumnModel().getColumn(1).setPreferredWidth(30);
+            amigosRelatorio.getColumnModel().getColumn(2).setResizable(false);
+            amigosRelatorio.getColumnModel().getColumn(3).setResizable(false);
+            amigosRelatorio.getColumnModel().getColumn(4).setResizable(false);
+            amigosRelatorio.getColumnModel().getColumn(5).setResizable(false);
+            amigosRelatorio.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         jLabel1.setFont(new java.awt.Font("Fira Sans", 0, 36)); // NOI18N
         jLabel1.setText("Todos os amigos cadastrados");
 
-        jMenu3.setText("exportação bala");
+        jMenu3.setText("Exportar");
         jMenu3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu3ActionPerformed(evt);
             }
         });
 
-        jMenuItem1.setText("exportar em PDF");
+        jMenuItem1.setText("Exportar em PDF");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
