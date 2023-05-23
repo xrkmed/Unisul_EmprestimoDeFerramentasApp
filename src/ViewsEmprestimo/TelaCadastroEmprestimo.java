@@ -274,15 +274,14 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
             .addGroup(jLayeredPane4Layout.createSequentialGroup()
                 .addGroup(jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane4Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel8))
-                    .addGroup(jLayeredPane4Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel7))
                     .addGroup(javax.swing.GroupLayout.Alignment.CENTER, jLayeredPane4Layout.createSequentialGroup()
                         .addGap(116, 116, 116)
-                        .addComponent(btnRemoverFerramenta)))
+                        .addComponent(btnRemoverFerramenta))
+                    .addGroup(jLayeredPane4Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jLayeredPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7))))
                 .addGap(116, 116, 116))
         );
         jLayeredPane4Layout.setVerticalGroup(
@@ -304,10 +303,10 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         );
 
         lblValorFerramentas.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        lblValorFerramentas.setText("Valor total das ferramentas emprestadas: R$ 0,00");
+        lblValorFerramentas.setText("Valor Total Empréstimo: R$ 0,00");
 
         lblValorReceber.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        lblValorReceber.setText("Valor a receber: R$ 0,00");
+        lblValorReceber.setText("Valor a Receber: R$ 0,00");
 
         btnAdicionarFerramenta.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnAdicionarFerramenta.setForeground(new java.awt.Color(51, 51, 51));
@@ -570,7 +569,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             totalValue += tool.getPrice();
         }
 
-        lblValorFerramentas.setText("Valor total das ferramentas emprestadas: R$" + BRLResource.PRICE_FORMATTER.format(totalValue));
+        lblValorFerramentas.setText("Valor Total Empréstimo: R$" + BRLResource.PRICE_FORMATTER.format(totalValue));
     }
 
     private void btnCadastrarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarEmprestimoActionPerformed

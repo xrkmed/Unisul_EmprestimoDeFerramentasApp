@@ -60,7 +60,8 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
                                 selecionadoCNPJ.setText(CNPJResource.returnCNPJFormat(selectedManufacturer.getCNPJ()));
                             }
                         } catch (Exception e) {
-                            JOptionPane.showMessageDialog(null, "Erro ao selecionar fabricante", "Erro", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Erro ao selecionar fabricante: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                            e.printStackTrace();
                         }
                     }
                 });
