@@ -108,7 +108,6 @@ public class TelaCadastro extends javax.swing.JFrame {
         setTitle("Cadastrar Amigo");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(500, 700));
-        setResizable(false);
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
