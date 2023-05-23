@@ -561,12 +561,18 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                     
             for(Object[] data : FriendsDAO.getInstance().loadFriendsTabela()){
                 if(filtroAmigosEmEmprestimo.isSelected() && data[5].toString().equals("0")){
-                continue;}
+                continue;
+                }
                 if(filtroAmigosDevolverFerramenta.isSelected() && data[6].toString().equals("0")){
                 continue;
                 }
-                if(filtroAmigosSemEmprestimoAberto.isSelected() && !data[5].toString().equals("0")){
+                if(filtroAmigosSemEmprestimoAberto.isSelected() && !data[5].toString().equals("0") && !data[6].toString().equals("0")){
                 continue;
+                }else{
+                      renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.white);
+                    for(int i = 0; i < jTable2.getColumnCount(); i++){
+                        jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
+                    }
                 }
                 if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
                     if(!data[2].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
