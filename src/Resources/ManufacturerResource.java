@@ -39,12 +39,8 @@ public class ManufacturerResource {
         return this.cnpj;
     }
 
-    public void setCNPJ(String cnpj) throws IllegalArgumentException{
-        if(CNPJResource.validarCNPJ(cnpj)){
-            this.cnpj = cnpj;
-        }else{
-            throw new IllegalArgumentException("Invalid CNPJ");
-        }
+    public void setCNPJ(String cnpj){
+        this.cnpj = cnpj;
     }
     
 }
