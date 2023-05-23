@@ -384,17 +384,16 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
-                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
-                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                              </Group>
                               <Group type="102" alignment="2" attributes="0">
                                   <EmptySpace min="116" pref="116" max="-2" attributes="0"/>
                                   <Component id="btnRemoverFerramenta" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
@@ -490,7 +489,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Liberation Sans" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Valor total das ferramentas emprestadas: R$ 0,00"/>
+                <Property name="text" type="java.lang.String" value="Valor Total Empr&#xe9;stimo: R$ 0,00"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblValorReceber">
@@ -498,7 +497,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Liberation Sans" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Valor a receber: R$ 0,00"/>
+                <Property name="text" type="java.lang.String" value="Valor a Receber: R$ 0,00"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnAdicionarFerramenta">
