@@ -112,6 +112,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         filtroEndereco = new javax.swing.JCheckBox();
         btnBuscar = new javax.swing.JButton();
         filtrarRanque = new javax.swing.JCheckBox();
+        rankType = new javax.swing.JComboBox<>();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jLabel6 = new javax.swing.JLabel();
         btnVerTodosEmprestimos = new javax.swing.JButton();
@@ -310,7 +311,21 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             }
         });
 
-        filtrarRanque.setText("Ranquear amigos (os de verdade eu sei que são)");
+        filtrarRanque.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        filtrarRanque.setText("Ranquear amigos ");
+        filtrarRanque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filtrarRanqueActionPerformed(evt);
+            }
+        });
+
+        rankType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome", "Emprestimos em aberto", "Emprestimos Atrasados" }));
+        rankType.setEnabled(false);
+        rankType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rankTypeActionPerformed(evt);
+            }
+        });
 
         jLayeredPane2.setLayer(filtroFiltrarNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(textFiltrarNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -322,6 +337,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         jLayeredPane2.setLayer(filtroEndereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(btnBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(filtrarRanque, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(rankType, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -330,23 +346,29 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(filtrarRanque)
-                    .addComponent(filtroAmigosSemEmprestimoAberto)
-                    .addComponent(filtroAmigosEmEmprestimo)
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addComponent(filtrarRanque)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rankType, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(filtroEndereco)
-                            .addComponent(filtroFiltrarNome))
-                        .addGap(10, 10, 10)
-                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(filtroAmigosSemEmprestimoAberto)
+                            .addComponent(filtroAmigosEmEmprestimo)
                             .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                                .addComponent(textFiltrarEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBuscar))))
-                    .addComponent(jLabel3)
-                    .addComponent(filtroAmigosDevolverFerramenta))
-                .addGap(18, 18, 18))
+                                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(filtroEndereco)
+                                    .addComponent(filtroFiltrarNome))
+                                .addGap(10, 10, 10)
+                                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                                        .addComponent(textFiltrarEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnBuscar))))
+                            .addComponent(filtroAmigosDevolverFerramenta)
+                            .addComponent(jLabel3))
+                        .addContainerGap(64, Short.MAX_VALUE))))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,9 +381,11 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                 .addComponent(filtroAmigosDevolverFerramenta)
                 .addGap(10, 10, 10)
                 .addComponent(filtroAmigosSemEmprestimoAberto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(filtrarRanque)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(filtrarRanque)
+                    .addComponent(rankType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(filtroFiltrarNome)
                     .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -564,12 +588,39 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
             StatusRenderer renderer = new StatusRenderer();
             //statusRed.addHighlightedRow(1, Color.RED);
-            ArrayList<Object[]> amigosData;
+            ArrayList<Object[]> amigosData = FriendsDAO.getInstance().loadFriendsTabela();
             if (filtrarRanque.isSelected()) {
-                amigosData = FriendsDAO.getInstance().loadRankFriendsTabela();
-            } else {
-                amigosData = FriendsDAO.getInstance().loadFriendsTabela();
+                switch(rankType.getSelectedItem().toString().toLowerCase()){
+                    case "nome": {
+                        amigosData.sort((Object[] object1, Object[] object2) -> {
+                            String s1 = (String) object1[2];
+                            String s2 = (String) object2[2];
+                            return s1.compareTo(s2);
+                        });
+                        break;
+                    }
+                    case "emprestimos em aberto": {
+                        amigosData.sort((Object[] object1, Object[] object2) -> {
+                            Integer i1 = (Integer) object1[5];
+                            Integer i2 = (Integer) object2[5];
+                            return i2.compareTo(i1);
+                        });
+                        break;
+                    }
+                    case "emprestimos atrasados": {
+                        amigosData.sort((Object[] object1, Object[] object2) -> {
+                            Integer i1 = (Integer) object1[6];
+                            Integer i2 = (Integer) object2[6];
+                            return i2.compareTo(i1);
+                        });
+                        break;
+                    }
+                    default:
+                        break;
+                }
             }
+
+            
             for (Object[] data : amigosData) {
                 if (filtroAmigosEmEmprestimo.isSelected() && data[5].toString().equals("0")) {
                     continue;
@@ -680,14 +731,6 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRemoverCadastroActionPerformed
 
-    private void filtroAmigosDevolverFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroAmigosDevolverFerramentaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_filtroAmigosDevolverFerramentaActionPerformed
-
-    private void filtroAmigosSemEmprestimoAbertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroAmigosSemEmprestimoAbertoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_filtroAmigosSemEmprestimoAbertoActionPerformed
-
     private void btnRemoverCadastroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnRemoverCadastroKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRemoverCadastroKeyReleased
@@ -711,6 +754,26 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     private void textFiltrarEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFiltrarEnderecoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFiltrarEnderecoActionPerformed
+
+    private void filtrarRanqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrarRanqueActionPerformed
+        if(filtrarRanque.isSelected()){
+            rankType.setEnabled(true);
+        }else{
+            rankType.setEnabled(false);
+        }
+    }//GEN-LAST:event_filtrarRanqueActionPerformed
+
+    private void rankTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rankTypeActionPerformed
+
+    private void filtroAmigosDevolverFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroAmigosDevolverFerramentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_filtroAmigosDevolverFerramentaActionPerformed
+
+    private void filtroAmigosSemEmprestimoAbertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroAmigosSemEmprestimoAbertoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_filtroAmigosSemEmprestimoAbertoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -756,6 +819,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable2;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JComboBox<String> rankType;
     private javax.swing.JTextField selecionadoNome;
     private javax.swing.JTextField selecionadoTelefone;
     private javax.swing.JTextField textFiltrarEndereco;

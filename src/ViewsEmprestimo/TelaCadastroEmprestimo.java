@@ -58,7 +58,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             this.setVisible(true);
             textDataDevolucao.setText(new SimpleDateFormat("dd/MM/yyyy").format(emprestimo.getEndDate()));
             textValorReceber.setText(BRLResource.PRICE_FORMATTER.format(emprestimo.getPrice()));
-            jLabel1.setText("Alterar emprestimo");
+            jLabel3.setText("Alterar emprestimo");
             btnCadastrarEmprestimo.setText("Alterar emprestimo");
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Algum erro interno aconteceu no sistema, tente novamente mais tarde ou contacte o administrador!");
