@@ -376,7 +376,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnControleGastosFabricantesActionPerformed
 
     private void btnRelatorioFabricantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioFabricantesActionPerformed
-        // TODO add your handling code here:
+         Thread newThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new ViewsManufacturer.TelaRelatorioFabricante().setVisible(true);
+            }
+        });
+
+        newThread.start();
     }//GEN-LAST:event_btnRelatorioFabricantesActionPerformed
 
     private void btnEmprestimosEmAbertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmprestimosEmAbertoActionPerformed
