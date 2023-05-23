@@ -42,36 +42,36 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         configFrame();
     }
 
-    private void configFrame(){
-        Thread loadValues = new Thread(new Runnable(){
+    private void configFrame() {
+        Thread loadValues = new Thread(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 jTable2.getColumnModel().getColumn(1).setPreferredWidth(35);
                 jTable2.getColumnModel().getColumn(1).setMinWidth(35);
                 jTable2.getColumnModel().getColumn(1).setMaxWidth(35);
-        
+
                 jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
                 jTable2.getColumnModel().getColumn(0).setMinWidth(35);
                 jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
-        
+
                 ((DefaultTableModel) jTable2.getModel()).setRowCount(0);
                 jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
+
                 jTable2.getSelectionModel().addListSelectionListener(x -> {
-                    try{
+                    try {
                         if (!x.getValueIsAdjusting()) {
                             int selectedRow = jTable2.getSelectedRow();
                             if (selectedRow != -1) {
                                 selectedFriend = FriendsDAO.getInstance().getFriend(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
                                 selecionadoNome.setText(selectedFriend.getName().toUpperCase());
                                 selecionadoTelefone.setText(PhoneValidResource.formatPhoneNumber(selectedFriend.getPhone()));
-                            }else{
+                            } else {
                                 selectedFriend = null;
                                 selecionadoNome.setText("");
                                 selecionadoTelefone.setText("");
                             }
                         }
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, e.getMessage());
                     }
                 });
@@ -111,6 +111,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         textFiltrarEndereco = new javax.swing.JTextField();
         filtroEndereco = new javax.swing.JCheckBox();
         btnBuscar = new javax.swing.JButton();
+        filtrarRanque = new javax.swing.JCheckBox();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jLabel6 = new javax.swing.JLabel();
         btnVerTodosEmprestimos = new javax.swing.JButton();
@@ -309,6 +310,8 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             }
         });
 
+        filtrarRanque.setText("Ranquear amigos (os de verdade eu sei que são)");
+
         jLayeredPane2.setLayer(filtroFiltrarNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(textFiltrarNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(filtroAmigosSemEmprestimoAberto, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -318,6 +321,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         jLayeredPane2.setLayer(textFiltrarEndereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(filtroEndereco, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(btnBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(filtrarRanque, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -326,9 +330,8 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                    .addComponent(filtrarRanque)
                     .addComponent(filtroAmigosSemEmprestimoAberto)
-                    .addComponent(filtroAmigosDevolverFerramenta)
                     .addComponent(filtroAmigosEmEmprestimo)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,7 +343,9 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                                 .addComponent(textFiltrarEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBuscar)))))
+                                .addComponent(btnBuscar))))
+                    .addComponent(jLabel3)
+                    .addComponent(filtroAmigosDevolverFerramenta))
                 .addGap(18, 18, 18))
         );
         jLayeredPane2Layout.setVerticalGroup(
@@ -354,7 +359,9 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                 .addComponent(filtroAmigosDevolverFerramenta)
                 .addGap(10, 10, 10)
                 .addComponent(filtroAmigosSemEmprestimoAberto)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(filtrarRanque)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(filtroFiltrarNome)
                     .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -363,7 +370,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                     .addComponent(textFiltrarEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar)
                     .addComponent(filtroEndereco))
-                .addGap(15, 15, 15))
+                .addContainerGap())
         );
 
         jLayeredPane3.setBackground(new java.awt.Color(153, 153, 153));
@@ -523,11 +530,11 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLayeredPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLayeredPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLayeredPane3))
-                .addGap(20, 20, 20))
+                    .addComponent(jLayeredPane3)
+                    .addComponent(jLayeredPane2, javax.swing.GroupLayout.Alignment.LEADING))
+                .addContainerGap())
         );
 
         pack();
@@ -539,15 +546,15 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void filtroFiltrarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroFiltrarNomeActionPerformed
-        if(filtroFiltrarNome.isSelected()){
+        if (filtroFiltrarNome.isSelected()) {
             textFiltrarNome.setEnabled(true);
-        }else{
+        } else {
             textFiltrarNome.setEnabled(false);
         }
     }//GEN-LAST:event_filtroFiltrarNomeActionPerformed
 
-    private void loadValores(){
-        try{
+    private void loadValores() {
+        try {
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             //CONFIGURACOES DA TABELA
             model.setRowCount(0);
@@ -557,53 +564,57 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
             StatusRenderer renderer = new StatusRenderer();
             //statusRed.addHighlightedRow(1, Color.RED);
-
-                    
-            for(Object[] data : FriendsDAO.getInstance().loadFriendsTabela()){
-                if(filtroAmigosEmEmprestimo.isSelected() && data[5].toString().equals("0")){
-                continue;
-                }
-                if(filtroAmigosDevolverFerramenta.isSelected() && data[6].toString().equals("0")){
-                continue;
-                }
-                if(filtroAmigosSemEmprestimoAberto.isSelected() && !data[5].toString().equals("0") && !data[6].toString().equals("0")){
-                continue;
-                }else{
-                      renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.white);
-                    for(int i = 0; i < jTable2.getColumnCount(); i++){
-                        jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
-                    }
-                }
-                if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
-                    if(!data[2].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
-                        continue;
-                    }
-                }
-
-                if(filtroEndereco.isSelected() && textFiltrarEndereco.getText().trim().length() > 0){
-                    if(!data[4].toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())){
-                        continue;
-                    }
-                }
-
-                if(Integer.parseInt(data[5].toString()) > 0){
-                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
-                    for(int i = 0; i < jTable2.getColumnCount(); i++){
-                        jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
-                    }
-                }
-
-                if(Integer.parseInt(data[6].toString()) > 0){
-                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
-                    for(int i = 0; i < jTable2.getColumnCount(); i++){
-                        jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
-                    }
-                }
-                        
-                model.addRow(data);
-                        
+            ArrayList<Object[]> amigosData;
+            if (filtrarRanque.isSelected()) {
+                amigosData = FriendsDAO.getInstance().loadRankFriendsTabela();
+            } else {
+                amigosData = FriendsDAO.getInstance().loadFriendsTabela();
             }
-        }catch(Exception e){
+            for (Object[] data : amigosData) {
+                if (filtroAmigosEmEmprestimo.isSelected() && data[5].toString().equals("0")) {
+                    continue;
+                }
+                if (filtroAmigosDevolverFerramenta.isSelected() && data[6].toString().equals("0")) {
+                    continue;
+                }
+                if (filtroAmigosSemEmprestimoAberto.isSelected() && !data[5].toString().equals("0") && !data[6].toString().equals("0")) {
+                    continue;
+                } else {
+                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.white);
+                    for (int i = 0; i < jTable2.getColumnCount(); i++) {
+                        jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
+                    }
+                }
+                if (filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0) {
+                    if (!data[2].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())) {
+                        continue;
+                    }
+                }
+
+                if (filtroEndereco.isSelected() && textFiltrarEndereco.getText().trim().length() > 0) {
+                    if (!data[4].toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())) {
+                        continue;
+                    }
+                }
+
+                if (Integer.parseInt(data[5].toString()) > 0) {
+                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
+                    for (int i = 0; i < jTable2.getColumnCount(); i++) {
+                        jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
+                    }
+                }
+
+                if (Integer.parseInt(data[6].toString()) > 0) {
+                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
+                    for (int i = 0; i < jTable2.getColumnCount(); i++) {
+                        jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
+                    }
+                }
+
+                model.addRow(data);
+
+            }
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao carregar os dados da tabela: " + e.getMessage());
         }
     }
@@ -612,7 +623,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void btnVerTodosEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerTodosEmprestimosActionPerformed
-        if(selectedFriend != null){
+        if (selectedFriend != null) {
             JOptionPane.showMessageDialog(null, selectedFriend);
         }
     }//GEN-LAST:event_btnVerTodosEmprestimosActionPerformed
@@ -620,12 +631,12 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
     }//GEN-LAST:event_jTable2MouseClicked
 
-    public FriendModel getSelectedFriend(){
+    public FriendModel getSelectedFriend() {
         return selectedFriend;
     }
 
     private void btnDadosCadastraisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDadosCadastraisActionPerformed
-        if(selectedFriend != null){
+        if (selectedFriend != null) {
             TelaCadastro tela = new TelaCadastro(selectedFriend);
             tela.setVisible(true);
 
@@ -639,21 +650,21 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDadosCadastraisActionPerformed
 
     private void filtroEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroEnderecoActionPerformed
-        if(filtroEndereco.isSelected()){
+        if (filtroEndereco.isSelected()) {
             textFiltrarEndereco.setEnabled(true);
-        }else{
+        } else {
             textFiltrarEndereco.setEnabled(false);
         }
     }//GEN-LAST:event_filtroEnderecoActionPerformed
 
     private void btnRemoverCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverCadastroActionPerformed
-        try{
-            if(selectedFriend != null){
-                int dialogResult = JOptionPane.showConfirmDialog (null, "Deseja realmente remover o cadastro de " + selectedFriend.getName() + "?","Atenção",JOptionPane.YES_NO_OPTION);
-                if(dialogResult == JOptionPane.YES_OPTION){
+        try {
+            if (selectedFriend != null) {
+                int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o cadastro de " + selectedFriend.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
+                if (dialogResult == JOptionPane.YES_OPTION) {
                     LoansDAO loansDAO = LoansDAO.getInstance();
-                    for(LoanModel loan : loansDAO.getAllLoans()){
-                        if(loan.getFriend().getId() == selectedFriend.getId() && loan.getReturned() == false){
+                    for (LoanModel loan : loansDAO.getAllLoans()) {
+                        if (loan.getFriend().getId() == selectedFriend.getId() && loan.getReturned() == false) {
                             JOptionPane.showMessageDialog(null, "Não é possível remover o cadastro de " + selectedFriend.getName() + " pois ele possui empréstimos pendentes.");
                             return;
                         }
@@ -664,7 +675,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                     loadValores();
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao remover o cadastro: " + e.getMessage());
         }
     }//GEN-LAST:event_btnRemoverCadastroActionPerformed
@@ -705,7 +716,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -724,6 +735,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     private java.awt.Canvas canvas3;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JCheckBox filtrarRanque;
     private javax.swing.JCheckBox filtroAmigosDevolverFerramenta;
     private javax.swing.JCheckBox filtroAmigosEmEmprestimo;
     private javax.swing.JCheckBox filtroAmigosSemEmprestimoAberto;

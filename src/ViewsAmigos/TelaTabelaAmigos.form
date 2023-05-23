@@ -82,12 +82,12 @@
                   <Component id="jScrollPane2" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jLayeredPane1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLayeredPane2" alignment="0" max="32767" attributes="0"/>
                   <Component id="jLayeredPane3" max="32767" attributes="0"/>
+                  <Component id="jLayeredPane2" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -290,9 +290,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <Component id="filtrarRanque" min="-2" max="-2" attributes="0"/>
                       <Component id="filtroAmigosSemEmprestimoAberto" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="filtroAmigosDevolverFerramenta" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="filtroAmigosEmEmprestimo" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -309,6 +308,8 @@
                               </Group>
                           </Group>
                       </Group>
+                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="filtroAmigosDevolverFerramenta" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               </Group>
@@ -325,7 +326,9 @@
                   <Component id="filtroAmigosDevolverFerramenta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="filtroAmigosSemEmprestimoAberto" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                  <EmptySpace pref="7" max="32767" attributes="0"/>
+                  <Component id="filtrarRanque" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
                       <Component id="filtroFiltrarNome" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="textFiltrarNome" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -336,7 +339,7 @@
                       <Component id="btnBuscar" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="filtroEndereco" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -427,6 +430,11 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="filtrarRanque">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ranquear amigos (os de verdade eu sei que s&#xe3;o)"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
