@@ -88,21 +88,5 @@ public class CEPResource {
         String numeros = telefone.replaceAll("[^0-9]", "");
         return numeros.matches("^\\d{10,11}$");
     }
-
-    public static String returnTelefoneFormat(String telefone) throws IllegalArgumentException{
-        if (telefone.charAt(2) != '9') {
-            telefone = telefone.substring(0, 2) + "9" + telefone.substring(2);
-        }
-
-        if(telefone.length() != 11){
-            throw new IllegalArgumentException("Telefone inválido");
-        }
-
-        String ddd = telefone.substring(0, 2);
-        String parte1 = telefone.substring(2, 7);
-        String parte2 = telefone.substring(7, 11);
-        String numeroFormatado = "(" + ddd + ") " + parte1 + "-" + parte2;
-        return numeroFormatado;
-    }
     
 }
