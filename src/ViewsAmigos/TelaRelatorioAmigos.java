@@ -44,6 +44,23 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Erro ao carregar relatorio de amigos: " + e);
                 }
             }
+<<<<<<< Updated upstream
+=======
+
+            private void loadList(JTable table, ArrayList<Object[]> dataObjects) {
+            
+                 DefaultTableModel model = (DefaultTableModel) table.getModel();
+                 model.setRowCount(0);
+                 try{
+                      for (Object[] data : dataObjects) {
+                model.addRow(data);
+                      }
+                 }catch(Exception e){
+//                 JOptionPane.showMessageDialog(null, "Erro na tabela de amigos muito ruim aqui no load "+e.getMessage());
+                 }
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+>>>>>>> Stashed changes
         });
         pStart.start();
        

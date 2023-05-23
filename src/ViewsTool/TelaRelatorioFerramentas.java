@@ -55,7 +55,7 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
             @Override
             public void run(){
                 try{
-                    System.out.println(ToolsDAO.getInstance().getRelatorioObjectTools().get(0).toString());
+                   
                     loadList(ferramentasRelatorio, ToolsDAO.getInstance().getRelatorioObjectTools());
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, "Erro ao carregar lista de ferramentas: " + e.getMessage());
