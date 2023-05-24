@@ -81,7 +81,8 @@ public class TelaFinalizarEmprestimo extends javax.swing.JFrame {
 
         btnFinalizarEmprestimo.setBackground(new java.awt.Color(153, 255, 153));
         btnFinalizarEmprestimo.setFont(new java.awt.Font("Liberation Sans", 1, 16)); // NOI18N
-        btnFinalizarEmprestimo.setText("Finalizar emprestimo");
+        btnFinalizarEmprestimo.setText("Finalizar Empréstimo");
+        btnFinalizarEmprestimo.setToolTipText("Finalizar o Empréstimo de Forma Segura");
         btnFinalizarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFinalizarEmprestimoActionPerformed(evt);
@@ -89,6 +90,7 @@ public class TelaFinalizarEmprestimo extends javax.swing.JFrame {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.setToolTipText("Cancelar A solicitação de Finalização");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -121,7 +123,7 @@ public class TelaFinalizarEmprestimo extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
                                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 534, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 532, Short.MAX_VALUE)
                                 .addComponent(btnFinalizarEmprestimo))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())

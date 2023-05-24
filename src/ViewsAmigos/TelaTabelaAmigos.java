@@ -170,6 +170,11 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                 jTable2MouseClicked(evt);
             }
         });
+        jTable2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTable2PropertyChange(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
@@ -195,7 +200,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 204, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("EMPRÉSTIMOS EM ABERTO");
-        jLabel2.setToolTipText("");
+        jLabel2.setToolTipText("Exibe Somente Amigos com Emprestimos Em Aberto");
 
         canvas2.setBackground(new java.awt.Color(255, 204, 0));
 
@@ -206,6 +211,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("EMPRÉSTIMOS ATRASADOS");
+        jLabel8.setToolTipText("Exibe Somente os Amigos Com Emprestimos Atrasados ");
 
         canvas3.setBackground(new java.awt.Color(255, 57, 57));
 
@@ -256,6 +262,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
         filtroFiltrarNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         filtroFiltrarNome.setText("Filtrar por nome:");
+        filtroFiltrarNome.setToolTipText("Buscar Por Um Nome Especifico");
         filtroFiltrarNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtroFiltrarNomeActionPerformed(evt);
@@ -276,6 +283,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
         filtroAmigosSemEmprestimoAberto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         filtroAmigosSemEmprestimoAberto.setText("Apenas amigos sem emprestimos em aberto.");
+        filtroAmigosSemEmprestimoAberto.setToolTipText("Apenas Amigos sem nenhuma pêndencia");
         filtroAmigosSemEmprestimoAberto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtroAmigosSemEmprestimoAbertoActionPerformed(evt);
@@ -284,6 +292,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
         filtroAmigosDevolverFerramenta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         filtroAmigosDevolverFerramenta.setText("Apenas amigos que devem devolver alguma ferramenta.");
+        filtroAmigosDevolverFerramenta.setToolTipText("Apenas Amigos Atrasados ");
         filtroAmigosDevolverFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtroAmigosDevolverFerramentaActionPerformed(evt);
@@ -292,6 +301,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
         filtroAmigosEmEmprestimo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         filtroAmigosEmEmprestimo.setText("Apenas amigos que estejam em um emprestimo.");
+        filtroAmigosEmEmprestimo.setToolTipText("Exibe Apenas Amigos que tem algo emprestado ");
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel3.setText("FILTROS");
@@ -310,6 +320,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
         filtroEndereco.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         filtroEndereco.setText("Endereço:");
+        filtroEndereco.setToolTipText("Busca Amigos Pelo Endereço ");
         filtroEndereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtroEnderecoActionPerformed(evt);
@@ -325,6 +336,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
         filtrarRanque.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         filtrarRanque.setText("Ranquear amigos ");
+        filtrarRanque.setToolTipText("Lista os Amigos que Mais Fizeram Emprestimos");
         filtrarRanque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtrarRanqueActionPerformed(evt);
@@ -418,6 +430,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         btnVerTodosEmprestimos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnVerTodosEmprestimos.setForeground(new java.awt.Color(51, 51, 51));
         btnVerTodosEmprestimos.setText("Visualizar Empréstimos");
+        btnVerTodosEmprestimos.setToolTipText("Exibe Somente Amigos que Tenham Feito ou Ja Fizeram Algum Empréstimo ");
         btnVerTodosEmprestimos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerTodosEmprestimosActionPerformed(evt);
@@ -427,6 +440,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         btnDadosCadastrais.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDadosCadastrais.setForeground(new java.awt.Color(51, 51, 51));
         btnDadosCadastrais.setText("Alterar Dados Cadastrais");
+        btnDadosCadastrais.setToolTipText("Modifica os Dados de um Amigo Já Cadastrado ");
         btnDadosCadastrais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDadosCadastraisActionPerformed(evt);
@@ -437,6 +451,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         btnRemoverCadastro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnRemoverCadastro.setForeground(new java.awt.Color(51, 51, 51));
         btnRemoverCadastro.setText("Remover Cadastro");
+        btnRemoverCadastro.setToolTipText("Exclui O Amigo Selecionado ");
         btnRemoverCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverCadastroActionPerformed(evt);
@@ -451,6 +466,12 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         btnRelatorioFerramentas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnRelatorioFerramentas.setForeground(new java.awt.Color(51, 51, 51));
         btnRelatorioFerramentas.setText("Relatório de Ferramentas");
+        btnRelatorioFerramentas.setToolTipText("Exibe o Relátório de Ferramentas Que Já Foram Emprestadas ");
+        btnRelatorioFerramentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioFerramentasActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel4.setText("Nome:");
@@ -470,6 +491,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         btnSelecionar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSelecionar.setForeground(new java.awt.Color(51, 51, 51));
         btnSelecionar.setText("Selecionar amigo");
+        btnSelecionar.setEnabled(false);
         btnSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSelecionarActionPerformed(evt);
@@ -823,6 +845,14 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     private void btnSelecionarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSelecionarKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSelecionarKeyReleased
+
+    private void jTable2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTable2PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable2PropertyChange
+
+    private void btnRelatorioFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioFerramentasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRelatorioFerramentasActionPerformed
 
     /**
      * @param args the command line arguments

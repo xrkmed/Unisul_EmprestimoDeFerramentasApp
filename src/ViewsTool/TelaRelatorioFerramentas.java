@@ -123,6 +123,7 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
         jLabel2.setText("Valor gasto ao total");
 
         textValorGastoTotal.setEditable(false);
+        textValorGastoTotal.setToolTipText("Valor Somado De todas Ferramentas Registradas ");
 
         jLabel3.setText("R$");
 
@@ -185,7 +186,7 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel1.setText("RELATORIO DE TODAS AS FERRAMENTAS CADASTRADAS");
+        jLabel1.setText("RELATÓRIO DE TODAS AS FERRAMENTAS CADASTRADAS");
 
         jMenu2.setText("Exportar");
 

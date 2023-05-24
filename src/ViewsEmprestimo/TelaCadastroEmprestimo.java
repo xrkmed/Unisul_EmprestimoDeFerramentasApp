@@ -158,6 +158,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         btnCadastrarEmprestimo.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnCadastrarEmprestimo.setForeground(new java.awt.Color(51, 51, 51));
         btnCadastrarEmprestimo.setText("Cadastrar Empréstimo");
+        btnCadastrarEmprestimo.setToolTipText("Finaliza o Processo de Empréstimo ");
         btnCadastrarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarEmprestimoActionPerformed(evt);
@@ -172,6 +173,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         btnSelecionarBeneficiado.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnSelecionarBeneficiado.setForeground(new java.awt.Color(51, 51, 51));
         btnSelecionarBeneficiado.setText("Selecionar ");
+        btnSelecionarBeneficiado.setToolTipText("Seleciona um Amigo Para Realizar o Empréstimo");
         btnSelecionarBeneficiado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSelecionarBeneficiadoActionPerformed(evt);
@@ -185,6 +187,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         btnRemoverBeneficiado.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnRemoverBeneficiado.setForeground(new java.awt.Color(51, 51, 51));
         btnRemoverBeneficiado.setText("Remover");
+        btnRemoverBeneficiado.setToolTipText("Descarta o Amigo Selecionado Para Este Emprestimo ");
         btnRemoverBeneficiado.setEnabled(false);
         btnRemoverBeneficiado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,8 +217,6 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setShowHorizontalLines(true);
-        jTable1.setShowVerticalLines(true);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setPreferredWidth(40);
@@ -249,6 +250,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         btnRemoverFerramenta.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnRemoverFerramenta.setForeground(new java.awt.Color(51, 51, 51));
         btnRemoverFerramenta.setText("Remover Ferramenta");
+        btnRemoverFerramenta.setToolTipText("Descarta a Ferramenta Selecionada Para Este Empréstimo");
         btnRemoverFerramenta.setEnabled(false);
         btnRemoverFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,6 +315,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         btnAdicionarFerramenta.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnAdicionarFerramenta.setForeground(new java.awt.Color(51, 51, 51));
         btnAdicionarFerramenta.setText("Adicionar Ferramenta");
+        btnAdicionarFerramenta.setToolTipText("Selecionar Uma Ferramenta da Lista");
         btnAdicionarFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarFerramentaActionPerformed(evt);
@@ -370,6 +373,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jLabel10.setText("Data Devolução (Dia/Mês/Ano):");
 
         textDataDevolucao.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        textDataDevolucao.setToolTipText("Defina Uma Data Prevista de Devolução");
         textDataDevolucao.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textDataDevolucaoKeyReleased(evt);
@@ -384,6 +388,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
 
         textValorReceber.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textValorReceber.setText("0,00");
+        textValorReceber.setToolTipText("Caso Haja Um Retorno Monetário ");
         textValorReceber.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textValorReceberKeyReleased(evt);
@@ -479,6 +484,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(51, 51, 51));
         jButton1.setText("Cancelar Alteração");
+        jButton1.setToolTipText("Cancela o Emprestimo Atual, Descartando Todas Alterações Feitas ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

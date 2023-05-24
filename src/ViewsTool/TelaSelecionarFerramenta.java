@@ -193,12 +193,14 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
 
         canvas1.setBackground(new java.awt.Color(255, 57, 57));
 
-        jLabel1.setText("Sem fabricante");
+        jLabel1.setText("Sem Fabricante");
+        jLabel1.setToolTipText("Busca Por Uma Ferramenta Caso Ela Tenha Sido Cadastrada Sem um Fabricante");
 
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel7.setText("STATUS");
 
-        jLabel8.setText("Em manutençao");
+        jLabel8.setText("Em Manutençao");
+        jLabel8.setToolTipText("Busca Por Uma Ferramenta Caso Ela Esteja No Conserto ");
 
         canvas3.setBackground(new java.awt.Color(255, 224, 255));
 
@@ -249,7 +251,8 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
         jLayeredPane2.setBackground(new java.awt.Color(153, 153, 153));
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        filtroFiltrarNome.setText("Filtrar por nome");
+        filtroFiltrarNome.setText("Filtrar Por Nome");
+        filtroFiltrarNome.setToolTipText("Busca Uma Ferramente Pelo Seu nome ou inicial ");
         filtroFiltrarNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtroFiltrarNomeActionPerformed(evt);
@@ -271,7 +274,8 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel3.setText("FILTROS");
 
-        filtroFiltrarUso.setText("Em uso por");
+        filtroFiltrarUso.setText("Em Uso Por");
+        filtroFiltrarUso.setToolTipText("Busca Pela Ferramenta Caso ela Esteja Em Uso Por Outro Amigo ");
         filtroFiltrarUso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtroFiltrarUsoActionPerformed(evt);
@@ -291,6 +295,7 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
         });
 
         filtroFabricante.setText("Fabricante");
+        filtroFabricante.setToolTipText("Busca Por Uma Ferramente pelo nome do Fabricante ");
         filtroFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtroFabricanteActionPerformed(evt);
@@ -404,6 +409,7 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
         btnSelecionarFerramenta.setBackground(new java.awt.Color(102, 255, 102));
         btnSelecionarFerramenta.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnSelecionarFerramenta.setText("Selecionar esta ferramenta");
+        btnSelecionarFerramenta.setToolTipText("Seleciona a Ferramenta Desejada ");
         btnSelecionarFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSelecionarFerramentaActionPerformed(evt);

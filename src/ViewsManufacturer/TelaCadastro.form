@@ -178,6 +178,7 @@
     <Component class="javax.swing.JButton" name="btnVerificarFabricante">
       <Properties>
         <Property name="text" type="java.lang.String" value="Verificar fabricante"/>
+        <Property name="toolTipText" type="java.lang.String" value="Realizar a Busca Autom&#xe1;tica Utilizando Somente o CNPJ"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerificarFabricanteActionPerformed"/>
@@ -337,6 +338,7 @@
               <Font name="Liberation Sans" size="15" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Finalizar cadastro"/>
+            <Property name="toolTipText" type="java.lang.String" value="Concluir o Cadastro do Fabricante"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -353,6 +355,7 @@
     <Component class="javax.swing.JButton" name="btnPularVerificacao">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar fabricante sem verificar status do CNPJ"/>
+        <Property name="toolTipText" type="java.lang.String" value="Prosseguir Com o Cadastro Sem a Consulta Autom&#xe1;tica "/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPularVerificacaoActionPerformed"/>

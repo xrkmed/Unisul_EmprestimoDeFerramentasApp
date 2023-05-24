@@ -210,6 +210,7 @@
         <Component class="javax.swing.JTextField" name="textValorGastoTotal">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="toolTipText" type="java.lang.String" value="Valor Somado De todas Ferramentas Registradas "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -232,7 +233,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Liberation Sans" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="RELATORIO DE TODAS AS FERRAMENTAS CADASTRADAS"/>
+        <Property name="text" type="java.lang.String" value="RELAT&#xd3;RIO DE TODAS AS FERRAMENTAS CADASTRADAS"/>
       </Properties>
     </Component>
   </SubComponents>

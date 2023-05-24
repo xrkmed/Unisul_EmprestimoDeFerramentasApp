@@ -8,10 +8,17 @@ import Controllers.PDFEntity;
 import DAO.FriendsDAO;
 import Resources.DirectoryChooserFrame;
 import com.itextpdf.text.Paragraph;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+
+
 
 /**
  *
@@ -22,14 +29,18 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
     /**
      * Creates new form TelaRelatorioAmigos
      */
+
     public TelaRelatorioAmigos() {
         initComponents();
         configFrame();
+       
     }
+
     
     public void setDirectory(String directory){
         this.directory = directory;
     }
+    
     
  private void configFrame(){
         Thread pStart = new Thread(new Runnable(){
@@ -59,6 +70,8 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
         });
         pStart.start();
     }
+ 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,6 +123,7 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        amigosRelatorio.setToolTipText("Informações dos amigos ");
         jScrollPane1.setViewportView(amigosRelatorio);
         if (amigosRelatorio.getColumnModel().getColumnCount() > 0) {
             amigosRelatorio.getColumnModel().getColumn(0).setResizable(false);
@@ -249,4 +263,16 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    private int rowAtPoint(Point p) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private int columnAtPoint(Point p) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private int convertColumnIndexToModel(int colIndex) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
