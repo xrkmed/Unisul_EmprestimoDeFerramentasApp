@@ -67,12 +67,9 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
                     }
                 });
 
-                ArrayList<Integer> lowestSize = new ArrayList<>(Arrays.asList(0, 1));
-                for (Integer i : lowestSize) {
-                    jTable2.getColumnModel().getColumn(i).setPreferredWidth(35);
-                    jTable2.getColumnModel().getColumn(i).setMinWidth(35);
-                    jTable2.getColumnModel().getColumn(i).setMaxWidth(35);
-                }
+                    jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
+                    jTable2.getColumnModel().getColumn(0).setMinWidth(35);
+                    jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
 
                 loadValores();
             }
@@ -131,36 +128,36 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "#", "Nome", "Fabricante", "Preço", "Em uso por", "Data de devoluçao"
+                "ID", "Nome", "Fabricante", "Preço", "Em uso por", "Data de devoluçao"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -177,15 +174,13 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
             jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setPreferredWidth(0);
+            jTable2.getColumnModel().getColumn(1).setPreferredWidth(400);
             jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setPreferredWidth(400);
             jTable2.getColumnModel().getColumn(3).setResizable(false);
             jTable2.getColumnModel().getColumn(4).setResizable(false);
+            jTable2.getColumnModel().getColumn(4).setPreferredWidth(100);
             jTable2.getColumnModel().getColumn(5).setResizable(false);
             jTable2.getColumnModel().getColumn(5).setPreferredWidth(100);
-            jTable2.getColumnModel().getColumn(6).setResizable(false);
-            jTable2.getColumnModel().getColumn(6).setPreferredWidth(100);
         }
 
         jLayeredPane1.setBackground(new java.awt.Color(153, 153, 153));
@@ -615,31 +610,31 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
             //new Object[]{result.getInt("id"), "-", result.getString("name"), result.getString("razao_social"), BRLResource.PRICE_FORMATTER.format(result.getDouble("price")), result.getString("nome"), new SimpleDateFormat("dd/MM/yyyy").format(result.getDate("endDate").toString())});
             for (Object[] data : datas) {
                 if (filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0) {
-                    if (!data[2].toString().toLowerCase().contains(textFiltrarNome.getText().toLowerCase())) {
+                    if (!data[1].toString().toLowerCase().contains(textFiltrarNome.getText().toLowerCase())) {
                         continue;
                     }
                 }
 
                 if (filtroFiltrarUso.isSelected() && textFiltrarUso.getText().trim().length() > 0) {
-                    if (!data[5].toString().toLowerCase().contains(textFiltrarUso.getText().toLowerCase())) {
+                    if (!data[4].toString().toLowerCase().contains(textFiltrarUso.getText().toLowerCase())) {
                         continue;
                     }
                 }
 
                 if (filtroFabricante.isSelected() && textFiltrarFabricante.getText().trim().length() > 0) {
-                    if (!data[3].toString().toLowerCase().contains(textFiltrarFabricante.getText().toLowerCase())) {
+                    if (!data[2].toString().toLowerCase().contains(textFiltrarFabricante.getText().toLowerCase())) {
                         continue;
                     }
                 }
 
-                if (!data[5].toString().equals("Disponivel")) {
+                if (!data[4].toString().equals("Disponivel")) {
                     statusRenderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                     for (int i = 0; i < jTable2.getColumnCount(); i++) {
                         jTable2.getColumnModel().getColumn(i).setCellRenderer(statusRenderer);
                     }
                 }
 
-                if (data[3].toString().equalsIgnoreCase("sem fabricante")) {
+                if (data[2].toString().equalsIgnoreCase("sem fabricante")) {
                     if (statusRenderer.getHighlightedRow(model.getRowCount()) == ColorsRenderer.lightYellow) {
                         statusRenderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightOrange);
                     } else {

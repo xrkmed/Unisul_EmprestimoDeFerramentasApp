@@ -57,10 +57,6 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         Thread loadValues = new Thread(new Runnable() {
             @Override
             public void run() {
-                jTable2.getColumnModel().getColumn(1).setPreferredWidth(35);
-                jTable2.getColumnModel().getColumn(1).setMinWidth(35);
-                jTable2.getColumnModel().getColumn(1).setMaxWidth(35);
-
                 jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
                 jTable2.getColumnModel().getColumn(0).setMinWidth(35);
                 jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
@@ -153,11 +149,11 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "#", "Nome", "Telefone", "Endereço", "Empr. Abertos", "Empr. Atrasados"
+                "ID", "Nome", "Telefone", "Endereço", "Empr. Abertos", "Empr. Atrasados"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -180,17 +176,15 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
             jTable2.getColumnModel().getColumn(0).setPreferredWidth(30);
             jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setPreferredWidth(0);
+            jTable2.getColumnModel().getColumn(1).setPreferredWidth(280);
             jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setPreferredWidth(280);
+            jTable2.getColumnModel().getColumn(2).setPreferredWidth(80);
             jTable2.getColumnModel().getColumn(3).setResizable(false);
-            jTable2.getColumnModel().getColumn(3).setPreferredWidth(80);
+            jTable2.getColumnModel().getColumn(3).setPreferredWidth(550);
             jTable2.getColumnModel().getColumn(4).setResizable(false);
-            jTable2.getColumnModel().getColumn(4).setPreferredWidth(550);
+            jTable2.getColumnModel().getColumn(4).setPreferredWidth(40);
             jTable2.getColumnModel().getColumn(5).setResizable(false);
             jTable2.getColumnModel().getColumn(5).setPreferredWidth(40);
-            jTable2.getColumnModel().getColumn(6).setResizable(false);
-            jTable2.getColumnModel().getColumn(6).setPreferredWidth(40);
         }
 
         jLayeredPane1.setBackground(new java.awt.Color(153, 153, 153));
@@ -652,24 +646,24 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                 switch(rankType.getSelectedItem().toString().toLowerCase()){
                     case "nome": {
                         amigosData.sort((Object[] object1, Object[] object2) -> {
-                            String s1 = (String) object1[2];
-                            String s2 = (String) object2[2];
+                            String s1 = (String) object1[1];
+                            String s2 = (String) object2[1];
                             return s1.compareTo(s2);
                         });
                         break;
                     }
                     case "emprestimos em aberto": {
                         amigosData.sort((Object[] object1, Object[] object2) -> {
-                            Integer i1 = (Integer) object1[5];
-                            Integer i2 = (Integer) object2[5];
+                            Integer i1 = (Integer) object1[4];
+                            Integer i2 = (Integer) object2[4];
                             return i2.compareTo(i1);
                         });
                         break;
                     }
                     case "emprestimos atrasados": {
                         amigosData.sort((Object[] object1, Object[] object2) -> {
-                            Integer i1 = (Integer) object1[6];
-                            Integer i2 = (Integer) object2[6];
+                            Integer i1 = (Integer) object1[5];
+                            Integer i2 = (Integer) object2[5];
                             return i2.compareTo(i1);
                         });
                         break;
@@ -681,13 +675,13 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
             
             for (Object[] data : amigosData) {
-                if (filtroAmigosEmEmprestimo.isSelected() && data[5].toString().equals("0")) {
+                if (filtroAmigosEmEmprestimo.isSelected() && data[4].toString().equals("0")) {
                     continue;
                 }
-                if (filtroAmigosDevolverFerramenta.isSelected() && data[6].toString().equals("0")) {
+                if (filtroAmigosDevolverFerramenta.isSelected() && data[5].toString().equals("0")) {
                     continue;
                 }
-                if (filtroAmigosSemEmprestimoAberto.isSelected() && !data[5].toString().equals("0") && !data[6].toString().equals("0")) {
+                if (filtroAmigosSemEmprestimoAberto.isSelected() && !data[4].toString().equals("0") && !data[6].toString().equals("0")) {
                     continue;
                 } else {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.white);
@@ -696,25 +690,25 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                     }
                 }
                 if (filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0) {
-                    if (!data[2].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())) {
+                    if (!data[1].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())) {
                         continue;
                     }
                 }
 
                 if (filtroEndereco.isSelected() && textFiltrarEndereco.getText().trim().length() > 0) {
-                    if (!data[4].toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())) {
+                    if (!data[3].toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())) {
                         continue;
                     }
                 }
 
-                if (Integer.parseInt(data[5].toString()) > 0) {
+                if (Integer.parseInt(data[4].toString()) > 0) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                     for (int i = 0; i < jTable2.getColumnCount(); i++) {
                         jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
                     }
                 }
 
-                if (Integer.parseInt(data[6].toString()) > 0) {
+                if (Integer.parseInt(data[5].toString()) > 0) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
                     for (int i = 0; i < jTable2.getColumnCount(); i++) {
                         jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
