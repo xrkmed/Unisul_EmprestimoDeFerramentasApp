@@ -95,6 +95,7 @@
           <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cadastrar Empr&#xe9;stimo"/>
+        <Property name="toolTipText" type="java.lang.String" value="Finaliza o Processo de Empr&#xe9;stimo "/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarEmprestimoActionPerformed"/>
@@ -210,6 +211,7 @@
               <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Selecionar "/>
+            <Property name="toolTipText" type="java.lang.String" value="Seleciona um Amigo Para Realizar o Empr&#xe9;stimo"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSelecionarBeneficiadoActionPerformed"/>
@@ -235,6 +237,7 @@
               <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Remover"/>
+            <Property name="toolTipText" type="java.lang.String" value="Descarta o Amigo Selecionado Para Este Emprestimo "/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -352,8 +355,6 @@
                         </Column>
                       </TableColumnModel>
                     </Property>
-                    <Property name="showHorizontalLines" type="boolean" value="true"/>
-                    <Property name="showVerticalLines" type="boolean" value="true"/>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
@@ -476,6 +477,7 @@
                       <Color blue="33" green="33" red="33" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Remover Ferramenta"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Descarta a Ferramenta Selecionada Para Este Empr&#xe9;stimo"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
@@ -509,6 +511,7 @@
                   <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Adicionar Ferramenta"/>
+                <Property name="toolTipText" type="java.lang.String" value="Selecionar Uma Ferramenta da Lista"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarFerramentaActionPerformed"/>
@@ -537,6 +540,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="14" style="0"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Defina Uma Data Prevista de Devolu&#xe7;&#xe3;o"/>
           </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textDataDevolucaoKeyReleased"/>
@@ -564,6 +568,7 @@
               <Font name="Liberation Sans" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="0,00"/>
+            <Property name="toolTipText" type="java.lang.String" value="Caso Haja Um Retorno Monet&#xe1;rio "/>
           </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textValorReceberKeyReleased"/>
@@ -591,6 +596,7 @@
           <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cancelar Altera&#xe7;&#xe3;o"/>
+        <Property name="toolTipText" type="java.lang.String" value="Cancela o Emprestimo Atual, Descartando Todas Altera&#xe7;&#xf5;es Feitas "/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>

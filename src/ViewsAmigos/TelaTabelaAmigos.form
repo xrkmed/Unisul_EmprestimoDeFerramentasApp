@@ -154,6 +154,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable2MouseClicked"/>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jTable2PropertyChange"/>
           </Events>
         </Component>
       </SubComponents>
@@ -227,7 +228,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="EMPR&#xc9;STIMOS EM ABERTO"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="toolTipText" type="java.lang.String" value="Exibe Somente Amigos com Emprestimos Em Aberto"/>
           </Properties>
         </Component>
         <Component class="java.awt.Canvas" name="canvas2">
@@ -255,6 +256,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="EMPR&#xc9;STIMOS ATRASADOS"/>
+            <Property name="toolTipText" type="java.lang.String" value="Exibe Somente os Amigos Com Emprestimos Atrasados "/>
           </Properties>
         </Component>
         <Component class="java.awt.Canvas" name="canvas3">
@@ -357,6 +359,7 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Filtrar por nome:"/>
+            <Property name="toolTipText" type="java.lang.String" value="Buscar Por Um Nome Especifico"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtroFiltrarNomeActionPerformed"/>
@@ -377,6 +380,7 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Apenas amigos sem emprestimos em aberto."/>
+            <Property name="toolTipText" type="java.lang.String" value="Apenas Amigos sem nenhuma p&#xea;ndencia"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtroAmigosSemEmprestimoAbertoActionPerformed"/>
@@ -388,6 +392,7 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Apenas amigos que devem devolver alguma ferramenta."/>
+            <Property name="toolTipText" type="java.lang.String" value="Apenas Amigos Atrasados "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtroAmigosDevolverFerramentaActionPerformed"/>
@@ -399,6 +404,7 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Apenas amigos que estejam em um emprestimo."/>
+            <Property name="toolTipText" type="java.lang.String" value="Exibe Apenas Amigos que tem algo emprestado "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -424,6 +430,7 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Endere&#xe7;o:"/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca Amigos Pelo Endere&#xe7;o "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtroEnderecoActionPerformed"/>
@@ -443,6 +450,7 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Ranquear amigos "/>
+            <Property name="toolTipText" type="java.lang.String" value="Lista os Amigos que Mais Fizeram Emprestimos"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtrarRanqueActionPerformed"/>
@@ -566,6 +574,7 @@
               <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Visualizar Empr&#xe9;stimos"/>
+            <Property name="toolTipText" type="java.lang.String" value="Exibe Somente Amigos que Tenham Feito ou Ja Fizeram Algum Empr&#xe9;stimo "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerTodosEmprestimosActionPerformed"/>
@@ -580,6 +589,7 @@
               <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Alterar Dados Cadastrais"/>
+            <Property name="toolTipText" type="java.lang.String" value="Modifica os Dados de um Amigo J&#xe1; Cadastrado "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDadosCadastraisActionPerformed"/>
@@ -597,6 +607,7 @@
               <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Remover Cadastro"/>
+            <Property name="toolTipText" type="java.lang.String" value="Exclui O Amigo Selecionado "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverCadastroActionPerformed"/>
@@ -612,7 +623,11 @@
               <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Ferramentas"/>
+            <Property name="toolTipText" type="java.lang.String" value="Exibe o Rel&#xe1;t&#xf3;rio de Ferramentas Que J&#xe1; Foram Emprestadas "/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRelatorioFerramentasActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>

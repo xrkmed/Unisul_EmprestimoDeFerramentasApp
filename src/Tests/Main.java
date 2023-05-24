@@ -23,7 +23,7 @@ public class Main {
         
         TelaPrincipal tela = new TelaPrincipal();
         tela.setVisible(true);
-
+ 
         //Initialize Connection
         Database.getInstance().getConnection();
     }

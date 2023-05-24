@@ -55,17 +55,17 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLayeredPane2" max="32767" attributes="0"/>
-                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLayeredPane1" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jLayeredPane2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLayeredPane1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLayeredPane3" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane2" pref="1343" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-              <Component id="jSeparator1" max="32767" attributes="0"/>
+              <Component id="jSeparator1" pref="1" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -194,7 +194,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="45" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -228,7 +228,8 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Fabricante sem ferramentas disponiveis"/>
+            <Property name="text" type="java.lang.String" value="Fabricante Sem Ferramentas Disponiveis"/>
+            <Property name="toolTipText" type="java.lang.String" value="Exibe Somente Fabricantes Que N&#xe3;o Tenham Ferramentas DIspon&#xed;veis"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
@@ -241,7 +242,8 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Fabricante sem ferramentas cadastradas"/>
+            <Property name="text" type="java.lang.String" value="Fabricante Sem Ferramentas Cadastradas"/>
+            <Property name="toolTipText" type="java.lang.String" value="Exibe Fabricantes Que N&#xe3;o Tenham Nenhuma Ferramenta Cadastrada "/>
           </Properties>
         </Component>
         <Component class="java.awt.Canvas" name="canvas2">
@@ -278,7 +280,7 @@
                           <Component id="textFiltrarNome" min="-2" pref="205" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="133" max="32767" attributes="0"/>
+                  <EmptySpace pref="230" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -307,7 +309,8 @@
       <SubComponents>
         <Component class="javax.swing.JCheckBox" name="filtroFiltrarNome">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Filtrar por nome"/>
+            <Property name="text" type="java.lang.String" value="Filtrar Por Nome"/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca Pelo Nome do Fabricante "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtroFiltrarNomeActionPerformed"/>
@@ -376,10 +379,10 @@
                                   <Component id="selecionadoCNPJ" alignment="0" min="-2" pref="296" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnRemoverCadastro" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnRelatorioFerramentas" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="15" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnRelatorioFerramentas" max="32767" attributes="0"/>
+                              <Component id="btnRemoverCadastro" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -418,12 +421,12 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="OP&#xc7;OES"/>
+            <Property name="text" type="java.lang.String" value="OP&#xc7;&#xd5;ES"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Razao social"/>
+            <Property name="text" type="java.lang.String" value="Razao Social"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="selecionadoNome">
@@ -437,6 +440,7 @@
               <Color blue="66" green="66" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Remover cadastro"/>
+            <Property name="toolTipText" type="java.lang.String" value="Remove o Fabricante do Sistema"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverCadastroActionPerformed"/>
@@ -455,6 +459,7 @@
         <Component class="javax.swing.JButton" name="btnRelatorioFerramentas">
           <Properties>
             <Property name="text" type="java.lang.String" value="Painel de Ferramentas"/>
+            <Property name="toolTipText" type="java.lang.String" value="Permite a Atribui&#xe7;&#xe3;o de Ferramentas Para O Fabricante Selecionado"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRelatorioFerramentasActionPerformed"/>

@@ -192,21 +192,21 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel7.setText("STATUS");
 
-        jLabel1.setText("Sem fabricante");
+        jLabel1.setText("Sem Fabricante");
 
         canvas1.setBackground(new java.awt.Color(255, 57, 57));
 
         canvas2.setBackground(new java.awt.Color(255, 255, 224));
 
-        jLabel2.setText("Em uso por algum amigo");
+        jLabel2.setText("Em Uso por Algum Amigo");
 
-        jLabel8.setText("Em manutençao");
+        jLabel8.setText("Em Manutençao");
 
         canvas3.setBackground(new java.awt.Color(255, 224, 255));
 
         canvas4.setBackground(new java.awt.Color(255, 160, 122));
 
-        jLabel10.setText("Sem fabricante e em uso");
+        jLabel10.setText("Sem Fabricante e Em Uso");
 
         jLayeredPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -274,7 +274,8 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
         jLayeredPane2.setBackground(new java.awt.Color(153, 153, 153));
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        filtroFiltrarNome.setText("Filtrar por nome");
+        filtroFiltrarNome.setText("Filtrar Por Nome");
+        filtroFiltrarNome.setToolTipText("Busca Uma Ferramente Pelo Seu Nome ou Inicial ");
         filtroFiltrarNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtroFiltrarNomeActionPerformed(evt);
@@ -296,7 +297,8 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel3.setText("FILTROS");
 
-        filtroFiltrarUso.setText("Em uso por");
+        filtroFiltrarUso.setText("Em Uso Por");
+        filtroFiltrarUso.setToolTipText("Busca Pela Ferramenta Caso ela Esteja Em Uso Por Outro Amigo ");
         filtroFiltrarUso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtroFiltrarUsoActionPerformed(evt);
@@ -316,6 +318,7 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
         });
 
         filtroFabricante.setText("Fabricante");
+        filtroFabricante.setToolTipText("Busca Por Uma Ferramente pelo nome do Fabricante ");
         filtroFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtroFabricanteActionPerformed(evt);
@@ -407,7 +410,7 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
                     .addComponent(textFiltrarFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnBuscar)
                 .addContainerGap())
         );
@@ -416,7 +419,7 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
         jLayeredPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        jLabel6.setText("OPÇOES");
+        jLabel6.setText("OPÇÕES");
 
         jLabel4.setText("Ferramenta");
 
@@ -424,6 +427,7 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
 
         btnRemoverCadastro.setBackground(new java.awt.Color(255, 102, 102));
         btnRemoverCadastro.setText("Remover ferramenta");
+        btnRemoverCadastro.setToolTipText("Exclui a Ferramenta do Sistema");
         btnRemoverCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverCadastroActionPerformed(evt);
@@ -435,6 +439,7 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
         jLabel5.setText("Fabricante");
 
         btnAlterarFerramenta.setText("Alterar ferramenta");
+        btnAlterarFerramenta.setToolTipText("Customiza o Nome da Ferramenta");
         btnAlterarFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarFerramentaActionPerformed(evt);
@@ -442,6 +447,7 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
         });
 
         btnEstadoFerramenta.setText("Estado da ferramenta");
+        btnEstadoFerramenta.setToolTipText("Informa O Estado da Ferramenta Após o Emprestimo ");
         btnEstadoFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEstadoFerramentaActionPerformed(evt);
@@ -449,6 +455,7 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
         });
 
         btnHistoricoUso.setText("Historico de uso");
+        btnHistoricoUso.setToolTipText("Exibe Quais Amigos Já Pegaram Essa Ferramenta Empretada ");
         btnHistoricoUso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHistoricoUsoActionPerformed(evt);
