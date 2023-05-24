@@ -258,7 +258,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sem fabricante"/>
+            <Property name="text" type="java.lang.String" value="Sem Fabricante"/>
           </Properties>
         </Component>
         <Component class="java.awt.Canvas" name="canvas1">
@@ -277,12 +277,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Em uso por algum amigo"/>
+            <Property name="text" type="java.lang.String" value="Em Uso por Algum Amigo"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Em manuten&#xe7;ao"/>
+            <Property name="text" type="java.lang.String" value="Em Manuten&#xe7;ao"/>
           </Properties>
         </Component>
         <Component class="java.awt.Canvas" name="canvas3">
@@ -301,7 +301,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sem fabricante e em uso"/>
+            <Property name="text" type="java.lang.String" value="Sem Fabricante e Em Uso"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -384,7 +384,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="9" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -394,7 +394,8 @@
       <SubComponents>
         <Component class="javax.swing.JCheckBox" name="filtroFiltrarNome">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Filtrar por nome"/>
+            <Property name="text" type="java.lang.String" value="Filtrar Por Nome"/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca Uma Ferramente Pelo Seu Nome ou Inicial "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtroFiltrarNomeActionPerformed"/>
@@ -419,7 +420,8 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="filtroFiltrarUso">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Em uso por"/>
+            <Property name="text" type="java.lang.String" value="Em Uso Por"/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca Pela Ferramenta Caso ela Esteja Em Uso Por Outro Amigo "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtroFiltrarUsoActionPerformed"/>
@@ -437,6 +439,7 @@
         <Component class="javax.swing.JCheckBox" name="filtroFabricante">
           <Properties>
             <Property name="text" type="java.lang.String" value="Fabricante"/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca Por Uma Ferramente pelo nome do Fabricante "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtroFabricanteActionPerformed"/>
@@ -557,7 +560,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="OP&#xc7;OES"/>
+            <Property name="text" type="java.lang.String" value="OP&#xc7;&#xd5;ES"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
@@ -576,6 +579,7 @@
               <Color blue="66" green="66" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Remover ferramenta"/>
+            <Property name="toolTipText" type="java.lang.String" value="Exclui a Ferramenta do Sistema"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverCadastroActionPerformed"/>
@@ -594,6 +598,7 @@
         <Component class="javax.swing.JButton" name="btnAlterarFerramenta">
           <Properties>
             <Property name="text" type="java.lang.String" value="Alterar ferramenta"/>
+            <Property name="toolTipText" type="java.lang.String" value="Customiza o Nome da Ferramenta"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlterarFerramentaActionPerformed"/>
@@ -602,6 +607,7 @@
         <Component class="javax.swing.JButton" name="btnEstadoFerramenta">
           <Properties>
             <Property name="text" type="java.lang.String" value="Estado da ferramenta"/>
+            <Property name="toolTipText" type="java.lang.String" value="Informa O Estado da Ferramenta Ap&#xf3;s o Emprestimo "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEstadoFerramentaActionPerformed"/>
@@ -610,6 +616,7 @@
         <Component class="javax.swing.JButton" name="btnHistoricoUso">
           <Properties>
             <Property name="text" type="java.lang.String" value="Historico de uso"/>
+            <Property name="toolTipText" type="java.lang.String" value="Exibe Quais Amigos J&#xe1; Pegaram Essa Ferramenta Empretada "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHistoricoUsoActionPerformed"/>

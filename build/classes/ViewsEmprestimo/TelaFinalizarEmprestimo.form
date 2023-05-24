@@ -72,7 +72,7 @@
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="btnCancelar" min="-2" pref="104" max="-2" attributes="0"/>
-                                  <EmptySpace pref="534" max="32767" attributes="0"/>
+                                  <EmptySpace pref="532" max="32767" attributes="0"/>
                                   <Component id="btnFinalizarEmprestimo" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -164,7 +164,8 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Finalizar emprestimo"/>
+            <Property name="text" type="java.lang.String" value="Finalizar Empr&#xe9;stimo"/>
+            <Property name="toolTipText" type="java.lang.String" value="Finalizar o Empr&#xe9;stimo de Forma Segura"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFinalizarEmprestimoActionPerformed"/>
@@ -173,6 +174,7 @@
         <Component class="javax.swing.JButton" name="btnCancelar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Cancelar A solicita&#xe7;&#xe3;o de Finaliza&#xe7;&#xe3;o"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>

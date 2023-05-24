@@ -237,7 +237,8 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sem fabricante"/>
+            <Property name="text" type="java.lang.String" value="Sem Fabricante"/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca Por Uma Ferramenta Caso Ela Tenha Sido Cadastrada Sem um Fabricante"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
@@ -250,7 +251,8 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Em manuten&#xe7;ao"/>
+            <Property name="text" type="java.lang.String" value="Em Manuten&#xe7;ao"/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca Por Uma Ferramenta Caso Ela Esteja No Conserto "/>
           </Properties>
         </Component>
         <Component class="java.awt.Canvas" name="canvas3">
@@ -350,7 +352,8 @@
       <SubComponents>
         <Component class="javax.swing.JCheckBox" name="filtroFiltrarNome">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Filtrar por nome"/>
+            <Property name="text" type="java.lang.String" value="Filtrar Por Nome"/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca Uma Ferramente Pelo Seu nome ou inicial "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtroFiltrarNomeActionPerformed"/>
@@ -375,7 +378,8 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="filtroFiltrarUso">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Em uso por"/>
+            <Property name="text" type="java.lang.String" value="Em Uso Por"/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca Pela Ferramenta Caso ela Esteja Em Uso Por Outro Amigo "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtroFiltrarUsoActionPerformed"/>
@@ -393,6 +397,7 @@
         <Component class="javax.swing.JCheckBox" name="filtroFabricante">
           <Properties>
             <Property name="text" type="java.lang.String" value="Fabricante"/>
+            <Property name="toolTipText" type="java.lang.String" value="Busca Por Uma Ferramente pelo nome do Fabricante "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filtroFabricanteActionPerformed"/>
@@ -524,6 +529,7 @@
               <Font name="Liberation Sans" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Selecionar esta ferramenta"/>
+            <Property name="toolTipText" type="java.lang.String" value="Seleciona a Ferramenta Desejada "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSelecionarFerramentaActionPerformed"/>
