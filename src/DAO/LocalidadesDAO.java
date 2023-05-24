@@ -10,6 +10,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 
 public class LocalidadesDAO {
 
@@ -47,7 +49,7 @@ public class LocalidadesDAO {
         return estados;
     }
     
-    public static Object[] obterCidadesAPI(String estadoUF) {
+    public static Object[] obterCidadesAPI(String estadoUF) throws MalformedURLException, ProtocolException, IOException {
         URL url = new URL("https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + estadoUF + "/municipios");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
