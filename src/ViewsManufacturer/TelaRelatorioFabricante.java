@@ -97,11 +97,11 @@ public class TelaRelatorioFabricante extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "#", "Nome", "CNPJ", "Quantidade de ferramentas", "Ferramentas emprestadas", "Valor total em ferramentas"
+                "ID", "Nome", "CNPJ", "Quantidade de ferramentas", "Ferramentas emprestadas", "Valor total em ferramentas"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -121,7 +121,6 @@ public class TelaRelatorioFabricante extends javax.swing.JFrame {
             emprestimosRelatorio.getColumnModel().getColumn(3).setResizable(false);
             emprestimosRelatorio.getColumnModel().getColumn(4).setResizable(false);
             emprestimosRelatorio.getColumnModel().getColumn(5).setResizable(false);
-            emprestimosRelatorio.getColumnModel().getColumn(6).setResizable(false);
         }
 
         jButton4.setText("Concluir");

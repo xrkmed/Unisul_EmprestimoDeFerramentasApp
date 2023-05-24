@@ -1,5 +1,6 @@
 package ViewsManufacturer;
 
+import ViewsTool.TelaPainelFerramentas;
 import Controllers.ColorsRenderer;
 import Controllers.StatusRenderer;
 import ViewsAmigos.*;
@@ -115,36 +116,36 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "#", "Nome", "CNPJ", "Ferramentas", "Ferramentas em uso", "Valor total"
+                "ID", "Nome", "CNPJ", "Ferramentas", "Ferramentas em uso", "Valor total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -161,15 +162,13 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
             jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setPreferredWidth(0);
+            jTable2.getColumnModel().getColumn(1).setPreferredWidth(400);
             jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setPreferredWidth(400);
             jTable2.getColumnModel().getColumn(3).setResizable(false);
+            jTable2.getColumnModel().getColumn(3).setPreferredWidth(100);
             jTable2.getColumnModel().getColumn(4).setResizable(false);
             jTable2.getColumnModel().getColumn(4).setPreferredWidth(100);
             jTable2.getColumnModel().getColumn(5).setResizable(false);
-            jTable2.getColumnModel().getColumn(5).setPreferredWidth(100);
-            jTable2.getColumnModel().getColumn(6).setResizable(false);
         }
 
         jLayeredPane1.setBackground(new java.awt.Color(153, 153, 153));
@@ -467,13 +466,13 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
 
             for (Object[] data : manufacturerData) {
                 if (filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0) {
-                    if (!data[2].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())) {
+                    if (!data[1].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())) {
                         continue;
                     }
                 }
 
-                if (Integer.parseInt(data[4].toString()) == Integer.parseInt(data[5].toString())) {
-                    if (Integer.parseInt(data[4].toString()) > 0) {
+                if (Integer.parseInt(data[3].toString()) == Integer.parseInt(data[4].toString())) {
+                    if (Integer.parseInt(data[3].toString()) > 0) {
                         renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
                     } else {
                         renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightOrange);
