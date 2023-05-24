@@ -57,10 +57,6 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         Thread loadValues = new Thread(new Runnable() {
             @Override
             public void run() {
-                jTable2.getColumnModel().getColumn(1).setPreferredWidth(35);
-                jTable2.getColumnModel().getColumn(1).setMinWidth(35);
-                jTable2.getColumnModel().getColumn(1).setMaxWidth(35);
-
                 jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
                 jTable2.getColumnModel().getColumn(0).setMinWidth(35);
                 jTable2.getColumnModel().getColumn(0).setMaxWidth(35);

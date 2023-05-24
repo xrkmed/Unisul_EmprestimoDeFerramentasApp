@@ -41,13 +41,9 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
         Thread loadValues = new Thread(new Runnable() {
             @Override
             public void run() {
-
-                ArrayList<Integer> lowestSize = new ArrayList<>(Arrays.asList(0, 1));
-                for (Integer i : lowestSize) {
-                    jTable2.getColumnModel().getColumn(i).setPreferredWidth(35);
-                    jTable2.getColumnModel().getColumn(i).setMinWidth(35);
-                    jTable2.getColumnModel().getColumn(i).setMaxWidth(35);
-                }
+                    jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
+                    jTable2.getColumnModel().getColumn(0).setMinWidth(35);
+                    jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
 
                 jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
