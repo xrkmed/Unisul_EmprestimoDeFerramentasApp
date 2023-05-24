@@ -161,7 +161,8 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
         jLayeredPane2.setBackground(new java.awt.Color(153, 153, 153));
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        filtroFiltrarNome.setText("Filtrar por nome");
+        filtroFiltrarNome.setText("Filtrar Por Nome");
+        filtroFiltrarNome.setToolTipText("Busca Uma Ferramenta Por Nome ");
         filtroFiltrarNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtroFiltrarNomeActionPerformed(evt);
@@ -231,9 +232,9 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
         jLayeredPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        jLabel6.setText("OPÇOES");
+        jLabel6.setText("OPÇÕES");
 
-        jLabel4.setText("Razao social");
+        jLabel4.setText("Razao Social");
 
         selecionadoNome.setEditable(false);
 
@@ -320,7 +321,7 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 360, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 359, Short.MAX_VALUE)
                         .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2))
                 .addGap(0, 0, 0)

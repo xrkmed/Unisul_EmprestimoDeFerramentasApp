@@ -86,7 +86,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel1.setText("Cadastro de ferramenta");
+        jLabel1.setText("Cadastro de Ferramenta");
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -100,7 +100,8 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         jLabel4.setText("Fabricante");
 
-        btnSelectFabricante.setText("Selecionar um fabricante");
+        btnSelectFabricante.setText("Selecionar um Fabricante");
+        btnSelectFabricante.setToolTipText("Selecione um Fabrincante Para a Ferramenta");
         btnSelectFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSelectFabricanteActionPerformed(evt);
@@ -112,7 +113,8 @@ public class TelaCadastro extends javax.swing.JFrame {
         textSelecionado.setText("Selecionado: nenhum");
 
         btnRemoverFabricante.setBackground(new java.awt.Color(255, 102, 102));
-        btnRemoverFabricante.setText("Remover fabricante selecionado");
+        btnRemoverFabricante.setText("Remover o Fabricante Selecionado ");
+        btnRemoverFabricante.setToolTipText("Remove o Fabricante Selecionado ");
         btnRemoverFabricante.setEnabled(false);
         btnRemoverFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,7 +189,8 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         btnConcluirCad.setBackground(new java.awt.Color(153, 255, 153));
         btnConcluirCad.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        btnConcluirCad.setText("Concluir cadastro");
+        btnConcluirCad.setText("Concluir Cadastro");
+        btnConcluirCad.setToolTipText("Finaliza o Cadastro Com Sucesso ");
         btnConcluirCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConcluirCadActionPerformed(evt);
@@ -195,6 +198,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         });
 
         btnCancelarCad.setText("Cancelar cadastro");
+        btnCancelarCad.setToolTipText("Descarta as Opções Selecionadas ");
         btnCancelarCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarCadActionPerformed(evt);
@@ -226,7 +230,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addContainerGap(538, Short.MAX_VALUE))
+                        .addContainerGap(531, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLayeredPane1)
                         .addContainerGap())

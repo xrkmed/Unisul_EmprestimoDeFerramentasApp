@@ -18,6 +18,7 @@ import Resources.CEPResource;
 import Resources.PhoneDocument;
 import Resources.PhoneValidResource;
 
+
 /**
  *
  * @author arkmed
@@ -136,6 +137,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLabel7.setText("Complemento:");
 
         textComplemento.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        textComplemento.setToolTipText("Descreva um Complemento");
         textComplemento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textComplementoActionPerformed(evt);
@@ -143,6 +145,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         });
 
         textNumero.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        textNumero.setToolTipText("Digite o Numero da Casa");
         textNumero.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
@@ -175,6 +178,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         selectCidade.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         selectCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a sua cidade" }));
+        selectCidade.setToolTipText("Selecione a sua cidade");
         selectCidade.setEnabled(false);
         selectCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,7 +187,8 @@ public class TelaCadastro extends javax.swing.JFrame {
         });
 
         selectEstado.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        selectEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o seu estado" }));
+        selectEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o Seu Estado" }));
+        selectEstado.setToolTipText("Escolha o Estado Desejado ");
         selectEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectEstadoActionPerformed(evt);
@@ -191,6 +196,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         });
 
         textCEP.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        textCEP.setToolTipText("Insira CEP do seu amigo");
         textCEP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 textCEPKeyPressed(evt);
@@ -199,6 +205,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         btnBuscarCep.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnBuscarCep.setText("Buscar CEP");
+        btnBuscarCep.setToolTipText("Sera Realizada uma Busca Automatica Para Preencher Cidade, Estado e Bairro");
         btnBuscarCep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarCepActionPerformed(evt);
@@ -316,8 +323,14 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         textNome.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textNome.setToolTipText("Digite o nome completo do seu amigo");
+        textNome.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         textNome.setInheritsPopupMenu(true);
         textNome.setName(""); // NOI18N
+        textNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textNomeActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel2.setText("Telefone:");
@@ -369,6 +382,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(51, 51, 51));
         jButton2.setText("Cancelar Cadastro");
+        jButton2.setToolTipText("Deletar as Informações Inseridas Acima");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -379,6 +393,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         btnCadastrar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnCadastrar.setForeground(new java.awt.Color(51, 51, 51));
         btnCadastrar.setText("Finalizar Cadastro");
+        btnCadastrar.setToolTipText("Salvar o Cadastro do Amigo ");
         btnCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCadastrarMouseClicked(evt);
@@ -641,8 +656,13 @@ public class TelaCadastro extends javax.swing.JFrame {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage());
             textCEP.requestFocus();
+
         }
     }//GEN-LAST:event_btnBuscarCepActionPerformed
+
+    private void textNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textNomeActionPerformed
 
     /**
      * @param args the command line arguments

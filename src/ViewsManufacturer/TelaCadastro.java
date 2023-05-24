@@ -125,6 +125,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         );
 
         btnVerificarFabricante.setText("Verificar fabricante");
+        btnVerificarFabricante.setToolTipText("Realizar a Busca Automática Utilizando Somente o CNPJ");
         btnVerificarFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerificarFabricanteActionPerformed(evt);
@@ -167,6 +168,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         btnFinalizarCadastro.setBackground(new java.awt.Color(153, 255, 153));
         btnFinalizarCadastro.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         btnFinalizarCadastro.setText("Finalizar cadastro");
+        btnFinalizarCadastro.setToolTipText("Concluir o Cadastro do Fabricante");
         btnFinalizarCadastro.setEnabled(false);
         btnFinalizarCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,6 +253,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         );
 
         btnPularVerificacao.setText("Cadastrar fabricante sem verificar status do CNPJ");
+        btnPularVerificacao.setToolTipText("Prosseguir Com o Cadastro Sem a Consulta Automática ");
         btnPularVerificacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPularVerificacaoActionPerformed(evt);

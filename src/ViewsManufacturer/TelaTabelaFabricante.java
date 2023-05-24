@@ -177,12 +177,14 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
 
         canvas1.setBackground(new java.awt.Color(255, 57, 57));
 
-        jLabel1.setText("Fabricante sem ferramentas disponiveis");
+        jLabel1.setText("Fabricante Sem Ferramentas Disponiveis");
+        jLabel1.setToolTipText("Exibe Somente Fabricantes Que Não Tenham Ferramentas DIsponíveis");
 
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel7.setText("STATUS");
 
-        jLabel2.setText("Fabricante sem ferramentas cadastradas");
+        jLabel2.setText("Fabricante Sem Ferramentas Cadastradas");
+        jLabel2.setToolTipText("Exibe Fabricantes Que Não Tenham Nenhuma Ferramenta Cadastrada ");
 
         canvas2.setBackground(new java.awt.Color(255, 57, 57));
 
@@ -210,7 +212,7 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +233,8 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
         jLayeredPane2.setBackground(new java.awt.Color(153, 153, 153));
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        filtroFiltrarNome.setText("Filtrar por nome");
+        filtroFiltrarNome.setText("Filtrar Por Nome");
+        filtroFiltrarNome.setToolTipText("Busca Pelo Nome do Fabricante ");
         filtroFiltrarNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtroFiltrarNomeActionPerformed(evt);
@@ -277,7 +280,7 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
                         .addComponent(filtroFiltrarNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(230, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnBuscar1)
@@ -301,14 +304,15 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
         jLayeredPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        jLabel6.setText("OPÇOES");
+        jLabel6.setText("OPÇÕES");
 
-        jLabel4.setText("Razao social");
+        jLabel4.setText("Razao Social");
 
         selecionadoNome.setEditable(false);
 
         btnRemoverCadastro.setBackground(new java.awt.Color(255, 102, 102));
         btnRemoverCadastro.setText("Remover cadastro");
+        btnRemoverCadastro.setToolTipText("Remove o Fabricante do Sistema");
         btnRemoverCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverCadastroActionPerformed(evt);
@@ -320,6 +324,7 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
         jLabel5.setText("CNPJ");
 
         btnRelatorioFerramentas.setText("Painel de Ferramentas");
+        btnRelatorioFerramentas.setToolTipText("Permite a Atribuição de Ferramentas Para O Fabricante Selecionado");
         btnRelatorioFerramentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRelatorioFerramentasActionPerformed(evt);
@@ -354,10 +359,10 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel5)
                                 .addComponent(selecionadoCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnRemoverCadastro, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnRelatorioFerramentas, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRelatorioFerramentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRemoverCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jLayeredPane3Layout.setVerticalGroup(
@@ -406,14 +411,14 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLayeredPane2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLayeredPane1)
+                        .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLayeredPane3))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1343, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
-                .addComponent(jSeparator1)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

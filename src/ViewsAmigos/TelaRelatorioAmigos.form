@@ -112,6 +112,7 @@
                 <Column editable="false" title="Emprestimos atrasados" type="java.lang.Integer"/>
               </Table>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Informa&#xe7;&#xf5;es dos amigos "/>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="30" resizable="false">

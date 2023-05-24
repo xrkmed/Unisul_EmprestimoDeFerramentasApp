@@ -54,7 +54,7 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="538" max="32767" attributes="0"/>
+                      <EmptySpace pref="531" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLayeredPane1" max="32767" attributes="0"/>
@@ -96,7 +96,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Cadastro de ferramenta"/>
+        <Property name="text" type="java.lang.String" value="Cadastro de Ferramenta"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JLayeredPane" name="jLayeredPane1">
@@ -205,7 +205,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSelectFabricante">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Selecionar um fabricante"/>
+            <Property name="text" type="java.lang.String" value="Selecionar um Fabricante"/>
+            <Property name="toolTipText" type="java.lang.String" value="Selecione um Fabrincante Para a Ferramenta"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSelectFabricanteActionPerformed"/>
@@ -226,7 +227,8 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Remover fabricante selecionado"/>
+            <Property name="text" type="java.lang.String" value="Remover o Fabricante Selecionado "/>
+            <Property name="toolTipText" type="java.lang.String" value="Remove o Fabricante Selecionado "/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -243,7 +245,8 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Liberation Sans" size="15" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Concluir cadastro"/>
+        <Property name="text" type="java.lang.String" value="Concluir Cadastro"/>
+        <Property name="toolTipText" type="java.lang.String" value="Finaliza o Cadastro Com Sucesso "/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConcluirCadActionPerformed"/>
@@ -252,6 +255,7 @@
     <Component class="javax.swing.JButton" name="btnCancelarCad">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar cadastro"/>
+        <Property name="toolTipText" type="java.lang.String" value="Descarta as Op&#xe7;&#xf5;es Selecionadas "/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarCadActionPerformed"/>

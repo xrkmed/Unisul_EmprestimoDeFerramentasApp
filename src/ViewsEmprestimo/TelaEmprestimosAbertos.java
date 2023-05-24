@@ -178,6 +178,7 @@ public class TelaEmprestimosAbertos extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 204, 0));
         jLabel9.setText("VENCIMENTO EM SETE DIAS");
+        jLabel9.setToolTipText("Exibe Somente Ferramentas Que Vencem em Sete Dias");
 
         canvas2.setBackground(new java.awt.Color(255, 255, 224));
 
@@ -235,6 +236,7 @@ public class TelaEmprestimosAbertos extends javax.swing.JFrame {
         btnAlterarEmprestimo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAlterarEmprestimo.setForeground(new java.awt.Color(51, 51, 51));
         btnAlterarEmprestimo.setText("Alterar Empréstimo");
+        btnAlterarEmprestimo.setToolTipText("Abre um Menu Para Alterar As Informações do Empréstimo");
         btnAlterarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarEmprestimoActionPerformed(evt);
@@ -247,6 +249,7 @@ public class TelaEmprestimosAbertos extends javax.swing.JFrame {
         btnRemoverCadastro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnRemoverCadastro.setForeground(new java.awt.Color(51, 51, 51));
         btnRemoverCadastro.setText("Cancelar Empréstimo");
+        btnRemoverCadastro.setToolTipText("Encerra o Empréstimo Sem Nenhuma Confirmação");
         btnRemoverCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverCadastroActionPerformed(evt);
@@ -259,6 +262,7 @@ public class TelaEmprestimosAbertos extends javax.swing.JFrame {
         btnFinalizarEmprestimo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnFinalizarEmprestimo.setForeground(new java.awt.Color(51, 51, 51));
         btnFinalizarEmprestimo.setText("Finalizar Empréstimo");
+        btnFinalizarEmprestimo.setToolTipText("Encerra o Empréstimo ");
         btnFinalizarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFinalizarEmprestimoActionPerformed(evt);
@@ -324,6 +328,7 @@ public class TelaEmprestimosAbertos extends javax.swing.JFrame {
 
         filtroFiltrarNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         filtroFiltrarNome.setText("Filtrar por nome:");
+        filtroFiltrarNome.setToolTipText("Buscar Por Uma Ferramenta em Especifico");
         filtroFiltrarNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtroFiltrarNomeActionPerformed(evt);
