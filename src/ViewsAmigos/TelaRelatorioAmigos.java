@@ -83,9 +83,10 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jLabel1 = new javax.swing.JLabel();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         amigosRelatorio = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -97,6 +98,12 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Grupo supimpa - tabela de amigos");
 
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setText("Amigos Cadastrados");
+
+        jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
         amigosRelatorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -105,7 +112,7 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "-", "Nome", "Telefone", "Endereço", "Emprestimos em aberto", "Emprestimos atrasados"
+                "ID", "Nome", "Telefone", "Endereço", "Empréstimos Realizados", "Empréstimos Atrasados"
             }
         ) {
             Class[] types = new Class [] {
@@ -126,28 +133,39 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
         amigosRelatorio.setToolTipText("Informações dos amigos ");
         jScrollPane1.setViewportView(amigosRelatorio);
         if (amigosRelatorio.getColumnModel().getColumnCount() > 0) {
-            amigosRelatorio.getColumnModel().getColumn(0).setResizable(false);
             amigosRelatorio.getColumnModel().getColumn(0).setPreferredWidth(30);
-            amigosRelatorio.getColumnModel().getColumn(1).setResizable(false);
-            amigosRelatorio.getColumnModel().getColumn(1).setPreferredWidth(30);
-            amigosRelatorio.getColumnModel().getColumn(2).setResizable(false);
-            amigosRelatorio.getColumnModel().getColumn(3).setResizable(false);
-            amigosRelatorio.getColumnModel().getColumn(4).setResizable(false);
-            amigosRelatorio.getColumnModel().getColumn(5).setResizable(false);
-            amigosRelatorio.getColumnModel().getColumn(6).setResizable(false);
+            amigosRelatorio.getColumnModel().getColumn(1).setPreferredWidth(400);
+            amigosRelatorio.getColumnModel().getColumn(2).setPreferredWidth(80);
+            amigosRelatorio.getColumnModel().getColumn(3).setPreferredWidth(100);
         }
 
-        jLabel1.setFont(new java.awt.Font("Fira Sans", 0, 36)); // NOI18N
-        jLabel1.setText("Todos os amigos cadastrados");
+        jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jMenu3.setText("Exportar");
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 913, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
+        );
+
+        jMenu3.setText("Opções");
         jMenu3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu3ActionPerformed(evt);
             }
         });
 
-        jMenuItem1.setText("Exportar em PDF");
+        jMenuItem1.setText("Exportar lista em .PDF");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -164,22 +182,20 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(234, 234, 234))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 913, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
+                .addGap(20, 20, 20)
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -256,6 +272,7 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable amigosRelatorio;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
