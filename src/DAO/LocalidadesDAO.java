@@ -47,14 +47,14 @@ public class LocalidadesDAO {
         return estados;
     }
     
-    public static Object[] obterCidadesAPI(String estadoUF) throws IOException {
+    public static Object[] obterCidadesAPI(String estadoUF) {
         URL url = new URL("https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + estadoUF + "/municipios");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Accept", "application/json");
 
         if (conn.getResponseCode() != 200) {
-            throw new RuntimeException("Erro ao obter a lista de cidades: " + conn.getResponseCode());
+            return obterCidades(estadoUF);
         }
 
         BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
@@ -64,7 +64,7 @@ public class LocalidadesDAO {
             response.append(output);
         }
 
-        conn.disconnect();
+        conn.disconnect(); 
 
         JsonArray jsonArray = JsonParser.parseString(response.toString()).getAsJsonArray();
         Object[] cidades = new Object[jsonArray.size()];
