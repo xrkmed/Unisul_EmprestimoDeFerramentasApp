@@ -79,8 +79,9 @@ public class TelaRelatorioEmprestimos extends javax.swing.JFrame {
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         emprestimosRelatorio = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -88,6 +89,7 @@ public class TelaRelatorioEmprestimos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Grupo Supimpa - Painel de Ferramentas");
+        setResizable(false);
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -96,7 +98,7 @@ public class TelaRelatorioEmprestimos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Amigo", "Data de inicio", "Data de devoluçao", "Finalizado data", "Observaçoes", "Ferramentas totais", "Valor total em ferramentas", "Valor recebido", "Ferramentas"
+                "ID", "Amigo", "Data Início", "Data Devoluçõo", "Data Finalizado", "Observações", "Num. Ferramentas", "V. Total Ferramentas", "V. Recebido", "Ferramentas"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -114,18 +116,44 @@ public class TelaRelatorioEmprestimos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(emprestimosRelatorio);
         if (emprestimosRelatorio.getColumnModel().getColumnCount() > 0) {
-            emprestimosRelatorio.getColumnModel().getColumn(0).setResizable(false);
-            emprestimosRelatorio.getColumnModel().getColumn(1).setResizable(false);
-            emprestimosRelatorio.getColumnModel().getColumn(2).setResizable(false);
-            emprestimosRelatorio.getColumnModel().getColumn(3).setResizable(false);
-            emprestimosRelatorio.getColumnModel().getColumn(4).setResizable(false);
-            emprestimosRelatorio.getColumnModel().getColumn(5).setResizable(false);
-            emprestimosRelatorio.getColumnModel().getColumn(6).setResizable(false);
-            emprestimosRelatorio.getColumnModel().getColumn(7).setResizable(false);
-            emprestimosRelatorio.getColumnModel().getColumn(8).setResizable(false);
-            emprestimosRelatorio.getColumnModel().getColumn(9).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(0).setPreferredWidth(20);
+            emprestimosRelatorio.getColumnModel().getColumn(1).setPreferredWidth(100);
+            emprestimosRelatorio.getColumnModel().getColumn(2).setPreferredWidth(40);
+            emprestimosRelatorio.getColumnModel().getColumn(3).setPreferredWidth(50);
+            emprestimosRelatorio.getColumnModel().getColumn(4).setPreferredWidth(50);
+            emprestimosRelatorio.getColumnModel().getColumn(5).setPreferredWidth(100);
+            emprestimosRelatorio.getColumnModel().getColumn(6).setPreferredWidth(70);
+            emprestimosRelatorio.getColumnModel().getColumn(7).setPreferredWidth(75);
+            emprestimosRelatorio.getColumnModel().getColumn(8).setPreferredWidth(65);
+            emprestimosRelatorio.getColumnModel().getColumn(9).setPreferredWidth(100);
         }
 
+        jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1178, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
+        );
+
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel1.setText("EMPRÉSTIMOS FINALIZADOS");
+
+        jButton4.setBackground(new java.awt.Color(153, 255, 153));
+        jButton4.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(51, 51, 51));
         jButton4.setText("Concluir");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,38 +161,10 @@ public class TelaRelatorioEmprestimos extends javax.swing.JFrame {
             }
         });
 
-        jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1231, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                    .addContainerGap(715, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(16, 16, 16)))
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                    .addContainerGap(259, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(16, 16, 16)))
-        );
-
-        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel1.setText("RELATORIO DE EMPRESTIMOS FINALIZADOS");
+        jButton1.setBackground(new java.awt.Color(255, 102, 102));
+        jButton1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(51, 51, 51));
+        jButton1.setText("Cancelar");
 
         jMenu2.setText("Exportar");
 
@@ -189,24 +189,31 @@ public class TelaRelatorioEmprestimos extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLayeredPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 718, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(300, 300, 300)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLayeredPane1))
+                .addGap(15, 15, 15))
+            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
+                .addGap(328, 328, 328)
+                .addComponent(jLabel1)
+                .addGap(328, 328, 328))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 42, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jLayeredPane1)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jButton1))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -305,6 +312,7 @@ public class TelaRelatorioEmprestimos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable emprestimosRelatorio;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
