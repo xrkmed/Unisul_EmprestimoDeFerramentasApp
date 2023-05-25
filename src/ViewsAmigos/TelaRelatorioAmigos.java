@@ -95,7 +95,7 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
 
         jMenu2.setText("jMenu2");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Grupo supimpa - tabela de amigos");
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
@@ -112,33 +112,23 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Telefone", "Endereço", "Emprestimos em aberto", "Emprestimos atrasados"
+                "ID", "Nome", "Telefone", "Endereço", "Empréstimos Realizados", "Empréstimos Atrasados"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
         });
-        amigosRelatorio.setToolTipText("Informações dos amigos ");
         jScrollPane1.setViewportView(amigosRelatorio);
         if (amigosRelatorio.getColumnModel().getColumnCount() > 0) {
             amigosRelatorio.getColumnModel().getColumn(0).setPreferredWidth(30);
-            amigosRelatorio.getColumnModel().getColumn(1).setResizable(false);
-            amigosRelatorio.getColumnModel().getColumn(2).setResizable(false);
-            amigosRelatorio.getColumnModel().getColumn(3).setResizable(false);
-            amigosRelatorio.getColumnModel().getColumn(4).setResizable(false);
-            amigosRelatorio.getColumnModel().getColumn(5).setResizable(false);
+            amigosRelatorio.getColumnModel().getColumn(1).setPreferredWidth(400);
+            amigosRelatorio.getColumnModel().getColumn(2).setPreferredWidth(80);
+            amigosRelatorio.getColumnModel().getColumn(3).setPreferredWidth(100);
         }
 
         jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
