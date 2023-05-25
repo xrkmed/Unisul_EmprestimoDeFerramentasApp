@@ -5,6 +5,9 @@ import ViewsEmprestimo.TelaCadastroEmprestimo;
 import ViewsAmigos.TelaRelatorioAmigos;
 import javax.swing.ToolTipManager;
 
+import Controllers.ThemeController;
+import Resources.Enum_Themes;
+
 public class TelaPrincipal extends javax.swing.JFrame {
 
     public TelaPrincipal() {
@@ -57,6 +60,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu4 = new javax.swing.JMenu();
         btnClose = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        fileMenu2 = new javax.swing.JMenu();
+        fileMenu7 = new javax.swing.JMenu();
+        btnTemaDark = new javax.swing.JMenuItem();
+        btnTemaLight = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Grupo Supimpa - ToolStock Manager");
@@ -343,6 +350,34 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuBar.add(fileMenu4);
 
+        fileMenu2.setMnemonic('f');
+        fileMenu2.setText("Visual");
+
+        fileMenu7.setMnemonic('f');
+        fileMenu7.setText("Temas");
+
+        btnTemaDark.setMnemonic('x');
+        btnTemaDark.setText("Escuro");
+        btnTemaDark.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTemaDarkActionPerformed(evt);
+            }
+        });
+        fileMenu7.add(btnTemaDark);
+
+        btnTemaLight.setMnemonic('x');
+        btnTemaLight.setText("Claro");
+        btnTemaLight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTemaLightActionPerformed(evt);
+            }
+        });
+        fileMenu7.add(btnTemaLight);
+
+        fileMenu2.add(fileMenu7);
+
+        menuBar.add(fileMenu2);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -528,6 +563,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAmigosMouseDragged
 
+    private void btnTemaLightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTemaLightActionPerformed
+        ThemeController.getInstance().setTheme(Enum_Themes.LIGHT, this);
+    }//GEN-LAST:event_btnTemaLightActionPerformed
+
+    private void btnTemaDarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTemaDarkActionPerformed
+        ThemeController.getInstance().setTheme(Enum_Themes.DARK, this);
+    }//GEN-LAST:event_btnTemaDarkActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -581,14 +624,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem btnRelatorioEmprestimo;
     private javax.swing.JMenuItem btnRelatorioFabricantes;
     private javax.swing.JMenuItem btnRelatorioFerramentas;
+    private javax.swing.JMenuItem btnTemaDark;
+    private javax.swing.JMenuItem btnTemaLight;
     private javax.swing.JMenuItem btnViewAmigosCad;
     private javax.swing.JMenuItem btnVisualizarFabricante;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu fileMenu1;
+    private javax.swing.JMenu fileMenu2;
     private javax.swing.JMenu fileMenu3;
     private javax.swing.JMenu fileMenu4;
     private javax.swing.JMenu fileMenu5;
     private javax.swing.JMenu fileMenu6;
+    private javax.swing.JMenu fileMenu7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane3;
