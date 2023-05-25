@@ -81,7 +81,7 @@
                       <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
                       <Component id="btnCancelar" min="-2" pref="200" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="300" max="-2" attributes="0"/>
-                      <Component id="btnFinalizarCadastro1" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Component id="btnFinalizarCadastro" min="-2" pref="200" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -99,15 +99,15 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLayeredPane1" min="-2" pref="212" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnPularVerificacao" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnVerificarFabricante" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnVerificarFabricante" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnFinalizarCadastro1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnFinalizarCadastro" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancelar" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -129,21 +129,16 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="2" attributes="0">
-                              <Component id="jLabel2" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="2" min="-2" max="-2" attributes="0"/>
-                              <Component id="textoCNPJ" alignment="2" min="-2" pref="267" max="-2" attributes="0"/>
-                              <Component id="textoNomeFantasia" alignment="2" min="-2" pref="350" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="jLabel2" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="2" min="-2" max="-2" attributes="0"/>
+                          <Component id="textoCNPJ" alignment="2" min="-2" pref="267" max="-2" attributes="0"/>
+                          <Component id="textoNomeFantasia" alignment="2" min="-2" pref="350" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
@@ -429,7 +424,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
         <Property name="toolTipText" type="java.lang.String" value="Concluir o Cadastro do Fabricante"/>
-        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
@@ -446,7 +440,7 @@
         <Property name="text" type="java.lang.String" value=" CADASTRO FABRICANTES"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnFinalizarCadastro1">
+    <Component class="javax.swing.JButton" name="btnFinalizarCadastro">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="99" green="ff" red="99" type="rgb"/>
@@ -462,7 +456,7 @@
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFinalizarCadastro1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFinalizarCadastroActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
