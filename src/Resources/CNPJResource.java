@@ -93,16 +93,11 @@ public class CNPJResource {
                 JsonElement jsonElement = parser.parse(new InputStreamReader(conn.getInputStream()));
 
 
-                if (jsonElement.getAsJsonObject().get("logradouro").getAsString().equalsIgnoreCase("ok")) {
-                    String sampleAddressStr = jsonElement.getAsJsonObject().get("logradouro").getAsString() + ", " + jsonElement.getAsJsonObject().get("numero").getAsString() + " - " + jsonElement.getAsJsonObject().get("bairro").getAsString() + ", " + jsonElement.getAsJsonObject().get("municipio").getAsString() + " - " + jsonElement.getAsJsonObject().get("uf").getAsString() + ", " + jsonElement.getAsJsonObject().get("cep").getAsString();
-                    CNPJEntity cnpjObject = new CNPJEntity(jsonElement.getAsJsonObject().get("nome").getAsString(), jsonElement.getAsJsonObject().get("telefone").getAsString(), Double.parseDouble(jsonElement.getAsJsonObject().get("capital_social").getAsString()), sampleAddressStr, jsonElement.getAsJsonObject().get("status").getAsString(), jsonElement.getAsJsonObject().get("situacao").getAsString(), jsonElement.getAsJsonObject().get("cnpj").getAsString());
+                String sampleAddressStr = jsonElement.getAsJsonObject().get("logradouro").getAsString() + ", " + jsonElement.getAsJsonObject().get("numero").getAsString() + " - " + jsonElement.getAsJsonObject().get("bairro").getAsString() + ", " + jsonElement.getAsJsonObject().get("municipio").getAsString() + " - " + jsonElement.getAsJsonObject().get("uf").getAsString() + ", " + jsonElement.getAsJsonObject().get("cep").getAsString();
+                CNPJEntity cnpjObject = new CNPJEntity(jsonElement.getAsJsonObject().get("nome").getAsString(), jsonElement.getAsJsonObject().get("telefone").getAsString(), Double.parseDouble(jsonElement.getAsJsonObject().get("capital_social").getAsString()), sampleAddressStr, jsonElement.getAsJsonObject().get("status").getAsString(), jsonElement.getAsJsonObject().get("situacao").getAsString(), jsonElement.getAsJsonObject().get("cnpj").getAsString());
 
-                    conn.disconnect();
-                    return cnpjObject;
-                } else {
-                    conn.disconnect();
-                    throw new CNPJNotFound("CNPJ Invalido, tente novamente...");
-                }
+                conn.disconnect();
+                return cnpjObject;
             } else {
                 conn.disconnect();
                 throw new IllegalArgumentException("Erro de conexao: " + conn.getResponseCode() + ", contacte o administrador do sistema e verifique sua conexao com a internet.");
