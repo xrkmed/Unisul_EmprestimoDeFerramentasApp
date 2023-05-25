@@ -375,7 +375,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         );
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("Dados Pessoais");
 
         jButton2.setBackground(new java.awt.Color(255, 102, 102));

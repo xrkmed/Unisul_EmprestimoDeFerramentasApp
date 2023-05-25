@@ -99,7 +99,7 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
         setTitle("Grupo supimpa - tabela de amigos");
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
         jLabel1.setText("Amigos Cadastrados");
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -191,6 +191,7 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
 

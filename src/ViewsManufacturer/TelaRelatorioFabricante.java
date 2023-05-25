@@ -79,8 +79,9 @@ public class TelaRelatorioFabricante extends javax.swing.JFrame {
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         emprestimosRelatorio = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        bntCancelar = new javax.swing.JButton();
+        bntCancelar1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -97,7 +98,7 @@ public class TelaRelatorioFabricante extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "CNPJ", "Quantidade de ferramentas", "Ferramentas emprestadas", "Valor total em ferramentas"
+                "ID", "Nome", "CNPJ", "Qnt. Ferramentas", "Ferramentas Emprestadas", "Valor Total Ferramentas"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -116,52 +117,61 @@ public class TelaRelatorioFabricante extends javax.swing.JFrame {
         jScrollPane1.setViewportView(emprestimosRelatorio);
         if (emprestimosRelatorio.getColumnModel().getColumnCount() > 0) {
             emprestimosRelatorio.getColumnModel().getColumn(0).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(0).setPreferredWidth(40);
             emprestimosRelatorio.getColumnModel().getColumn(1).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(1).setPreferredWidth(350);
             emprestimosRelatorio.getColumnModel().getColumn(2).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(2).setPreferredWidth(200);
             emprestimosRelatorio.getColumnModel().getColumn(3).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(3).setPreferredWidth(100);
             emprestimosRelatorio.getColumnModel().getColumn(4).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(4).setPreferredWidth(100);
             emprestimosRelatorio.getColumnModel().getColumn(5).setResizable(false);
+            emprestimosRelatorio.getColumnModel().getColumn(5).setPreferredWidth(100);
         }
 
-        jButton4.setText("Concluir");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1231, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                    .addGap(1114, 1114, 1114)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGap(16, 16, 16)))
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1235, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                .addGap(64, 64, 64))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                    .addGap(259, 259, 259)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addGap(16, 16, 16)))
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
         );
 
-        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel1.setText("RELATÓRIO DAS FABRICANTES");
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel1.setText("RELATÓRIO FABRICANTES");
+
+        bntCancelar.setBackground(new java.awt.Color(255, 102, 102));
+        bntCancelar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        bntCancelar.setForeground(new java.awt.Color(51, 51, 51));
+        bntCancelar.setText("Cancelar");
+        bntCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntCancelarActionPerformed(evt);
+            }
+        });
+
+        bntCancelar1.setBackground(new java.awt.Color(153, 255, 153));
+        bntCancelar1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        bntCancelar1.setForeground(new java.awt.Color(51, 51, 51));
+        bntCancelar1.setText("Exportar Relatório");
+        bntCancelar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntCancelar1ActionPerformed(evt);
+            }
+        });
 
         jMenu2.setText("Exportar");
 
@@ -186,33 +196,39 @@ public class TelaRelatorioFabricante extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLayeredPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 876, Short.MAX_VALUE)))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel1)
+                    .addComponent(jLayeredPane1))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(289, 289, 289)
+                .addComponent(bntCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(300, 300, 300)
+                .addComponent(bntCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(160, 160, 160))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addComponent(jLayeredPane1)
-                .addGap(42, 42, 42))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntCancelar)
+                    .addComponent(bntCancelar1))
+                .addGap(20, 20, 20))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_bntCancelarActionPerformed
 
     public void setDirectory(String directory){
         this.directory = directory;
@@ -248,6 +264,10 @@ public class TelaRelatorioFabricante extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, value.toString());
         }
     }//GEN-LAST:event_emprestimosRelatorioMouseClicked
+
+    private void bntCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntCancelar1ActionPerformed
 
     public void loadList(JTable table, ArrayList<Object[]> dataObject) throws ParseException{
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -301,8 +321,9 @@ public class TelaRelatorioFabricante extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntCancelar;
+    private javax.swing.JButton bntCancelar1;
     private javax.swing.JTable emprestimosRelatorio;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu2;

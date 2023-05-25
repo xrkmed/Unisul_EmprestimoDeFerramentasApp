@@ -61,8 +61,8 @@ public class CNPJResource {
     }
 
     public static String returnCNPJFormat(String cnpj) throws IllegalArgumentException{
-        if(cnpj.length() != 14){
-            throw new IllegalArgumentException("CNPJ inválido");
+        while(cnpj.length() < 14){
+            cnpj = "0" + cnpj;
         }
 
         return cnpj.substring(0, 2) + "." + cnpj.substring(2, 5) + "." + cnpj.substring(5, 8) + "/" + cnpj.substring(8, 12) + "-" + cnpj.substring(12);
