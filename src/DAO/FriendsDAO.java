@@ -28,14 +28,14 @@ public class FriendsDAO {
 
     //Methods
     public FriendModel addFriend(String nome, String telefone, AddressResource address) throws IllegalArgumentException, DatabaseResultQueryException, SQLException{
-        ResultSet searchComum = DBQuery.executeQuery("SELECT id FROM tb_amigos WHERE nome = ? OR telefone = ? LIMIT 1;", nome, telefone);
+        ResultSet searchComum = DBQuery.executeQuery("SELECT id FROM tb_amigos WHERE nome = ? OR telefone = ? LIMIT 1;", nome.toUpperCase(), telefone.toUpperCase());
         if(searchComum.next()){
             throw new IllegalArgumentException("Já existe um amigo com esse nome ou telefone!");
         }
 
-        ResultSet result = DBQuery.insertOrUpdateQuery("INSERT INTO tb_amigos (nome, telefone) VALUES (?, ?);", nome, telefone);
+        ResultSet result = DBQuery.insertOrUpdateQuery("INSERT INTO tb_amigos (nome, telefone) VALUES (?, ?);", nome.toUpperCase(), telefone.toUpperCase());
         while(result.next()){
-            FriendModel friend = new FriendModel(result.getInt(1), nome, address, telefone);
+            FriendModel friend = new FriendModel(result.getInt(1), nome.toUpperCase(), address, telefone);
             DBQuery.insertOrUpdateQuery("INSERT INTO tb_enderecos (amigo_id, numero, rua, bairro, cidade, uf, complemento, cep) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", friend.getId(), address.getNumber(), address.getStreet(), address.getDistrict(), address.getCity(), address.getState(), address.getComplemento(), address.getCEP());
 
             return friend;
@@ -55,7 +55,7 @@ public class FriendsDAO {
  
         while(result.next()){
             AddressResource address = new AddressResource(result.getString("rua"), result.getString("bairro"), result.getString("cidade"), result.getString("uf"), result.getInt("numero"), result.getString("complemento"), result.getInt("cep"));
-            FriendModel friend = new FriendModel(result.getInt("id"), result.getString("nome"), address, result.getLong("telefone") + "");
+            FriendModel friend = new FriendModel(result.getInt("id"), result.getString("nome").toUpperCase(), address, result.getLong("telefone") + "");
             friends.add(friend);
         }
         return friends;
@@ -66,7 +66,7 @@ public class FriendsDAO {
 
         while(result.next()){
             AddressResource address = new AddressResource(result.getString("rua"), result.getString("bairro"), result.getString("cidade"), result.getString("uf"), result.getInt("numero"), result.getString("complemento"), result.getInt("cep"));
-            FriendModel friend = new FriendModel(result.getInt("id"), result.getString("nome"), address, result.getLong("telefone") + "");
+            FriendModel friend = new FriendModel(result.getInt("id"), result.getString("nome").toUpperCase(), address, result.getLong("telefone") + "");
             return friend;
         }
 
@@ -83,7 +83,8 @@ public class FriendsDAO {
          ResultSet result = DBQuery.executeQuery("SELECT tb_amigos.id, tb_amigos.nome, tb_amigos.telefone, tb_enderecos.numero, tb_enderecos.rua, tb_enderecos.bairro, tb_enderecos.cidade, tb_enderecos.uf, tb_enderecos.complemento, tb_enderecos.cep, COUNT(tb_emprestimos.id) AS quantidade_emprestimos, SUM(CASE WHEN tb_emprestimos.endDate < CURDATE() AND tb_emprestimos.finalizado = 0 THEN 1 ELSE 0 END) AS quantidade_emprestimos_atrasados FROM tb_amigos JOIN tb_enderecos ON tb_amigos.id = tb_enderecos.amigo_id LEFT JOIN tb_emprestimos ON tb_amigos.id = tb_emprestimos.amigo_id GROUP BY tb_amigos.id, tb_amigos.nome, tb_amigos.telefone, tb_enderecos.numero, tb_enderecos.rua, tb_enderecos.bairro, tb_enderecos.cidade, tb_enderecos.uf, tb_enderecos.complemento, tb_enderecos.cep;");
         while(result.next()){
             AddressResource address = new AddressResource(result.getString("rua"), result.getString("bairro"), result.getString("cidade"), result.getString("uf"), result.getInt("numero"), result.getString("complemento"), result.getInt("cep"));
-            Object[] data = {result.getInt("id"),result.getString("nome"), PhoneValidResource.formatPhoneNumber(result.getLong("telefone") + ""), address, result.getInt("quantidade_emprestimos"), result.getInt("quantidade_emprestimos_atrasados")};
+            Object[] data = {result.getInt("id"),result.getString("nome").toUpperCase(), PhoneValidResource.formatPhoneNumber(result.getLong("telefone") + ""), address, result.getInt("quantidade_emprestimos"), result.getInt("quantidade_emprestimos_atrasados")};
+      
             datasObject.add(data);
         }
         return datasObject;
