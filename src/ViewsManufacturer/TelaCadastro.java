@@ -49,15 +49,18 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         textoTelefone = new javax.swing.JTextField();
         textoRazaoSocial = new javax.swing.JLabel();
-        btnFinalizarCadastro = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         btnPularVerificacao = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        btnFinalizarCadastro1 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Grupo Supimpa - Cadastro de fabricante");
+        setPreferredSize(null);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -69,7 +72,8 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         jLabel2.setText("Nome Fantasia");
 
-        textoCNPJ.setToolTipText("Insira o CNPJ da marca");
+        textoCNPJ.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        textoCNPJ.setToolTipText("Insira o CNPJ da fabricante.");
 
         jLabel3.setText("CNPJ");
 
@@ -78,7 +82,8 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jLabel1.setText("Consultar Fabricante");
 
-        textoNomeFantasia.setToolTipText("Insira o nome da fabricante");
+        textoNomeFantasia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        textoNomeFantasia.setToolTipText("Insira o nome da fabricante.");
 
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(textoCNPJ, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -94,37 +99,39 @@ public class TelaCadastro extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(15, 15, 15)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabel2)
-                            .addComponent(textoNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
                             .addComponent(jLabel3)
                             .addComponent(textoCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)))
+                            .addComponent(textoNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel5)))
+                .addGap(15, 15, 15))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addComponent(textoNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addComponent(textoCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel5)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
-        btnVerificarFabricante.setText("Verificar fabricante");
+        btnVerificarFabricante.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnVerificarFabricante.setForeground(new java.awt.Color(51, 51, 51));
+        btnVerificarFabricante.setText("Verificar");
         btnVerificarFabricante.setToolTipText("Realizar a Busca Automática Utilizando Somente o CNPJ");
         btnVerificarFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,44 +146,38 @@ public class TelaCadastro extends javax.swing.JFrame {
         textoStatus.setEditable(false);
         textoStatus.setToolTipText("Insira o nome da fabricante");
 
-        jLabel7.setText("Status");
+        jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel7.setText("Status:");
 
+        CNPJLabel.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         CNPJLabel.setText("CNPJ");
 
         textoEndereco.setEditable(false);
         textoEndereco.setToolTipText("Insira o nome da fabricante");
 
-        jLabel4.setText("Situaçao");
+        jLabel4.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel4.setText("Situação:");
 
         textoSituacao.setEditable(false);
         textoSituacao.setToolTipText("Insira o nome da fabricante");
 
-        jLabel8.setText("Capital Social");
+        jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel8.setText("Capital Social:");
 
         textoCapitalSocial.setEditable(false);
         textoCapitalSocial.setToolTipText("Insira o nome da fabricante");
 
-        jLabel9.setText("Telefone");
+        jLabel9.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel9.setText("Telefone:");
 
         textoTelefone.setEditable(false);
         textoTelefone.setToolTipText("Insira o nome da fabricante");
 
-        textoRazaoSocial.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        textoRazaoSocial.setForeground(new java.awt.Color(255, 0, 0));
+        textoRazaoSocial.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         textoRazaoSocial.setText("NOME");
 
-        btnFinalizarCadastro.setBackground(new java.awt.Color(153, 255, 153));
-        btnFinalizarCadastro.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        btnFinalizarCadastro.setText("Finalizar cadastro");
-        btnFinalizarCadastro.setToolTipText("Concluir o Cadastro do Fabricante");
-        btnFinalizarCadastro.setEnabled(false);
-        btnFinalizarCadastro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFinalizarCadastroActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setText("Endereço Matriz");
+        jLabel10.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel10.setText("Endereço Matriz:");
 
         jLayeredPane2.setLayer(textoStatus, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -189,7 +190,6 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLayeredPane2.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(textoTelefone, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(textoRazaoSocial, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(btnFinalizarCadastro, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
@@ -197,66 +197,99 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLayeredPane2Layout.setHorizontalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textoEndereco)
+                .addGap(15, 15, 15)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(textoRazaoSocial)
+                    .addComponent(CNPJLabel)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(textoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)
-                            .addComponent(textoCapitalSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)
-                            .addComponent(textoSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(textoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(CNPJLabel)
-                            .addComponent(textoRazaoSocial))
-                        .addGap(0, 390, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnFinalizarCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(233, 233, 233))
+                            .addComponent(textoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)))
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textoCapitalSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textoSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)))
+                    .addComponent(jLabel10)
+                    .addComponent(textoEndereco))
+                .addGap(15, 15, 15))
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(15, 15, 15)
                 .addComponent(textoRazaoSocial)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(15, 15, 15)
                 .addComponent(CNPJLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(10, 10, 10)
                 .addComponent(textoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textoCapitalSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textoSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btnFinalizarCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(15, 15, 15)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(10, 10, 10)
+                                .addComponent(textoCapitalSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(10, 10, 10)
+                                .addComponent(textoSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel9)
+                        .addGap(10, 10, 10)
+                        .addComponent(textoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(10, 10, 10)
+                        .addComponent(textoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15))
         );
 
-        btnPularVerificacao.setText("Cadastrar fabricante sem verificar status do CNPJ");
+        btnPularVerificacao.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnPularVerificacao.setForeground(new java.awt.Color(51, 51, 51));
+        btnPularVerificacao.setText("Cadastro sem Verificação");
         btnPularVerificacao.setToolTipText("Prosseguir Com o Cadastro Sem a Consulta Automática ");
         btnPularVerificacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPularVerificacaoActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setBackground(new java.awt.Color(255, 51, 51));
+        btnCancelar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(51, 51, 51));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setToolTipText("Concluir o Cadastro do Fabricante");
+        btnCancelar.setEnabled(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel6.setText(" CADASTRO FABRICANTES");
+
+        btnFinalizarCadastro1.setBackground(new java.awt.Color(153, 255, 153));
+        btnFinalizarCadastro1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnFinalizarCadastro1.setForeground(new java.awt.Color(51, 51, 51));
+        btnFinalizarCadastro1.setText("Finalizar Cadastro");
+        btnFinalizarCadastro1.setToolTipText("Concluir o Cadastro do Fabricante");
+        btnFinalizarCadastro1.setEnabled(false);
+        btnFinalizarCadastro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarCadastro1ActionPerformed(evt);
             }
         });
 
@@ -281,29 +314,48 @@ public class TelaCadastro extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLayeredPane1)
-                    .addComponent(btnVerificarFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPularVerificacao))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayeredPane2)
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(246, 246, 246)
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(btnPularVerificacao)
+                                .addGap(30, 30, 30)
+                                .addComponent(btnVerificarFabricante)))
+                        .addGap(15, 15, 15)
+                        .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(300, 300, 300)
+                        .addComponent(btnFinalizarCadastro1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(13, 13, 13)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel6)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLayeredPane2)
+                    .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLayeredPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPularVerificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnVerificarFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(172, 172, 172)))
-                .addContainerGap())
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnPularVerificacao)
+                            .addComponent(btnVerificarFabricante))))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFinalizarCadastro1)
+                    .addComponent(btnCancelar))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -315,7 +367,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void btnVerificarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarFabricanteActionPerformed
-        btnFinalizarCadastro.setEnabled(false);
+        btnCancelar.setEnabled(false);
         if (textoNomeFantasia.getText().equals("") || textoCNPJ.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             return;
@@ -364,7 +416,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                         CNPJLabel.setText(cnpjObject.getCNPJ());
 
                         if (cnpjObject.getStatus().equals("OK")) {
-                            btnFinalizarCadastro.setEnabled(true);
+                            btnCancelar.setEnabled(true);
                         }
 
                     } catch (IllegalArgumentException | CNPJNotFound e) {
@@ -379,7 +431,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnVerificarFabricanteActionPerformed
 
-    private void btnFinalizarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCadastroActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         if (cnpjObject != null && cnpjObject.getStatus().equals("OK")) {
             try {
                 ManufacturerResource manufacturer = ManufacturerDAO.getInstance().addManufacturer(cnpjObject.getNome(), CNPJResource.returnCNPJUnformat(cnpjObject.getCNPJ()));
@@ -389,7 +441,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }
         }
-    }//GEN-LAST:event_btnFinalizarCadastroActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
     }//GEN-LAST:event_formWindowOpened
@@ -423,6 +475,10 @@ public class TelaCadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPularVerificacaoActionPerformed
 
+    private void btnFinalizarCadastro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCadastro1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFinalizarCadastro1ActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -433,7 +489,8 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CNPJLabel;
-    private javax.swing.JButton btnFinalizarCadastro;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnFinalizarCadastro1;
     private javax.swing.JButton btnPularVerificacao;
     private javax.swing.JButton btnVerificarFabricante;
     private javax.swing.JMenuItem exitMenuItem;
@@ -444,6 +501,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
