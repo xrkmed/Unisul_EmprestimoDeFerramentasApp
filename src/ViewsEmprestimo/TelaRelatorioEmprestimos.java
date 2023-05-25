@@ -168,7 +168,7 @@ public class TelaRelatorioEmprestimos extends javax.swing.JFrame {
 
         jMenu2.setText("Exportar");
 
-        jMenu4.setText("Exportar relatorio");
+        jMenu4.setText("Exportar Relatório");
 
         jMenuItem1.setText("Exportar para PDF");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
