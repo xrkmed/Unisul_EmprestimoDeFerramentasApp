@@ -53,7 +53,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         btnPularVerificacao = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        btnFinalizarCadastro = new javax.swing.JButton();
+        btnFinalizarCadastro1 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
@@ -267,6 +267,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         btnCancelar.setForeground(new java.awt.Color(51, 51, 51));
         btnCancelar.setText("Cancelar");
         btnCancelar.setToolTipText("Concluir o Cadastro do Fabricante");
+        btnCancelar.setEnabled(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -277,15 +278,15 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 51, 51));
         jLabel6.setText(" CADASTRO FABRICANTES");
 
-        btnFinalizarCadastro.setBackground(new java.awt.Color(153, 255, 153));
-        btnFinalizarCadastro.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        btnFinalizarCadastro.setForeground(new java.awt.Color(51, 51, 51));
-        btnFinalizarCadastro.setText("Finalizar Cadastro");
-        btnFinalizarCadastro.setToolTipText("Concluir o Cadastro do Fabricante");
-        btnFinalizarCadastro.setEnabled(false);
-        btnFinalizarCadastro.addActionListener(new java.awt.event.ActionListener() {
+        btnFinalizarCadastro1.setBackground(new java.awt.Color(153, 255, 153));
+        btnFinalizarCadastro1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnFinalizarCadastro1.setForeground(new java.awt.Color(51, 51, 51));
+        btnFinalizarCadastro1.setText("Finalizar Cadastro");
+        btnFinalizarCadastro1.setToolTipText("Concluir o Cadastro do Fabricante");
+        btnFinalizarCadastro1.setEnabled(false);
+        btnFinalizarCadastro1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFinalizarCadastroActionPerformed(evt);
+                btnFinalizarCadastro1ActionPerformed(evt);
             }
         });
 
@@ -330,7 +331,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                         .addGap(136, 136, 136)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(300, 300, 300)
-                        .addComponent(btnFinalizarCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnFinalizarCadastro1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
@@ -349,7 +350,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                             .addComponent(btnVerificarFabricante))))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnFinalizarCadastro)
+                    .addComponent(btnFinalizarCadastro1)
                     .addComponent(btnCancelar))
                 .addGap(20, 20, 20))
         );
@@ -369,7 +370,7 @@ public class TelaCadastro extends javax.swing.JFrame {
             return;
         }
 
-        if (CNPJResource.returnCNPJUnformat(textoCNPJ.getText()).length() != 14) {
+        if(!CNPJResource.validarCNPJ(textoCNPJ.getText())){
             JOptionPane.showMessageDialog(null, "CNPJ inválido!");
             return;
         }
@@ -410,7 +411,10 @@ public class TelaCadastro extends javax.swing.JFrame {
                         textoCapitalSocial.setText("R$ " + cnpjObject.getCapitalSocial());
                         textoSituacao.setText(cnpjObject.getSituacao());
                         CNPJLabel.setText(cnpjObject.getCNPJ());
-                        btnFinalizarCadastro.setEnabled(true);
+
+                        if (cnpjObject.getStatus().equals("OK")) {
+                            btnCancelar.setEnabled(true);
+                        }
 
                     } catch (IllegalArgumentException | CNPJNotFound e) {
                         JOptionPane.showMessageDialog(null, e.getMessage());
@@ -425,7 +429,15 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerificarFabricanteActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-       this.dispose();
+        if (cnpjObject != null && cnpjObject.getStatus().equals("OK")) {
+            try {
+                ManufacturerResource manufacturer = ManufacturerDAO.getInstance().addManufacturer(cnpjObject.getNome(), CNPJResource.returnCNPJUnformat(cnpjObject.getCNPJ()));
+                JOptionPane.showMessageDialog(null, "Fabricante " + cnpjObject.getNome() + " (" + cnpjObject.getCNPJ() + ") cadastrado com sucesso!");
+                this.dispose();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -460,17 +472,9 @@ public class TelaCadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPularVerificacaoActionPerformed
 
-    private void btnFinalizarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCadastroActionPerformed
-        if (cnpjObject != null && cnpjObject.getStatus().equals("OK")) {
-            try {
-                ManufacturerResource manufacturer = ManufacturerDAO.getInstance().addManufacturer(cnpjObject.getNome(), CNPJResource.returnCNPJUnformat(cnpjObject.getCNPJ()));
-                JOptionPane.showMessageDialog(null, "Fabricante " + cnpjObject.getNome() + " (" + cnpjObject.getCNPJ() + ") cadastrado com sucesso!");
-                this.dispose();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_btnFinalizarCadastroActionPerformed
+    private void btnFinalizarCadastro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCadastro1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFinalizarCadastro1ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -483,7 +487,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CNPJLabel;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnFinalizarCadastro;
+    private javax.swing.JButton btnFinalizarCadastro1;
     private javax.swing.JButton btnPularVerificacao;
     private javax.swing.JButton btnVerificarFabricante;
     private javax.swing.JMenuItem exitMenuItem;
