@@ -67,6 +67,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu8 = new javax.swing.JMenu();
         btnDevTela = new javax.swing.JMenuItem();
         jSeparator11 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Grupo Supimpa - ToolStock Manager");
@@ -384,7 +385,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu8.setMnemonic('f');
         fileMenu8.setText("Desenvolvimento");
 
-        btnDevTela.setText("Nova tela");
+        btnDevTela.setText("TesteTela");
         btnDevTela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDevTelaActionPerformed(evt);
@@ -392,6 +393,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         fileMenu8.add(btnDevTela);
         fileMenu8.add(jSeparator11);
+
+        jMenuItem1.setText("NewTela");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        fileMenu8.add(jMenuItem1);
 
         menuBar.add(fileMenu8);
 
@@ -600,6 +609,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         newThread.start();
     }//GEN-LAST:event_btnDevTelaActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new NewTela().setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -670,6 +683,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane3;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator11;
