@@ -20,7 +20,7 @@ public class NewTela extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        labelListaNome = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         btnMais = new javax.swing.JButton();
@@ -82,18 +82,20 @@ public class NewTela extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-------------", "ID", "Nome", "Emp. Pendente" }));
         jComboBox1.setToolTipText("Selecione um filtro");
+        jComboBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel2.setText("Filtros:");
 
-        jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Lista Amigos");
+        labelListaNome.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        labelListaNome.setForeground(new java.awt.Color(255, 51, 51));
+        labelListaNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelListaNome.setText("Lista Amigos");
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-export-custom (2).png"))); // NOI18N
         jButton6.setToolTipText("Exportar Relatório");
         jButton6.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLayeredPane1.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -104,7 +106,7 @@ public class NewTela extends javax.swing.JFrame {
         jLayeredPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jComboBox1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(labelListaNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jButton6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -123,7 +125,7 @@ public class NewTela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelListaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
@@ -150,7 +152,7 @@ public class NewTela extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
+                    .addComponent(labelListaNome)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10))
         );
@@ -160,23 +162,37 @@ public class NewTela extends javax.swing.JFrame {
         btnMais.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/cog-custom.png"))); // NOI18N
         btnMais.setToolTipText("Mais Opções");
         btnMais.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnMais.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/account-group-custom.png"))); // NOI18N
         btnAmigos.setToolTipText("Amigos");
         btnAmigos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnAmigos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAmigos.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 btnAmigosMouseDragged(evt);
+            }
+        });
+        btnAmigos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAmigosActionPerformed(evt);
             }
         });
 
         btnEmprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/hand-coin-custom-removebg-preview.png"))); // NOI18N
         btnEmprestimos.setToolTipText("Empréstimos");
         btnEmprestimos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnEmprestimos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEmprestimos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmprestimosActionPerformed(evt);
+            }
+        });
 
         bntFerramentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/tools-custom.png"))); // NOI18N
         bntFerramentas.setToolTipText("Ferramentas");
         bntFerramentas.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        bntFerramentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bntFerramentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntFerramentasActionPerformed(evt);
@@ -186,10 +202,17 @@ public class NewTela extends javax.swing.JFrame {
         bntFabricantes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/anvil-custom.png"))); // NOI18N
         bntFabricantes.setToolTipText("Fabricantes");
         bntFabricantes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        bntFabricantes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bntFabricantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntFabricantesActionPerformed(evt);
+            }
+        });
 
         bntSeguranca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/lock-open-custom.png"))); // NOI18N
         bntSeguranca.setToolTipText("Segurança");
         bntSeguranca.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        bntSeguranca.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLayeredPane3.setLayer(btnMais, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(btnAmigos, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -458,7 +481,7 @@ public class NewTela extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAmigosMouseDragged
 
     private void bntFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFerramentasActionPerformed
-        // TODO add your handling code here:
+        labelListaNome.setText("Lista Ferramentas");
     }//GEN-LAST:event_bntFerramentasActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -473,9 +496,18 @@ public class NewTela extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmigosActionPerformed
+        labelListaNome.setText("Lista Amigos");
+    }//GEN-LAST:event_btnAmigosActionPerformed
+
+    private void btnEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmprestimosActionPerformed
+        labelListaNome.setText("Lista Empréstimos");
+    }//GEN-LAST:event_btnEmprestimosActionPerformed
+
+    private void bntFabricantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFabricantesActionPerformed
+        labelListaNome.setText("Lista Fabricantes");
+    }//GEN-LAST:event_bntFabricantesActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -508,97 +540,7 @@ public class NewTela extends javax.swing.JFrame {
         });
     }
 
-    private void loadValores() {
-        try {
-            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-            //CONFIGURACOES DA TABELA
-            model.setRowCount(0);
-            selectedFriend = null;
-            selecionadoNome.setText("");
-            selecionadoTelefone.setText("");
-
-            StatusRenderer renderer = new StatusRenderer();
-            //statusRed.addHighlightedRow(1, Color.RED);
-            ArrayList<Object[]> amigosData = FriendsDAO.getInstance().loadFriendsTabela();
-            if (filtrarRanque.isSelected()) {
-                switch (rankType.getSelectedItem().toString().toLowerCase()) {
-                    case "nome": {
-                        amigosData.sort((Object[] object1, Object[] object2) -> {
-                            String s1 = (String) object1[1];
-                            String s2 = (String) object2[1];
-                            return s1.compareTo(s2);
-                        });
-                        break;
-                    }
-                    case "emprestimos em aberto": {
-                        amigosData.sort((Object[] object1, Object[] object2) -> {
-                            Integer i1 = (Integer) object1[4];
-                            Integer i2 = (Integer) object2[4];
-                            return i2.compareTo(i1);
-                        });
-                        break;
-                    }
-                    case "emprestimos atrasados": {
-                        amigosData.sort((Object[] object1, Object[] object2) -> {
-                            Integer i1 = (Integer) object1[5];
-                            Integer i2 = (Integer) object2[5];
-                            return i2.compareTo(i1);
-                        });
-                        break;
-                    }
-                    default:
-                        break;
-                }
-            }
-
-            for (Object[] data : amigosData) {
-                if (filtroAmigosEmEmprestimo.isSelected() && data[4].toString().equals("0")) {
-                    continue;
-                }
-                if (filtroAmigosDevolverFerramenta.isSelected() && data[5].toString().equals("0")) {
-                    continue;
-                }
-                if (filtroAmigosSemEmprestimoAberto.isSelected() && !data[4].toString().equals("0") && !data[6].toString().equals("0")) {
-                    continue;
-                } else {
-                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.white);
-                    for (int i = 0; i < jTable2.getColumnCount(); i++) {
-                        jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
-                    }
-                }
-                if (filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0) {
-                    if (!data[1].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())) {
-                        continue;
-                    }
-                }
-
-                if (filtroEndereco.isSelected() && textFiltrarEndereco.getText().trim().length() > 0) {
-                    if (!data[3].toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())) {
-                        continue;
-                    }
-                }
-
-                if (Integer.parseInt(data[4].toString()) > 0) {
-                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
-                    for (int i = 0; i < jTable2.getColumnCount(); i++) {
-                        jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
-                    }
-                }
-
-                if (Integer.parseInt(data[5].toString()) > 0) {
-                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
-                    for (int i = 0; i < jTable2.getColumnCount(); i++) {
-                        jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
-                    }
-                }
-
-                model.addRow(data);
-
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar os dados da tabela: " + e.getMessage());
-        }
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntFabricantes;
@@ -616,7 +558,6 @@ public class NewTela extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JMenu jMenu1;
@@ -636,5 +577,6 @@ public class NewTela extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel labelListaNome;
     // End of variables declaration//GEN-END:variables
 }
