@@ -164,7 +164,7 @@ public class LoansDAO {
             }
 
             
-            Object[] datas = new Object[]{result.getInt("emprestimo_id"), result.getString("nome"), sdf.format(result.getDate("startDate")), sdf.format(result.getDate("endDate")), sdf.format(result.getDate("finalizadoData")), result.getString("observacoes"), result.getInt("totalFerramentas"), BRLResource.PRICE_FORMATTER.format(result.getDouble("totalValorFerramentas")), BRLResource.PRICE_FORMATTER.format(result.getDouble("valorRecebido")), stringFerramentas};
+            Object[] datas = new Object[]{result.getInt("emprestimo_id"), result.getString("nome").toUpperCase(), sdf.format(result.getDate("startDate")), sdf.format(result.getDate("endDate")), sdf.format(result.getDate("finalizadoData")), result.getString("observacoes").toUpperCase(), result.getInt("totalFerramentas"), BRLResource.PRICE_FORMATTER.format(result.getDouble("totalValorFerramentas")), BRLResource.PRICE_FORMATTER.format(result.getDouble("valorRecebido")), stringFerramentas.toUpperCase()};
             relatorio.add(datas);
          }
 
