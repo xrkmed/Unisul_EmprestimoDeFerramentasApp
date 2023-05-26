@@ -8,36 +8,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Op&#xe7;&#xf5;es"/>
           </Properties>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu4">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
-          </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Relat&#xf3;rio Amigos"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Relat&#xf3;rio Ferramentas"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Relat&#xf3;rio Fabricantes"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Relat&#xf3;rio Empr&#xe9;stimos Finalizados"/>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Views/Icons/close-thick-custom (1).png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Fechar Sistema"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem8ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -69,26 +49,28 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Views/Icons/white-balance-sunny-custom.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Visual Claro"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Views/Icons/moon-waning-crescent-custom.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Visual Noturno"/>
               </Properties>
             </MenuItem>
           </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Sair"/>
-          </Properties>
         </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Grupo Supimpa - ToolStock Manager"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
@@ -154,27 +136,27 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                  <Component id="jButton2" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="bntCadastrar" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                  <Component id="jButton4" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnDeletar" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                  <Component id="jButton5" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnEditar" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                  <Component id="jButton3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnVisualizar" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton6" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnExportar" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace pref="35" max="32767" attributes="0"/>
                   <Component id="labelListaNome" min="-2" pref="367" max="-2" attributes="0"/>
                   <EmptySpace pref="35" max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="22" max="-2" attributes="0"/>
+                  <Component id="bntBuscar" min="-2" pref="22" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                  <Component id="jTextField1" min="-2" pref="240" max="-2" attributes="0"/>
+                  <Component id="campoFiltroNome" min="-2" pref="240" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                  <Component id="jComboBox1" min="-2" pref="139" max="-2" attributes="0"/>
+                  <Component id="comboFiltros" min="-2" pref="139" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -185,16 +167,16 @@
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
                       <Component id="jLabel1" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="2" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="jButton3" alignment="2" pref="0" max="32767" attributes="0"/>
-                      <Component id="jButton5" alignment="2" pref="0" max="32767" attributes="0"/>
-                      <Component id="jButton4" alignment="2" pref="0" max="32767" attributes="0"/>
-                      <Component id="jButton2" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoFiltroNome" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="bntBuscar" alignment="2" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="btnVisualizar" alignment="2" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnEditar" alignment="2" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnDeletar" alignment="2" pref="0" max="32767" attributes="0"/>
+                      <Component id="bntCadastrar" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="comboFiltros" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="labelListaNome" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton6" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="btnExportar" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               </Group>
@@ -202,7 +184,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="campoFiltroNome">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Busca por nome"/>
           </Properties>
@@ -215,8 +197,11 @@
             <Property name="text" type="java.lang.String" value="Nome:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="bntCadastrar">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/file-document-plus-custom.png"/>
             </Property>
@@ -231,8 +216,11 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="btnVisualizar">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/file-eye-custom.png"/>
             </Property>
@@ -247,8 +235,11 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="btnDeletar">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/file-document-remove-custom.png"/>
             </Property>
@@ -263,8 +254,11 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="btnEditar">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/file-document-edit-custom.png"/>
             </Property>
@@ -279,8 +273,11 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="bntBuscar">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/magnify-custom.png"/>
             </Property>
@@ -295,7 +292,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="comboFiltros">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -334,8 +331,11 @@
             <Property name="text" type="java.lang.String" value="Lista Amigos"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton6">
+        <Component class="javax.swing.JButton" name="btnExportar">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/file-export-custom (2).png"/>
             </Property>
@@ -367,7 +367,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnMais" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
+                      <Component id="btnConfig" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
                       <Component id="bntSeguranca" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
                       <Component id="bntFabricantes" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
                       <Component id="bntFerramentas" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
@@ -392,15 +392,18 @@
                   <EmptySpace pref="20" max="32767" attributes="0"/>
                   <Component id="bntSeguranca" pref="48" max="32767" attributes="0"/>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
-                  <Component id="btnMais" pref="48" max="32767" attributes="0"/>
+                  <Component id="btnConfig" pref="48" max="32767" attributes="0"/>
                   <EmptySpace pref="35" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnMais">
+        <Component class="javax.swing.JButton" name="btnConfig">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/cog-custom.png"/>
             </Property>
@@ -417,6 +420,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAmigos">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/account-group-custom.png"/>
             </Property>
@@ -437,6 +443,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnEmprestimos">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/hand-coin-custom-removebg-preview.png"/>
             </Property>
@@ -456,6 +465,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="bntFerramentas">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/tools-custom.png"/>
             </Property>
@@ -475,6 +487,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="bntFabricantes">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/anvil-custom.png"/>
             </Property>
@@ -494,6 +509,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="bntSeguranca">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/lock-open-custom.png"/>
             </Property>
@@ -517,7 +535,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="tabelaAmigos">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="14" style="1"/>
