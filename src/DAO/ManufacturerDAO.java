@@ -54,7 +54,7 @@ public class ManufacturerDAO {
         ResultSet manufacturers = DBQuery.executeQuery("SELECT id, razao_social, cnpj FROM tb_fabricantes;");
 
         while(manufacturers.next()){
-            ManufacturerResource manufacturer = new ManufacturerResource(manufacturers.getInt("id"), manufacturers.getString("razao_social"), manufacturers.getLong("cnpj") + "");
+            ManufacturerResource manufacturer = new ManufacturerResource(manufacturers.getInt("id"), manufacturers.getString("razao_social").toUpperCase(), manufacturers.getLong("cnpj") + "");
             fabricantes.add(manufacturer);
         }
 
@@ -77,7 +77,7 @@ public class ManufacturerDAO {
             ResultSet manufacturers = DBQuery.executeQuery("SELECT id, razao_social, cnpj FROM tb_fabricantes WHERE cnpj = ? LIMIT 1;", cnpj);
 
             while(manufacturers.next()){
-                ManufacturerResource manufacturer = new ManufacturerResource(manufacturers.getInt("id"), manufacturers.getString("razao_social"), manufacturers.getLong("cnpj") + "");
+                ManufacturerResource manufacturer = new ManufacturerResource(manufacturers.getInt("id"), manufacturers.getString("razao_social").toUpperCase(), manufacturers.getLong("cnpj") + "");
                 return manufacturer;
             }
         }
@@ -89,7 +89,7 @@ public class ManufacturerDAO {
         ArrayList<Object[]> datas = new ArrayList<>();
         ResultSet result = DBQuery.executeQuery("SELECT F.id AS id_fabricante, F.razao_social AS nome_fabricante, F.cnpj AS cnpj_fabricante, COUNT(T.id) AS quantidade_ferramentas, COUNT(CASE WHEN T.emprestimo_id <> 0 THEN 1 END) AS quantidade_ferramentas_com_emprestimo, SUM(T.price) AS valor_total_ferramentas FROM tb_fabricantes F LEFT JOIN tb_ferramentas T ON F.id = T.fabricante_id GROUP BY F.id, F.razao_social, F.cnpj;");
         while(result.next()){
-            datas.add(new Object[]{result.getInt("id_fabricante"),  result.getString("nome_fabricante"), CNPJResource.returnCNPJFormat(result.getString("cnpj_fabricante")), result.getInt("quantidade_ferramentas"), result.getInt("quantidade_ferramentas_com_emprestimo"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getLong("valor_total_ferramentas"))});
+            datas.add(new Object[]{result.getInt("id_fabricante"),  result.getString("nome_fabricante").toUpperCase(), CNPJResource.returnCNPJFormat(result.getString("cnpj_fabricante")), result.getInt("quantidade_ferramentas"), result.getInt("quantidade_ferramentas_com_emprestimo"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getLong("valor_total_ferramentas"))});
         }
 
         return datas;

@@ -102,7 +102,7 @@ public class LoansDAO {
         ResultSet result = DBQuery.executeQuery("SELECT E.id AS id_emprestimo, A.nome AS nome_amigo, E.startDate, E.endDate, DATEDIFF(E.endDate, CURDATE()) AS dias_restantes, E.valor_receber AS valor_emprestimo, COALESCE(SUM(F.price), 0) AS soma_valor_ferramentas, COUNT(F.id) AS quantidade_ferramentas FROM tb_emprestimos E JOIN tb_amigos A ON E.amigo_id = A.id LEFT JOIN tb_ferramentas F ON E.id = F.emprestimo_id WHERE E.finalizado = 0 GROUP BY E.id, A.nome, E.startDate, E.endDate, E.valor_receber;");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         while(result.next()){
-            datas.add(new Object[]{result.getInt("id_emprestimo"), result.getString("nome_amigo"), sdf.format(result.getDate("startDate")), sdf.format(result.getDate("endDate")), result.getInt("dias_restantes"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("valor_emprestimo")), result.getInt("quantidade_ferramentas"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("soma_valor_ferramentas"))});
+            datas.add(new Object[]{result.getInt("id_emprestimo"), result.getString("nome_amigo").toUpperCase(), sdf.format(result.getDate("startDate")), sdf.format(result.getDate("endDate")), result.getInt("dias_restantes"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("valor_emprestimo")), result.getInt("quantidade_ferramentas"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("soma_valor_ferramentas"))});
         }
 
         return datas;
@@ -164,7 +164,7 @@ public class LoansDAO {
             }
 
             
-            Object[] datas = new Object[]{result.getInt("emprestimo_id"), result.getString("nome"), sdf.format(result.getDate("startDate")), sdf.format(result.getDate("endDate")), sdf.format(result.getDate("finalizadoData")), result.getString("observacoes"), result.getInt("totalFerramentas"), BRLResource.PRICE_FORMATTER.format(result.getDouble("totalValorFerramentas")), BRLResource.PRICE_FORMATTER.format(result.getDouble("valorRecebido")), stringFerramentas};
+            Object[] datas = new Object[]{result.getInt("emprestimo_id"), result.getString("nome").toUpperCase(), sdf.format(result.getDate("startDate")), sdf.format(result.getDate("endDate")), sdf.format(result.getDate("finalizadoData")), result.getString("observacoes").toUpperCase(), result.getInt("totalFerramentas"), BRLResource.PRICE_FORMATTER.format(result.getDouble("totalValorFerramentas")), BRLResource.PRICE_FORMATTER.format(result.getDouble("valorRecebido")), stringFerramentas.toUpperCase()};
             relatorio.add(datas);
          }
 

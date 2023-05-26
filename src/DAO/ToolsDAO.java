@@ -53,7 +53,7 @@ public class ToolsDAO {
         ResultSet result = DBQuery.executeQuery("SELECT id, name, price, fabricante_id, emprestimo_id FROM tb_ferramentas;");
 
         while(result.next()){
-            ToolModel tool = new ToolModel(result.getInt("id"), result.getString("name"), ManufacturerDAO.getInstance().getManufacturer(result.getInt("fabricante_id")), result.getDouble("price"), result.getInt("emprestimo_id"));
+            ToolModel tool = new ToolModel(result.getInt("id"), result.getString("name").toUpperCase(), ManufacturerDAO.getInstance().getManufacturer(result.getInt("fabricante_id")), result.getDouble("price"), result.getInt("emprestimo_id"));
             ferramentas.add(tool);
         }
 
@@ -68,7 +68,7 @@ public class ToolsDAO {
         Double toolPrice = 0.;
         while(result.next()){
             toolId = result.getInt("id");
-            toolName = result.getString("name");
+            toolName = result.getString("name").toUpperCase();
             toolManufacturerId = result.getInt("fabricante_id");
             toolPrice = result.getDouble("price");
             toolLoanId = result.getInt("emprestimo_id");
@@ -87,7 +87,7 @@ public class ToolsDAO {
         Double toolPrice = 0.;
         while(result.next()){
             toolId = result.getInt("id");
-            toolName = result.getString("name");
+            toolName = result.getString("name").toUpperCase();
             toolManufacturerId = result.getInt("fabricante_id");
             toolPrice = result.getDouble("price");
             toolLoanId = result.getInt("emprestimo_id");
@@ -102,7 +102,7 @@ public class ToolsDAO {
         ResultSet result = DBQuery.executeQuery("SELECT id, name, price, fabricante_id, emprestimo_id FROM tb_ferramentas WHERE fabricante_id = '" + manufacturerId +"';");
 
         while(result.next()){
-            ToolModel tool = new ToolModel(result.getInt("id"), result.getString("name"), ManufacturerDAO.getInstance().getManufacturer(result.getInt("fabricante_id")), result.getDouble("price"), result.getInt("emprestimo_id"));
+            ToolModel tool = new ToolModel(result.getInt("id"), result.getString("name").toUpperCase(), ManufacturerDAO.getInstance().getManufacturer(result.getInt("fabricante_id")), result.getDouble("price"), result.getInt("emprestimo_id"));
             ferramentas.add(tool);
         }
 
@@ -114,7 +114,7 @@ public class ToolsDAO {
         ResultSet result = DBQuery.executeQuery("SELECT id, name, price, fabricante_id, emprestimo_id FROM tb_ferramentas WHERE IFNULL(fabricante_id, 'Sem Fabricante') = 'Sem Fabricante';");
         
         while(result.next()){
-            ToolModel tool = new ToolModel(result.getInt("id"), result.getString("name"), null, result.getDouble("price"), result.getInt("emprestimo_id"));
+            ToolModel tool = new ToolModel(result.getInt("id"), result.getString("name").toUpperCase(), null, result.getDouble("price"), result.getInt("emprestimo_id"));
             ferramentas.add(tool);
         }
 
@@ -142,7 +142,7 @@ public class ToolsDAO {
         ResultSet result = DBQuery.executeQuery("SELECT tb_ferramentas.id AS id_ferramenta, tb_ferramentas.name AS nome_ferramenta, IFNULL(tb_fabricantes.razao_social, 'Sem fabricante') AS nome_fabricante, tb_ferramentas.price AS preco_ferramenta, IFNULL(tb_amigos.nome, 'Disponivel') AS nome_amigo, IF(tb_ferramentas.emprestimo_id IS NOT NULL, tb_emprestimos.endDate, 'Disponivel') AS endDate FROM tb_ferramentas LEFT JOIN tb_fabricantes ON tb_ferramentas.fabricante_id = tb_fabricantes.id LEFT JOIN tb_emprestimos ON tb_ferramentas.emprestimo_id = tb_emprestimos.id LEFT JOIN tb_amigos ON tb_emprestimos.amigo_id = tb_amigos.id;");
         while(result.next()){
             String date = !result.getString("endDate").equals("Disponivel") ? DateResource.convertDatabaseData(result.getString("endDate")) : "Disponivel";
-            datas.add(new Object[]{result.getInt("id_ferramenta"), result.getString("nome_ferramenta"), result.getString("nome_fabricante"), BRLResource.PRICE_FORMATTER.format(result.getDouble("preco_ferramenta")), result.getString("nome_amigo"), date});
+            datas.add(new Object[]{result.getInt("id_ferramenta"), result.getString("nome_ferramenta").toUpperCase(), result.getString("nome_fabricante").toUpperCase(), BRLResource.PRICE_FORMATTER.format(result.getDouble("preco_ferramenta")), result.getString("nome_amigo").toUpperCase(), date});
         }
 
         return datas;
@@ -152,7 +152,7 @@ public class ToolsDAO {
         ArrayList<Object[]> datas = new ArrayList<>();
         ResultSet result = DBQuery.executeQuery("SELECT tb_ferramentas.id, tb_ferramentas.name, tb_ferramentas.price, SUM(CASE WHEN tb_emprestimos.id > 0 THEN 1 ELSE 0 END) as total_loans FROM tb_ferramentas LEFT JOIN tb_emprestimos ON tb_ferramentas.emprestimo_id = tb_emprestimos.id GROUP BY tb_ferramentas.id, tb_ferramentas.name, tb_ferramentas.price, tb_emprestimos.id;");
         while(result.next()){
-           datas.add(new Object[]{result.getInt("id"), result.getString("name"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("price")), result.getInt("total_loans")});
+           datas.add(new Object[]{result.getInt("id"), result.getString("name").toUpperCase(), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("price")), result.getInt("total_loans")});
         }
 
         return datas;
