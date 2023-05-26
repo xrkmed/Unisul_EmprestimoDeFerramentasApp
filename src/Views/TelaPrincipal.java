@@ -18,16 +18,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        btnMais = new javax.swing.JButton();
-        btnAmigos = new javax.swing.JButton();
-        btnEmprestimos = new javax.swing.JButton();
-        bntFerramentas = new javax.swing.JButton();
-        bntFabricantes = new javax.swing.JButton();
-        bntSeguranca = new javax.swing.JButton();
-        jLayeredPane3 = new javax.swing.JLayeredPane();
-        jSeparator10 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         fileMenu1 = new javax.swing.JMenu();
@@ -71,106 +61,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Grupo Supimpa - ToolStock Manager");
-
-        jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        btnMais.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/4781840_+_add_circle_create_expand_icon.png"))); // NOI18N
-        btnMais.setToolTipText("Mais Opções");
-
-        btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/3994366_friend_group_members_people_team_icon.png"))); // NOI18N
-        btnAmigos.setToolTipText("Amigos");
-        btnAmigos.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                btnAmigosMouseDragged(evt);
-            }
-        });
-
-        btnEmprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/6598164_donation_give_money_support_volunteer_icon-removebg-preview.png"))); // NOI18N
-        btnEmprestimos.setToolTipText("Empréstimos");
-
-        bntFerramentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/8685618_ic_fluent_document_toolbox_filled_icon.png"))); // NOI18N
-        bntFerramentas.setToolTipText("Ferramentas");
-        bntFerramentas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntFerramentasActionPerformed(evt);
-            }
-        });
-
-        bntFabricantes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/9070920_hammer_and_anvil_icon__1_-removebg-preview.png"))); // NOI18N
-        bntFabricantes.setToolTipText("Fabricantes");
-
-        bntSeguranca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/9004782_lock_security_secure_protect_icon.png"))); // NOI18N
-        bntSeguranca.setToolTipText("Segurança");
-
-        jLayeredPane1.setLayer(btnMais, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(btnAmigos, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(btnEmprestimos, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(bntFerramentas, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(bntFabricantes, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(bntSeguranca, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMais, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntSeguranca, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntFabricantes, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntFerramentas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEmprestimos, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15))
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(btnAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(btnEmprestimos, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(bntFerramentas, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(bntFabricantes, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(bntSeguranca, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(btnMais, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
-        );
-
-        jLayeredPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("Lucro / Dívidas");
-
-        jLayeredPane3.setLayer(jSeparator10, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
-        jLayeredPane3.setLayout(jLayeredPane3Layout);
-        jLayeredPane3Layout.setHorizontalGroup(
-            jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15))
-        );
-        jLayeredPane3Layout.setVerticalGroup(
-            jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel1)
-                .addGap(3, 3, 3)
-                .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85))
-        );
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Administrativo");
@@ -410,23 +300,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(420, 420, 420)
-                .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+            .addGap(0, 843, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(355, 355, 355)
-                        .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(15, 15, 15))
+            .addGap(0, 522, Short.MAX_VALUE)
         );
 
         pack();
@@ -581,14 +459,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRankingAmigosActionPerformed
 
-    private void bntFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFerramentasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bntFerramentasActionPerformed
-
-    private void btnAmigosMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAmigosMouseDragged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAmigosMouseDragged
-
     private void btnTemaLightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTemaLightActionPerformed
         ThemeController.getInstance().setTheme(Enum_Themes.LIGHT, this);
     }//GEN-LAST:event_btnTemaLightActionPerformed
@@ -646,10 +516,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntFabricantes;
-    private javax.swing.JButton bntFerramentas;
-    private javax.swing.JButton bntSeguranca;
-    private javax.swing.JButton btnAmigos;
     private javax.swing.JMenuItem btnCadastrarAmigo;
     private javax.swing.JMenuItem btnCadastrarEmprestimo;
     private javax.swing.JMenuItem btnCadastrarFabricante;
@@ -658,10 +524,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem btnControleFinanceiro;
     private javax.swing.JMenuItem btnControleGastosFabricantes;
     private javax.swing.JMenuItem btnDevTela;
-    private javax.swing.JButton btnEmprestimos;
     private javax.swing.JMenuItem btnEmprestimosEmAberto;
     private javax.swing.JMenuItem btnFerramentasCad;
-    private javax.swing.JButton btnMais;
     private javax.swing.JMenuItem btnRankingAmigos;
     private javax.swing.JMenuItem btnRelatorioAmigos;
     private javax.swing.JMenuItem btnRelatorioEmprestimo;
@@ -680,12 +544,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu6;
     private javax.swing.JMenu fileMenu7;
     private javax.swing.JMenu fileMenu8;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JSeparator jSeparator10;
     private javax.swing.JPopupMenu.Separator jSeparator11;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
