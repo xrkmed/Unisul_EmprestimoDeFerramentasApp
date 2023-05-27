@@ -61,7 +61,7 @@ public class TelaInicial extends javax.swing.JFrame {
         bntCadastrar.setBackground(new java.awt.Color(205, 205, 205));
         bntCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-document-plus-custom.png"))); // NOI18N
         bntCadastrar.setToolTipText("Adicionar");
-        bntCadastrar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        bntCadastrar.setBorder(null);
         bntCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bntCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,25 +72,25 @@ public class TelaInicial extends javax.swing.JFrame {
         btnVisualizar.setBackground(new java.awt.Color(205, 205, 205));
         btnVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-eye-custom.png"))); // NOI18N
         btnVisualizar.setToolTipText("Modo Leitura");
-        btnVisualizar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnVisualizar.setBorder(null);
         btnVisualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btnDeletar.setBackground(new java.awt.Color(205, 205, 205));
         btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-document-remove-custom.png"))); // NOI18N
         btnDeletar.setToolTipText("Deletar");
-        btnDeletar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnDeletar.setBorder(null);
         btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btnEditar.setBackground(new java.awt.Color(205, 205, 205));
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-document-edit-custom.png"))); // NOI18N
         btnEditar.setToolTipText("Editar");
-        btnEditar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnEditar.setBorder(null);
         btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         bntBuscar.setBackground(new java.awt.Color(205, 205, 205));
         bntBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/magnify-custom.png"))); // NOI18N
         bntBuscar.setToolTipText("Buscar");
-        bntBuscar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        bntBuscar.setBorder(null);
         bntBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         comboFiltros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-------------", "ID", "Nome", "Emp. Pendente" }));
@@ -108,7 +108,7 @@ public class TelaInicial extends javax.swing.JFrame {
         btnExportar.setBackground(new java.awt.Color(205, 205, 205));
         btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-export-custom (2).png"))); // NOI18N
         btnExportar.setToolTipText("Exportar Relatório");
-        btnExportar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnExportar.setBorder(null);
         btnExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLayeredPane1.setLayer(campoFiltroNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -176,13 +176,13 @@ public class TelaInicial extends javax.swing.JFrame {
         btnConfig.setBackground(new java.awt.Color(205, 205, 205));
         btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/cog-custom.png"))); // NOI18N
         btnConfig.setToolTipText("Mais Opções");
-        btnConfig.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnConfig.setBorder(null);
         btnConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btnAmigos.setBackground(new java.awt.Color(205, 205, 205));
         btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/account-group-custom.png"))); // NOI18N
         btnAmigos.setToolTipText("Amigos");
-        btnAmigos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnAmigos.setBorder(null);
         btnAmigos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAmigos.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -198,7 +198,7 @@ public class TelaInicial extends javax.swing.JFrame {
         btnEmprestimos.setBackground(new java.awt.Color(205, 205, 205));
         btnEmprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/hand-coin-custom-removebg-preview.png"))); // NOI18N
         btnEmprestimos.setToolTipText("Empréstimos");
-        btnEmprestimos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnEmprestimos.setBorder(null);
         btnEmprestimos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEmprestimos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,7 +209,7 @@ public class TelaInicial extends javax.swing.JFrame {
         bntFerramentas.setBackground(new java.awt.Color(205, 205, 205));
         bntFerramentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/tools-custom.png"))); // NOI18N
         bntFerramentas.setToolTipText("Ferramentas");
-        bntFerramentas.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        bntFerramentas.setBorder(null);
         bntFerramentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bntFerramentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,7 +220,7 @@ public class TelaInicial extends javax.swing.JFrame {
         bntFabricantes.setBackground(new java.awt.Color(205, 205, 205));
         bntFabricantes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/anvil-custom.png"))); // NOI18N
         bntFabricantes.setToolTipText("Fabricantes");
-        bntFabricantes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        bntFabricantes.setBorder(null);
         bntFabricantes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bntFabricantes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,7 +231,7 @@ public class TelaInicial extends javax.swing.JFrame {
         bntSeguranca.setBackground(new java.awt.Color(205, 205, 205));
         bntSeguranca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/lock-open-custom.png"))); // NOI18N
         bntSeguranca.setToolTipText("Segurança");
-        bntSeguranca.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        bntSeguranca.setBorder(null);
         bntSeguranca.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLayeredPane3.setLayer(btnConfig, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -260,17 +260,17 @@ public class TelaInicial extends javax.swing.JFrame {
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
                 .addContainerGap(35, Short.MAX_VALUE)
-                .addComponent(btnAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(btnAmigos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(btnEmprestimos, javax.swing.GroupLayout.PREFERRED_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(btnEmprestimos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(bntFerramentas, javax.swing.GroupLayout.PREFERRED_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(bntFerramentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(bntFabricantes, javax.swing.GroupLayout.PREFERRED_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(bntFabricantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(bntSeguranca, javax.swing.GroupLayout.PREFERRED_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(bntSeguranca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(btnConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(btnConfig, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 

@@ -228,9 +228,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Adicionar"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -250,9 +248,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Modo Leitura"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -269,9 +265,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Deletar"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -288,9 +282,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Editar"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -307,9 +299,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Buscar"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -365,9 +355,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Exportar Relat&#xf3;rio"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -406,17 +394,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace pref="35" max="32767" attributes="0"/>
-                  <Component id="btnAmigos" pref="48" max="32767" attributes="0"/>
+                  <Component id="btnAmigos" max="32767" attributes="0"/>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
-                  <Component id="btnEmprestimos" pref="48" max="32767" attributes="0"/>
+                  <Component id="btnEmprestimos" max="32767" attributes="0"/>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
-                  <Component id="bntFerramentas" pref="48" max="32767" attributes="0"/>
+                  <Component id="bntFerramentas" max="32767" attributes="0"/>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
-                  <Component id="bntFabricantes" pref="48" max="32767" attributes="0"/>
+                  <Component id="bntFabricantes" max="32767" attributes="0"/>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
-                  <Component id="bntSeguranca" pref="48" max="32767" attributes="0"/>
+                  <Component id="bntSeguranca" max="32767" attributes="0"/>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
-                  <Component id="btnConfig" pref="48" max="32767" attributes="0"/>
+                  <Component id="btnConfig" max="32767" attributes="0"/>
                   <EmptySpace pref="35" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -433,9 +421,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Mais Op&#xe7;&#xf5;es"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -452,9 +438,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Amigos"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -475,9 +459,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Empr&#xe9;stimos"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -497,9 +479,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Ferramentas"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -519,9 +499,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Fabricantes"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -541,9 +519,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Seguran&#xe7;a"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
