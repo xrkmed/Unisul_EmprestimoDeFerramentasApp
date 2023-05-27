@@ -1,10 +1,13 @@
 package Views;
 
+import Controllers.OptionSelected;
+import Controllers.ThemeController;
+import Resources.Enum_Themes;
 import javax.swing.JOptionPane;
 
-public class NewTela extends javax.swing.JFrame {
+public class TelaInicial extends javax.swing.JFrame {
 
-    public NewTela() {
+    public TelaInicial() {
         initComponents();
     }
 
@@ -58,6 +61,11 @@ public class NewTela extends javax.swing.JFrame {
         bntCadastrar.setToolTipText("Adicionar");
         bntCadastrar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         bntCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bntCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntCadastrarActionPerformed(evt);
+            }
+        });
 
         btnVisualizar.setBackground(new java.awt.Color(255, 255, 255));
         btnVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-eye-custom.png"))); // NOI18N
@@ -429,10 +437,20 @@ public class NewTela extends javax.swing.JFrame {
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/white-balance-sunny-custom.png"))); // NOI18N
         jMenuItem6.setText("Visual Claro");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem6);
 
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/moon-waning-crescent-custom.png"))); // NOI18N
         jMenuItem7.setText("Visual Noturno");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem7);
 
         jMenuBar1.add(jMenu2);
@@ -475,6 +493,7 @@ public class NewTela extends javax.swing.JFrame {
 
     private void bntFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFerramentasActionPerformed
         labelListaNome.setText("Lista Ferramentas");
+        OptionSelected.setOption("ferramentas");
     }//GEN-LAST:event_bntFerramentasActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -483,14 +502,17 @@ public class NewTela extends javax.swing.JFrame {
 
     private void btnAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmigosActionPerformed
         labelListaNome.setText("Lista Amigos");
+        OptionSelected.setOption("amigos");
     }//GEN-LAST:event_btnAmigosActionPerformed
 
     private void btnEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmprestimosActionPerformed
         labelListaNome.setText("Lista Empréstimos");
+        OptionSelected.setOption("emprestimos");
     }//GEN-LAST:event_btnEmprestimosActionPerformed
 
     private void bntFabricantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFabricantesActionPerformed
         labelListaNome.setText("Lista Fabricantes");
+        OptionSelected.setOption("fabricantes");
     }//GEN-LAST:event_bntFabricantesActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -498,6 +520,20 @@ public class NewTela extends javax.swing.JFrame {
         if (flag == JOptionPane.YES_OPTION) {
             System.exit(-1);
         }    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        ThemeController.getInstance().setTheme(Enum_Themes.DARK, this);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        ThemeController.getInstance().setTheme(Enum_Themes.LIGHT, this);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void bntCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCadastrarActionPerformed
+        switch(OptionSelected.getOption()){
+            default: JOptionPane.showMessageDialog(rootPane, OptionSelected.getOption());
+        }
+    }//GEN-LAST:event_bntCadastrarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -513,20 +549,21 @@ public class NewTela extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewTela().setVisible(true);
+                new TelaInicial().setVisible(true);
             }
         });
     }
