@@ -6,11 +6,11 @@ import Resources.Enum_Themes;
 import javax.swing.JOptionPane;
 
 public class TelaInicial extends javax.swing.JFrame {
-
+    
     public TelaInicial() {
         initComponents();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -45,6 +45,8 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Grupo Supimpa - ToolStock Manager");
@@ -56,7 +58,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel1.setText("Nome:");
 
-        bntCadastrar.setBackground(new java.awt.Color(255, 255, 255));
+        bntCadastrar.setBackground(new java.awt.Color(205, 205, 205));
         bntCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-document-plus-custom.png"))); // NOI18N
         bntCadastrar.setToolTipText("Adicionar");
         bntCadastrar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -67,25 +69,25 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        btnVisualizar.setBackground(new java.awt.Color(255, 255, 255));
+        btnVisualizar.setBackground(new java.awt.Color(205, 205, 205));
         btnVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-eye-custom.png"))); // NOI18N
         btnVisualizar.setToolTipText("Modo Leitura");
         btnVisualizar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         btnVisualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        btnDeletar.setBackground(new java.awt.Color(255, 255, 255));
+        btnDeletar.setBackground(new java.awt.Color(205, 205, 205));
         btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-document-remove-custom.png"))); // NOI18N
         btnDeletar.setToolTipText("Deletar");
         btnDeletar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        btnEditar.setBackground(new java.awt.Color(255, 255, 255));
+        btnEditar.setBackground(new java.awt.Color(205, 205, 205));
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-document-edit-custom.png"))); // NOI18N
         btnEditar.setToolTipText("Editar");
         btnEditar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        bntBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        bntBuscar.setBackground(new java.awt.Color(205, 205, 205));
         bntBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/magnify-custom.png"))); // NOI18N
         bntBuscar.setToolTipText("Buscar");
         bntBuscar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -103,7 +105,7 @@ public class TelaInicial extends javax.swing.JFrame {
         labelListaNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelListaNome.setText("Lista Amigos");
 
-        btnExportar.setBackground(new java.awt.Color(255, 255, 255));
+        btnExportar.setBackground(new java.awt.Color(205, 205, 205));
         btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-export-custom (2).png"))); // NOI18N
         btnExportar.setToolTipText("Exportar Relatório");
         btnExportar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -171,13 +173,13 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jLayeredPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        btnConfig.setBackground(new java.awt.Color(255, 255, 255));
+        btnConfig.setBackground(new java.awt.Color(205, 205, 205));
         btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/cog-custom.png"))); // NOI18N
         btnConfig.setToolTipText("Mais Opções");
         btnConfig.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         btnConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        btnAmigos.setBackground(new java.awt.Color(255, 255, 255));
+        btnAmigos.setBackground(new java.awt.Color(205, 205, 205));
         btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/account-group-custom.png"))); // NOI18N
         btnAmigos.setToolTipText("Amigos");
         btnAmigos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -193,7 +195,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        btnEmprestimos.setBackground(new java.awt.Color(255, 255, 255));
+        btnEmprestimos.setBackground(new java.awt.Color(205, 205, 205));
         btnEmprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/hand-coin-custom-removebg-preview.png"))); // NOI18N
         btnEmprestimos.setToolTipText("Empréstimos");
         btnEmprestimos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -204,7 +206,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        bntFerramentas.setBackground(new java.awt.Color(255, 255, 255));
+        bntFerramentas.setBackground(new java.awt.Color(205, 205, 205));
         bntFerramentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/tools-custom.png"))); // NOI18N
         bntFerramentas.setToolTipText("Ferramentas");
         bntFerramentas.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -215,7 +217,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        bntFabricantes.setBackground(new java.awt.Color(255, 255, 255));
+        bntFabricantes.setBackground(new java.awt.Color(205, 205, 205));
         bntFabricantes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/anvil-custom.png"))); // NOI18N
         bntFabricantes.setToolTipText("Fabricantes");
         bntFabricantes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -226,7 +228,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        bntSeguranca.setBackground(new java.awt.Color(255, 255, 255));
+        bntSeguranca.setBackground(new java.awt.Color(205, 205, 205));
         bntSeguranca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/lock-open-custom.png"))); // NOI18N
         bntSeguranca.setToolTipText("Segurança");
         bntSeguranca.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -455,6 +457,18 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Antiga Tela Inicial");
+
+        jMenuItem1.setText("Abrir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -531,36 +545,31 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void bntCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCadastrarActionPerformed
         switch(OptionSelected.getOption()){
-            default: JOptionPane.showMessageDialog(rootPane, OptionSelected.getOption());
+            case "amigos":
+                new TelaCadastro().setVisible(true);
+            break;
+            
+            case "emprestimos":
+                new ViewsEmprestimo.TelaCadastroEmprestimo().setVisible(true);
+            break;
+            
+            case "ferramentas":
+                new ViewsTool.TelaCadastro().setVisible(true);
+            break;
+            
+            case "fabricantes":
+                new ViewsManufacturer.TelaCadastro().setVisible(true);
+            break;
+            
+            default:
         }
     }//GEN-LAST:event_bntCadastrarActionPerformed
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new TelaPrincipal().setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-        /* Create and display the form */
+    public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaInicial().setVisible(true);
@@ -590,8 +599,10 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

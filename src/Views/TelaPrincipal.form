@@ -277,8 +277,8 @@
     </Menu>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="ToolStock Manager - Grupo Supimpa"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" value="Grupo Supimpa - ToolStock Manager"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="menuBar"/>
