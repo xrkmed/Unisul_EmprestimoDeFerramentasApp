@@ -79,11 +79,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jButton4" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnVisualizarEmprestimos" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                  <Component id="jButton5" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnDeletar" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                  <Component id="jButton3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnCadastrar" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -93,9 +93,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jButton3" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="jButton5" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="jButton4" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="btnCadastrar" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="btnDeletar" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="btnVisualizarEmprestimos" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="2" min="-2" pref="44" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
@@ -104,7 +104,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="btnCadastrar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/content-save-check-custom.png"/>
@@ -119,8 +119,11 @@
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="btnVisualizarEmprestimos">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/eye-custom.png"/>
@@ -136,7 +139,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="btnDeletar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/content-save-minus-custom.png"/>

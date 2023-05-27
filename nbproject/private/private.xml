@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documentos/GitHub/TRABALHO%20A3/Unisul_EmprestimoDeFerramentasApp/src/Views/TesteTela.java</file>
-            <file>file:/D:/Documentos/GitHub/TRABALHO%20A3/Unisul_EmprestimoDeFerramentasApp/src/Views/NewTela.java</file>
-            <file>file:/D:/Documentos/GitHub/TRABALHO%20A3/Unisul_EmprestimoDeFerramentasApp/src/Views/TelaPrincipal.java</file>
+            <file>file:/D:/Documentos/GitHub/TRABALHO%20A3/Unisul_EmprestimoDeFerramentasApp/src/Views/TelaCadastro.java</file>
+            <file>file:/D:/Documentos/GitHub/TRABALHO%20A3/Unisul_EmprestimoDeFerramentasApp/src/Controllers/OptionSelected.java</file>
+            <file>file:/D:/Documentos/GitHub/TRABALHO%20A3/Unisul_EmprestimoDeFerramentasApp/src/ViewsAmigos/TelaCadastro.java</file>
+            <file>file:/D:/Documentos/GitHub/TRABALHO%20A3/Unisul_EmprestimoDeFerramentasApp/src/Views/TelaInicial.java</file>
+            <file>file:/D:/Documentos/GitHub/TRABALHO%20A3/Unisul_EmprestimoDeFerramentasApp/src/Tests/Main.java</file>
         </group>
     </open-files>
 </project-private>

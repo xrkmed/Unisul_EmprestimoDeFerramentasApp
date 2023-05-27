@@ -4,7 +4,7 @@ import DAO.FriendsDAO;
 import DAO.LoansDAO;
 import DAO.ToolsDAO;
 import Database.Database;
-import Views.TelaPrincipal;
+import Views.TelaInicial;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import javax.swing.UIManager;
 
@@ -21,7 +21,7 @@ public class Main {
             e.printStackTrace();
         }
         
-        TelaPrincipal tela = new TelaPrincipal();
+        TelaInicial tela = new TelaInicial();
         tela.setVisible(true);
  
         //Initialize Connection

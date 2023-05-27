@@ -59,7 +59,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jSeparator11 = new javax.swing.JPopupMenu.Separator();
         jMenuItem1 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Grupo Supimpa - ToolStock Manager");
 
         fileMenu.setMnemonic('f');

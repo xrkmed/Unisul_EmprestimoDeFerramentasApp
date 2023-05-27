@@ -5,7 +5,7 @@ import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 
 import Resources.Enum_Themes;
-import Views.TelaPrincipal;
+import Views.TelaInicial;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
@@ -59,7 +59,7 @@ public class ThemeController {
         }
         
         parent.dispose();
-        new TelaPrincipal().setVisible(true);
+        new TelaInicial().setVisible(true);
     }
 
     
