@@ -4,11 +4,13 @@ import Controllers.ThemeController;
 import Resources.Enum_Themes;
 import Views.Screens.ScreenAmigos;
 import Views.Screens.ScreenEntity;
+import Views.Screens.ScreenFerramentas;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class TelaInicial extends javax.swing.JFrame {
     
@@ -16,15 +18,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     public TelaInicial() {
         initComponents();
-        telaAtual = new ScreenAmigos(this);
-        Thread t = new Thread(new Runnable(){
-            @Override
-            public void run(){
-                telaAtual.carregarDados();
-            }
-        });
-
-        t.start();
+        updateTela(new ScreenAmigos(this));
     }
 
     public JTable getTable(){
@@ -53,6 +47,20 @@ public class TelaInicial extends javax.swing.JFrame {
 
     public JButton getBtnExportar(){
         return btnExportar;
+    }
+
+    public void updateTela(ScreenEntity e){
+        telaAtual = e;
+        ((DefaultTableModel) getTable().getModel()).setRowCount(0);
+        
+        Thread t = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                e.carregarDados();
+            }
+        });
+
+        t.start();
     }
     
     @SuppressWarnings("unchecked")
@@ -222,6 +230,11 @@ public class TelaInicial extends javax.swing.JFrame {
         btnConfig.setToolTipText("Mais Opções");
         btnConfig.setBorder(null);
         btnConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfigActionPerformed(evt);
+            }
+        });
 
         btnAmigos.setBackground(new java.awt.Color(205, 205, 205));
         btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/account-group-custom.png"))); // NOI18N
@@ -277,6 +290,11 @@ public class TelaInicial extends javax.swing.JFrame {
         bntSeguranca.setToolTipText("Segurança");
         bntSeguranca.setBorder(null);
         bntSeguranca.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bntSeguranca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntSegurancaActionPerformed(evt);
+            }
+        });
 
         jLayeredPane3.setLayer(btnConfig, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(btnAmigos, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -546,10 +564,12 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAmigosMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAmigosMouseDragged
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnAmigosMouseDragged
 
     private void bntFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFerramentasActionPerformed
+        if(!(telaAtual instanceof ScreenFerramentas)){
+            updateTela(new ScreenFerramentas(this));
+        }
     }//GEN-LAST:event_bntFerramentasActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -557,9 +577,13 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void btnAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmigosActionPerformed
+        if(!(telaAtual instanceof ScreenAmigos)){
+            updateTela(new ScreenAmigos(this));
+        }
     }//GEN-LAST:event_btnAmigosActionPerformed
 
     private void btnEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmprestimosActionPerformed
+        
     }//GEN-LAST:event_btnEmprestimosActionPerformed
 
     private void bntFabricantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFabricantesActionPerformed
@@ -586,6 +610,14 @@ public class TelaInicial extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         new TelaPrincipal().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void bntSegurancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSegurancaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntSegurancaActionPerformed
+
+    private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConfigActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

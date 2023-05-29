@@ -8,23 +8,24 @@ import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
 import Controllers.StatusRenderer;
 import DAO.FriendsDAO;
+import DAO.ToolsDAO;
 import Views.TelaInicial;
 
-public class ScreenAmigos extends ScreenEntity{
+public class ScreenFerramentas extends ScreenEntity{
 
-    private final String[] columnNames = {"ID", "Nome", "Telefone", "Endereço", "Empr. Abertos", "Empr. Atrasados"};
+    private final String[] columnNames = {"ID", "Nome", "Fabricante", "Preço", "Em uso por", "Data de devoluçao"};
     
-    public ScreenAmigos(){
+    public ScreenFerramentas(){
         super();
     }
 
-    public ScreenAmigos(TelaInicial telaInicial){
+    public ScreenFerramentas(TelaInicial telaInicial){
         super(telaInicial);
     }
 
     @Override
     public String getName(){
-        return "Tela Amigos";
+        return "Tela Ferramentas";
     }
 
     @Override
@@ -63,8 +64,8 @@ public class ScreenAmigos extends ScreenEntity{
         try {
             StatusRenderer renderer = new StatusRenderer();
             //statusRed.addHighlightedRow(1, Color.RED);
-            ArrayList<Object[]> amigosData = FriendsDAO.getInstance().loadFriendsTabela();
-
+            ArrayList<Object[]> datas = ToolsDAO.getInstance().getFerramentasValue();
+            
             DefaultTableModel model = new DefaultTableModel(new Object[0][columnNames.length], columnNames){
                 boolean[] canEdit = new boolean [] {
                     false, false, false, false, false, false
@@ -78,27 +79,35 @@ public class ScreenAmigos extends ScreenEntity{
             getTable().setModel(model);
 
             if (getTable().getColumnModel().getColumnCount() > 0) {
-                getTable().getColumnModel().getColumn(0).setMinWidth(65);
-                getTable().getColumnModel().getColumn(0).setMaxWidth(65);
-                getTable().getColumnModel().getColumn(1).setPreferredWidth(350);
-                getTable().getColumnModel().getColumn(2).setPreferredWidth(150);
-                getTable().getColumnModel().getColumn(3).setPreferredWidth(400);
-                getTable().getColumnModel().getColumn(4).setPreferredWidth(110);
-                getTable().getColumnModel().getColumn(4).setMaxWidth(110);
-                getTable().getColumnModel().getColumn(5).setPreferredWidth(110);
-                getTable().getColumnModel().getColumn(5).setMaxWidth(110);
+                getTable().getColumnModel().getColumn(0).setPreferredWidth(35);
+                getTable().getColumnModel().getColumn(0).setMinWidth(35);
+                getTable().getColumnModel().getColumn(0).setMaxWidth(35);
+                getTable().getColumnModel().getColumn(0).setResizable(false);
+                getTable().getColumnModel().getColumn(1).setResizable(false);
+                getTable().getColumnModel().getColumn(1).setPreferredWidth(400);
+                getTable().getColumnModel().getColumn(2).setResizable(false);
+                getTable().getColumnModel().getColumn(3).setResizable(false);
+                getTable().getColumnModel().getColumn(4).setResizable(false);
+                getTable().getColumnModel().getColumn(4).setPreferredWidth(100);
+                getTable().getColumnModel().getColumn(5).setResizable(false);
+                getTable().getColumnModel().getColumn(5).setPreferredWidth(100);
             }
 
-            for (Object[] data : amigosData) {
-                if (Integer.parseInt(data[4].toString()) > 0) {
+            for (Object[] data : datas) {
+                if (!data[4].toString().equals("Disponivel")) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
                         getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
                     }
                 }
 
-                if (Integer.parseInt(data[5].toString()) > 0) {
-                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
+                if (data[2].toString().equalsIgnoreCase("sem fabricante")) {
+                    if (renderer.getHighlightedRow(model.getRowCount()) == ColorsRenderer.lightYellow) {
+                        renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightOrange);
+                    } else {
+                        renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
+                    }
+
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
                         getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
                     }
