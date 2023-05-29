@@ -608,7 +608,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_bntCadastrarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new TelaPrincipal().setVisible(true);
+        new TelaPrincipalOld().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void bntSegurancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSegurancaActionPerformed
