@@ -1,25 +1,11 @@
 package ViewsTool;
 
-import ViewsManufacturer.*;
-import ViewsAmigos.*;
-import java.awt.Color;
-import java.awt.List;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
-
-import DAO.FriendsDAO;
 import DAO.ManufacturerDAO;
-import DAO.ToolsDAO;
-import Model.FriendModel;
-import Model.ToolModel;
-import Resources.CEPResource;
 import Resources.CNPJResource;
 import Resources.ManufacturerResource;
 
@@ -33,15 +19,15 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
         initFrameConfig();
     }
 
-    public TelaSelecionarFabricante(JFrame parent){
+    public TelaSelecionarFabricante(JFrame parent) {
         this();
         this.parent = parent;
     }
 
-    private void initFrameConfig(){
+    private void initFrameConfig() {
         new Thread(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 ManufacturerDAO dao = ManufacturerDAO.getInstance();
                 jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
                 jTable2.getColumnModel().getColumn(0).setMinWidth(35);
@@ -53,13 +39,13 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
                 jTable2.getSelectionModel().addListSelectionListener(x -> {
                     if (!x.getValueIsAdjusting()) {
                         int selectedRow = jTable2.getSelectedRow();
-                        try{
+                        try {
                             if (selectedRow != -1) {
                                 updateManufacturer(dao.getManufacturer(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString())));
                                 selecionadoNome.setText(selectedManufacturer.getName());
                                 selecionadoCNPJ.setText(CNPJResource.returnCNPJFormat(selectedManufacturer.getCNPJ()));
                             }
-                        }catch(Exception e){
+                        } catch (Exception e) {
                             JOptionPane.showMessageDialog(null, "Erro ao selecionar fabricante: " + e.getMessage());
                         }
                     }
@@ -70,7 +56,7 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
         }).start();
     }
 
-    public ManufacturerResource getSelectedManufacturer(){
+    public ManufacturerResource getSelectedManufacturer() {
         return this.selectedManufacturer;
     }
 
@@ -352,40 +338,40 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void filtroFiltrarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroFiltrarNomeActionPerformed
-        if(filtroFiltrarNome.isSelected()){
+        if (filtroFiltrarNome.isSelected()) {
             textFiltrarNome.setEnabled(true);
-        }else{
+        } else {
             textFiltrarNome.setEnabled(false);
         }
     }//GEN-LAST:event_filtroFiltrarNomeActionPerformed
 
     private void textFiltrarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFiltrarNomeActionPerformed
-      
+
     }//GEN-LAST:event_textFiltrarNomeActionPerformed
 
-    private void updateManufacturer(ManufacturerResource manufacturer){
+    private void updateManufacturer(ManufacturerResource manufacturer) {
         selectedManufacturer = manufacturer;
     }
 
-    private void loadValores(){
-        try{
+    private void loadValores() {
+        try {
             ManufacturerDAO dao = ManufacturerDAO.getInstance();
             ArrayList<ManufacturerResource> manufacturers = dao.getManufacturers();
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             //CONFIGURACOES DA TABELA
             model.setRowCount(0);
-                    
-            for(ManufacturerResource manufacturer : manufacturers){
-                if(filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0){
-                    if(!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())){
+
+            for (ManufacturerResource manufacturer : manufacturers) {
+                if (filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0) {
+                    if (!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())) {
                         continue;
                     }
                 }
 
-            model.addRow(new Object[]{manufacturer.getId(), manufacturer.getName(), CNPJResource.returnCNPJFormat(manufacturer.getCNPJ())});
-                        
+                model.addRow(new Object[]{manufacturer.getId(), manufacturer.getName(), CNPJResource.returnCNPJFormat(manufacturer.getCNPJ())});
+
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao carregar fabricantes: " + e.getMessage());
         }
     }
@@ -400,14 +386,14 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void btnSelecionarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarFabricanteActionPerformed
-        if(selectedManufacturer != null){
-            if(parent != null){
+        if (selectedManufacturer != null) {
+            if (parent != null) {
 
-                try{
-                    if(parent instanceof TelaCadastro){
-                        ((TelaCadastro)parent).updateFabricante(selectedManufacturer);
+                try {
+                    if (parent instanceof TelaCadastro) {
+                        ((TelaCadastro) parent).updateFabricante(selectedManufacturer);
                     }
-                }catch(Exception e){
+                } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Erro ao atualizar fabricante: " + e.getMessage());
                 }
             }
@@ -420,9 +406,6 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
         loadValores();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

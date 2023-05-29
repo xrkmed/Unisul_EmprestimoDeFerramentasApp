@@ -1,8 +1,8 @@
 package Views.Screens;
+
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Controllers.ColorsRenderer;
@@ -11,6 +11,8 @@ import Controllers.StatusRenderer;
 import DAO.FriendsDAO;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
+import ViewsAmigos.TelaCadastroAmigos;
+import ViewsAmigos.TelaCadastroAmigos;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -23,27 +25,27 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class ScreenAmigos extends ScreenEntity{
 
     private final String[] columnNames = {"ID", "Nome", "Telefone", "Endereço", "Empr. Abertos", "Empr. Atrasados"};
-    
-    public ScreenAmigos(){
+
+    public ScreenAmigos() {
         super();
     }
 
-    public ScreenAmigos(TelaInicial telaInicial){
+    public ScreenAmigos(TelaInicial telaInicial) {
         super(telaInicial);
     }
 
     @Override
-    public String getName(){
+    public String getName() {
         return "Tela Amigos";
     }
 
     @Override
-    public Object getSelectedValue(){
+    public Object getSelectedValue() {
         return getTable().getValueAt(getTable().getSelectedRow(), 0);
     }
 
     @Override
-    public void init(){
+    public void init() {
         getTitulo().setText(getName());
 
         getBtnCadastro().addActionListener(e -> {
@@ -69,20 +71,21 @@ public class ScreenAmigos extends ScreenEntity{
 
     // AQUI OCORRE O LOAD DA TABELA E A FORMATAÇÃO DOS DADOS
     @Override
-    public void carregarDados(){
+    public void carregarDados() {
         try {
             StatusRenderer renderer = new StatusRenderer();
             //statusRed.addHighlightedRow(1, Color.RED);
             ArrayList<Object[]> amigosData = FriendsDAO.getInstance().loadFriendsTabela();
 
-            DefaultTableModel model = new DefaultTableModel(new Object[0][columnNames.length], columnNames){
-                boolean[] canEdit = new boolean [] {
+            DefaultTableModel model = new DefaultTableModel(new Object[0][columnNames.length], columnNames) {
+                boolean[] canEdit = new boolean[]{
                     false, false, false, false, false, false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return canEdit [columnIndex];
-                };
+                    return canEdit[columnIndex];
+                }
+            ;
             };
 
             getTable().setModel(model);
@@ -123,19 +126,23 @@ public class ScreenAmigos extends ScreenEntity{
 
 
     /* FUNCOES DOS BOTOES */
-    public void btnCadastro(){
+    public void btnCadastro() {
+        new TelaCadastroAmigos().setVisible(true);
+    }
+
+    public void btnEditar() {
         JOptionPane.showMessageDialog(null, "working!");
     }
 
-    public void btnEditar(){
+    public void btnDeletar() {
         JOptionPane.showMessageDialog(null, "working!");
     }
 
-    public void btnDeletar(){
+    public void btnVisualizar() {
         JOptionPane.showMessageDialog(null, "working!");
     }
 
-    public void btnVisualizar(){
+    public void btnExportar() {
         JOptionPane.showMessageDialog(null, "working!");
     }
 

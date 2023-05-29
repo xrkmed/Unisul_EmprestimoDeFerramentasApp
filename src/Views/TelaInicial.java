@@ -7,7 +7,6 @@ import Views.Screens.ScreenEmprestimos;
 import Views.Screens.ScreenEntity;
 import Views.Screens.ScreenFabricantes;
 import Views.Screens.ScreenFerramentas;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,7 +14,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class TelaInicial extends javax.swing.JFrame {
-    
+
     private ScreenEntity telaAtual;
 
     public TelaInicial() {
@@ -23,48 +22,48 @@ public class TelaInicial extends javax.swing.JFrame {
         updateTela(new ScreenAmigos(this));
     }
 
-    public JTable getTable(){
+    public JTable getTable() {
         return tabelaPrincipal;
     }
 
-    public JLabel getTitulo(){
+    public JLabel getTitulo() {
         return labelListaNome;
     }
 
-    public JButton getBtnCadastro(){
+    public JButton getBtnCadastro() {
         return bntCadastrar;
     }
 
-    public JButton getBtnEditar(){
+    public JButton getBtnEditar() {
         return btnEditar;
     }
 
-    public JButton getBtnDeletar(){
+    public JButton getBtnDeletar() {
         return btnDeletar;
     }
 
-    public JButton getBtnVisualizar(){
+    public JButton getBtnVisualizar() {
         return btnVisualizar;
     }
 
-    public JButton getBtnExportar(){
+    public JButton getBtnExportar() {
         return btnExportar;
     }
 
-    public void updateTela(ScreenEntity e){
+    public void updateTela(ScreenEntity e) {
         telaAtual = e;
         ((DefaultTableModel) getTable().getModel()).setRowCount(0);
-        
-        Thread t = new Thread(new Runnable(){
+
+        Thread t = new Thread(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 e.carregarDados();
             }
         });
 
         t.start();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -160,7 +159,7 @@ public class TelaInicial extends javax.swing.JFrame {
         labelListaNome.setText("Lista Amigos");
 
         btnExportar.setBackground(new java.awt.Color(205, 205, 205));
-        btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-export-custom (2).png"))); // NOI18N
+        btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-pdf-box-custom.png"))); // NOI18N
         btnExportar.setToolTipText("Exportar Relatório");
         btnExportar.setBorder(null);
         btnExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -569,7 +568,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAmigosMouseDragged
 
     private void bntFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFerramentasActionPerformed
-        if(!(telaAtual instanceof ScreenFerramentas)){
+        if (!(telaAtual instanceof ScreenFerramentas)) {
             updateTela(new ScreenFerramentas(this));
         }
     }//GEN-LAST:event_bntFerramentasActionPerformed
@@ -579,7 +578,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void btnAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmigosActionPerformed
-        if(!(telaAtual instanceof ScreenAmigos)){
+        if (!(telaAtual instanceof ScreenAmigos)) {
             updateTela(new ScreenAmigos(this));
         }
     }//GEN-LAST:event_btnAmigosActionPerformed
@@ -600,7 +599,7 @@ public class TelaInicial extends javax.swing.JFrame {
         int flag = JOptionPane.showConfirmDialog(rootPane, "Deseja fechar o software?", "Confirmação", JOptionPane.YES_NO_OPTION);
         if (flag == JOptionPane.YES_OPTION) {
             System.exit(-1);
-        }    
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed

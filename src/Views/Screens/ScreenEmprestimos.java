@@ -1,8 +1,8 @@
 package Views.Screens;
+
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Controllers.ColorsRenderer;
@@ -22,7 +22,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class ScreenEmprestimos extends ScreenEntity{
+public class ScreenEmprestimos extends ScreenEntity {
 
     private final String[] columnNames = {"ID", "Amigo", "Data Início", "Data Devolução", "Dias Restantes", "A Receber", "Qtd. Ferramentas", "Valor Ferramentas"};
     
@@ -114,19 +114,23 @@ public class ScreenEmprestimos extends ScreenEntity{
 
 
     /* FUNCOES DOS BOTOES */
-    public void btnCadastro(){
+    public void btnCadastro() {
+        new TelaCadastroEmprestimo().setVisible(true);
+    }
+
+    public void btnEditar() {
         JOptionPane.showMessageDialog(null, "working!");
     }
 
-    public void btnEditar(){
+    public void btnDeletar() {
         JOptionPane.showMessageDialog(null, "working!");
     }
 
-    public void btnDeletar(){
+    public void btnVisualizar() {
         JOptionPane.showMessageDialog(null, "working!");
     }
 
-    public void btnVisualizar(){
+    public void btnExportar() {
         JOptionPane.showMessageDialog(null, "working!");
     }
 
