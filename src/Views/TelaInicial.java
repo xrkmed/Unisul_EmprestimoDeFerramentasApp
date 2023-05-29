@@ -82,16 +82,16 @@ public class TelaInicial extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaPrincipal = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menuOpcoes = new javax.swing.JMenu();
+        menuExit = new javax.swing.JMenuItem();
+        menuFinanceiro = new javax.swing.JMenu();
+        menuControleEmprestimos = new javax.swing.JMenuItem();
+        menuGastosFerramentas = new javax.swing.JMenuItem();
+        menuPersonalizacao = new javax.swing.JMenu();
+        lightMode = new javax.swing.JMenuItem();
+        darkMode = new javax.swing.JMenuItem();
+        menuOldScreen = new javax.swing.JMenu();
+        menuOldScreenOpen = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Grupo Supimpa - ToolStock Manager");
@@ -452,67 +452,67 @@ public class TelaInicial extends javax.swing.JFrame {
             tabelaPrincipal.getColumnModel().getColumn(5).setMaxWidth(110);
         }
 
-        jMenu1.setText("Opções");
+        menuOpcoes.setText("Opções");
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/close-thick-custom (1).png"))); // NOI18N
-        jMenuItem2.setText("Fechar Sistema");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        menuExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/close-thick-custom (1).png"))); // NOI18N
+        menuExit.setText("Fechar Sistema");
+        menuExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                menuExitActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        menuOpcoes.add(menuExit);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuOpcoes);
 
-        jMenu5.setText("Financeiro");
+        menuFinanceiro.setText("Financeiro");
 
-        jMenuItem4.setText("Controle Financeiro Empréstimos");
-        jMenu5.add(jMenuItem4);
+        menuControleEmprestimos.setText("Controle Financeiro Empréstimos");
+        menuFinanceiro.add(menuControleEmprestimos);
 
-        jMenuItem5.setText("Gastos Ferramentas");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        menuGastosFerramentas.setText("Gastos Ferramentas");
+        menuGastosFerramentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                menuGastosFerramentasActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem5);
+        menuFinanceiro.add(menuGastosFerramentas);
 
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(menuFinanceiro);
 
-        jMenu2.setText("Personalização");
+        menuPersonalizacao.setText("Personalização");
 
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/white-balance-sunny-custom.png"))); // NOI18N
-        jMenuItem6.setText("Visual Claro");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        lightMode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/white-balance-sunny-custom.png"))); // NOI18N
+        lightMode.setText("Visual Claro");
+        lightMode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                lightModeActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem6);
+        menuPersonalizacao.add(lightMode);
 
-        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/moon-waning-crescent-custom.png"))); // NOI18N
-        jMenuItem7.setText("Visual Noturno");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        darkMode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/moon-waning-crescent-custom.png"))); // NOI18N
+        darkMode.setText("Visual Noturno");
+        darkMode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                darkModeActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem7);
+        menuPersonalizacao.add(darkMode);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuPersonalizacao);
 
-        jMenu3.setText("Antiga Tela Inicial");
+        menuOldScreen.setText("Antiga Tela Inicial");
 
-        jMenuItem1.setText("Abrir");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuOldScreenOpen.setText("Abrir");
+        menuOldScreenOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuOldScreenOpenActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem1);
+        menuOldScreen.add(menuOldScreenOpen);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(menuOldScreen);
 
         setJMenuBar(jMenuBar1);
 
@@ -547,15 +547,13 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAmigosMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAmigosMouseDragged
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnAmigosMouseDragged
 
     private void bntFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFerramentasActionPerformed
     }//GEN-LAST:event_bntFerramentasActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    private void menuGastosFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGastosFerramentasActionPerformed
+    }//GEN-LAST:event_menuGastosFerramentasActionPerformed
 
     private void btnAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmigosActionPerformed
     }//GEN-LAST:event_btnAmigosActionPerformed
@@ -568,27 +566,27 @@ public class TelaInicial extends javax.swing.JFrame {
     private void bntFabricantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFabricantesActionPerformed
     }//GEN-LAST:event_bntFabricantesActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void menuExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuExitActionPerformed
         int flag = JOptionPane.showConfirmDialog(rootPane, "Deseja fechar o software?", "Confirmação", JOptionPane.YES_NO_OPTION);
         if (flag == JOptionPane.YES_OPTION) {
             System.exit(-1);
         }    
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_menuExitActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void darkModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkModeActionPerformed
         ThemeController.getInstance().setTheme(Enum_Themes.DARK, this);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_darkModeActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void lightModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lightModeActionPerformed
         ThemeController.getInstance().setTheme(Enum_Themes.LIGHT, this);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_lightModeActionPerformed
 
     private void bntCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCadastrarActionPerformed
     }//GEN-LAST:event_bntCadastrarActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuOldScreenOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuOldScreenOpenActionPerformed
         new TelaPrincipalOld().setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuOldScreenOpenActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -614,23 +612,23 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btnVisualizar;
     private javax.swing.JTextField campoFiltroNome;
     private javax.swing.JComboBox<String> comboFiltros;
+    private javax.swing.JMenuItem darkMode;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelListaNome;
+    private javax.swing.JMenuItem lightMode;
+    private javax.swing.JMenuItem menuControleEmprestimos;
+    private javax.swing.JMenuItem menuExit;
+    private javax.swing.JMenu menuFinanceiro;
+    private javax.swing.JMenuItem menuGastosFerramentas;
+    private javax.swing.JMenu menuOldScreen;
+    private javax.swing.JMenuItem menuOldScreenOpen;
+    private javax.swing.JMenu menuOpcoes;
+    private javax.swing.JMenu menuPersonalizacao;
     private javax.swing.JTable tabelaPrincipal;
     // End of variables declaration//GEN-END:variables
 }
