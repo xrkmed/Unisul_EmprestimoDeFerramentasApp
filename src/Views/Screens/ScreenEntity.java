@@ -51,6 +51,10 @@ public class ScreenEntity {
         //
     }
 
+    public void atualizarDados(){
+        carregarDados();
+    }
+
     public final JTable getTable() {
         return tela.getTable();
     }

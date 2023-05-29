@@ -58,7 +58,6 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
                 jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
                 jTable2.getColumnModel().getColumn(0).setMinWidth(35);
                 jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
-               
 
                 loadValores();
             }

@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import Exceptions.DatabaseResultQueryException;
+import Tests.Main;
 
 public class DBQuery {
 
@@ -34,6 +35,7 @@ public class DBQuery {
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
+                Main.tela.getTelaAtual().atualizarDados();
                 ResultSet result = statement.getGeneratedKeys();
                 return result;
             }
