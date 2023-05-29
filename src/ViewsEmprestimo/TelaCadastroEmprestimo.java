@@ -131,9 +131,6 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         btnRemoverBeneficiado = new javax.swing.JButton();
         btnAdicionarFerramenta = new javax.swing.JButton();
         btnRemoverFerramenta = new javax.swing.JButton();
-        menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        exitMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Empréstimo - Grupo Supimpa");
@@ -527,22 +524,6 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 .addGap(4, 4, 4))
         );
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("Opções");
-
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Sair");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
-
-        setJMenuBar(menuBar);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -567,10 +548,6 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_exitMenuItemActionPerformed
 
     public void setSelectedFriend(FriendModel e) {
         lblSelecionadoBeneficiado.setText(e.getName().toUpperCase());
@@ -728,8 +705,6 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
     private javax.swing.JButton btnRemoverBeneficiado;
     private javax.swing.JButton btnRemoverFerramenta;
     private javax.swing.JButton btnSelecionarBeneficiado;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -752,7 +727,6 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
     private javax.swing.JLabel lblSelecionadoBeneficiado;
     private javax.swing.JLabel lblValorFerramentas;
     private javax.swing.JLabel lblValorReceber;
-    private javax.swing.JMenuBar menuBar;
     private javax.swing.JTextField selecionadoFabricante;
     private javax.swing.JTextField selecionadoNome;
     private javax.swing.JTextField textDataDevolucao;
