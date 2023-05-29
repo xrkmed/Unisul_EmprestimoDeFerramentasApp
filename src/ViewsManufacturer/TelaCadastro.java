@@ -59,7 +59,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Grupo Supimpa - Cadastro de fabricante");
+        setTitle("Cadastro de Fabricantes - Grupo Supimpa");
         setPreferredSize(null);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {

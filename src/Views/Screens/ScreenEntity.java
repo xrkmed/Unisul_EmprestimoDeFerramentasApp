@@ -15,6 +15,27 @@ public class ScreenEntity {
 
     public ScreenEntity(TelaInicial telaInicial){
         this.tela = telaInicial;
+
+        for (java.awt.event.ActionListener al : getBtnCadastro().getActionListeners()) {
+            getBtnCadastro().removeActionListener(al);
+        }
+
+        for (java.awt.event.ActionListener al : getBtnEditar().getActionListeners()) {
+            getBtnEditar().removeActionListener(al);
+        }
+
+        for (java.awt.event.ActionListener al : getBtnDeletar().getActionListeners()) {
+            getBtnDeletar().removeActionListener(al);
+        }
+
+        for (java.awt.event.ActionListener al : getBtnVisualizar().getActionListeners()) {
+            getBtnVisualizar().removeActionListener(al);
+        }
+
+        for (java.awt.event.ActionListener al : getBtnExportar().getActionListeners()) {
+            getBtnExportar().removeActionListener(al);
+        }
+        
         init();
     }
 
@@ -56,6 +77,10 @@ public class ScreenEntity {
 
     public final JButton getBtnExportar(){
         return tela.getBtnExportar();
+    }
+
+    public Object getSelectedValue(){
+        return null;
     }
 
     

@@ -20,7 +20,6 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         TelaInicial tela = new TelaInicial();
         tela.setVisible(true);
 

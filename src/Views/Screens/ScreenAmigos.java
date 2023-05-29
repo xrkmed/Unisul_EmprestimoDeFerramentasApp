@@ -24,7 +24,12 @@ public class ScreenAmigos extends ScreenEntity{
 
     @Override
     public String getName(){
-        return "Lista Amigos";
+        return "Tela Amigos";
+    }
+
+    @Override
+    public Object getSelectedValue(){
+        return getTable().getValueAt(getTable().getSelectedRow(), 0);
     }
 
     @Override

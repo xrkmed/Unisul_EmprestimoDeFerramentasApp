@@ -370,7 +370,6 @@ public class TelaPrincipalOld extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRelatorioAmigosActionPerformed
 
     private void btnControleFinanceiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnControleFinanceiroActionPerformed
-
     }//GEN-LAST:event_btnControleFinanceiroActionPerformed
 
     private void btnRelatorioFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioFerramentasActionPerformed

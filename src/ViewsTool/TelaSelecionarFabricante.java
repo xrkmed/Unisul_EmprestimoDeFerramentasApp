@@ -98,7 +98,7 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Tela de amigos cadastrados - Grupo Supimpa");
+        setTitle("Selecionar Fabricante - Grupo Supimpa");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {

@@ -57,7 +57,7 @@ public class TelaFinalizarEmprestimo extends javax.swing.JFrame {
         btnFinalizarEmprestimo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Finalizar emprestimo");
+        setTitle("Finalizar Empréstimo - Grupo Supimpa ");
         setResizable(false);
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
