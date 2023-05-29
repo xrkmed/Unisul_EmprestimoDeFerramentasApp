@@ -87,7 +87,7 @@ public class TelaRelatorioFerramentas extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Grupo Supimpa - Painel de Ferramentas");
+        setTitle("Relatório de Ferramentas - Grupo Supimpa");
         setResizable(false);
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));

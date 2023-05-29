@@ -7,7 +7,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Grupo Supimpa - Painel de Ferramentas"/>
+    <Property name="title" type="java.lang.String" value="Painel de Ferramentas - Grupo Supimpa"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>

@@ -26,7 +26,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Tela de amigos cadastrados - Grupo Supimpa"/>
+    <Property name="title" type="java.lang.String" value="Empr&#xe9;stimos Abertos - Grupo Supimpa"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="menuBar"/>

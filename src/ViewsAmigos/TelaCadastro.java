@@ -106,7 +106,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastrar Amigo");
+        setTitle("Cadastrar Amigo - Grupo Supimpa");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
