@@ -7,6 +7,7 @@ import Views.Screens.ScreenEmprestimos;
 import Views.Screens.ScreenEntity;
 import Views.Screens.ScreenFabricantes;
 import Views.Screens.ScreenFerramentas;
+import ViewsEmprestimo.TelaCadastroEmprestimo;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -160,7 +161,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         btnExportar.setBackground(new java.awt.Color(205, 205, 205));
         btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-pdf-box-custom.png"))); // NOI18N
-        btnExportar.setToolTipText("Exportar Relatório");
+        btnExportar.setToolTipText("Exportar Relatório da Lista Exibida");
         btnExportar.setBorder(null);
         btnExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 

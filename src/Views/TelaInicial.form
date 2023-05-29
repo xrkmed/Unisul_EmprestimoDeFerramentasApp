@@ -353,7 +353,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/file-pdf-box-custom.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Exportar Relat&#xf3;rio"/>
+            <Property name="toolTipText" type="java.lang.String" value="Exportar Relat&#xf3;rio da Lista Exibida"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>

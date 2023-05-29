@@ -71,17 +71,17 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         document.setDocumentFilter(new DateDocument());
         lblDataHoje.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jTable1.getSelectionModel().addListSelectionListener(x -> {
+        jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jTable2.getSelectionModel().addListSelectionListener(x -> {
             if (!x.getValueIsAdjusting()) {
-                int selectedRow = jTable1.getSelectedRow();
+                int selectedRow = jTable2.getSelectedRow();
                 if (selectedRow != -1) {
-                    selecionadoNome.setText(jTable1.getValueAt(selectedRow, 1).toString());
-                    selecionadoFabricante.setText(jTable1.getValueAt(selectedRow, 2).toString());
+                    selecionadoNome.setText(jTable2.getValueAt(selectedRow, 1).toString());
+                    selecionadoFabricante.setText(jTable2.getValueAt(selectedRow, 2).toString());
                     btnRemoverFerramenta.setEnabled(true);
 
                     for (ToolModel tool : toolsList.getTools()) {
-                        if (tool.getId() == (int) jTable1.getValueAt(selectedRow, 0)) {
+                        if (tool.getId() == (int) jTable2.getValueAt(selectedRow, 0)) {
                             selectedTool = tool;
                             break;
                         }
@@ -109,11 +109,11 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jLayeredPane6 = new javax.swing.JLayeredPane();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        selecionadoNome1 = new javax.swing.JTextField();
-        selecionadoFabricante1 = new javax.swing.JTextField();
+        selecionadoNome = new javax.swing.JTextField();
+        selecionadoFabricante = new javax.swing.JTextField();
         jLayeredPane2 = new javax.swing.JLayeredPane();
-        lblValorFerramentas1 = new javax.swing.JLabel();
-        lblValorReceber1 = new javax.swing.JLabel();
+        lblValorFerramentas = new javax.swing.JLabel();
+        lblValorReceber = new javax.swing.JLabel();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jLabel10 = new javax.swing.JLabel();
         lblDataHoje = new javax.swing.JLabel();
@@ -124,16 +124,13 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLayeredPane5 = new javax.swing.JLayeredPane();
-        jLabel14 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         btnCadastrarEmprestimo = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btnSelecionarBeneficiado = new javax.swing.JButton();
         btnRemoverBeneficiado = new javax.swing.JButton();
         btnAdicionarFerramenta = new javax.swing.JButton();
         btnRemoverFerramenta = new javax.swing.JButton();
-        menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        exitMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Empréstimo - Grupo Supimpa");
@@ -182,27 +179,27 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel13.setText("Fabricante:");
 
-        selecionadoNome1.setEditable(false);
-        selecionadoNome1.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        selecionadoNome.setEditable(false);
+        selecionadoNome.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
 
-        selecionadoFabricante1.setEditable(false);
-        selecionadoFabricante1.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        selecionadoFabricante1.addActionListener(new java.awt.event.ActionListener() {
+        selecionadoFabricante.setEditable(false);
+        selecionadoFabricante.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        selecionadoFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selecionadoFabricante1ActionPerformed(evt);
+                selecionadoFabricanteActionPerformed(evt);
             }
         });
 
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        lblValorFerramentas1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        lblValorFerramentas1.setText("Valor Total Empréstimo: R$ 0,00");
+        lblValorFerramentas.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        lblValorFerramentas.setText("Valor Total Empréstimo: R$ 0,00");
 
-        lblValorReceber1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        lblValorReceber1.setText("Valor a Receber: R$ 0,00");
+        lblValorReceber.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        lblValorReceber.setText("Valor a Receber: R$ 0,00");
 
-        jLayeredPane2.setLayer(lblValorFerramentas1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(lblValorReceber1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(lblValorFerramentas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(lblValorReceber, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -211,24 +208,24 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblValorFerramentas1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
-                    .addComponent(lblValorReceber1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblValorFerramentas, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                    .addComponent(lblValorReceber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(lblValorReceber1)
+                .addComponent(lblValorReceber)
                 .addGap(10, 10, 10)
-                .addComponent(lblValorFerramentas1)
+                .addComponent(lblValorFerramentas)
                 .addGap(10, 10, 10))
         );
 
         jLayeredPane6.setLayer(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane6.setLayer(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(selecionadoNome1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(selecionadoFabricante1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane6.setLayer(selecionadoNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane6.setLayer(selecionadoFabricante, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane6.setLayer(jLayeredPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane6Layout = new javax.swing.GroupLayout(jLayeredPane6);
@@ -240,8 +237,8 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel13)
                     .addComponent(jLabel12)
-                    .addComponent(selecionadoFabricante1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
-                    .addComponent(selecionadoNome1))
+                    .addComponent(selecionadoFabricante, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                    .addComponent(selecionadoNome))
                 .addGap(118, 118, 118)
                 .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -249,18 +246,19 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jLayeredPane6Layout.setVerticalGroup(
             jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane6Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel12)
-                .addGap(5, 5, 5)
-                .addComponent(selecionadoNome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel13)
-                .addGap(5, 5, 5)
-                .addComponent(selecionadoFabricante1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredPane6Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel12)
+                        .addGap(5, 5, 5)
+                        .addComponent(selecionadoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel13)
+                        .addGap(5, 5, 5)
+                        .addComponent(selecionadoFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10))
         );
 
@@ -276,7 +274,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jLabel9.setText("Data Início:");
 
         textDataDevolucao.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        textDataDevolucao.setToolTipText("Defina Uma Data Prevista de Devolução");
+        textDataDevolucao.setToolTipText("Exemplo: (13/12/2023)");
         textDataDevolucao.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textDataDevolucaoKeyReleased(evt);
@@ -365,23 +363,19 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(jLayeredPane6)
-                        .addGap(10, 10, 10))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addComponent(jLayeredPane6))
+                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(jLabel11)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4))
+                    .addComponent(jSeparator1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                .addComponent(jLabel11)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblSelecionadoBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2))
-                                    .addGap(454, 454, 454)
-                                    .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(10, 10, 10))))
+                            .addComponent(lblSelecionadoBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(454, 454, 454)
+                        .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -408,15 +402,16 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
 
         jLayeredPane5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel14.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel14.setText("Cadastro Empréstimo");
+        jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel3.setText("Cadastro Empréstimo");
 
         btnCadastrarEmprestimo.setBackground(new java.awt.Color(153, 255, 153));
         btnCadastrarEmprestimo.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnCadastrarEmprestimo.setForeground(new java.awt.Color(51, 51, 51));
-        btnCadastrarEmprestimo.setText("Cadastrar Empréstimo");
-        btnCadastrarEmprestimo.setToolTipText("Finaliza o Processo de Empréstimo ");
+        btnCadastrarEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-check-custom.png"))); // NOI18N
+        btnCadastrarEmprestimo.setToolTipText("Salvar");
+        btnCadastrarEmprestimo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         btnCadastrarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarEmprestimoActionPerformed(evt);
@@ -426,18 +421,21 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(51, 51, 51));
-        jButton1.setText("Cancelar Alteração");
-        jButton1.setToolTipText("Cancela o Emprestimo Atual, Descartando Todas Alterações Feitas ");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-minus-custom.png"))); // NOI18N
+        jButton1.setToolTipText("Cancelar");
+        jButton1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        btnSelecionarBeneficiado.setBackground(new java.awt.Color(153, 255, 153));
         btnSelecionarBeneficiado.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnSelecionarBeneficiado.setForeground(new java.awt.Color(51, 51, 51));
-        btnSelecionarBeneficiado.setText("Selecionar ");
-        btnSelecionarBeneficiado.setToolTipText("Seleciona um Amigo Para Realizar o Empréstimo");
+        btnSelecionarBeneficiado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/account-plus-custom.png"))); // NOI18N
+        btnSelecionarBeneficiado.setToolTipText("Adicionar Tomador do Empréstimo");
+        btnSelecionarBeneficiado.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         btnSelecionarBeneficiado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSelecionarBeneficiadoActionPerformed(evt);
@@ -447,8 +445,9 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         btnRemoverBeneficiado.setBackground(new java.awt.Color(255, 102, 102));
         btnRemoverBeneficiado.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnRemoverBeneficiado.setForeground(new java.awt.Color(51, 51, 51));
-        btnRemoverBeneficiado.setText("Remover");
-        btnRemoverBeneficiado.setToolTipText("Descarta o Amigo Selecionado Para Este Emprestimo ");
+        btnRemoverBeneficiado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/account-remove-custom.png"))); // NOI18N
+        btnRemoverBeneficiado.setToolTipText("Remover Tomador do Empréstimo");
+        btnRemoverBeneficiado.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         btnRemoverBeneficiado.setEnabled(false);
         btnRemoverBeneficiado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -456,10 +455,12 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             }
         });
 
+        btnAdicionarFerramenta.setBackground(new java.awt.Color(153, 255, 153));
         btnAdicionarFerramenta.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnAdicionarFerramenta.setForeground(new java.awt.Color(51, 51, 51));
-        btnAdicionarFerramenta.setText("Adicionar Ferramenta");
-        btnAdicionarFerramenta.setToolTipText("Selecionar Uma Ferramenta da Lista");
+        btnAdicionarFerramenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/toolbox-custom.png"))); // NOI18N
+        btnAdicionarFerramenta.setToolTipText("Adicionar Ferramenta");
+        btnAdicionarFerramenta.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         btnAdicionarFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarFerramentaActionPerformed(evt);
@@ -469,8 +470,9 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         btnRemoverFerramenta.setBackground(new java.awt.Color(255, 102, 102));
         btnRemoverFerramenta.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnRemoverFerramenta.setForeground(new java.awt.Color(51, 51, 51));
-        btnRemoverFerramenta.setText("Remover Ferramenta");
-        btnRemoverFerramenta.setToolTipText("Descarta a Ferramenta Selecionada Para Este Empréstimo");
+        btnRemoverFerramenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/tools-custom (1).png"))); // NOI18N
+        btnRemoverFerramenta.setToolTipText("Remover Ferramenta da Lista");
+        btnRemoverFerramenta.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         btnRemoverFerramenta.setEnabled(false);
         btnRemoverFerramenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -478,7 +480,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             }
         });
 
-        jLayeredPane5.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane5.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(btnCadastrarEmprestimo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(btnSelecionarBeneficiado, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -491,16 +493,16 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jLayeredPane5Layout.setHorizontalGroup(
             jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel14)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel3)
                 .addGap(200, 200, 200)
                 .addComponent(btnRemoverFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(btnAdicionarFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addComponent(btnSelecionarBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
                 .addComponent(btnRemoverBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnSelecionarBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
@@ -518,25 +520,9 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                     .addComponent(btnRemoverBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCadastrarEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4))
         );
-
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("Opções");
-
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Sair");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
-            }
-        });
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
-
-        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -563,10 +549,6 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_exitMenuItemActionPerformed
-
     public void setSelectedFriend(FriendModel e) {
         lblSelecionadoBeneficiado.setText(e.getName().toUpperCase());
         selectedFriend = e;
@@ -578,9 +560,9 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
     }
 
     public void loadFerramentasList() {;
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
-        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         double totalValue = 0;
         for (ToolModel tool : toolsList.getTools()) {
@@ -697,9 +679,9 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void selecionadoFabricante1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionadoFabricante1ActionPerformed
+    private void selecionadoFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionadoFabricanteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_selecionadoFabricante1ActionPerformed
+    }//GEN-LAST:event_selecionadoFabricanteActionPerformed
 
     public void addFerramenta(ToolModel e) {
         if (!toolsList.containsTool(e.getId())) {
@@ -723,16 +705,14 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
     private javax.swing.JButton btnRemoverBeneficiado;
     private javax.swing.JButton btnRemoverFerramenta;
     private javax.swing.JButton btnSelecionarBeneficiado;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
@@ -745,11 +725,10 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblDataHoje;
     private javax.swing.JLabel lblSelecionadoBeneficiado;
-    private javax.swing.JLabel lblValorFerramentas1;
-    private javax.swing.JLabel lblValorReceber1;
-    private javax.swing.JMenuBar menuBar;
-    private javax.swing.JTextField selecionadoFabricante1;
-    private javax.swing.JTextField selecionadoNome1;
+    private javax.swing.JLabel lblValorFerramentas;
+    private javax.swing.JLabel lblValorReceber;
+    private javax.swing.JTextField selecionadoFabricante;
+    private javax.swing.JTextField selecionadoNome;
     private javax.swing.JTextField textDataDevolucao;
     private javax.swing.JTextField textValorReceber;
     // End of variables declaration//GEN-END:variables

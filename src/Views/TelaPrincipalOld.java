@@ -53,9 +53,7 @@ public class TelaPrincipalOld extends javax.swing.JFrame {
         btnTemaDark = new javax.swing.JMenuItem();
         btnTemaLight = new javax.swing.JMenuItem();
         fileMenu8 = new javax.swing.JMenu();
-        btnDevTela = new javax.swing.JMenuItem();
         jSeparator11 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Grupo Supimpa - ToolStock Manager");
@@ -272,23 +270,7 @@ public class TelaPrincipalOld extends javax.swing.JFrame {
 
         fileMenu8.setMnemonic('f');
         fileMenu8.setText("Desenvolvimento");
-
-        btnDevTela.setText("TesteTela");
-        btnDevTela.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDevTelaActionPerformed(evt);
-            }
-        });
-        fileMenu8.add(btnDevTela);
         fileMenu8.add(jSeparator11);
-
-        jMenuItem1.setText("NewTela");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        fileMenu8.add(jMenuItem1);
 
         menuBar.add(fileMenu8);
 
@@ -450,14 +432,6 @@ public class TelaPrincipalOld extends javax.swing.JFrame {
         ThemeController.getInstance().setTheme(Enum_Themes.DARK, this);
     }//GEN-LAST:event_btnTemaDarkActionPerformed
 
-    private void btnDevTelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevTelaActionPerformed
-
-    }//GEN-LAST:event_btnDevTelaActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new TelaInicial().setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -474,7 +448,6 @@ public class TelaPrincipalOld extends javax.swing.JFrame {
     private javax.swing.JMenuItem btnClose;
     private javax.swing.JMenuItem btnControleFinanceiro;
     private javax.swing.JMenuItem btnControleGastosFabricantes;
-    private javax.swing.JMenuItem btnDevTela;
     private javax.swing.JMenuItem btnEmprestimosEmAberto;
     private javax.swing.JMenuItem btnFerramentasCad;
     private javax.swing.JMenuItem btnRankingAmigos;
@@ -495,7 +468,6 @@ public class TelaPrincipalOld extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu6;
     private javax.swing.JMenu fileMenu7;
     private javax.swing.JMenu fileMenu8;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator11;
     private javax.swing.JPopupMenu.Separator jSeparator2;
