@@ -1,13 +1,15 @@
 package ViewsAmigos;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.text.AbstractDocument;
 import DAO.FriendsDAO;
 import DAO.LocalidadesDAO;
 import Model.FriendModel;
 import Resources.AddressResource;
 import Resources.CEPResource;
+import Resources.PhoneDocument;
 import Resources.PhoneValidResource;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 public class TelaCadastroAmigos extends javax.swing.JFrame {
 
@@ -15,18 +17,48 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
     public TelaCadastroAmigos() {
         initComponents();
+        configFrame();
+    }
+
+    public TelaCadastroAmigos(FriendModel selectedFriend) {
+        this();
+        this.selectedFriend = selectedFriend;
+        this.setTitle("Alterar cadastro de " + selectedFriend.getName().toUpperCase());
+        textNome.setText(selectedFriend.getName());
+        textCEP.setText("" + selectedFriend.getAddress().getCEP());
+        selectEstado.setSelectedItem(selectedFriend.getAddress().getState());
+        selectCidade.setSelectedItem(selectedFriend.getAddress().getCity());
+        textRua.setText(selectedFriend.getAddress().getStreet());
+        textBairro.setText(selectedFriend.getAddress().getDistrict());
+        textComplemento.setText(selectedFriend.getAddress().getComplemento());
+        textNumero.setText(selectedFriend.getAddress().getNumber() + "");
+        textTelefone.setText(selectedFriend.getPhone());
+        btnCadastrar.setText("Finalizar alteração");
+        //jButton2.setText("Cancelar alteração");
+    }
+
+    private void configFrame() {
+        AbstractDocument document = (AbstractDocument) textTelefone.getDocument();
+
+        document.setDocumentFilter(new PhoneDocument());
+
+        //evitar travamento de janela ao carregar os dados
+        Thread pThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                selectEstado.removeAllItems();
+                for (Object estado : LocalidadesDAO.getEstados()) {
+                    selectEstado.addItem(estado.toString());
+                }
+            }
+        });
+        pThread.start();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLayeredPane2 = new javax.swing.JLayeredPane();
-        btnCadastrar = new javax.swing.JButton();
-        btnVisualizarEmprestimos = new javax.swing.JButton();
-        btnDeletar = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -43,83 +75,23 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         selectEstado = new javax.swing.JComboBox<>();
         textCEP = new javax.swing.JTextField();
         btnBuscarCep = new javax.swing.JButton();
-        jLayeredPane3 = new javax.swing.JLayeredPane();
-        jLabel13 = new javax.swing.JLabel();
+        jLayeredPane2 = new javax.swing.JLayeredPane();
+        jLabel1 = new javax.swing.JLabel();
         textNome = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         textTelefone = new javax.swing.JTextField();
+        jLayeredPane5 = new javax.swing.JLayeredPane();
+        btnVisualizarEmprestimos2 = new javax.swing.JButton();
+        btnDeletar2 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jToggleButton3 = new javax.swing.JToggleButton();
+        btnCadastrar = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Amigos - Dados Cadastrais");
+        setTitle("Cadastrar Amigo - Grupo Supimpa");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
-
-        jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-check-custom.png"))); // NOI18N
-        btnCadastrar.setToolTipText("Salvar Alterações");
-        btnCadastrar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
-            }
-        });
-
-        btnVisualizarEmprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/eye-custom.png"))); // NOI18N
-        btnVisualizarEmprestimos.setToolTipText("Visualizar Empréstimos");
-        btnVisualizarEmprestimos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        btnVisualizarEmprestimos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-minus-custom.png"))); // NOI18N
-        btnDeletar.setToolTipText("Cancelar");
-        btnDeletar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel3.setText("Dados Cadastrais");
-
-        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/plus-custom.png"))); // NOI18N
-        jToggleButton1.setToolTipText("Novo Empréstimo");
-        jToggleButton1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        jLayeredPane2.setLayer(btnCadastrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(btnVisualizarEmprestimos, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(btnDeletar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jToggleButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
-        jLayeredPane2.setLayout(jLayeredPane2Layout);
-        jLayeredPane2Layout.setHorizontalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(btnVisualizarEmprestimos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10))
-        );
-        jLayeredPane2Layout.setVerticalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVisualizarEmprestimos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4))
-        );
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -146,6 +118,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
         textComplemento.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textComplemento.setToolTipText("Descreva um Complemento");
+        textComplemento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         textComplemento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textComplementoActionPerformed(evt);
@@ -154,6 +127,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
         textNumero.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textNumero.setToolTipText("Digite o Numero da Casa");
+        textNumero.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         textNumero.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
@@ -180,13 +154,16 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
         textRua.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textRua.setToolTipText("Digite o nome da rua");
+        textRua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         textBairro.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textBairro.setToolTipText("Digite o nome da rua");
+        textBairro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         selectCidade.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         selectCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a sua cidade" }));
-        selectCidade.setToolTipText("Selecione a sua Cidade");
+        selectCidade.setToolTipText("Selecione a sua cidade");
+        selectCidade.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         selectCidade.setEnabled(false);
         selectCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,6 +174,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         selectEstado.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         selectEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o Seu Estado" }));
         selectEstado.setToolTipText("Escolha o Estado Desejado ");
+        selectEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         selectEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectEstadoActionPerformed(evt);
@@ -205,6 +183,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
         textCEP.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textCEP.setToolTipText("Insira CEP do seu amigo");
+        textCEP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         textCEP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 textCEPKeyPressed(evt);
@@ -214,6 +193,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         btnBuscarCep.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnBuscarCep.setText("Buscar CEP");
         btnBuscarCep.setToolTipText("Sera Realizada uma Busca Automatica Para Preencher Cidade, Estado e Bairro");
+        btnBuscarCep.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscarCep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarCepActionPerformed(evt);
@@ -244,7 +224,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(42, 42, 42))
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
@@ -270,58 +250,58 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addComponent(textNumero)
                         .addGap(168, 168, 168))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(selectCidade, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(selectEstado, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(textCEP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                        .addGap(38, 38, 38)
-                        .addComponent(btnBuscarCep, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(selectEstado, javax.swing.GroupLayout.Alignment.LEADING, 0, 190, Short.MAX_VALUE)
+                            .addComponent(textCEP, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBuscarCep, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(10, 10, 10)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel6)
                     .addComponent(textCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarCep)
-                    .addComponent(jLabel6))
+                    .addComponent(btnBuscarCep))
                 .addGap(13, 13, 13)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(selectEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel5)
+                    .addComponent(selectEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(selectCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel4)
+                    .addComponent(selectCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel11)
+                    .addComponent(textBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel8)
+                    .addComponent(textRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel10)
+                    .addComponent(textNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(15, 15, 15))
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel7)
+                    .addComponent(textComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
         );
 
-        jLayeredPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel13.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jLabel13.setText("Nome Completo:");
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel1.setText("Nome Completo:");
 
         textNome.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textNome.setToolTipText("Digite o nome completo do seu amigo");
-        textNome.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        textNome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         textNome.setInheritsPopupMenu(true);
         textNome.setName(""); // NOI18N
         textNome.addActionListener(new java.awt.event.ActionListener() {
@@ -330,50 +310,122 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
             }
         });
 
-        jLabel14.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jLabel14.setText("Telefone:");
+        jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        jLabel2.setText("Telefone:");
 
         textTelefone.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textTelefone.setToolTipText("Digite o telefone do seu amigo");
+        textTelefone.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jLayeredPane3.setLayer(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(textNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(textTelefone, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(textNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(textTelefone, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
-        jLayeredPane3.setLayout(jLayeredPane3Layout);
-        jLayeredPane3Layout.setHorizontalGroup(
-            jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
+        jLayeredPane2.setLayout(jLayeredPane2Layout);
+        jLayeredPane2Layout.setHorizontalGroup(
+            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addGap(15, 15, 15)
-                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(21, 21, 21)
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textTelefone)
                     .addComponent(textNome))
                 .addGap(15, 15, 15))
         );
-        jLayeredPane3Layout.setVerticalGroup(
-            jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane3Layout.createSequentialGroup()
+        jLayeredPane2Layout.setVerticalGroup(
+            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addComponent(textNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(textTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
                         .addGap(16, 16, 16)
-                        .addComponent(jLabel14)))
+                        .addComponent(jLabel2)))
                 .addGap(15, 15, 15))
         );
 
-        jMenu1.setText("Opções");
-        menuBar.add(jMenu1);
+        jLayeredPane5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        btnVisualizarEmprestimos2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/eye-custom.png"))); // NOI18N
+        btnVisualizarEmprestimos2.setToolTipText("Visualizar Empréstimos");
+        btnVisualizarEmprestimos2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnVisualizarEmprestimos2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btnDeletar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-minus-custom.png"))); // NOI18N
+        btnDeletar2.setToolTipText("Cancelar");
+        btnDeletar2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnDeletar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabel14.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel14.setText("Dados Cadastrais");
+
+        jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/plus-custom.png"))); // NOI18N
+        jToggleButton3.setToolTipText("Novo Empréstimo");
+        jToggleButton3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jToggleButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btnCadastrar.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        btnCadastrar.setForeground(new java.awt.Color(51, 51, 51));
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-check-custom.png"))); // NOI18N
+        btnCadastrar.setToolTipText("Salvar Cadastro");
+        btnCadastrar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCadastrarMouseClicked(evt);
+            }
+        });
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
+
+        jLayeredPane5.setLayer(btnVisualizarEmprestimos2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane5.setLayer(btnDeletar2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane5.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane5.setLayer(jToggleButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane5.setLayer(btnCadastrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane5Layout = new javax.swing.GroupLayout(jLayeredPane5);
+        jLayeredPane5.setLayout(jLayeredPane5Layout);
+        jLayeredPane5Layout.setHorizontalGroup(
+            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnVisualizarEmprestimos2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnDeletar2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
+        );
+        jLayeredPane5Layout.setVerticalGroup(
+            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane5Layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btnDeletar2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVisualizarEmprestimos2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4))
+        );
 
         setJMenuBar(menuBar);
 
@@ -384,18 +436,18 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLayeredPane3, javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLayeredPane2))
+                    .addComponent(jLayeredPane1)
+                    .addComponent(jLayeredPane2)
+                    .addComponent(jLayeredPane5))
                 .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
@@ -404,134 +456,6 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void textComplementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textComplementoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textComplementoActionPerformed
-
-    private void textNumeroInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_textNumeroInputMethodTextChanged
-
-    }//GEN-LAST:event_textNumeroInputMethodTextChanged
-
-    private void textNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNumeroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textNumeroActionPerformed
-
-    private void textNumeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyPressed
-
-    }//GEN-LAST:event_textNumeroKeyPressed
-
-    private void textNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyReleased
-
-    }//GEN-LAST:event_textNumeroKeyReleased
-
-    private void textNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyTyped
-
-    }//GEN-LAST:event_textNumeroKeyTyped
-
-    private void selectCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCidadeActionPerformed
-
-    }//GEN-LAST:event_selectCidadeActionPerformed
-
-    private void selectEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectEstadoActionPerformed
-        if (selectEstado.getSelectedItem() != null && selectEstado.getSelectedItem().toString().length() == 2) {
-            selectCidade.setEnabled(false);
-            textBairro.setText("");
-            textRua.setText("");
-            textNumero.setText("");
-            textComplemento.setText("");
-
-            if (textCEP.getText().length() == 0) {
-                Thread thread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        selectCidade.setEnabled(true);
-                        selectCidade.removeAllItems();
-                        for (Object cidade : LocalidadesDAO.obterCidades(selectEstado.getSelectedItem().toString())) {
-                            selectCidade.addItem(cidade.toString());
-                        }
-
-                    }
-                });
-                thread.start();
-            } else {
-                selectCidade.setEnabled(true);
-                selectCidade.removeAllItems();
-                for (Object cidade : LocalidadesDAO.obterCidades(selectEstado.getSelectedItem().toString())) {
-                    selectCidade.addItem(cidade.toString());
-                }
-            }
-        }
-    }//GEN-LAST:event_selectEstadoActionPerformed
-
-    private void textCEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCEPKeyPressed
-        if (textCEP.getText().length() > 8) {
-            JOptionPane.showMessageDialog(null, "CEP inválido (Digite apenas números)");
-            textCEP.setText("");
-            textCEP.requestFocus();
-            return;
-        }
-
-        // press enter or tab
-        if (evt.getKeyCode() == 10 || evt.getKeyCode() == 9) {
-            if (textCEP.getText().length() != 8) {
-                JOptionPane.showMessageDialog(null, "CEP inválido! (Digite apenas números)");
-                textCEP.setText("");
-                textCEP.requestFocus();
-                return;
-            }
-        }
-    }//GEN-LAST:event_textCEPKeyPressed
-
-    private void btnBuscarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCepActionPerformed
-        if (textCEP.getText().length() != 8) {
-            JOptionPane.showMessageDialog(null, "CEP inválido! (Digite apenas números)");
-            textCEP.setText("");
-            textCEP.requestFocus();
-            return;
-        }
-        JOptionPane.showMessageDialog(null, "Aguarde enquanto o CEP é consultado!", "Aguarde", JOptionPane.INFORMATION_MESSAGE);
-
-        try {
-            int opcao = JOptionPane.showConfirmDialog(this, "Para buscar um CEP, voce precisa ter uma conexao estavel com a internet, deseja procurar um CEP?", "Confirmar busca", JOptionPane.YES_NO_OPTION);
-            if (opcao == JOptionPane.NO_OPTION) {
-                return;
-            }
-
-            AddressResource cepBuscado = CEPResource.buscarCEP(Integer.parseInt(textCEP.getText()));
-
-            selectEstado.setSelectedItem(cepBuscado.getState());
-            selectCidade.removeAllItems();
-            selectCidade.addItem(cepBuscado.getCity());
-            selectCidade.setSelectedItem(cepBuscado.getCity());
-            selectCidade.setEnabled(false);
-
-            if (cepBuscado.getDistrict().length() > 0) {
-                textBairro.setText(cepBuscado.getDistrict());
-                textBairro.setEnabled(false);
-            }
-
-            if (cepBuscado.getStreet().length() > 0) {
-                textRua.setText(cepBuscado.getStreet());
-                textRua.setEnabled(false);
-            }
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "CEP em formato invalido (Digite apenas números)");
-            textCEP.requestFocus();
-        } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "CEP não encontrado");
-            textCEP.requestFocus();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            textCEP.requestFocus();
-
-        }
-    }//GEN-LAST:event_btnBuscarCepActionPerformed
-
-    private void textNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textNomeActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         ArrayList<String> erros = new ArrayList<String>();
@@ -619,32 +543,139 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void btnCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseClicked
+
+    }//GEN-LAST:event_btnCadastrarMouseClicked
+
+    private void textComplementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textComplementoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textComplementoActionPerformed
+
+    private void textNumeroInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_textNumeroInputMethodTextChanged
+
+    }//GEN-LAST:event_textNumeroInputMethodTextChanged
+
+    private void textNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textNumeroActionPerformed
+
+    private void textNumeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyPressed
+
+    }//GEN-LAST:event_textNumeroKeyPressed
+
+    private void textNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyReleased
+
+    }//GEN-LAST:event_textNumeroKeyReleased
+
+    private void textNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyTyped
+
+    }//GEN-LAST:event_textNumeroKeyTyped
+
+    private void selectCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCidadeActionPerformed
+
+    }//GEN-LAST:event_selectCidadeActionPerformed
+
+    private void selectEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectEstadoActionPerformed
+        if (selectEstado.getSelectedItem() != null && selectEstado.getSelectedItem().toString().length() == 2) {
+            selectCidade.setEnabled(false);
+            textBairro.setText("");
+            textRua.setText("");
+            textNumero.setText("");
+            textComplemento.setText("");
+
+            if (textCEP.getText().length() == 0) {
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        selectCidade.setEnabled(true);
+                        selectCidade.removeAllItems();
+                        for (Object cidade : LocalidadesDAO.obterCidades(selectEstado.getSelectedItem().toString())) {
+                            selectCidade.addItem(cidade.toString());
+                        }
+
+                    }
+                });
+                thread.start();
+            } else {
+                selectCidade.setEnabled(true);
+                selectCidade.removeAllItems();
+                for (Object cidade : LocalidadesDAO.obterCidades(selectEstado.getSelectedItem().toString())) {
+                    selectCidade.addItem(cidade.toString());
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroAmigos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroAmigos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroAmigos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroAmigos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
+    }//GEN-LAST:event_selectEstadoActionPerformed
 
-        /* Create and display the form */
+    private void textCEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCEPKeyPressed
+        if (textCEP.getText().length() > 8) {
+            JOptionPane.showMessageDialog(null, "CEP inválido (Digite apenas números)");
+            textCEP.setText("");
+            textCEP.requestFocus();
+            return;
+        }
+
+        // press enter or tab
+        if (evt.getKeyCode() == 10 || evt.getKeyCode() == 9) {
+            if (textCEP.getText().length() != 8) {
+                JOptionPane.showMessageDialog(null, "CEP inválido (Digite apenas números)");
+                textCEP.setText("");
+                textCEP.requestFocus();
+                return;
+            }
+        }
+    }//GEN-LAST:event_textCEPKeyPressed
+
+    private void btnBuscarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCepActionPerformed
+        if (textCEP.getText().length() != 8) {
+            JOptionPane.showMessageDialog(null, "CEP inválido (Digite apenas números)");
+            textCEP.setText("");
+            textCEP.requestFocus();
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "Aguarde enquanto o CEP é consultado...", "Aguarde", JOptionPane.INFORMATION_MESSAGE);
+
+        try {
+            int opcao = JOptionPane.showConfirmDialog(this, "Para buscar um CEP, voce precisa ter uma conexao estavel com a internet, deseja procurar um CEP?", "Confirmar busca", JOptionPane.YES_NO_OPTION);
+            if (opcao == JOptionPane.NO_OPTION) {
+                return;
+            }
+
+            AddressResource cepBuscado = CEPResource.buscarCEP(Integer.parseInt(textCEP.getText()));
+
+            selectEstado.setSelectedItem(cepBuscado.getState());
+            selectCidade.removeAllItems();
+            selectCidade.addItem(cepBuscado.getCity());
+            selectCidade.setSelectedItem(cepBuscado.getCity());
+            selectCidade.setEnabled(false);
+
+            if (cepBuscado.getDistrict().length() > 0) {
+                textBairro.setText(cepBuscado.getDistrict());
+                textBairro.setEnabled(false);
+            }
+
+            if (cepBuscado.getStreet().length() > 0) {
+                textRua.setText(cepBuscado.getStreet());
+                textRua.setEnabled(false);
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "CEP em formato invalido (Digite apenas números)");
+            textCEP.requestFocus();
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "CEP não encontrado");
+            textCEP.requestFocus();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            textCEP.requestFocus();
+
+        }
+    }//GEN-LAST:event_btnBuscarCepActionPerformed
+
+    private void textNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textNomeActionPerformed
+
+    public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaCadastroAmigos().setVisible(true);
@@ -655,13 +686,21 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarCep;
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnCadastrar1;
+    private javax.swing.JButton btnCadastrar2;
     private javax.swing.JButton btnDeletar;
+    private javax.swing.JButton btnDeletar1;
+    private javax.swing.JButton btnDeletar2;
     private javax.swing.JButton btnVisualizarEmprestimos;
+    private javax.swing.JButton btnVisualizarEmprestimos1;
+    private javax.swing.JButton btnVisualizarEmprestimos2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -670,8 +709,11 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JLayeredPane jLayeredPane4;
+    private javax.swing.JLayeredPane jLayeredPane5;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JComboBox<String> selectCidade;
     private javax.swing.JComboBox<String> selectEstado;

@@ -313,7 +313,7 @@ public class TelaPrincipalOld extends javax.swing.JFrame {
         Thread newThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                new ViewsAmigos.TelaCadastro().setVisible(true);
+                new ViewsAmigos.TelaCadastroAmigos().setVisible(true);
             }
         });
         newThread.start();
