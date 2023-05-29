@@ -2,21 +2,14 @@ package Resources;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-
 public class CEPResource {
-    
-    public static AddressResource buscarCEP(Integer cep) throws IOException{
+
+    public static AddressResource buscarCEP(Integer cep) throws IOException {
         String urlStr = "https://viacep.com.br/ws/" + cep + "/json/";
         URL url = new URL(urlStr);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -36,19 +29,19 @@ public class CEPResource {
         String uf = jsonElement.getAsJsonObject().get("uf").getAsString();
         String complemento = jsonElement.getAsJsonObject().get("complemento").getAsString();
 
-        if(uf.equalsIgnoreCase("undefined") || cidade.equalsIgnoreCase("undefined")){
+        if (uf.equalsIgnoreCase("undefined") || cidade.equalsIgnoreCase("undefined")) {
             throw new IOException("CEP inválido");
         }
 
-        if(rua.equalsIgnoreCase("undefined")){
+        if (rua.equalsIgnoreCase("undefined")) {
             rua = "";
         }
 
-        if(bairro.equalsIgnoreCase("undefined")){
+        if (bairro.equalsIgnoreCase("undefined")) {
             bairro = "";
         }
 
-        if(complemento.equalsIgnoreCase("undefined")){
+        if (complemento.equalsIgnoreCase("undefined")) {
             complemento = "";
         }
 
@@ -88,5 +81,4 @@ public class CEPResource {
         String numeros = telefone.replaceAll("[^0-9]", "");
         return numeros.matches("^\\d{10,11}$");
     }
-    
 }

@@ -2,12 +2,11 @@ package Exceptions;
 
 public class ToolNotFound extends Exception {
 
-    public ToolNotFound(String message){
+    public ToolNotFound(String message) {
         super(message);
     }
 
-    public ToolNotFound(){
+    public ToolNotFound() {
         super("ERROR: Tool not found.");
     }
-    
 }

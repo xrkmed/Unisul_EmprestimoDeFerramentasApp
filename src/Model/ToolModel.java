@@ -3,7 +3,6 @@ package Model;
 import DAO.LoansDAO;
 import Exceptions.DatabaseResultQueryException;
 import Resources.ManufacturerResource;
-
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -15,11 +14,10 @@ public class ToolModel {
     private String nome;
     private Integer loanId;
 
-    public ToolModel(){
-
+    public ToolModel() {
     }
 
-    public ToolModel(Integer id, String nome, ManufacturerResource manufacturer, double price, Integer loanId){
+    public ToolModel(Integer id, String nome, ManufacturerResource manufacturer, double price, Integer loanId) {
         this.id = id;
         this.nome = nome;
         this.manufacturer = manufacturer;
@@ -27,27 +25,27 @@ public class ToolModel {
         this.loanId = loanId;
     }
 
-    public Integer getId(){
+    public Integer getId() {
         return this.id;
     }
 
-    public ManufacturerResource getManufacturer(){
+    public ManufacturerResource getManufacturer() {
         return this.manufacturer;
     }
 
-    public double getPrice(){
+    public double getPrice() {
         return this.price;
     }
 
-    public String getNome(){
+    public String getNome() {
         return this.nome;
     }
 
-    public LoanModel getLoan() throws DatabaseResultQueryException, SQLException{
+    public LoanModel getLoan() throws DatabaseResultQueryException, SQLException {
         return LoansDAO.getInstance().getLoanByToolId(id);
     }
 
-    public boolean isAvailable(){
+    public boolean isAvailable() {
         return loanId == 0;
     }
 
@@ -77,6 +75,4 @@ public class ToolModel {
         final ToolModel other = (ToolModel) obj;
         return Objects.equals(this.id, other.id);
     }
-
-    
 }

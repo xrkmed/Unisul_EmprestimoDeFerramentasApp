@@ -10,21 +10,21 @@ import Controllers.StatusRenderer;
 import DAO.FriendsDAO;
 import Views.TelaInicial;
 
-public class ScreenAmigos extends ScreenEntity{
+public class ScreenEmprestimos extends ScreenEntity{
 
     private final String[] columnNames = {"ID", "Nome", "Telefone", "Endereço", "Empr. Abertos", "Empr. Atrasados"};
     
-    public ScreenAmigos(){
+    public ScreenEmprestimos(){
         super();
     }
 
-    public ScreenAmigos(TelaInicial telaInicial){
+    public ScreenEmprestimos(TelaInicial telaInicial){
         super(telaInicial);
     }
 
     @Override
     public String getName(){
-        return "Lista Amigos";
+        return "Lista Empréstimos";
     }
 
     @Override

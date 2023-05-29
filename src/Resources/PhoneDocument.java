@@ -4,6 +4,7 @@ import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 
 public class PhoneDocument extends DocumentFilter {
+
     @Override
     public void remove(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length) throws javax.swing.text.BadLocationException {
         replace(fb, offset, length, "", null);

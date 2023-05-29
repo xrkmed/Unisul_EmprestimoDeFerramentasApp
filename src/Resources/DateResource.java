@@ -6,24 +6,25 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class DateResource {
+
     public static String formatDateString(String text) {
         // Remove qualquer caractere não numérico
         String digitsOnly = text.replaceAll("\\D", "");
-        
-        if(digitsOnly.length() >= 2){
-            if(Integer.parseInt(digitsOnly.substring(0, 2)) > 31){
+
+        if (digitsOnly.length() >= 2) {
+            if (Integer.parseInt(digitsOnly.substring(0, 2)) > 31) {
                 digitsOnly = "31" + digitsOnly.substring(2);
             }
         }
 
-        if(digitsOnly.length() >= 4){
-            if(Integer.parseInt(digitsOnly.substring(2, 4)) > 12){
+        if (digitsOnly.length() >= 4) {
+            if (Integer.parseInt(digitsOnly.substring(2, 4)) > 12) {
                 digitsOnly = digitsOnly.substring(0, 2) + "12" + digitsOnly.substring(4);
             }
         }
 
-        if(digitsOnly.length() >= 6){
-            if(Integer.parseInt(digitsOnly.substring(4, 6)) > 9999){
+        if (digitsOnly.length() >= 6) {
+            if (Integer.parseInt(digitsOnly.substring(4, 6)) > 9999) {
                 digitsOnly = digitsOnly.substring(0, 4) + "9999" + digitsOnly.substring(6);
             }
         }
@@ -38,14 +39,14 @@ public class DateResource {
             formattedText.append(c);
         }
 
-        if(formattedText.length() > 10) {
+        if (formattedText.length() > 10) {
             formattedText.delete(10, formattedText.length());
         }
-        
+
         return formattedText.toString();
     }
 
-    public static Date unformatDateString(String text){
+    public static Date unformatDateString(String text) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         try {
             return format.parse(text);
@@ -59,14 +60,14 @@ public class DateResource {
         String dataConvertida = null;
         DateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy");
-        
+
         try {
             Date date = formatoEntrada.parse(data);
             dataConvertida = formatoSaida.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        
+
         return dataConvertida;
     }
 }

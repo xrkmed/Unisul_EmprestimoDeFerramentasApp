@@ -1,13 +1,12 @@
 package Exceptions;
 
-public class CNPJNotFound extends Exception{
-    
-        public CNPJNotFound(String message){
-            super(message);
-        }
+public class CNPJNotFound extends Exception {
 
-        public CNPJNotFound(){
-            super("CNPJ not found");
-        }
-    
+    public CNPJNotFound(String message) {
+        super(message);
+    }
+
+    public CNPJNotFound() {
+        super("CNPJ not found");
+    }
 }

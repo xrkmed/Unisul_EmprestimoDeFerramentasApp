@@ -3,6 +3,7 @@ package Views;
 import Controllers.ThemeController;
 import Resources.Enum_Themes;
 import Views.Screens.ScreenAmigos;
+import Views.Screens.ScreenEmprestimos;
 import Views.Screens.ScreenEntity;
 
 import javax.swing.JButton;
@@ -560,6 +561,8 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAmigosActionPerformed
 
     private void btnEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmprestimosActionPerformed
+        ScreenEmprestimos flag = new ScreenEmprestimos();
+        flag.carregarDados();
     }//GEN-LAST:event_btnEmprestimosActionPerformed
 
     private void bntFabricantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFabricantesActionPerformed
@@ -584,7 +587,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_bntCadastrarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new TelaPrincipal().setVisible(true);
+        new TelaPrincipalOld().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public static void main(String args[]) {

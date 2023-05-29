@@ -4,6 +4,7 @@ import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 
 public class CNPJDocument extends DocumentFilter {
+
     @Override
     public void remove(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length) throws javax.swing.text.BadLocationException {
         replace(fb, offset, length, "", null);
@@ -28,5 +29,5 @@ public class CNPJDocument extends DocumentFilter {
             super.replace(fb, 0, doc.getLength(), filteredText, attr);
         }
     }
-    
+
 }

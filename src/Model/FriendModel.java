@@ -10,42 +10,41 @@ public class FriendModel {
     private AddressResource address;
     private String phone;
 
-    public FriendModel(){
-
+    public FriendModel() {
     }
 
-    public FriendModel(Integer id, String name, AddressResource address, String phone){
+    public FriendModel(Integer id, String name, AddressResource address, String phone) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
     }
 
-    public Integer getId(){
+    public Integer getId() {
         return this.id;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
-    public AddressResource getAddress(){
+    public AddressResource getAddress() {
         return this.address;
     }
 
-    public String getPhone(){
+    public String getPhone() {
         return this.phone;
     }
 
-    public void setPhone(String phone){
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public void updateAddress(AddressResource e){
+    public void updateAddress(AddressResource e) {
         this.address = e;
     }
 
@@ -75,7 +74,4 @@ public class FriendModel {
         final FriendModel other = (FriendModel) obj;
         return Objects.equals(this.id, other.id);
     }
-
-
-    
 }

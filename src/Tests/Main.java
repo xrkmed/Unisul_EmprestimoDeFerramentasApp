@@ -15,17 +15,17 @@ public class Main {
     public static ToolsDAO tools = ToolsDAO.getInstance();
 
     public static void main(String[] args) {
-        try{
+        try {
             UIManager.setLookAndFeel(new FlatMacLightLaf());
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         TelaInicial tela = new TelaInicial();
         tela.setVisible(true);
- 
+
         //Initialize Connection
         Database.getInstance().getConnection();
     }
-    
+
 }

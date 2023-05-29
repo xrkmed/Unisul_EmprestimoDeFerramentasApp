@@ -11,7 +11,6 @@ public class CNPJEntity {
     private String cnpj;
 
     public CNPJEntity() {
-
     }
 
     public CNPJEntity(String nome, String telefone, double capitalSocial, String sampleAddress, String status, String situacao, String cnpj) {
@@ -51,6 +50,4 @@ public class CNPJEntity {
     public String getCNPJ() {
         return this.cnpj;
     }
-
-    
 }

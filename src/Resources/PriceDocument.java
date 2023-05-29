@@ -4,6 +4,7 @@ import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 
 public class PriceDocument extends DocumentFilter {
+
     @Override
     public void remove(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length) throws javax.swing.text.BadLocationException {
         replace(fb, offset, length, "", null);
@@ -19,12 +20,12 @@ public class PriceDocument extends DocumentFilter {
         Document doc = fb.getDocument();
         StringBuilder sb = new StringBuilder(doc.getText(0, doc.getLength()));
         sb.replace(offset, offset + length, text);
-        
+
         String filteredText = sb.toString().replaceAll("[^\\d]", "");
-        if(filteredText.length() > 9){
+        if (filteredText.length() > 9) {
             return;
         }
-        
+
         try {
             if (!filteredText.isEmpty()) {
                 double value = Double.parseDouble(filteredText) / 100.0;
@@ -36,5 +37,5 @@ public class PriceDocument extends DocumentFilter {
         } catch (Exception ex) {
             super.replace(fb, 0, doc.getLength(), "", attr);
         }
-    } 
+    }
 }
