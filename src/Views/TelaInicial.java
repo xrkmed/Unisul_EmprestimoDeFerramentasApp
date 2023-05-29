@@ -23,6 +23,10 @@ public class TelaInicial extends javax.swing.JFrame {
         updateTela(new ScreenAmigos(this));
     }
 
+    public ScreenEntity getTelaAtual() {
+        return telaAtual;
+    }
+    
     public JTable getTable() {
         return tabelaPrincipal;
     }

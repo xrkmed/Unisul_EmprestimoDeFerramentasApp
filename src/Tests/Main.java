@@ -13,6 +13,7 @@ public class Main {
     public static LoansDAO loans = LoansDAO.getInstance();
     public static FriendsDAO friends = FriendsDAO.getInstance();
     public static ToolsDAO tools = ToolsDAO.getInstance();
+    public static TelaInicial tela;
 
     public static void main(String[] args) {
         try {
@@ -20,8 +21,9 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        TelaInicial tela = new TelaInicial();
-        tela.setVisible(true);
+        
+        Main.tela = new TelaInicial();
+        Main.tela.setVisible(true);
 
         //Initialize Connection
         Database.getInstance().getConnection();
