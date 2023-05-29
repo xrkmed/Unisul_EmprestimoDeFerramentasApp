@@ -6,11 +6,21 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Controllers.ColorsRenderer;
+import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
+import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsEmprestimo.TelaRelatorioEmprestimos;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 public class ScreenEmprestimos extends ScreenEntity{
 
@@ -62,7 +72,7 @@ public class ScreenEmprestimos extends ScreenEntity{
 
             DefaultTableModel model = new DefaultTableModel(new Object[0][columnNames.length], columnNames){
                 boolean[] canEdit = new boolean [] {
-                    false, false, false, false, false, false
+                    false, false, false, false, false, false, false, false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -121,14 +131,26 @@ public class ScreenEmprestimos extends ScreenEntity{
     }
 
     public void btnExportar(){
-        //abrir um joptionpane para confirmar se o usuario quer exportar os emprestimos em aberto ou finalizado
-        int i = JOptionPane.showOptionDialog(null, "Selecione o tipo de relatorio que voce deseja exportar", "Exportar",  1, 1, null, new Object[] {"Em aberto", "Finalizados"}, null);
-        if(i == 0){
-            //TODO
-        }else if(i == 1){
-          TelaRelatorioEmprestimos telaRelatorioEmprestimos = new TelaRelatorioEmprestimos();
-          telaRelatorioEmprestimos.setVisible(true);
-        }
+        DirectoryChooserFrame directoryChooserFrame = new DirectoryChooserFrame();
+
+        directoryChooserFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                if(directoryChooserFrame.getSelectedDirectory().length() > 0){
+                    try{
+                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
+                        String fileName = "RelatorioEmprestimos";
+                        PDFEntity.export(directoryChooserFrame.getSelectedDirectory() + "/", fileName, getTable(), paragraphRelatorio);
+                        JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente novamente mais tarde...");
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente selecionar um diretorio valido!");
+                }
+            }
+        });
     }
     
 }
