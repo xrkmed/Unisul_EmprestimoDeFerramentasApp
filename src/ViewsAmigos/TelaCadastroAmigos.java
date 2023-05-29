@@ -402,9 +402,9 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         jLayeredPane5Layout.setHorizontalGroup(
             jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane5Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(btnVisualizarEmprestimos2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -686,19 +686,11 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarCep;
     private javax.swing.JButton btnCadastrar;
-    private javax.swing.JButton btnCadastrar1;
-    private javax.swing.JButton btnCadastrar2;
-    private javax.swing.JButton btnDeletar;
-    private javax.swing.JButton btnDeletar1;
     private javax.swing.JButton btnDeletar2;
-    private javax.swing.JButton btnVisualizarEmprestimos;
-    private javax.swing.JButton btnVisualizarEmprestimos1;
     private javax.swing.JButton btnVisualizarEmprestimos2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -708,11 +700,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
-    private javax.swing.JLayeredPane jLayeredPane3;
-    private javax.swing.JLayeredPane jLayeredPane4;
     private javax.swing.JLayeredPane jLayeredPane5;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JComboBox<String> selectCidade;
