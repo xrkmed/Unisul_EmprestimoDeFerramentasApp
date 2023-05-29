@@ -5,6 +5,7 @@ import Resources.Enum_Themes;
 import Views.Screens.ScreenAmigos;
 import Views.Screens.ScreenEmprestimos;
 import Views.Screens.ScreenEntity;
+import Views.Screens.ScreenFabricantes;
 import Views.Screens.ScreenFerramentas;
 
 import javax.swing.JButton;
@@ -590,6 +591,9 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEmprestimosActionPerformed
 
     private void bntFabricantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFabricantesActionPerformed
+        if(!(telaAtual instanceof ScreenFabricantes)){
+            updateTela(new ScreenFabricantes(this));
+        }
     }//GEN-LAST:event_bntFabricantesActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
