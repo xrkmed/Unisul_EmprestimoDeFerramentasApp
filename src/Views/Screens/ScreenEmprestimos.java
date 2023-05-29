@@ -130,10 +130,6 @@ public class ScreenEmprestimos extends ScreenEntity {
         JOptionPane.showMessageDialog(null, "working!");
     }
 
-    public void btnExportar() {
-        JOptionPane.showMessageDialog(null, "working!");
-    }
-
     public void btnExportar(){
         DirectoryChooserFrame directoryChooserFrame = new DirectoryChooserFrame();
 

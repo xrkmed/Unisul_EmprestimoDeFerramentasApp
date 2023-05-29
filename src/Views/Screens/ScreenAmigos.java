@@ -22,7 +22,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class ScreenAmigos extends ScreenEntity{
+public class ScreenAmigos extends ScreenEntity {
 
     private final String[] columnNames = {"ID", "Nome", "Telefone", "Endereço", "Empr. Abertos", "Empr. Atrasados"};
 
@@ -139,10 +139,6 @@ public class ScreenAmigos extends ScreenEntity{
     }
 
     public void btnVisualizar() {
-        JOptionPane.showMessageDialog(null, "working!");
-    }
-
-    public void btnExportar() {
         JOptionPane.showMessageDialog(null, "working!");
     }
 
