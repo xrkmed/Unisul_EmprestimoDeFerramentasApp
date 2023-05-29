@@ -1,34 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/Application.java to edit this template
- */
 package ViewsTool;
 
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-
 import Controllers.ColorsRenderer;
 import Controllers.StatusRenderer;
 import DAO.ToolsDAO;
 import Model.ToolModel;
 import Resources.ManufacturerResource;
 
-/**
- *
- * @author arkmed
- */
 public class TelaPainelFerramentas extends javax.swing.JFrame {
 
     private ToolModel selectedTool = null;
     private ManufacturerResource manufacturer = null;
 
-    /**
-     * Creates new form TelaPainelFerramentas
-     */
     public TelaPainelFerramentas() {
         initComponents();
         configFrame();
@@ -40,58 +27,53 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
         this.setTitle("Ferramentas do Fabricante " + manufacturer.getName());
     }
 
-    private void configFrame(){
-        Thread pStart = new Thread(new Runnable(){
+    private void configFrame() {
+        Thread pStart = new Thread(new Runnable() {
             @Override
-            public void run(){
-                    ferramentasSemFab.getSelectionModel().addListSelectionListener(x -> {
-                        if (!x.getValueIsAdjusting()) {
-                            int selectedRow = ferramentasSemFab.getSelectedRow();
-                            if (selectedRow != -1) {
-                                try{
-                                    selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasSemFab.getValueAt(selectedRow, 0));
-                                    ferramentasList.clearSelection();
-                                }catch(Exception e){
-                                    JOptionPane.showMessageDialog(null, "Erro ao selecionar ferramenta: " + e.getMessage());
-                                }
+            public void run() {
+                ferramentasSemFab.getSelectionModel().addListSelectionListener(x -> {
+                    if (!x.getValueIsAdjusting()) {
+                        int selectedRow = ferramentasSemFab.getSelectedRow();
+                        if (selectedRow != -1) {
+                            try {
+                                selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasSemFab.getValueAt(selectedRow, 0));
+                                ferramentasList.clearSelection();
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(null, "Erro ao selecionar ferramenta: " + e.getMessage());
                             }
                         }
-                    });
-                    ((DefaultTableModel) ferramentasSemFab.getModel()).setRowCount(0);
-                    ferramentasSemFab.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            
-                    ferramentasList.getSelectionModel().addListSelectionListener(x -> {
-                        if (!x.getValueIsAdjusting()) {
-                            int selectedRow = ferramentasList.getSelectedRow();
-                            if (selectedRow != -1) {
-                                try{
-                                    selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasList.getValueAt(selectedRow, 0));
-                                    ferramentasSemFab.clearSelection();
-                                }catch(Exception e){
-                                    JOptionPane.showMessageDialog(null, "Erro ao selecionar ferramenta: " + e.getMessage());
-                                }
-                            }
-                        }
-                    });
-                    ((DefaultTableModel) ferramentasList.getModel()).setRowCount(0);
-                    ferramentasList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-                    try{
-                        loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
-                        loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
-                    }catch(Exception e){
-                        JOptionPane.showMessageDialog(null, "Erro ao carregar ferramentas: " + e.getMessage());
                     }
+                });
+                ((DefaultTableModel) ferramentasSemFab.getModel()).setRowCount(0);
+                ferramentasSemFab.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+                ferramentasList.getSelectionModel().addListSelectionListener(x -> {
+                    if (!x.getValueIsAdjusting()) {
+                        int selectedRow = ferramentasList.getSelectedRow();
+                        if (selectedRow != -1) {
+                            try {
+                                selectedTool = ToolsDAO.getInstance().getTool((int) ferramentasList.getValueAt(selectedRow, 0));
+                                ferramentasSemFab.clearSelection();
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(null, "Erro ao selecionar ferramenta: " + e.getMessage());
+                            }
+                        }
+                    }
+                });
+                ((DefaultTableModel) ferramentasList.getModel()).setRowCount(0);
+                ferramentasList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+                try {
+                    loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
+                    loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Erro ao carregar ferramentas: " + e.getMessage());
+                }
             }
         });
         pStart.start();
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -360,29 +342,29 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadFabricanteActionPerformed
-        try{
-            if(selectedTool != null && selectedTool.getManufacturer() == null){
+        try {
+            if (selectedTool != null && selectedTool.getManufacturer() == null) {
                 ToolsDAO.getInstance().updateManufacturer(selectedTool.getId(), manufacturer.getId());
                 loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
                 loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Selecione uma ferramenta sem fabricante para adicionar o fabricante selecionado");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao adicionar fabricante: " + e.getMessage());
         }
     }//GEN-LAST:event_btnCadFabricanteActionPerformed
 
     private void btnRemFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemFabricanteActionPerformed
-        try{
-            if(selectedTool != null && selectedTool.getManufacturer().getId() == manufacturer.getId()){
+        try {
+            if (selectedTool != null && selectedTool.getManufacturer().getId() == manufacturer.getId()) {
                 ToolsDAO.getInstance().updateManufacturer(selectedTool.getId(), -1);
                 loadList(ferramentasList, ToolsDAO.getInstance().getToolsByManufacturer(manufacturer.getId()));
                 loadList(ferramentasSemFab, ToolsDAO.getInstance().getToolsWithoutManufacturer());
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Selecione uma ferramenta deste fabricante para remover o fabricante");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao remover fabricante: " + e.getMessage());
         }
     }//GEN-LAST:event_btnRemFabricanteActionPerformed
@@ -391,15 +373,15 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    public void loadList(JTable table, ArrayList<ToolModel> tools){
+    public void loadList(JTable table, ArrayList<ToolModel> tools) {
         StatusRenderer renderer = new StatusRenderer();
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
 
         for (ToolModel tool : tools) {
-            if(!tool.isAvailable()){
+            if (!tool.isAvailable()) {
                 renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
-                for(int i = 0; i < table.getColumnCount(); i++){
+                for (int i = 0; i < table.getColumnCount(); i++) {
                     table.getColumnModel().getColumn(i).setCellRenderer(renderer);
                 }
             }
@@ -411,34 +393,8 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPainelFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPainelFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPainelFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPainelFerramentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaPainelFerramentas().setVisible(true);

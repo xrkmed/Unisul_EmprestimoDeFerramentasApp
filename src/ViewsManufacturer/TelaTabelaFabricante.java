@@ -3,25 +3,12 @@ package ViewsManufacturer;
 import ViewsTool.TelaPainelFerramentas;
 import Controllers.ColorsRenderer;
 import Controllers.StatusRenderer;
-import ViewsAmigos.*;
-import java.awt.Color;
-import java.awt.List;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
-
-import DAO.FriendsDAO;
 import DAO.ManufacturerDAO;
 import DAO.ToolsDAO;
-import Model.FriendModel;
-import Model.ToolModel;
-import Resources.BRLResource;
-import Resources.CEPResource;
 import Resources.CNPJResource;
 import Resources.ManufacturerResource;
 
@@ -29,9 +16,6 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
 
     private ManufacturerResource selectedManufacturer = null;
 
-    /**
-     * Creates new form java
-     */
     public TelaTabelaFabricante() {
         initComponents();
         initTable();
@@ -41,9 +25,9 @@ public class TelaTabelaFabricante extends javax.swing.JFrame {
         Thread loadValues = new Thread(new Runnable() {
             @Override
             public void run() {
-                    jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
-                    jTable2.getColumnModel().getColumn(0).setMinWidth(35);
-                    jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
+                jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
+                jTable2.getColumnModel().getColumn(0).setMinWidth(35);
+                jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
 
                 jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 

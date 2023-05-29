@@ -10,10 +10,10 @@ public class ScreenEntity {
 
     private TelaInicial tela;
 
-    public ScreenEntity(){
+    public ScreenEntity() {
     }
 
-    public ScreenEntity(TelaInicial telaInicial){
+    public ScreenEntity(TelaInicial telaInicial) {
         this.tela = telaInicial;
 
         for (java.awt.event.ActionListener al : getBtnCadastro().getActionListeners()) {
@@ -35,53 +35,52 @@ public class ScreenEntity {
         for (java.awt.event.ActionListener al : getBtnExportar().getActionListeners()) {
             getBtnExportar().removeActionListener(al);
         }
-        
+
         init();
     }
 
-    public String getName(){
+    public String getName() {
         return "Lista vazia";
     }
 
-    public void carregarDados(){
+    public void carregarDados() {
         //
     }
 
-    public void init(){
+    public void init() {
         //
     }
 
-    public final JTable getTable(){
+    public final JTable getTable() {
         return tela.getTable();
     }
 
-    public final JLabel getTitulo(){
+    public final JLabel getTitulo() {
         return tela.getTitulo();
     }
 
-    public final JButton getBtnCadastro(){
+    public final JButton getBtnCadastro() {
         return tela.getBtnCadastro();
     }
 
-    public final JButton getBtnEditar(){
+    public final JButton getBtnEditar() {
         return tela.getBtnEditar();
     }
 
-    public final JButton getBtnDeletar(){
+    public final JButton getBtnDeletar() {
         return tela.getBtnDeletar();
     }
 
-    public final JButton getBtnVisualizar(){
+    public final JButton getBtnVisualizar() {
         return tela.getBtnVisualizar();
     }
 
-    public final JButton getBtnExportar(){
+    public final JButton getBtnExportar() {
         return tela.getBtnExportar();
     }
 
-    public Object getSelectedValue(){
+    public Object getSelectedValue() {
         return null;
     }
 
-    
 }
