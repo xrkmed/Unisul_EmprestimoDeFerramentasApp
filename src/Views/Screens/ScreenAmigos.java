@@ -6,9 +6,19 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Controllers.ColorsRenderer;
+import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import DAO.FriendsDAO;
+import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 public class ScreenAmigos extends ScreenEntity{
 
@@ -130,7 +140,26 @@ public class ScreenAmigos extends ScreenEntity{
     }
 
     public void btnExportar(){
-        JOptionPane.showMessageDialog(null, "working!");
+        DirectoryChooserFrame directoryChooserFrame = new DirectoryChooserFrame();
+
+        directoryChooserFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                if(directoryChooserFrame.getSelectedDirectory().length() > 0){
+                    try{
+                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
+                        String fileName = "RelatorioAmigos";
+                        PDFEntity.export(directoryChooserFrame.getSelectedDirectory() + "/", fileName, getTable(), paragraphRelatorio);
+                        JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
+                    }catch(Exception e){
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente novamente mais tarde...");
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente selecionar um diretorio valido!");
+                }
+            }
+        });
     }
     
 }

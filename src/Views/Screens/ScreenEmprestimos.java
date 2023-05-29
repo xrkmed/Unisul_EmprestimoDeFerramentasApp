@@ -139,7 +139,7 @@ public class ScreenEmprestimos extends ScreenEntity{
                 if(directoryChooserFrame.getSelectedDirectory().length() > 0){
                     try{
                         Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
-                        String fileName = "RelatorioEmprestimos";
+                        String fileName = "RelatorioEmprestimosEmAberto";
                         PDFEntity.export(directoryChooserFrame.getSelectedDirectory() + "/", fileName, getTable(), paragraphRelatorio);
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
                     }catch(Exception e){
