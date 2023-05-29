@@ -1,4 +1,4 @@
-package Views;
+package ViewsAmigos;
 
 import DAO.FriendsDAO;
 import DAO.LocalidadesDAO;
@@ -9,11 +9,11 @@ import Resources.PhoneValidResource;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-public class TelaCadastro extends javax.swing.JFrame {
+public class TelaCadastroAmigos extends javax.swing.JFrame {
 
     private FriendModel selectedFriend = null;
 
-    public TelaCadastro() {
+    public TelaCadastroAmigos() {
         initComponents();
     }
 
@@ -80,6 +80,10 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("Dados Cadastrais");
+
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/plus-custom.png"))); // NOI18N
+        jToggleButton1.setToolTipText("Novo Empréstimo");
+        jToggleButton1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLayeredPane2.setLayer(btnCadastrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(btnVisualizarEmprestimos, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -629,20 +633,21 @@ public class TelaCadastro extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroAmigos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroAmigos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroAmigos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroAmigos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaCadastro().setVisible(true);
+                new TelaCadastroAmigos().setVisible(true);
             }
         });
     }
