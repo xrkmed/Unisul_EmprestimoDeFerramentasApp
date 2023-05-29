@@ -11,7 +11,7 @@ import Views.TelaInicial;
 
 public class ScreenFerramentas extends ScreenEntity {
 
-    private final String[] columnNames = {"ID", "Nome", "Fabricante", "Preço", "Em uso por", "Data de devoluçao"};
+    private final String[] columnNames = {"ID", "Nome", "Fabricante", "Preço", "Em Uso Por", "Data Devolução"};
 
     public ScreenFerramentas() {
         super();
