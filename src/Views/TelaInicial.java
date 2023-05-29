@@ -157,7 +157,7 @@ public class TelaInicial extends javax.swing.JFrame {
         labelListaNome.setText("Lista Amigos");
 
         btnExportar.setBackground(new java.awt.Color(205, 205, 205));
-        btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-export-custom (2).png"))); // NOI18N
+        btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-pdf-box-custom.png"))); // NOI18N
         btnExportar.setToolTipText("Exportar Relatório");
         btnExportar.setBorder(null);
         btnExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

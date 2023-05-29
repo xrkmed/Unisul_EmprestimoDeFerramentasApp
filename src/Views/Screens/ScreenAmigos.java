@@ -9,6 +9,8 @@ import Controllers.ColorsRenderer;
 import Controllers.StatusRenderer;
 import DAO.FriendsDAO;
 import Views.TelaInicial;
+import ViewsAmigos.TelaCadastroAmigos;
+import ViewsAmigos.TelaCadastroAmigos;
 
 public class ScreenAmigos extends ScreenEntity {
 
@@ -115,7 +117,7 @@ public class ScreenAmigos extends ScreenEntity {
 
     /* FUNCOES DOS BOTOES */
     public void btnCadastro() {
-        JOptionPane.showMessageDialog(null, "working!");
+        new TelaCadastroAmigos().setVisible(true);
     }
 
     public void btnEditar() {

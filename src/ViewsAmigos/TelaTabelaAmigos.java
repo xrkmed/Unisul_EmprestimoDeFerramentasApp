@@ -715,7 +715,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
     private void btnDadosCadastraisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDadosCadastraisActionPerformed
         if (selectedFriend != null) {
-            TelaCadastro tela = new TelaCadastro(selectedFriend);
+            TelaCadastroAmigos tela = new TelaCadastroAmigos(selectedFriend);
             tela.setVisible(true);
 
             tela.addWindowListener(new WindowAdapter() {
