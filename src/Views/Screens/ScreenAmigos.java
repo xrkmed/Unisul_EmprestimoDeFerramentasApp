@@ -60,7 +60,7 @@ public class ScreenAmigos extends ScreenEntity{
             //statusRed.addHighlightedRow(1, Color.RED);
             ArrayList<Object[]> amigosData = FriendsDAO.getInstance().loadFriendsTabela();
 
-            DefaultTableModel model = new DefaultTableModel(new Object[0][6], columnNames){
+            DefaultTableModel model = new DefaultTableModel(new Object[0][columnNames.length], columnNames){
                 boolean[] canEdit = new boolean [] {
                     false, false, false, false, false, false
                 };
@@ -71,6 +71,18 @@ public class ScreenAmigos extends ScreenEntity{
             };
 
             getTable().setModel(model);
+
+            if (getTable().getColumnModel().getColumnCount() > 0) {
+                getTable().getColumnModel().getColumn(0).setMinWidth(65);
+                getTable().getColumnModel().getColumn(0).setMaxWidth(65);
+                getTable().getColumnModel().getColumn(1).setPreferredWidth(350);
+                getTable().getColumnModel().getColumn(2).setPreferredWidth(150);
+                getTable().getColumnModel().getColumn(3).setPreferredWidth(400);
+                getTable().getColumnModel().getColumn(4).setPreferredWidth(110);
+                getTable().getColumnModel().getColumn(4).setMaxWidth(110);
+                getTable().getColumnModel().getColumn(5).setPreferredWidth(110);
+                getTable().getColumnModel().getColumn(5).setMaxWidth(110);
+            }
 
             for (Object[] data : amigosData) {
                 if (Integer.parseInt(data[4].toString()) > 0) {
