@@ -1,14 +1,58 @@
 package Views;
 
-import Controllers.OptionSelected;
 import Controllers.ThemeController;
 import Resources.Enum_Themes;
+import Views.Screens.ScreenAmigos;
+import Views.Screens.ScreenEntity;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 public class TelaInicial extends javax.swing.JFrame {
     
+    private ScreenEntity telaAtual;
+
     public TelaInicial() {
         initComponents();
+        telaAtual = new ScreenAmigos(this);
+        Thread t = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                telaAtual.carregarDados();
+            }
+        });
+
+        t.start();
+    }
+
+    public JTable getTable(){
+        return tabelaPrincipal;
+    }
+
+    public JLabel getTitulo(){
+        return labelListaNome;
+    }
+
+    public JButton getBtnCadastro(){
+        return bntCadastrar;
+    }
+
+    public JButton getBtnEditar(){
+        return btnEditar;
+    }
+
+    public JButton getBtnDeletar(){
+        return btnDeletar;
+    }
+
+    public JButton getBtnVisualizar(){
+        return btnVisualizar;
+    }
+
+    public JButton getBtnExportar(){
+        return btnExportar;
     }
     
     @SuppressWarnings("unchecked")
@@ -35,7 +79,7 @@ public class TelaInicial extends javax.swing.JFrame {
         bntFabricantes = new javax.swing.JButton();
         bntSeguranca = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaAmigos = new javax.swing.JTable();
+        tabelaPrincipal = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -274,8 +318,8 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        tabelaAmigos.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        tabelaAmigos.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaPrincipal.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        tabelaPrincipal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -390,21 +434,21 @@ public class TelaInicial extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabelaAmigos.setToolTipText("");
-        tabelaAmigos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tabelaAmigos.setShowGrid(true);
-        tabelaAmigos.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tabelaAmigos);
-        if (tabelaAmigos.getColumnModel().getColumnCount() > 0) {
-            tabelaAmigos.getColumnModel().getColumn(0).setMinWidth(65);
-            tabelaAmigos.getColumnModel().getColumn(0).setMaxWidth(65);
-            tabelaAmigos.getColumnModel().getColumn(1).setPreferredWidth(350);
-            tabelaAmigos.getColumnModel().getColumn(2).setPreferredWidth(150);
-            tabelaAmigos.getColumnModel().getColumn(3).setPreferredWidth(400);
-            tabelaAmigos.getColumnModel().getColumn(4).setPreferredWidth(110);
-            tabelaAmigos.getColumnModel().getColumn(4).setMaxWidth(110);
-            tabelaAmigos.getColumnModel().getColumn(5).setPreferredWidth(110);
-            tabelaAmigos.getColumnModel().getColumn(5).setMaxWidth(110);
+        tabelaPrincipal.setToolTipText("");
+        tabelaPrincipal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tabelaPrincipal.setShowGrid(true);
+        tabelaPrincipal.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tabelaPrincipal);
+        if (tabelaPrincipal.getColumnModel().getColumnCount() > 0) {
+            tabelaPrincipal.getColumnModel().getColumn(0).setMinWidth(65);
+            tabelaPrincipal.getColumnModel().getColumn(0).setMaxWidth(65);
+            tabelaPrincipal.getColumnModel().getColumn(1).setPreferredWidth(350);
+            tabelaPrincipal.getColumnModel().getColumn(2).setPreferredWidth(150);
+            tabelaPrincipal.getColumnModel().getColumn(3).setPreferredWidth(400);
+            tabelaPrincipal.getColumnModel().getColumn(4).setPreferredWidth(110);
+            tabelaPrincipal.getColumnModel().getColumn(4).setMaxWidth(110);
+            tabelaPrincipal.getColumnModel().getColumn(5).setPreferredWidth(110);
+            tabelaPrincipal.getColumnModel().getColumn(5).setMaxWidth(110);
         }
 
         jMenu1.setText("Opções");
@@ -506,8 +550,6 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAmigosMouseDragged
 
     private void bntFerramentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFerramentasActionPerformed
-        labelListaNome.setText("Lista Ferramentas");
-        OptionSelected.setOption("ferramentas");
     }//GEN-LAST:event_bntFerramentasActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -515,25 +557,20 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void btnAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmigosActionPerformed
-        labelListaNome.setText("Lista Amigos");
-        OptionSelected.setOption("amigos");
     }//GEN-LAST:event_btnAmigosActionPerformed
 
     private void btnEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmprestimosActionPerformed
-        labelListaNome.setText("Lista Empréstimos");
-        OptionSelected.setOption("emprestimos");
     }//GEN-LAST:event_btnEmprestimosActionPerformed
 
     private void bntFabricantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFabricantesActionPerformed
-        labelListaNome.setText("Lista Fabricantes");
-        OptionSelected.setOption("fabricantes");
     }//GEN-LAST:event_bntFabricantesActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         int flag = JOptionPane.showConfirmDialog(rootPane, "Deseja fechar o software?", "Confirmação", JOptionPane.YES_NO_OPTION);
         if (flag == JOptionPane.YES_OPTION) {
             System.exit(-1);
-        }    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        }    
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         ThemeController.getInstance().setTheme(Enum_Themes.DARK, this);
@@ -544,25 +581,6 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void bntCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCadastrarActionPerformed
-        switch(OptionSelected.getOption()){
-            case "amigos":
-                new TelaCadastro().setVisible(true);
-            break;
-            
-            case "emprestimos":
-                new ViewsEmprestimo.TelaCadastroEmprestimo().setVisible(true);
-            break;
-            
-            case "ferramentas":
-                new ViewsTool.TelaCadastro().setVisible(true);
-            break;
-            
-            case "fabricantes":
-                new ViewsManufacturer.TelaCadastro().setVisible(true);
-            break;
-            
-            default:
-        }
     }//GEN-LAST:event_bntCadastrarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -610,6 +628,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelListaNome;
-    private javax.swing.JTable tabelaAmigos;
+    private javax.swing.JTable tabelaPrincipal;
     // End of variables declaration//GEN-END:variables
 }
