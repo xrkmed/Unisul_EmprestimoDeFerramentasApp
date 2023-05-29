@@ -47,7 +47,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             this.setVisible(true);
             textDataDevolucao.setText(new SimpleDateFormat("dd/MM/yyyy").format(emprestimo.getEndDate()));
             textValorReceber.setText(BRLResource.PRICE_FORMATTER.format(emprestimo.getPrice()));
-            jLabel3.setText("Alterar emprestimo");
+            jLabel14.setText("Alterar emprestimo");
             btnCadastrarEmprestimo.setText("Alterar emprestimo");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Algum erro interno aconteceu no sistema, tente novamente mais tarde ou contacte o administrador!");
@@ -71,17 +71,17 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         document.setDocumentFilter(new DateDocument());
         lblDataHoje.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jTable1.getSelectionModel().addListSelectionListener(x -> {
+        jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jTable2.getSelectionModel().addListSelectionListener(x -> {
             if (!x.getValueIsAdjusting()) {
-                int selectedRow = jTable1.getSelectedRow();
+                int selectedRow = jTable2.getSelectedRow();
                 if (selectedRow != -1) {
-                    selecionadoNome.setText(jTable1.getValueAt(selectedRow, 1).toString());
-                    selecionadoFabricante.setText(jTable1.getValueAt(selectedRow, 2).toString());
+                    selecionadoNome.setText(jTable2.getValueAt(selectedRow, 1).toString());
+                    selecionadoFabricante.setText(jTable2.getValueAt(selectedRow, 2).toString());
                     btnRemoverFerramenta.setEnabled(true);
 
                     for (ToolModel tool : toolsList.getTools()) {
-                        if (tool.getId() == (int) jTable1.getValueAt(selectedRow, 0)) {
+                        if (tool.getId() == (int) jTable2.getValueAt(selectedRow, 0)) {
                             selectedTool = tool;
                             break;
                         }
@@ -109,11 +109,11 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jLayeredPane6 = new javax.swing.JLayeredPane();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        selecionadoNome1 = new javax.swing.JTextField();
-        selecionadoFabricante1 = new javax.swing.JTextField();
+        selecionadoNome = new javax.swing.JTextField();
+        selecionadoFabricante = new javax.swing.JTextField();
         jLayeredPane2 = new javax.swing.JLayeredPane();
-        lblValorFerramentas1 = new javax.swing.JLabel();
-        lblValorReceber1 = new javax.swing.JLabel();
+        lblValorFerramentas = new javax.swing.JLabel();
+        lblValorReceber = new javax.swing.JLabel();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jLabel10 = new javax.swing.JLabel();
         lblDataHoje = new javax.swing.JLabel();
@@ -182,27 +182,27 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel13.setText("Fabricante:");
 
-        selecionadoNome1.setEditable(false);
-        selecionadoNome1.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        selecionadoNome.setEditable(false);
+        selecionadoNome.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
 
-        selecionadoFabricante1.setEditable(false);
-        selecionadoFabricante1.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        selecionadoFabricante1.addActionListener(new java.awt.event.ActionListener() {
+        selecionadoFabricante.setEditable(false);
+        selecionadoFabricante.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        selecionadoFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selecionadoFabricante1ActionPerformed(evt);
+                selecionadoFabricanteActionPerformed(evt);
             }
         });
 
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        lblValorFerramentas1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        lblValorFerramentas1.setText("Valor Total Empréstimo: R$ 0,00");
+        lblValorFerramentas.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        lblValorFerramentas.setText("Valor Total Empréstimo: R$ 0,00");
 
-        lblValorReceber1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        lblValorReceber1.setText("Valor a Receber: R$ 0,00");
+        lblValorReceber.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
+        lblValorReceber.setText("Valor a Receber: R$ 0,00");
 
-        jLayeredPane2.setLayer(lblValorFerramentas1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(lblValorReceber1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(lblValorFerramentas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(lblValorReceber, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -211,24 +211,24 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblValorFerramentas1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
-                    .addComponent(lblValorReceber1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblValorFerramentas, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                    .addComponent(lblValorReceber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(lblValorReceber1)
+                .addComponent(lblValorReceber)
                 .addGap(10, 10, 10)
-                .addComponent(lblValorFerramentas1)
+                .addComponent(lblValorFerramentas)
                 .addGap(10, 10, 10))
         );
 
         jLayeredPane6.setLayer(jLabel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane6.setLayer(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(selecionadoNome1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(selecionadoFabricante1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane6.setLayer(selecionadoNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane6.setLayer(selecionadoFabricante, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane6.setLayer(jLayeredPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane6Layout = new javax.swing.GroupLayout(jLayeredPane6);
@@ -240,8 +240,8 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel13)
                     .addComponent(jLabel12)
-                    .addComponent(selecionadoFabricante1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
-                    .addComponent(selecionadoNome1))
+                    .addComponent(selecionadoFabricante, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                    .addComponent(selecionadoNome))
                 .addGap(118, 118, 118)
                 .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -249,18 +249,19 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jLayeredPane6Layout.setVerticalGroup(
             jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane6Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel12)
-                .addGap(5, 5, 5)
-                .addComponent(selecionadoNome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel13)
-                .addGap(5, 5, 5)
-                .addComponent(selecionadoFabricante1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredPane6Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel12)
+                        .addGap(5, 5, 5)
+                        .addComponent(selecionadoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel13)
+                        .addGap(5, 5, 5)
+                        .addComponent(selecionadoFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10))
         );
 
@@ -365,23 +366,19 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(jLayeredPane6)
-                        .addGap(10, 10, 10))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addComponent(jLayeredPane6))
+                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(jLabel11)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4))
+                    .addComponent(jSeparator1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                .addComponent(jLabel11)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblSelecionadoBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2))
-                                    .addGap(454, 454, 454)
-                                    .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(10, 10, 10))))
+                            .addComponent(lblSelecionadoBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(454, 454, 454)
+                        .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -578,9 +575,9 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
     }
 
     public void loadFerramentasList() {;
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
-        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jTable2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         double totalValue = 0;
         for (ToolModel tool : toolsList.getTools()) {
@@ -697,9 +694,9 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void selecionadoFabricante1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionadoFabricante1ActionPerformed
+    private void selecionadoFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionadoFabricanteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_selecionadoFabricante1ActionPerformed
+    }//GEN-LAST:event_selecionadoFabricanteActionPerformed
 
     public void addFerramenta(ToolModel e) {
         if (!toolsList.containsTool(e.getId())) {
@@ -745,11 +742,11 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblDataHoje;
     private javax.swing.JLabel lblSelecionadoBeneficiado;
-    private javax.swing.JLabel lblValorFerramentas1;
-    private javax.swing.JLabel lblValorReceber1;
+    private javax.swing.JLabel lblValorFerramentas;
+    private javax.swing.JLabel lblValorReceber;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JTextField selecionadoFabricante1;
-    private javax.swing.JTextField selecionadoNome1;
+    private javax.swing.JTextField selecionadoFabricante;
+    private javax.swing.JTextField selecionadoNome;
     private javax.swing.JTextField textDataDevolucao;
     private javax.swing.JTextField textValorReceber;
     // End of variables declaration//GEN-END:variables
