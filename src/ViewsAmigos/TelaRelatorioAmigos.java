@@ -96,7 +96,7 @@ public class TelaRelatorioAmigos extends javax.swing.JFrame {
         jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Grupo supimpa - tabela de amigos");
+        setTitle("Relatório de Amigos - Grupo Supimpa");
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));

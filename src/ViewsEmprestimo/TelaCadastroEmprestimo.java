@@ -152,7 +152,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Grupo Supimpa - Cadastro de Empréstimo");
+        setTitle("Cadastrar Empréstimo - Grupo Supimpa");
 
         btnCadastrarEmprestimo.setBackground(new java.awt.Color(153, 255, 153));
         btnCadastrarEmprestimo.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N

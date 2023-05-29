@@ -118,7 +118,7 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Grupo Supimpa - Painel de Ferramentas");
+        setTitle("Painel de Ferramentas - Grupo Supimpa");
         setResizable(false);
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));

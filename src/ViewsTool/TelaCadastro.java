@@ -81,7 +81,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Grupo Supimpa - Cadastro de Ferramenta");
+        setTitle("Cadastro de Ferramenta - Grupo Supimpa");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N

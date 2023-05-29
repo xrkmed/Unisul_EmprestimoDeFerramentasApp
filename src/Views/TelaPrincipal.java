@@ -66,7 +66,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnTemaLight = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Grupo Supimpa - ToolStock Manager");
+        setTitle("ToolStock Manager - Grupo Supimpa");
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
