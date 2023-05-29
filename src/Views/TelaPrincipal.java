@@ -64,9 +64,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         fileMenu7 = new javax.swing.JMenu();
         btnTemaDark = new javax.swing.JMenuItem();
         btnTemaLight = new javax.swing.JMenuItem();
+        fileMenu8 = new javax.swing.JMenu();
+        btnDevTela = new javax.swing.JMenuItem();
+        jSeparator11 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("ToolStock Manager - Grupo Supimpa");
+        setTitle("Grupo Supimpa - ToolStock Manager");
 
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -378,6 +382,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuBar.add(fileMenu2);
 
+        fileMenu8.setMnemonic('f');
+        fileMenu8.setText("Desenvolvimento");
+
+        btnDevTela.setText("TesteTela");
+        btnDevTela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDevTelaActionPerformed(evt);
+            }
+        });
+        fileMenu8.add(btnDevTela);
+        fileMenu8.add(jSeparator11);
+
+        jMenuItem1.setText("NewTela");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        fileMenu8.add(jMenuItem1);
+
+        menuBar.add(fileMenu8);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -571,6 +597,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
         ThemeController.getInstance().setTheme(Enum_Themes.DARK, this);
     }//GEN-LAST:event_btnTemaDarkActionPerformed
 
+    private void btnDevTelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevTelaActionPerformed
+        Thread newThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                TesteTela tela = new TesteTela();
+                tela.setVisible(true);
+            }
+        });
+
+        newThread.start();
+    }//GEN-LAST:event_btnDevTelaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new NewTela().setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -615,6 +657,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem btnClose;
     private javax.swing.JMenuItem btnControleFinanceiro;
     private javax.swing.JMenuItem btnControleGastosFabricantes;
+    private javax.swing.JMenuItem btnDevTela;
     private javax.swing.JButton btnEmprestimos;
     private javax.swing.JMenuItem btnEmprestimosEmAberto;
     private javax.swing.JMenuItem btnFerramentasCad;
@@ -636,11 +679,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu5;
     private javax.swing.JMenu fileMenu6;
     private javax.swing.JMenu fileMenu7;
+    private javax.swing.JMenu fileMenu8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane3;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JPopupMenu.Separator jSeparator11;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
