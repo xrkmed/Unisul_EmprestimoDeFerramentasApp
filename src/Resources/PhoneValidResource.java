@@ -1,6 +1,7 @@
 package Resources;
 
 public class PhoneValidResource {
+
     public static boolean isValidPhoneNumber(String phoneNumber) {
         // Implementação da validação do número de telefone
         return phoneNumber.matches("\\d{11}");
@@ -20,5 +21,5 @@ public class PhoneValidResource {
         formattedText.append(phoneNumber.substring(6));
         return formattedText.toString();
     }
-    
+
 }

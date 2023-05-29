@@ -8,10 +8,13 @@ import ViewsEmprestimo.TelaRelatorioEmprestimos;
 import ViewsTool.TelaRelatorioFerramentas;
 import ViewsAmigos.TelaRelatorioAmigos;
 import ViewsManufacturer.TelaRelatorioFabricante;
+
 public class DirectoryChooserFrame extends JFrame {
-    public DirectoryChooserFrame(){
+
+    public DirectoryChooserFrame() {
         super();
     }
+
     public DirectoryChooserFrame(JFrame parent) {
         this();
         setTitle("Selecione o local para salvar seu arquivo");
@@ -24,19 +27,19 @@ public class DirectoryChooserFrame extends JFrame {
         int choice = fileChooser.showDialog(this, "Selecionar");
         if (choice == JFileChooser.APPROVE_OPTION) {
             String selectedDirectory = fileChooser.getSelectedFile().getAbsolutePath();
-            if(parent instanceof TelaRelatorioFerramentas){
+            if (parent instanceof TelaRelatorioFerramentas) {
                 ((TelaRelatorioFerramentas) parent).setDirectory(selectedDirectory);
                 this.dispose();
             }
-            if(parent instanceof TelaRelatorioEmprestimos){
+            if (parent instanceof TelaRelatorioEmprestimos) {
                 ((TelaRelatorioEmprestimos) parent).setDirectory(selectedDirectory);
                 this.dispose();
             }
-            if(parent instanceof TelaRelatorioAmigos){
+            if (parent instanceof TelaRelatorioAmigos) {
                 ((TelaRelatorioAmigos) parent).setDirectory(selectedDirectory);
                 this.dispose();
             }
-            if(parent instanceof TelaRelatorioFabricante){
+            if (parent instanceof TelaRelatorioFabricante) {
                 ((TelaRelatorioFabricante) parent).setDirectory(selectedDirectory);
                 this.dispose();
             }

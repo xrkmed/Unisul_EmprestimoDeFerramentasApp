@@ -11,7 +11,7 @@ import Controllers.CNPJEntity;
 import Exceptions.CNPJNotFound;
 
 public class CNPJResource {
-    
+
     public static boolean validarCNPJ(String cnpj) {
         // Remove caracteres especiais
         cnpj = cnpj.replaceAll("[^\\d]", "");
@@ -60,16 +60,16 @@ public class CNPJResource {
         return true;
     }
 
-    public static String returnCNPJFormat(String cnpj) throws IllegalArgumentException{
-        while(cnpj.length() < 14){
+    public static String returnCNPJFormat(String cnpj) throws IllegalArgumentException {
+        while (cnpj.length() < 14) {
             cnpj = "0" + cnpj;
         }
 
         return cnpj.substring(0, 2) + "." + cnpj.substring(2, 5) + "." + cnpj.substring(5, 8) + "/" + cnpj.substring(8, 12) + "-" + cnpj.substring(12);
     }
 
-    public static String returnCNPJUnformat(String cnpj) throws IllegalArgumentException{
-        if(cnpj.length() != 18){
+    public static String returnCNPJUnformat(String cnpj) throws IllegalArgumentException {
+        if (cnpj.length() != 18) {
             throw new IllegalArgumentException("CNPJ inválido");
         }
 
@@ -80,7 +80,7 @@ public class CNPJResource {
         return nome.length() > 3 && nome.length() <= 64;
     }
 
-    public static CNPJEntity consultarCNPJ(String cnpj) throws CNPJNotFound{
+    public static CNPJEntity consultarCNPJ(String cnpj) throws CNPJNotFound {
         try {
             String urlConsulta = "https://www.receitaws.com.br/v1/cnpj/" + cnpj;
 
@@ -92,7 +92,6 @@ public class CNPJResource {
                 JsonParser parser = new JsonParser();
                 JsonElement jsonElement = parser.parse(new InputStreamReader(conn.getInputStream()));
 
-
                 String sampleAddressStr = jsonElement.getAsJsonObject().get("logradouro").getAsString() + ", " + jsonElement.getAsJsonObject().get("numero").getAsString() + " - " + jsonElement.getAsJsonObject().get("bairro").getAsString() + ", " + jsonElement.getAsJsonObject().get("municipio").getAsString() + " - " + jsonElement.getAsJsonObject().get("uf").getAsString() + ", " + jsonElement.getAsJsonObject().get("cep").getAsString();
                 CNPJEntity cnpjObject = new CNPJEntity(jsonElement.getAsJsonObject().get("nome").getAsString(), jsonElement.getAsJsonObject().get("telefone").getAsString(), Double.parseDouble(jsonElement.getAsJsonObject().get("capital_social").getAsString()), sampleAddressStr, jsonElement.getAsJsonObject().get("status").getAsString(), jsonElement.getAsJsonObject().get("situacao").getAsString(), jsonElement.getAsJsonObject().get("cnpj").getAsString());
 
@@ -102,7 +101,7 @@ public class CNPJResource {
                 conn.disconnect();
                 throw new IllegalArgumentException("Erro de conexao: " + conn.getResponseCode() + ", contacte o administrador do sistema e verifique sua conexao com a internet.");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage());
         }
     }

@@ -2,7 +2,6 @@ package Model;
 
 import java.sql.SQLException;
 import java.util.Date;
-
 import DAO.LoansDAO;
 import Exceptions.DatabaseResultQueryException;
 import Resources.ToolboxResource;
@@ -17,10 +16,10 @@ public class LoanModel {
     private boolean returned;
     private double price;
 
-    public LoanModel(){
+    public LoanModel() {
     }
 
-    public LoanModel(Integer id, Date startDate, Date endDate, boolean returned, double price){
+    public LoanModel(Integer id, Date startDate, Date endDate, boolean returned, double price) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -29,47 +28,47 @@ public class LoanModel {
         tools = new ToolboxResource();
     }
 
-    public Integer getId(){
+    public Integer getId() {
         return this.id;
     }
 
-    public FriendModel getFriend() throws DatabaseResultQueryException, SQLException{
+    public FriendModel getFriend() throws DatabaseResultQueryException, SQLException {
         return LoansDAO.getInstance().getFriendByLoanId(id);
     }
 
-    public double getPrice(){
+    public double getPrice() {
         return this.price;
     }
 
-    public Date getStartDate(){
+    public Date getStartDate() {
         return this.startDate;
     }
 
-    public Date getEndDate(){
+    public Date getEndDate() {
         return this.endDate;
     }
 
-    public boolean getReturned(){
+    public boolean getReturned() {
         return this.returned;
     }
 
-    public void setReturned(boolean returned){
+    public void setReturned(boolean returned) {
         this.returned = returned;
     }
 
-    public boolean needsReturn(){
+    public boolean needsReturn() {
         return getEndDate().before(new Date(System.currentTimeMillis()));
     }
 
-    public void addTool(ToolModel e){
+    public void addTool(ToolModel e) {
         this.tools.addTool(e);
     }
 
-    public void removeTool(ToolModel e){
+    public void removeTool(ToolModel e) {
         this.tools.removeTool(e);
     }
 
-    public boolean containsTool(int id){
+    public boolean containsTool(int id) {
         return this.tools.containsTool(id);
     }
 
@@ -99,7 +98,4 @@ public class LoanModel {
         final LoanModel other = (LoanModel) obj;
         return Objects.equals(this.id, other.id);
     }
-
-    
-    
 }
