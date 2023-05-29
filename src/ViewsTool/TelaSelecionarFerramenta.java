@@ -2,34 +2,15 @@ package ViewsTool;
 
 import Controllers.ColorsRenderer;
 import Controllers.StatusRenderer;
-import ViewsManufacturer.*;
-import ViewsAmigos.*;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
-
-import java.awt.Color;
-import java.awt.List;
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
-
-import DAO.FriendsDAO;
-import DAO.LoansDAO;
-import DAO.ManufacturerDAO;
 import DAO.ToolsDAO;
-import Model.FriendModel;
-import Model.LoanModel;
 import Model.ToolModel;
-import Resources.BRLResource;
-import Resources.CEPResource;
-import Resources.CNPJResource;
-import Resources.ManufacturerResource;
 
 public class TelaSelecionarFerramenta extends javax.swing.JFrame {
 

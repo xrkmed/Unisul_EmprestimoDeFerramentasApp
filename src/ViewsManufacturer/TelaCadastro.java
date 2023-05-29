@@ -2,8 +2,6 @@ package ViewsManufacturer;
 
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
-//import javax.xml.ws.http.HTTPException;
-
 import Controllers.CNPJEntity;
 import DAO.ManufacturerDAO;
 import Exceptions.CNPJNotFound;
@@ -370,7 +368,7 @@ public class TelaCadastro extends javax.swing.JFrame {
             return;
         }
 
-        if(!CNPJResource.validarCNPJ(textoCNPJ.getText())){
+        if (!CNPJResource.validarCNPJ(textoCNPJ.getText())) {
             JOptionPane.showMessageDialog(null, "CNPJ inválido!");
             return;
         }

@@ -1,11 +1,8 @@
 package ViewsAmigos;
 
 import java.util.ArrayList;
-
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
-
 import DAO.FriendsDAO;
 import DAO.LocalidadesDAO;
 import Model.FriendModel;
@@ -23,7 +20,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         configFrame();
     }
 
-    public TelaCadastro(FriendModel selectedFriend){
+    public TelaCadastro(FriendModel selectedFriend) {
         this();
         this.selectedFriend = selectedFriend;
         this.setTitle("Alterar cadastro de " + selectedFriend.getName().toUpperCase());
@@ -40,17 +37,17 @@ public class TelaCadastro extends javax.swing.JFrame {
         jButton2.setText("Cancelar alteração");
     }
 
-    private void configFrame(){
+    private void configFrame() {
         AbstractDocument document = (AbstractDocument) textTelefone.getDocument();
 
         document.setDocumentFilter(new PhoneDocument());
 
         //evitar travamento de janela ao carregar os dados
-        Thread pThread = new Thread(new Runnable(){
+        Thread pThread = new Thread(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 selectEstado.removeAllItems();
-                for(Object estado : LocalidadesDAO.getEstados()){
+                for (Object estado : LocalidadesDAO.getEstados()) {
                     selectEstado.addItem(estado.toString());
                 }
             }
@@ -433,83 +430,83 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         ArrayList<String> erros = new ArrayList<String>();
 
-        if(!CEPResource.verificarNomeCompleto(textNome.getText())){
+        if (!CEPResource.verificarNomeCompleto(textNome.getText())) {
             erros.add("Nome inválido. Digite o nome completo (Ex: João da Silva)");
             textNome.setText("");
             textNome.setEnabled(true);
         }
 
-        if(!CEPResource.verificarCEP(textCEP.getText())){
+        if (!CEPResource.verificarCEP(textCEP.getText())) {
             erros.add("CEP inválido. Digite apenas números (Ex: 12345678)");
             textCEP.setText("");
             textCEP.setEnabled(true);
         }
 
-        if(!CEPResource.verificarNumeroCasa(textNumero.getText())){
+        if (!CEPResource.verificarNumeroCasa(textNumero.getText())) {
             erros.add("Número inválido. Digite apenas números (Ex: 123)");
             textNumero.setText("");
             textNumero.setEnabled(true);
         }
 
-        if(!CEPResource.verificarBairro(textBairro.getText())){
+        if (!CEPResource.verificarBairro(textBairro.getText())) {
             erros.add("Bairro inválido. Digite apenas o nome do bairro (Ex: Jardim Paulista)");
             textBairro.setText("");
             textBairro.setEnabled(true);
         }
 
-        if(!CEPResource.verificarCidade(selectCidade.getSelectedItem().toString())){
+        if (!CEPResource.verificarCidade(selectCidade.getSelectedItem().toString())) {
             erros.add("Cidade inválida. Digite apenas o nome da cidade (Ex: São Paulo)");
             selectCidade.setEnabled(true);
         }
 
-        if(!CEPResource.verificarEstado(selectEstado.getSelectedItem().toString())){
+        if (!CEPResource.verificarEstado(selectEstado.getSelectedItem().toString())) {
             erros.add("Estado inválido. Digite apenas a sigla do estado (Ex: SP)");
         }
 
-        if(!CEPResource.verificarRua(textRua.getText())){
+        if (!CEPResource.verificarRua(textRua.getText())) {
             erros.add("Rua inválida. Digite apenas o nome da rua (Ex: Rua Paulista)");
             textRua.setText("");
             textRua.setEnabled(true);
         }
 
-        if(!PhoneValidResource.isValidPhoneNumber(PhoneValidResource.unformatPhoneNumber(textTelefone.getText()))){
+        if (!PhoneValidResource.isValidPhoneNumber(PhoneValidResource.unformatPhoneNumber(textTelefone.getText()))) {
             erros.add("Telefone inválido. Digite apenas números (Ex: 11912345678)");
             textTelefone.setText("");
             textTelefone.setEnabled(true);
         }
 
-        if(erros.size() > 0){
+        if (erros.size() > 0) {
             String mensagem = "";
-            for(String erro : erros){
+            for (String erro : erros) {
                 mensagem += erro + "\n";
             }
             JOptionPane.showMessageDialog(null, "[+] Alguns erros foram encontrados: \n\n\n" + mensagem);
-        }else{
-            if(selectedFriend == null){
-                try{
+        } else {
+            if (selectedFriend == null) {
+                try {
                     AddressResource address = new AddressResource(textRua.getText(), textBairro.getText(), selectCidade.getSelectedItem().toString(), selectEstado.getSelectedItem().toString(), Integer.parseInt(textNumero.getText()), textComplemento.getText(), Integer.parseInt(textCEP.getText()));
                     FriendModel friendModel = FriendsDAO.getInstance().addFriend(textNome.getText().toUpperCase(), PhoneValidResource.unformatPhoneNumber(textTelefone.getText()), address);
                     JOptionPane.showMessageDialog(null, "Amigo cadastrado com sucesso! (" + friendModel.getId() + ")");
                     this.dispose();
-                }catch(Exception e){
+                } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
-            }else{
-                try{
+            } else {
+                try {
                     AddressResource address = new AddressResource(textRua.getText(), textBairro.getText(), selectCidade.getSelectedItem().toString(), selectEstado.getSelectedItem().toString(), Integer.parseInt(textNumero.getText()), textComplemento.getText(), Integer.parseInt(textCEP.getText()));
                     FriendModel friendModel = FriendsDAO.getInstance().getFriend(selectedFriend.getId());
-                    if(friendModel == null){
+                    if (friendModel == null) {
                         throw new Exception("Amigo não encontrado");
                     }
-    
+
                     friendModel.setName(textNome.getText().toUpperCase());
                     friendModel.setPhone(PhoneValidResource.unformatPhoneNumber(textTelefone.getText()));
                     friendModel.updateAddress(address);
-    
+
                     FriendsDAO.getInstance().updateFriend(friendModel.getId(), friendModel);
                     JOptionPane.showMessageDialog(null, "Amigo alterado com sucesso!");
                     this.dispose();
-                }catch(Exception e){
+                } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                 }
             }
@@ -549,17 +546,17 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_selectCidadeActionPerformed
 
     private void selectEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectEstadoActionPerformed
-        if(selectEstado.getSelectedItem() != null && selectEstado.getSelectedItem().toString().length() == 2){
+        if (selectEstado.getSelectedItem() != null && selectEstado.getSelectedItem().toString().length() == 2) {
             selectCidade.setEnabled(false);
             textBairro.setText("");
             textRua.setText("");
             textNumero.setText("");
             textComplemento.setText("");
 
-            if(textCEP.getText().length() == 0){
-                Thread thread = new Thread(new Runnable(){
+            if (textCEP.getText().length() == 0) {
+                Thread thread = new Thread(new Runnable() {
                     @Override
-                    public void run(){
+                    public void run() {
                         selectCidade.setEnabled(true);
                         selectCidade.removeAllItems();
                         for (Object cidade : LocalidadesDAO.obterCidades(selectEstado.getSelectedItem().toString())) {
@@ -569,7 +566,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                     }
                 });
                 thread.start();
-            }else{
+            } else {
                 selectCidade.setEnabled(true);
                 selectCidade.removeAllItems();
                 for (Object cidade : LocalidadesDAO.obterCidades(selectEstado.getSelectedItem().toString())) {
@@ -580,7 +577,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_selectEstadoActionPerformed
 
     private void textCEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCEPKeyPressed
-        if(textCEP.getText().length() > 8){
+        if (textCEP.getText().length() > 8) {
             JOptionPane.showMessageDialog(null, "CEP inválido (Digite apenas números)");
             textCEP.setText("");
             textCEP.requestFocus();
@@ -588,8 +585,8 @@ public class TelaCadastro extends javax.swing.JFrame {
         }
 
         // press enter or tab
-        if(evt.getKeyCode() == 10 || evt.getKeyCode() == 9){
-            if(textCEP.getText().length() != 8){
+        if (evt.getKeyCode() == 10 || evt.getKeyCode() == 9) {
+            if (textCEP.getText().length() != 8) {
                 JOptionPane.showMessageDialog(null, "CEP inválido (Digite apenas números)");
                 textCEP.setText("");
                 textCEP.requestFocus();
@@ -599,7 +596,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_textCEPKeyPressed
 
     private void btnBuscarCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCepActionPerformed
-        if(textCEP.getText().length() != 8){
+        if (textCEP.getText().length() != 8) {
             JOptionPane.showMessageDialog(null, "CEP inválido (Digite apenas números)");
             textCEP.setText("");
             textCEP.requestFocus();
@@ -607,9 +604,9 @@ public class TelaCadastro extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(null, "Aguarde enquanto o CEP é consultado...", "Aguarde", JOptionPane.INFORMATION_MESSAGE);
 
-        try{
+        try {
             int opcao = JOptionPane.showConfirmDialog(this, "Para buscar um CEP, voce precisa ter uma conexao estavel com a internet, deseja procurar um CEP?", "Confirmar busca", JOptionPane.YES_NO_OPTION);
-            if(opcao == JOptionPane.NO_OPTION){
+            if (opcao == JOptionPane.NO_OPTION) {
                 return;
             }
 
@@ -621,23 +618,23 @@ public class TelaCadastro extends javax.swing.JFrame {
             selectCidade.setSelectedItem(cepBuscado.getCity());
             selectCidade.setEnabled(false);
 
-            if(cepBuscado.getDistrict().length() > 0){
+            if (cepBuscado.getDistrict().length() > 0) {
                 textBairro.setText(cepBuscado.getDistrict());
                 textBairro.setEnabled(false);
             }
 
-            if(cepBuscado.getStreet().length() > 0){
+            if (cepBuscado.getStreet().length() > 0) {
                 textRua.setText(cepBuscado.getStreet());
                 textRua.setEnabled(false);
             }
 
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "CEP em formato invalido (Digite apenas números)");
             textCEP.requestFocus();
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "CEP não encontrado");
             textCEP.requestFocus();
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
             textCEP.requestFocus();
 
@@ -648,34 +645,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textNomeActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaCadastro().setVisible(true);
