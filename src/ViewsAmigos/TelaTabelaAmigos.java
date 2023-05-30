@@ -112,7 +112,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Tabela de Amigos - Grupo Supimpapo Supimpa");
+        setTitle("Tabela de Amigos - Grupo Supimpa");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
