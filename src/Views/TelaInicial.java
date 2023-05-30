@@ -8,6 +8,9 @@ import Views.Screens.ScreenEntity;
 import Views.Screens.ScreenFabricantes;
 import Views.Screens.ScreenFerramentas;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
+
+import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -61,7 +64,24 @@ public class TelaInicial extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Aguarde alguns instantes...");
             return;
         }
-        
+
+        btnAmigos.setBackground(new Color(205, 205, 205));
+        btnEmprestimos.setBackground(new Color(205, 205, 205));
+        bntFerramentas.setBackground(new Color(205, 205, 205));
+        bntFabricantes.setBackground(new Color(205, 205, 205));
+        bntSeguranca.setBackground(new Color(205, 205, 205));
+        btnConfig.setBackground(new Color(205, 205, 205));
+
+        if(e instanceof ScreenAmigos){
+            btnAmigos.setBackground(new Color(155, 155, 155));
+        }else if(e instanceof ScreenEmprestimos){
+            btnEmprestimos.setBackground(new Color(155, 155, 155));
+        }else if(e instanceof ScreenFerramentas){
+            bntFerramentas.setBackground(new Color(155, 155, 155));
+        }else if(e instanceof ScreenFabricantes){
+            bntFabricantes.setBackground(new Color(155, 155, 155));
+        }
+
         telaAtual = e;
         ((DefaultTableModel) getTable().getModel()).setRowCount(0);
 
