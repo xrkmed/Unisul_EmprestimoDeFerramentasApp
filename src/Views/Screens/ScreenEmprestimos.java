@@ -12,6 +12,7 @@ import DAO.FriendsDAO;
 import DAO.LoansDAO;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
+import ViewsEmprestimo.TelaCadastroEmprestimo;
 import ViewsEmprestimo.TelaRelatorioEmprestimos;
 
 import com.itextpdf.text.Document;
@@ -36,7 +37,7 @@ public class ScreenEmprestimos extends ScreenEntity {
 
     @Override
     public String getName(){
-        return "Empréstimos em aberto";
+        return "Empréstimos em Aberto";
     }
 
     @Override
