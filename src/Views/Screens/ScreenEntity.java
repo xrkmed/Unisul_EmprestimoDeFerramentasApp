@@ -51,7 +51,7 @@ public class ScreenEntity {
         //
     }
 
-    public void atualizarDados(){
+    public void atualizarDados() {
         carregarDados();
     }
 

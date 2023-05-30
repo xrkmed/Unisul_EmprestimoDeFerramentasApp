@@ -1,47 +1,36 @@
 package Views.Screens;
+
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
 import Controllers.ColorsRenderer;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
-import DAO.FriendsDAO;
-import DAO.LoansDAO;
 import DAO.ManufacturerDAO;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
-import ViewsEmprestimo.TelaRelatorioEmprestimos;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
 
-public class ScreenFabricantes extends ScreenEntity{
+public class ScreenFabricantes extends ScreenEntity {
 
     private final String[] columnNames = {"ID", "Nome", "CNPJ", "Ferramentas", "Ferramentas em uso", "Valor total"};
-    
-    public ScreenFabricantes(){
+
+    public ScreenFabricantes() {
         super();
     }
 
-    public ScreenFabricantes(TelaInicial telaInicial){
+    public ScreenFabricantes(TelaInicial telaInicial) {
         super(telaInicial);
     }
 
     @Override
-    public String getName(){
+    public String getName() {
         return "Lista de Fabricantes";
     }
 
     @Override
-    public void init(){
+    public void init() {
         getTitulo().setText(getName());
 
         getBtnCadastro().addActionListener(e -> {
@@ -67,18 +56,19 @@ public class ScreenFabricantes extends ScreenEntity{
 
     // AQUI OCORRE O LOAD DA TABELA E A FORMATAÇÃO DOS DADOS
     @Override
-    public void carregarDados(){
+    public void carregarDados() {
         try {
             StatusRenderer renderer = new StatusRenderer();
 
-            DefaultTableModel model = new DefaultTableModel(new Object[0][columnNames.length], columnNames){
-                boolean[] canEdit = new boolean [] {
+            DefaultTableModel model = new DefaultTableModel(new Object[0][columnNames.length], columnNames) {
+                boolean[] canEdit = new boolean[]{
                     false, false, false, false, false, false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return canEdit [columnIndex];
-                };
+                    return canEdit[columnIndex];
+                }
+            ;
             };
 
             getTable().setModel(model);
@@ -115,43 +105,43 @@ public class ScreenFabricantes extends ScreenEntity{
 
 
     /* FUNCOES DOS BOTOES */
-    public void btnCadastro(){
+    public void btnCadastro() {
         JOptionPane.showMessageDialog(null, "working!");
     }
 
-    public void btnEditar(){
+    public void btnEditar() {
         JOptionPane.showMessageDialog(null, "working!");
     }
 
-    public void btnDeletar(){
+    public void btnDeletar() {
         JOptionPane.showMessageDialog(null, "working!");
     }
 
-    public void btnVisualizar(){
+    public void btnVisualizar() {
         JOptionPane.showMessageDialog(null, "working!");
     }
 
-    public void btnExportar(){
+    public void btnExportar() {
         DirectoryChooserFrame directoryChooserFrame = new DirectoryChooserFrame();
 
         directoryChooserFrame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                if(directoryChooserFrame.getSelectedDirectory().length() > 0){
-                    try{
+                if (directoryChooserFrame.getSelectedDirectory().length() > 0) {
+                    try {
                         Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
                         String fileName = "RelatorioFabricantes";
                         PDFEntity.export(directoryChooserFrame.getSelectedDirectory() + "/", fileName, getTable(), paragraphRelatorio);
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                         JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente novamente mais tarde...");
                     }
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente selecionar um diretorio valido!");
                 }
             }
         });
     }
-    
+
 }

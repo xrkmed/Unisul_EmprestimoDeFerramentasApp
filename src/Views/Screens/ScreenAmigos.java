@@ -12,15 +12,7 @@ import DAO.FriendsDAO;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsAmigos.TelaCadastroAmigos;
-import ViewsAmigos.TelaCadastroAmigos;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
 
 public class ScreenAmigos extends ScreenEntity {
 
@@ -142,27 +134,27 @@ public class ScreenAmigos extends ScreenEntity {
         JOptionPane.showMessageDialog(null, "working!");
     }
 
-    public void btnExportar(){
+    public void btnExportar() {
         DirectoryChooserFrame directoryChooserFrame = new DirectoryChooserFrame();
 
         directoryChooserFrame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                if(directoryChooserFrame.getSelectedDirectory().length() > 0){
-                    try{
+                if (directoryChooserFrame.getSelectedDirectory().length() > 0) {
+                    try {
                         Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
                         String fileName = "RelatorioAmigos";
                         PDFEntity.export(directoryChooserFrame.getSelectedDirectory() + "/", fileName, getTable(), paragraphRelatorio);
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                         JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente novamente mais tarde...");
                     }
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente selecionar um diretorio valido!");
                 }
             }
         });
     }
-    
+
 }
