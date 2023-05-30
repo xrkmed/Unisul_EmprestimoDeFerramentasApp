@@ -325,7 +325,7 @@ public class TelaPrincipalOld extends javax.swing.JFrame {
         Thread newThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                new ViewsTool.TelaCadastro().setVisible(true);
+                new ViewsTool.TelaCadastroFerramentas().setVisible(true);
             }
         });
         newThread.start();
@@ -372,7 +372,7 @@ public class TelaPrincipalOld extends javax.swing.JFrame {
         Thread newThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                new ViewsManufacturer.TelaCadastro().setVisible(true);
+                new ViewsManufacturer.TelaCadastroFabricantes().setVisible(true);
             }
         });
         newThread.start();

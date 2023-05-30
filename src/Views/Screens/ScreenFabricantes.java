@@ -10,6 +10,7 @@ import Controllers.StatusRenderer;
 import DAO.ManufacturerDAO;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
+import ViewsManufacturer.TelaCadastroFabricantes;
 import com.itextpdf.text.Paragraph;
 
 public class ScreenFabricantes extends ScreenEntity {
@@ -106,7 +107,7 @@ public class ScreenFabricantes extends ScreenEntity {
 
     /* FUNCOES DOS BOTOES */
     public void btnCadastro() {
-        JOptionPane.showMessageDialog(null, "working!");
+        new TelaCadastroFabricantes().setVisible(true);
     }
 
     public void btnEditar() {
