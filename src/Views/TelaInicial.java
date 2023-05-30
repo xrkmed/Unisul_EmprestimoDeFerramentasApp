@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class TelaInicial extends javax.swing.JFrame {
 
     private ScreenEntity telaAtual;
+    private Thread actualThread;
 
     public TelaInicial() {
         initComponents();
@@ -26,7 +27,7 @@ public class TelaInicial extends javax.swing.JFrame {
     public ScreenEntity getTelaAtual() {
         return telaAtual;
     }
-    
+
     public JTable getTable() {
         return tabelaPrincipal;
     }
@@ -56,17 +57,22 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     public void updateTela(ScreenEntity e) {
+        if(actualThread != null && actualThread.isAlive()){
+            JOptionPane.showMessageDialog(null, "Aguarde alguns instantes...");
+            return;
+        }
+        
         telaAtual = e;
         ((DefaultTableModel) getTable().getModel()).setRowCount(0);
 
-        Thread t = new Thread(new Runnable() {
+        actualThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 e.carregarDados();
             }
         });
 
-        t.start();
+        actualThread.start();
     }
 
     @SuppressWarnings("unchecked")
