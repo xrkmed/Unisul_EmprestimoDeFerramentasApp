@@ -408,7 +408,6 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 51, 51));
         jLabel3.setText("Cadastro Empréstimo");
 
-        btnCadastrarEmprestimo.setBackground(new java.awt.Color(153, 255, 153));
         btnCadastrarEmprestimo.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         btnCadastrarEmprestimo.setForeground(new java.awt.Color(51, 51, 51));
         btnCadastrarEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-check-custom.png"))); // NOI18N
@@ -420,7 +419,6 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 102, 102));
         jButton1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(51, 51, 51));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-minus-custom.png"))); // NOI18N
@@ -432,7 +430,6 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             }
         });
 
-        btnSelecionarBeneficiado.setBackground(new java.awt.Color(153, 255, 153));
         btnSelecionarBeneficiado.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnSelecionarBeneficiado.setForeground(new java.awt.Color(51, 51, 51));
         btnSelecionarBeneficiado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/account-plus-custom.png"))); // NOI18N
@@ -444,7 +441,6 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             }
         });
 
-        btnRemoverBeneficiado.setBackground(new java.awt.Color(255, 102, 102));
         btnRemoverBeneficiado.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnRemoverBeneficiado.setForeground(new java.awt.Color(51, 51, 51));
         btnRemoverBeneficiado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/account-remove-custom.png"))); // NOI18N
@@ -457,7 +453,6 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             }
         });
 
-        btnAdicionarFerramenta.setBackground(new java.awt.Color(153, 255, 153));
         btnAdicionarFerramenta.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnAdicionarFerramenta.setForeground(new java.awt.Color(51, 51, 51));
         btnAdicionarFerramenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/toolbox-custom.png"))); // NOI18N
@@ -469,7 +464,6 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             }
         });
 
-        btnRemoverFerramenta.setBackground(new java.awt.Color(255, 102, 102));
         btnRemoverFerramenta.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnRemoverFerramenta.setForeground(new java.awt.Color(51, 51, 51));
         btnRemoverFerramenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/tools-custom (1).png"))); // NOI18N

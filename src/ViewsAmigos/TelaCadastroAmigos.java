@@ -89,7 +89,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastrar Amigo - Grupo Supimpa");
+        setTitle("Dados Cadastrais - Grupo Supimpa");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
@@ -394,6 +394,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/plus-custom.png"))); // NOI18N
         jButton1.setToolTipText("Criar Novo Empréstimo");
         jButton1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLayeredPane5.setLayer(btnVisualizarEmprestimos2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(btnDeletar2, javax.swing.JLayeredPane.DEFAULT_LAYER);
