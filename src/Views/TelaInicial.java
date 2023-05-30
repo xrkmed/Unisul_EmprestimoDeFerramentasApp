@@ -32,6 +32,8 @@ public class TelaInicial extends javax.swing.JFrame {
         
         campoFiltroNome.putClientProperty( FlatClientProperties.PLACEHOLDER_TEXT, "Procurar" );
 	campoFiltroNome.putClientProperty( FlatClientProperties.TEXT_FIELD_LEADING_ICON, new com.formdev.flatlaf.icons.FlatSearchIcon() );
+        
+        campoFiltroNome.putClientProperty( FlatClientProperties.TEXT_FIELD_SHOW_CLEAR_BUTTON, true );
     }
 
     public ScreenEntity getTelaAtual() {
