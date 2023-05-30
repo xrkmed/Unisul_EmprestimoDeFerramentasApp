@@ -35,8 +35,6 @@ public class ScreenEmprestimos extends ScreenEntity {
 
     @Override
     public void init() {
-        getTitulo().setText(getName());
-
         getBtnCadastro().addActionListener(e -> {
             btnCadastro();
         });

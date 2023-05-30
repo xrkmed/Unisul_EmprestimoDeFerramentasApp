@@ -9,6 +9,7 @@ import Views.Screens.ScreenFabricantes;
 import Views.Screens.ScreenFerramentas;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.icons.FlatSearchIcon;
 
@@ -75,6 +76,8 @@ public class TelaInicial extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Aguarde alguns instantes...");
             return;
         }
+        
+        FlatAnimatedLafChange.showSnapshot();
 
         btnAmigos.setBackground(new Color(205, 205, 205));
         btnEmprestimos.setBackground(new Color(205, 205, 205));
@@ -82,7 +85,7 @@ public class TelaInicial extends javax.swing.JFrame {
         bntFabricantes.setBackground(new Color(205, 205, 205));
         bntSeguranca.setBackground(new Color(205, 205, 205));
         btnConfig.setBackground(new Color(205, 205, 205));
-
+        
         if(e instanceof ScreenAmigos){
             btnAmigos.setBackground(new Color(155, 155, 155));
         }else if(e instanceof ScreenEmprestimos){
@@ -94,6 +97,7 @@ public class TelaInicial extends javax.swing.JFrame {
         }
 
         telaAtual = e;
+        labelListaNome.setText(e.getName());
         ((DefaultTableModel) getTable().getModel()).setRowCount(0);
 
         actualThread = new Thread(new Runnable() {
@@ -104,6 +108,7 @@ public class TelaInicial extends javax.swing.JFrame {
         });
 
         actualThread.start();
+        FlatAnimatedLafChange.hideSnapshotWithAnimation();
     }
 
     @SuppressWarnings("unchecked")

@@ -5,6 +5,7 @@ import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import Resources.Enum_Themes;
 import Views.TelaInicial;
+import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
@@ -50,13 +51,15 @@ public class ThemeController {
 
         getInstance().theme = theme;
 
+        FlatAnimatedLafChange.showSnapshot();
+        
         try {
             UIManager.setLookAndFeel(getLookAndFeel(theme));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        parent.dispose();
-        new TelaInicial().setVisible(true);
+        FlatMacLightLaf.updateUI();
+        FlatAnimatedLafChange.hideSnapshotWithAnimation();
     }
 }

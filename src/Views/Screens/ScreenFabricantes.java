@@ -31,8 +31,6 @@ public class ScreenFabricantes extends ScreenEntity {
 
     @Override
     public void init() {
-        getTitulo().setText(getName());
-
         getBtnCadastro().addActionListener(e -> {
             btnCadastro();
         });
