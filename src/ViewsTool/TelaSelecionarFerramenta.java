@@ -55,12 +55,9 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
                     }
                 });
 
-                ArrayList<Integer> lowestSize = new ArrayList<>(Arrays.asList(0, 1));
-                for (Integer i : lowestSize) {
-                    jTable2.getColumnModel().getColumn(i).setPreferredWidth(35);
-                    jTable2.getColumnModel().getColumn(i).setMinWidth(35);
-                    jTable2.getColumnModel().getColumn(i).setMaxWidth(35);
-                }
+                jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
+                jTable2.getColumnModel().getColumn(0).setMinWidth(35);
+                jTable2.getColumnModel().getColumn(0).setMaxWidth(35);
 
                 loadValores();
             }
@@ -112,36 +109,36 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "#", "Nome", "Fabricante", "Preço", "Em uso por", "Data de devoluçao"
+                "ID", "Nome", "Fabricante", "Preço", "Em uso por", "Data de devoluçao"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -158,15 +155,13 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
             jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setPreferredWidth(0);
+            jTable2.getColumnModel().getColumn(1).setPreferredWidth(400);
             jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setPreferredWidth(400);
             jTable2.getColumnModel().getColumn(3).setResizable(false);
             jTable2.getColumnModel().getColumn(4).setResizable(false);
+            jTable2.getColumnModel().getColumn(4).setPreferredWidth(100);
             jTable2.getColumnModel().getColumn(5).setResizable(false);
             jTable2.getColumnModel().getColumn(5).setPreferredWidth(100);
-            jTable2.getColumnModel().getColumn(6).setResizable(false);
-            jTable2.getColumnModel().getColumn(6).setPreferredWidth(100);
         }
 
         jLayeredPane1.setBackground(new java.awt.Color(153, 153, 153));
