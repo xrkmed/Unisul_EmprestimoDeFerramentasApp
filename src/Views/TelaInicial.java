@@ -13,6 +13,7 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.icons.FlatSearchIcon;
 
 import java.awt.Color;
+import javax.swing.Icon;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -34,6 +35,7 @@ public class TelaInicial extends javax.swing.JFrame {
 	campoFiltroNome.putClientProperty( FlatClientProperties.TEXT_FIELD_LEADING_ICON, new com.formdev.flatlaf.icons.FlatSearchIcon() );
         
         campoFiltroNome.putClientProperty( FlatClientProperties.TEXT_FIELD_SHOW_CLEAR_BUTTON, true );
+        comboFiltros.setSelectedItem(null);
     }
 
     public ScreenEntity getTelaAtual() {
@@ -366,9 +368,9 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addComponent(bntFabricantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(bntSeguranca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(btnConfig, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         tabelaPrincipal.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N

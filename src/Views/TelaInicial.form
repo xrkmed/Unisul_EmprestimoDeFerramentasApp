@@ -386,9 +386,9 @@
                   <Component id="bntFabricantes" max="32767" attributes="0"/>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
                   <Component id="bntSeguranca" max="32767" attributes="0"/>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
                   <Component id="btnConfig" max="32767" attributes="0"/>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="33" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
