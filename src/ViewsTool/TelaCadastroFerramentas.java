@@ -9,17 +9,17 @@ import Resources.BRLResource;
 import Resources.ManufacturerResource;
 import Resources.PriceDocument;
 
-public class TelaCadastro extends javax.swing.JFrame {
+public class TelaCadastroFerramentas extends javax.swing.JFrame {
 
     private ManufacturerResource selectedManufacturer = null;
     private ToolModel tool = null;
 
-    public TelaCadastro() {
+    public TelaCadastroFerramentas() {
         initComponents();
         initFrameConfig();
     }
 
-    public TelaCadastro(ToolModel tool) {
+    public TelaCadastroFerramentas(ToolModel tool) {
         this();
         this.tool = tool;
 
@@ -314,7 +314,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaCadastro().setVisible(true);
+                new TelaCadastroFerramentas().setVisible(true);
             }
         });
     }

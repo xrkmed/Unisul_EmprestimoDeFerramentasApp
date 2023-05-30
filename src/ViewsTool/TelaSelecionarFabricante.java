@@ -390,8 +390,8 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
             if (parent != null) {
 
                 try {
-                    if (parent instanceof TelaCadastro) {
-                        ((TelaCadastro) parent).updateFabricante(selectedManufacturer);
+                    if (parent instanceof TelaCadastroFerramentas) {
+                        ((TelaCadastroFerramentas) parent).updateFabricante(selectedManufacturer);
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Erro ao atualizar fabricante: " + e.getMessage());

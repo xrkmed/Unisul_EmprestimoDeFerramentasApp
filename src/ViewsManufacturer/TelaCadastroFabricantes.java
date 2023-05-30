@@ -9,11 +9,11 @@ import Resources.CNPJDocument;
 import Resources.CNPJResource;
 import Resources.ManufacturerResource;
 
-public class TelaCadastroFerramentas extends javax.swing.JFrame {
+public class TelaCadastroFabricantes extends javax.swing.JFrame {
 
     private CNPJEntity cnpjObject = null;
 
-    public TelaCadastroFerramentas() {
+    public TelaCadastroFabricantes() {
         initComponents();
         configFrame();
     }
@@ -462,7 +462,7 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaCadastroFerramentas().setVisible(true);
+                new TelaCadastroFabricantes().setVisible(true);
             }
         });
     }
