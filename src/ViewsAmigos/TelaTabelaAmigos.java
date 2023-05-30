@@ -804,6 +804,21 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
         if (selectedFriend != null) {
+            //verifica se o selectedFriend tem emprestimos em aberto
+            if(Integer.parseInt(jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString()) > 0){
+                int confirmar = JOptionPane.showConfirmDialog(null, "O amigo selecionado possui empréstimos em aberto. Deseja continuar?", "Atenção", JOptionPane.YES_NO_OPTION);
+                if(confirmar == JOptionPane.NO_OPTION){
+                    return;
+                }
+            }
+
+            if(Integer.parseInt(jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString()) > 0){
+                int confirmar = JOptionPane.showConfirmDialog(null, "O amigo selecionado possui empréstimos ATRASADOS!!!. Deseja continuar?", "Atenção", JOptionPane.YES_NO_OPTION);
+                if(confirmar == JOptionPane.NO_OPTION){
+                    return;
+                }
+            }     
+
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um beneficiado");
