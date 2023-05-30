@@ -89,7 +89,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastrar Amigo - Grupo Supimpa");
+        setTitle("Cadastro de Amigos  - Grupo Supimpa");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
