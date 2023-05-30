@@ -209,6 +209,9 @@
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Busca por nome"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoFiltroNomeActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>

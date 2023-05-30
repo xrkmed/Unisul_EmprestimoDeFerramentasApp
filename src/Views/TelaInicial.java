@@ -8,6 +8,9 @@ import Views.Screens.ScreenEntity;
 import Views.Screens.ScreenFabricantes;
 import Views.Screens.ScreenFerramentas;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
+import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
+import com.formdev.flatlaf.icons.FlatSearchIcon;
 
 import java.awt.Color;
 
@@ -25,6 +28,10 @@ public class TelaInicial extends javax.swing.JFrame {
     public TelaInicial() {
         initComponents();
         updateTela(new ScreenAmigos(this));
+        
+        
+        campoFiltroNome.putClientProperty( FlatClientProperties.PLACEHOLDER_TEXT, "Procurar" );
+	campoFiltroNome.putClientProperty( FlatClientProperties.TEXT_FIELD_LEADING_ICON, new com.formdev.flatlaf.icons.FlatSearchIcon() );
     }
 
     public ScreenEntity getTelaAtual() {
@@ -138,6 +145,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         campoFiltroNome.setToolTipText("Busca por nome");
+        campoFiltroNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoFiltroNomeActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel1.setText("Nome:");
@@ -655,6 +667,10 @@ public class TelaInicial extends javax.swing.JFrame {
     private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnConfigActionPerformed
+
+    private void campoFiltroNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoFiltroNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoFiltroNomeActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
