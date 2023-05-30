@@ -8,6 +8,9 @@ import Views.Screens.ScreenEntity;
 import Views.Screens.ScreenFabricantes;
 import Views.Screens.ScreenFerramentas;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
+
+import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class TelaInicial extends javax.swing.JFrame {
 
     private ScreenEntity telaAtual;
+    private Thread actualThread;
 
     public TelaInicial() {
         initComponents();
@@ -26,7 +30,7 @@ public class TelaInicial extends javax.swing.JFrame {
     public ScreenEntity getTelaAtual() {
         return telaAtual;
     }
-    
+
     public JTable getTable() {
         return tabelaPrincipal;
     }
@@ -56,17 +60,39 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     public void updateTela(ScreenEntity e) {
+        if(actualThread != null && actualThread.isAlive()){
+            JOptionPane.showMessageDialog(null, "Aguarde alguns instantes...");
+            return;
+        }
+
+        btnAmigos.setBackground(new Color(205, 205, 205));
+        btnEmprestimos.setBackground(new Color(205, 205, 205));
+        bntFerramentas.setBackground(new Color(205, 205, 205));
+        bntFabricantes.setBackground(new Color(205, 205, 205));
+        bntSeguranca.setBackground(new Color(205, 205, 205));
+        btnConfig.setBackground(new Color(205, 205, 205));
+
+        if(e instanceof ScreenAmigos){
+            btnAmigos.setBackground(new Color(155, 155, 155));
+        }else if(e instanceof ScreenEmprestimos){
+            btnEmprestimos.setBackground(new Color(155, 155, 155));
+        }else if(e instanceof ScreenFerramentas){
+            bntFerramentas.setBackground(new Color(155, 155, 155));
+        }else if(e instanceof ScreenFabricantes){
+            bntFabricantes.setBackground(new Color(155, 155, 155));
+        }
+
         telaAtual = e;
         ((DefaultTableModel) getTable().getModel()).setRowCount(0);
 
-        Thread t = new Thread(new Runnable() {
+        actualThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 e.carregarDados();
             }
         });
 
-        t.start();
+        actualThread.start();
     }
 
     @SuppressWarnings("unchecked")
