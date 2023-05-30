@@ -103,7 +103,7 @@ public class ScreenFerramentas extends ScreenEntity{
             }
 
             for (Object[] data : datas) {
-                if (!data[4].toString().equals("Disponivel")) {
+                if (!data[4].toString().equalsIgnoreCase("disponivel")) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
                         getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
