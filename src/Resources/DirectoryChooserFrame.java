@@ -22,7 +22,7 @@ public class DirectoryChooserFrame extends JFrame {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-        int choice = fileChooser.showDialog(this, "Selecionar");
+        int choice = fileChooser.showDialog(this, "Exportar aqui");
         if (choice == JFileChooser.APPROVE_OPTION) {
             selectedDirectory = fileChooser.getSelectedFile().getAbsolutePath();
             this.dispose();
@@ -38,7 +38,7 @@ public class DirectoryChooserFrame extends JFrame {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-        int choice = fileChooser.showDialog(this, "Selecionar");
+        int choice = fileChooser.showDialog(this, "Exportar aqui");
         if (choice == JFileChooser.APPROVE_OPTION) {
             selectedDirectory = fileChooser.getSelectedFile().getAbsolutePath();
             if (parent instanceof TelaRelatorioFerramentas) {
