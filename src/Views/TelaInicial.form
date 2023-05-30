@@ -168,9 +168,7 @@
                   <Component id="btnExportar" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace pref="35" max="32767" attributes="0"/>
                   <Component id="labelListaNome" min="-2" pref="367" max="-2" attributes="0"/>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
-                  <Component id="bntBuscar" min="-2" pref="22" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                  <EmptySpace pref="67" max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Component id="campoFiltroNome" min="-2" pref="240" max="-2" attributes="0"/>
@@ -189,7 +187,6 @@
                   <Group type="103" groupAlignment="2" attributes="0">
                       <Component id="jLabel1" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="campoFiltroNome" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="bntBuscar" alignment="2" min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="btnVisualizar" alignment="2" pref="0" max="32767" attributes="0"/>
                       <Component id="btnEditar" alignment="2" pref="0" max="32767" attributes="0"/>
                       <Component id="btnDeletar" alignment="2" pref="0" max="32767" attributes="0"/>
@@ -284,23 +281,6 @@
               <Image iconType="3" name="/Views/Icons/file-document-edit-custom.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Editar"/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="bntBuscar">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cd" green="cd" red="cd" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Views/Icons/magnify-custom.png"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Buscar"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>

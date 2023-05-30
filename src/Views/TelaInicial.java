@@ -115,7 +115,6 @@ public class TelaInicial extends javax.swing.JFrame {
         btnVisualizar = new javax.swing.JButton();
         btnDeletar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        bntBuscar = new javax.swing.JButton();
         comboFiltros = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         labelListaNome = new javax.swing.JLabel();
@@ -185,12 +184,6 @@ public class TelaInicial extends javax.swing.JFrame {
         btnEditar.setBorder(null);
         btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        bntBuscar.setBackground(new java.awt.Color(205, 205, 205));
-        bntBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/magnify-custom.png"))); // NOI18N
-        bntBuscar.setToolTipText("Buscar");
-        bntBuscar.setBorder(null);
-        bntBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         comboFiltros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-------------", "ID", "Nome", "Emp. Pendente" }));
         comboFiltros.setToolTipText("Selecione um filtro");
         comboFiltros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -215,7 +208,6 @@ public class TelaInicial extends javax.swing.JFrame {
         jLayeredPane1.setLayer(btnVisualizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnDeletar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(btnEditar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(bntBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(comboFiltros, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(labelListaNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -238,9 +230,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(labelListaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(bntBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(5, 5, 5)
                 .addComponent(campoFiltroNome, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,7 +247,6 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1)
                     .addComponent(campoFiltroNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVisualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -684,7 +673,6 @@ public class TelaInicial extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntBuscar;
     private javax.swing.JButton bntCadastrar;
     private javax.swing.JButton bntFabricantes;
     private javax.swing.JButton bntFerramentas;
