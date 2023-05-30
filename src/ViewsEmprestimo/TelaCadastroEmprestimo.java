@@ -142,6 +142,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         jLabel2.setText("Beneficiado:");
 
         lblSelecionadoBeneficiado.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        lblSelecionadoBeneficiado.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSelecionadoBeneficiado.setText("Nenhum");
 
         jLabel4.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
@@ -164,6 +165,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable2.setToolTipText("Para remover uma ferramenta, clique sobre ela e depois no botão \"Remover\"");
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setPreferredWidth(40);
@@ -372,8 +374,8 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(lblSelecionadoBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblSelecionadoBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10))
         );
@@ -385,7 +387,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(10, 10, 10)
-                        .addComponent(lblSelecionadoBeneficiado))
+                        .addComponent(lblSelecionadoBeneficiado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
