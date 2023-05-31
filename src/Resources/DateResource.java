@@ -61,7 +61,7 @@ public class DateResource {
         DateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy");
 
-        try {
+        try {       
             Date date = formatoEntrada.parse(data);
             dataConvertida = formatoSaida.format(date);
         } catch (ParseException e) {
