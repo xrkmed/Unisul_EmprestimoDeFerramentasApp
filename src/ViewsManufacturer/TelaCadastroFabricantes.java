@@ -329,15 +329,22 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerificarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarFabricanteActionPerformed
-        
-        if (textoNomeFantasia.getText().equals("") || textoCNPJ.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
-            return;
-        }
 
-        if (!CNPJResource.validarCNPJ(textoCNPJ.getText())) {
-            JOptionPane.showMessageDialog(null, "CNPJ inválido!");
-            return;
+        boolean validCnpj = false;
+        if(textoCNPJ.getText().length() == 18){
+            validCnpj = CNPJResource.validarCNPJ(CNPJResource.returnCNPJUnformat(textoCNPJ.getText()));
+            if (!validCnpj) {
+                int option = JOptionPane.showConfirmDialog(null, "CNPJ inválido! Deseja continuar o cadastro mesmo assim?", "CNPJ Inválido", JOptionPane.YES_NO_OPTION);
+                if (option == JOptionPane.NO_OPTION) {
+                    textoCNPJ.setText("");
+                    return;
+                }
+            }
+        }else{
+            int option = JOptionPane.showConfirmDialog(null, "O CNPJ Informado nao e valido, voce pode obtar por cadastrar o CNPJ correto ou continuar o cadastro com este CNPJ, deseja continuar?", "CNPJ Inválido", JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.NO_OPTION) {
+                return;
+            }
         }
 
         if (textoNomeFantasia.getText().length() > 50) {
@@ -353,7 +360,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
         }
 
         try {
-            if (ManufacturerDAO.getInstance().getManufacturer(CNPJResource.returnCNPJUnformat(textoCNPJ.getText())) != null) {
+            if (validCnpj && ManufacturerDAO.getInstance().getManufacturer(CNPJResource.returnCNPJUnformat(textoCNPJ.getText())) != null) {
                 JOptionPane.showMessageDialog(null, "Fabricante com este CNPJ já cadastrado!");
                 textoCNPJ.setText("");
                 return;
@@ -362,7 +369,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
-        if (CNPJResource.validarCNPJ(CNPJResource.returnCNPJUnformat(textoCNPJ.getText()))) {
+        if (textoCNPJ.getText().length() == 18 && validCnpj) {
 
             Thread consultarCNPJ = new Thread(new Runnable() {
                 @Override
@@ -393,29 +400,49 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Aguarde enquanto consultamos o CNPJ informado...");
 
+        }else{
+            textoEndereco.setText("Nao informado");
+            textoRazaoSocial.setText(textoNomeFantasia.getText());
+            textoTelefone.setText("Nao informado");
+            textoStatus.setText("OK");
+            textoCapitalSocial.setText("Desconhecido");
+            textoSituacao.setText("SEM CONSULTA");
+            CNPJLabel.setText(textoCNPJ.getText());
+            btnFinalizarCadastro1.setEnabled(true);
+            btnCancelar.setEnabled(true);
         }
     }//GEN-LAST:event_btnVerificarFabricanteActionPerformed
 
     private void btnFinalizarCadastro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCadastro1ActionPerformed
         if (cnpjObject != null && cnpjObject.getStatus().equals("OK")) {
             try {
-                ManufacturerResource manufacturer = ManufacturerDAO.getInstance().addManufacturer(cnpjObject.getNome(), CNPJResource.returnCNPJUnformat(cnpjObject.getCNPJ()));
+                ManufacturerDAO.getInstance().addManufacturer(cnpjObject.getNome(), CNPJResource.returnCNPJUnformat(cnpjObject.getCNPJ()));
                 JOptionPane.showMessageDialog(null, "Fabricante " + cnpjObject.getNome() + " (" + cnpjObject.getCNPJ() + ") cadastrado com sucesso!");
                 this.dispose();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }
-        } else if (!textoNomeFantasia.getText().equals("") && !textoCNPJ.getText().equals("")) {
+        } else if (!textoNomeFantasia.getText().equals("")) {
+            if (textoNomeFantasia.getText().length() < 2 || textoNomeFantasia.getText().length() > 50) {
+                JOptionPane.showMessageDialog(null, "Nome do fabricante inválido!");
+                return;
+            }
+            
             try {
-                ManufacturerResource manufacturer = ManufacturerDAO.getInstance().addManufacturer(textoNomeFantasia.getText(), textoCNPJ.getText());
-                JOptionPane.showMessageDialog(null, "Fabricante " + manufacturer.getName() + " (" + manufacturer.getCNPJ() + ") cadastrado com sucesso!");
+                if(ManufacturerDAO.getInstance().getManufacturerByNome(textoNomeFantasia.getText().trim()) != null){
+                    JOptionPane.showMessageDialog(null, "Fabricante com este nome fantasia já cadastrado!");
+                    return;
+                }
 
+                ManufacturerResource manufacturer = ManufacturerDAO.getInstance().addManufacturer(textoNomeFantasia.getText(), "00000000000000");
+                JOptionPane.showMessageDialog(null, "Fabricante " + manufacturer.getName() + " cadastrado com sucesso!");
+                this.dispose();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }
 
         }else{
-        JOptionPane.showMessageDialog(null, "Insira o nome fantasia e o CNPJ");
+         JOptionPane.showMessageDialog(null, "Preencha o nome do fabricante!");
         }
     }//GEN-LAST:event_btnFinalizarCadastro1ActionPerformed
 
