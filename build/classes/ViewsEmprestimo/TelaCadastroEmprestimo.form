@@ -429,6 +429,7 @@
                 <Property name="toolTipText" type="java.lang.String" value="Exemplo: (13/12/2023)"/>
               </Properties>
               <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textDataDevolucaoActionPerformed"/>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textDataDevolucaoKeyReleased"/>
               </Events>
             </Component>

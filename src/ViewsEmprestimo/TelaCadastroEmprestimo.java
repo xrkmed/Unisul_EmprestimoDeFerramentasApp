@@ -277,6 +277,11 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
 
         textDataDevolucao.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textDataDevolucao.setToolTipText("Exemplo: (13/12/2023)");
+        textDataDevolucao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textDataDevolucaoActionPerformed(evt);
+            }
+        });
         textDataDevolucao.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textDataDevolucaoKeyReleased(evt);
@@ -577,7 +582,14 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
     private void btnCadastrarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarEmprestimoActionPerformed
         if (selectedFriend != null) {
             try {
+                String endDateString = textDataDevolucao.getText();
+                if (endDateString.length() != 10) {
+                    JOptionPane.showMessageDialog(this, "Digite uma data valida (dd/MM/yyyy)", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 Date endDate = DateResource.unformatDateString(textDataDevolucao.getText());
+
                 if (endDate.before(new Date())) {
                     JOptionPane.showMessageDialog(this, "A data de devolução não pode ser anterior a data de hoje!", "Erro", JOptionPane.ERROR_MESSAGE);
                     return;
@@ -618,6 +630,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Emprestimo finalizado com sucesso!");
                     this.dispose();
                 }
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
@@ -678,6 +691,10 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
     private void selecionadoFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionadoFabricanteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_selecionadoFabricanteActionPerformed
+
+    private void textDataDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDataDevolucaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textDataDevolucaoActionPerformed
 
     public void addFerramenta(ToolModel e) {
         if (!toolsList.containsTool(e.getId())) {

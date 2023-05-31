@@ -46,28 +46,16 @@ public class DateResource {
         return formattedText.toString();
     }
 
-    public static Date unformatDateString(String text) {
+    public static Date unformatDateString(String text) throws ParseException, NullPointerException {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            return format.parse(text);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return format.parse(text);
     }
 
-    public static String convertDatabaseData(String data) {
-        String dataConvertida = null;
+    public static String convertDatabaseData(String data) throws ParseException, NullPointerException {
         DateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = formatoEntrada.parse(data);
 
-        try {
-            Date date = formatoEntrada.parse(data);
-            dataConvertida = formatoSaida.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return dataConvertida;
+        return formatoSaida.format(date);
     }
 }
