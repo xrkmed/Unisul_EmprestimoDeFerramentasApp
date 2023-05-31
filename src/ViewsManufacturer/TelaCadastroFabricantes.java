@@ -19,6 +19,8 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
     }
 
     private void configFrame() {
+        btnFinalizarCadastro1.setEnabled(true);
+        btnCancelar.setEnabled(true);
         AbstractDocument document = (AbstractDocument) textoCNPJ.getDocument();
         document.setDocumentFilter(new CNPJDocument());
     }
@@ -327,7 +329,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerificarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarFabricanteActionPerformed
-        btnFinalizarCadastro1.setEnabled(false);
+        
         if (textoNomeFantasia.getText().equals("") || textoCNPJ.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             return;
@@ -412,6 +414,8 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }
 
+        }else{
+        JOptionPane.showMessageDialog(null, "Insira o nome fantasia e o CNPJ");
         }
     }//GEN-LAST:event_btnFinalizarCadastro1ActionPerformed
 
