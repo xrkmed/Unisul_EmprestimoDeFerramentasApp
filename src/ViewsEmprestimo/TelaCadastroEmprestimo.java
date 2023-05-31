@@ -583,15 +583,15 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         if (selectedFriend != null) {
             try {
                 String endDateString = textDataDevolucao.getText();
-                if (endDateString != null && endDateString.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "A data de devolução não pode estar vazia.", "Erro", JOptionPane.ERROR_MESSAGE);
+                if (endDateString.length() != 10) {
+                    JOptionPane.showMessageDialog(this, "Digite uma data valida (dd/MM/yyyy)", "Erro", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
                 Date endDate = DateResource.unformatDateString(textDataDevolucao.getText());
 
                 if (endDate.before(new Date())) {
-                    JOptionPane.showMessageDialog(this, "A data de devolução não pode ser anterior a data de hoje! /n Nem Vazia", "Erro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "A data de devolução não pode ser anterior a data de hoje!", "Erro", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
