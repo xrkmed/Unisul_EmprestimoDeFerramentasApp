@@ -10,12 +10,12 @@ public class ManufacturerResource {
 
     }
 
-    public ManufacturerResource(String name, String cnpj) throws IllegalArgumentException {
+    public ManufacturerResource(String name, String cnpj) {
         this.name = name;
         this.setCNPJ(cnpj);
     }
 
-    public ManufacturerResource(Integer id, String name, String cnpj) throws IllegalArgumentException {
+    public ManufacturerResource(Integer id, String name, String cnpj) {
         this.id = id;
         this.name = name;
         this.setCNPJ(cnpj);
@@ -36,10 +36,14 @@ public class ManufacturerResource {
     }
 
     public String getCNPJ() {
-        return this.cnpj;
+        return this.cnpj != null ? this.cnpj : "00.000.000/0000-00";
     }
 
     public void setCNPJ(String cnpj) {
+        if(!cnpj.equals("00.000.000/0000-00") && !CNPJResource.validarCNPJ(cnpj)) {
+            cnpj = "00.000.000/0000-00";
+        }
+
         this.cnpj = cnpj;
     }
 
