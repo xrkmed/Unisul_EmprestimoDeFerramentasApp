@@ -1,5 +1,7 @@
 package Views;
 
+import Controllers.FiltrosClass;
+import Controllers.FiltrosEntity;
 import Controllers.ThemeController;
 import Resources.Enum_Themes;
 import Views.Screens.ScreenAmigos;
@@ -12,6 +14,7 @@ import ViewsEmprestimo.TelaCadastroEmprestimo;
 import java.awt.Color;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -33,6 +36,10 @@ public class TelaInicial extends javax.swing.JFrame {
 
     public JTable getTable() {
         return tabelaPrincipal;
+    }
+
+    public JComboBox<FiltrosClass> getComboBox(){
+        return comboFiltros;
     }
 
     public JLabel getTitulo() {
@@ -71,6 +78,9 @@ public class TelaInicial extends javax.swing.JFrame {
         bntFabricantes.setBackground(new Color(205, 205, 205));
         bntSeguranca.setBackground(new Color(205, 205, 205));
         btnConfig.setBackground(new Color(205, 205, 205));
+
+        comboFiltros.setModel(FiltrosEntity.get(e));
+        comboFiltros.setSelectedItem(null);
 
         if(e instanceof ScreenAmigos){
             btnAmigos.setBackground(new Color(155, 155, 155));
@@ -177,9 +187,14 @@ public class TelaInicial extends javax.swing.JFrame {
         bntBuscar.setBorder(null);
         bntBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        comboFiltros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-------------", "ID", "Nome", "Emp. Pendente" }));
+        comboFiltros.setModel(new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[] { new FiltrosClass("")  }));
         comboFiltros.setToolTipText("Selecione um filtro");
         comboFiltros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        comboFiltros.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboFiltrosItemStateChanged(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel2.setText("Filtros:");
@@ -656,6 +671,14 @@ public class TelaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnConfigActionPerformed
 
+    private void comboFiltrosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboFiltrosItemStateChanged
+        FiltrosClass selecionado = (FiltrosClass) comboFiltros.getSelectedItem();
+        if (selecionado != null) {
+            ((DefaultTableModel) getTable().getModel()).setRowCount(0);
+            telaAtual.carregarDados();
+        }
+    }//GEN-LAST:event_comboFiltrosItemStateChanged
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -679,7 +702,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btnExportar;
     private javax.swing.JButton btnVisualizar;
     private javax.swing.JTextField campoFiltroNome;
-    private javax.swing.JComboBox<String> comboFiltros;
+    private javax.swing.JComboBox<FiltrosClass> comboFiltros;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;

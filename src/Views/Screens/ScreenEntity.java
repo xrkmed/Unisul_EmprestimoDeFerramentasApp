@@ -1,9 +1,14 @@
 package Views.Screens;
 
+import java.util.ArrayList;
+
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
+import Controllers.FiltrosClass;
 import Views.TelaInicial;
 
 public class ScreenEntity {
@@ -59,6 +64,19 @@ public class ScreenEntity {
         return tela.getTable();
     }
 
+    public final ArrayList<Object[]> getTableData() {
+        ArrayList<Object[]> tableData = new ArrayList<>();
+        for (int row = 0; row < getTable().getRowCount(); row++) {
+            Object[] rowData = new Object[getTable().getColumnCount()];
+            for (int col = 0; col < getTable().getColumnCount(); col++) {
+                rowData[col] = getTable().getValueAt(row, col);
+            }
+            tableData.add(rowData);
+        }
+
+        return tableData;
+    }
+
     public final JLabel getTitulo() {
         return tela.getTitulo();
     }
@@ -81,6 +99,10 @@ public class ScreenEntity {
 
     public final JButton getBtnExportar() {
         return tela.getBtnExportar();
+    }
+
+    public final JComboBox<FiltrosClass> getFiltros() {
+        return tela.getComboBox();
     }
 
     public Object getSelectedValue() {
