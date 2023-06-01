@@ -26,7 +26,7 @@ public class ManufacturerDAO {
 
     //Methods
     public ManufacturerResource addManufacturer(String razaoSocial, String CNPJ) throws IllegalArgumentException, SQLException, DatabaseResultQueryException {
-        if (!CNPJResource.validarCNPJ(CNPJ)) {
+        if (!CNPJ.equals("00000000000000") && !CNPJResource.validarCNPJ(CNPJ)) {
             throw new IllegalArgumentException("Invalid CNPJ");
         }
 
@@ -76,6 +76,17 @@ public class ManufacturerDAO {
                 ManufacturerResource manufacturer = new ManufacturerResource(manufacturers.getInt("id"), manufacturers.getString("razao_social").toUpperCase(), manufacturers.getLong("cnpj") + "");
                 return manufacturer;
             }
+        }
+
+        return null;
+    }
+
+    public ManufacturerResource getManufacturerByNome(String nomeFantasia) throws DatabaseResultQueryException, SQLException {
+        ResultSet manufacturers = DBQuery.executeQuery("SELECT id, razao_social, cnpj FROM tb_fabricantes WHERE razao_social = ? LIMIT 1;", nomeFantasia.toUpperCase());
+
+        while (manufacturers.next()) {
+            ManufacturerResource manufacturer = new ManufacturerResource(manufacturers.getInt("id"), manufacturers.getString("razao_social").toUpperCase(), manufacturers.getLong("cnpj") + "");
+            return manufacturer;
         }
 
         return null;
