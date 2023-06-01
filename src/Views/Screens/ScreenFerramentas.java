@@ -1,7 +1,6 @@
 package Views.Screens;
 
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
@@ -92,7 +91,7 @@ public class ScreenFerramentas extends ScreenEntity {
                 getTable().getColumnModel().getColumn(4).setWidth(195);
                 getTable().getColumnModel().getColumn(5).setMinWidth(110);
                 getTable().getColumnModel().getColumn(5).setMaxWidth(110);
-               
+
             }
 
             for (Object[] data : datas) {

@@ -1,14 +1,10 @@
 package Views.Screens;
 
-import Controllers.EventScheduler;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
 import Controllers.FiltrosClass;
 import Views.TelaInicial;
 
@@ -17,16 +13,6 @@ public class ScreenEntity {
     private TelaInicial tela;
 
     public ScreenEntity() {
-    }
-    
-    public void debug(){
-            System.out.println("Views.Screens.ScreenEntity.debug()");
-        for(int i = 0; i < getTable().getColumnModel().getColumnCount(); ++i){
-            System.out.println(i + ": " + getTable().getColumnModel().getColumn(i).getWidth());
-        }
-            System.out.println("END: Views.Screens.ScreenEntity.debug()");
-            
-            new EventScheduler().addEvent(5000, () -> debug());
     }
 
     public ScreenEntity(TelaInicial telaInicial) {
@@ -60,11 +46,9 @@ public class ScreenEntity {
     }
 
     public void carregarDados() {
-        //
     }
 
     public void init() {
-        //
     }
 
     public void atualizarDados() {
