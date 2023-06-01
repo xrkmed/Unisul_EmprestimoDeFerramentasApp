@@ -6,6 +6,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import Controllers.ColorsRenderer;
+import Controllers.FiltrosClass;
+import Controllers.FiltrosEnum;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import DAO.FriendsDAO;
@@ -94,7 +96,23 @@ public class ScreenAmigos extends ScreenEntity {
                 getTable().getColumnModel().getColumn(5).setMaxWidth(110);
             }
 
+            if(getFiltros().getSelectedItem() != null){
+                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                if(f.getType() == FiltrosEnum.FILTRO_ORDENAR){
+                    amigosData.sort((Object[] data1, Object[] data2) -> {
+                        return f.compare(data1, data2);
+                    });
+                }
+            }
+
             for (Object[] data : amigosData) {
+                if(getFiltros().getSelectedItem() != null){
+                    FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                    if(f.getType() == FiltrosEnum.FILTRO_FILTRAR && !f.run(data)){
+                        continue;
+                    }
+                }
+                
                 if (Integer.parseInt(data[4].toString()) > 0) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
