@@ -394,17 +394,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace pref="35" max="32767" attributes="0"/>
-                  <Component id="btnAmigos" max="32767" attributes="0"/>
+                  <Component id="btnAmigos" max="-2" attributes="0"/>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
-                  <Component id="btnEmprestimos" max="32767" attributes="0"/>
+                  <Component id="btnEmprestimos" max="-2" attributes="0"/>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
-                  <Component id="bntFerramentas" max="32767" attributes="0"/>
+                  <Component id="bntFerramentas" max="-2" attributes="0"/>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
-                  <Component id="bntFabricantes" max="32767" attributes="0"/>
+                  <Component id="bntFabricantes" max="-2" attributes="0"/>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
-                  <Component id="bntSeguranca" max="32767" attributes="0"/>
+                  <Component id="bntSeguranca" max="-2" attributes="0"/>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
-                  <Component id="btnConfig" max="32767" attributes="0"/>
+                  <Component id="btnConfig" max="-2" attributes="0"/>
                   <EmptySpace pref="35" max="32767" attributes="0"/>
               </Group>
           </Group>
