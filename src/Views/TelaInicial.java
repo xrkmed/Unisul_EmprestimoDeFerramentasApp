@@ -94,6 +94,7 @@ public class TelaInicial extends javax.swing.JFrame {
         }
 
         telaAtual = e;
+        getTitulo().setText(e.getName());
         ((DefaultTableModel) getTable().getModel()).setRowCount(0);
 
         actualThread = new Thread(new Runnable() {

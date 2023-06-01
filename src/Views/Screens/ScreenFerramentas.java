@@ -37,9 +37,6 @@ public class ScreenFerramentas extends ScreenEntity {
 
     @Override
     public void init() {
-        debug();
-        getTitulo().setText(getName());
-
         getBtnCadastro().addActionListener(e -> {
             btnCadastro();
         });
@@ -86,7 +83,10 @@ public class ScreenFerramentas extends ScreenEntity {
                 getTable().getColumnModel().getColumn(0).setMinWidth(65);
                 getTable().getColumnModel().getColumn(0).setMaxWidth(65);
                 getTable().getColumnModel().getColumn(1).setWidth(300);
-                getTable().getColumnModel().getColumn(2).setWidth(260);
+                getTable().getColumnModel().getColumn(1).setMinWidth(100);
+                getTable().getColumnModel().getColumn(2).setWidth(250);
+                getTable().getColumnModel().getColumn(2).setMinWidth(75);
+                //getTable().getColumnModel().getColumn(3).setMinWidth(135);
                 getTable().getColumnModel().getColumn(3).setMinWidth(135);
                 getTable().getColumnModel().getColumn(3).setMaxWidth(135);
                 getTable().getColumnModel().getColumn(4).setWidth(195);
