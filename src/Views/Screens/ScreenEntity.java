@@ -1,5 +1,6 @@
 package Views.Screens;
 
+import Controllers.EventScheduler;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -16,6 +17,16 @@ public class ScreenEntity {
     private TelaInicial tela;
 
     public ScreenEntity() {
+    }
+    
+    public void debug(){
+            System.out.println("Views.Screens.ScreenEntity.debug()");
+        for(int i = 0; i < getTable().getColumnModel().getColumnCount(); ++i){
+            System.out.println(i + ": " + getTable().getColumnModel().getColumn(i).getWidth());
+        }
+            System.out.println("END: Views.Screens.ScreenEntity.debug()");
+            
+            new EventScheduler().addEvent(5000, () -> debug());
     }
 
     public ScreenEntity(TelaInicial telaInicial) {

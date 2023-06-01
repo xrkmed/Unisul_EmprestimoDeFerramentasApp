@@ -37,6 +37,7 @@ public class ScreenFerramentas extends ScreenEntity {
 
     @Override
     public void init() {
+        debug();
         getTitulo().setText(getName());
 
         getBtnCadastro().addActionListener(e -> {
