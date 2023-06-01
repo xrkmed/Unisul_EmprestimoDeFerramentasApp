@@ -157,7 +157,7 @@ public class TelaInicial extends javax.swing.JFrame {
         bntCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-document-plus-custom.png"))); // NOI18N
         bntCadastrar.setToolTipText("Adicionar");
         bntCadastrar.setBorder(null);
-        bntCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bntCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bntCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntCadastrarActionPerformed(evt);
@@ -168,29 +168,29 @@ public class TelaInicial extends javax.swing.JFrame {
         btnVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-eye-custom.png"))); // NOI18N
         btnVisualizar.setToolTipText("Modo Leitura");
         btnVisualizar.setBorder(null);
-        btnVisualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVisualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnDeletar.setBackground(new java.awt.Color(205, 205, 205));
         btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-document-remove-custom.png"))); // NOI18N
         btnDeletar.setToolTipText("Deletar");
         btnDeletar.setBorder(null);
-        btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnEditar.setBackground(new java.awt.Color(205, 205, 205));
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-document-edit-custom.png"))); // NOI18N
         btnEditar.setToolTipText("Editar");
         btnEditar.setBorder(null);
-        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         bntBuscar.setBackground(new java.awt.Color(205, 205, 205));
         bntBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/magnify-custom.png"))); // NOI18N
         bntBuscar.setToolTipText("Buscar");
         bntBuscar.setBorder(null);
-        bntBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bntBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         comboFiltros.setModel(new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[] { new FiltrosClass("")  }));
         comboFiltros.setToolTipText("Selecione um filtro");
-        comboFiltros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        comboFiltros.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         comboFiltros.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboFiltrosItemStateChanged(evt);
@@ -209,7 +209,7 @@ public class TelaInicial extends javax.swing.JFrame {
         btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-pdf-box-custom.png"))); // NOI18N
         btnExportar.setToolTipText("Exportar Relatório da Lista Exibida");
         btnExportar.setBorder(null);
-        btnExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLayeredPane1.setLayer(campoFiltroNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -277,7 +277,7 @@ public class TelaInicial extends javax.swing.JFrame {
         btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/cog-custom.png"))); // NOI18N
         btnConfig.setToolTipText("Mais Opções");
         btnConfig.setBorder(null);
-        btnConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfigActionPerformed(evt);
@@ -288,7 +288,7 @@ public class TelaInicial extends javax.swing.JFrame {
         btnAmigos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/account-group-custom.png"))); // NOI18N
         btnAmigos.setToolTipText("Amigos");
         btnAmigos.setBorder(null);
-        btnAmigos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAmigos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAmigos.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 btnAmigosMouseDragged(evt);
@@ -304,7 +304,7 @@ public class TelaInicial extends javax.swing.JFrame {
         btnEmprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/hand-coin-custom-removebg-preview.png"))); // NOI18N
         btnEmprestimos.setToolTipText("Empréstimos");
         btnEmprestimos.setBorder(null);
-        btnEmprestimos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEmprestimos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEmprestimos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEmprestimosActionPerformed(evt);
@@ -315,7 +315,7 @@ public class TelaInicial extends javax.swing.JFrame {
         bntFerramentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/tools-custom.png"))); // NOI18N
         bntFerramentas.setToolTipText("Ferramentas");
         bntFerramentas.setBorder(null);
-        bntFerramentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bntFerramentas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bntFerramentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntFerramentasActionPerformed(evt);
@@ -326,7 +326,7 @@ public class TelaInicial extends javax.swing.JFrame {
         bntFabricantes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/anvil-custom.png"))); // NOI18N
         bntFabricantes.setToolTipText("Fabricantes");
         bntFabricantes.setBorder(null);
-        bntFabricantes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bntFabricantes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bntFabricantes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntFabricantesActionPerformed(evt);
@@ -337,7 +337,7 @@ public class TelaInicial extends javax.swing.JFrame {
         bntSeguranca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/lock-open-custom.png"))); // NOI18N
         bntSeguranca.setToolTipText("Segurança");
         bntSeguranca.setBorder(null);
-        bntSeguranca.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bntSeguranca.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         bntSeguranca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntSegurancaActionPerformed(evt);
@@ -394,9 +394,13 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         ));
         tabelaPrincipal.setToolTipText("");
-        tabelaPrincipal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tabelaPrincipal.setShowGrid(true);
+        tabelaPrincipal.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tabelaPrincipal.getTableHeader().setReorderingAllowed(false);
+        tabelaPrincipal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaPrincipalMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaPrincipal);
 
         jMenu1.setText("Opções");
@@ -561,6 +565,10 @@ public class TelaInicial extends javax.swing.JFrame {
             telaAtual.carregarDados();
         }
     }//GEN-LAST:event_comboFiltrosItemStateChanged
+
+    private void tabelaPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPrincipalMouseClicked
+        System.out.println();
+    }//GEN-LAST:event_tabelaPrincipalMouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
