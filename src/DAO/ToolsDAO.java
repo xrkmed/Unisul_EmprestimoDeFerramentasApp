@@ -2,6 +2,7 @@ package DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import Database.DBQuery;
 import Exceptions.DatabaseResultQueryException;
@@ -134,13 +135,13 @@ public class ToolsDAO {
         DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET name = ?, price = ?, fabricante_id = ? WHERE id = ?;", reference.getNome(), reference.getPrice(), (reference.getManufacturer() != null ? reference.getManufacturer().getId() : null), id);
     }
 
-    public ArrayList<Object[]> getFerramentasValue() throws DatabaseResultQueryException, SQLException {
+    public ArrayList<Object[]> getFerramentasValue() throws DatabaseResultQueryException, SQLException, ParseException {
         ArrayList<Object[]> datas = new ArrayList<>();
         ResultSet result = DBQuery.executeQuery("SELECT tb_ferramentas.id AS id_ferramenta, tb_ferramentas.name AS nome_ferramenta, IFNULL(tb_fabricantes.razao_social, 'Sem fabricante') AS nome_fabricante, tb_ferramentas.price AS preco_ferramenta, IFNULL(tb_amigos.nome, 'Disponivel') AS nome_amigo, IF(tb_ferramentas.emprestimo_id IS NOT NULL, tb_emprestimos.endDate, 'Disponivel') AS endDate FROM tb_ferramentas LEFT JOIN tb_fabricantes ON tb_ferramentas.fabricante_id = tb_fabricantes.id LEFT JOIN tb_emprestimos ON tb_ferramentas.emprestimo_id = tb_emprestimos.id LEFT JOIN tb_amigos ON tb_emprestimos.amigo_id = tb_amigos.id;");
         while (result.next()) {
             String date = !result.getString("endDate").equals("Disponivel") ? DateResource.convertDatabaseData(result.getString("endDate")) : "Disponivel";
             datas.add(new Object[]{result.getInt("id_ferramenta"), result.getString("nome_ferramenta").toUpperCase(), result.getString("nome_fabricante").toUpperCase(), BRLResource.PRICE_FORMATTER.format(result.getDouble("preco_ferramenta")), result.getString("nome_amigo").toUpperCase(), date});
-        }
+       }
 
         return datas;
     }
