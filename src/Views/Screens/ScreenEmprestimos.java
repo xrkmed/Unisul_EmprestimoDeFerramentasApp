@@ -9,11 +9,6 @@ import DAO.LoansDAO;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
-import ViewsEmprestimo.TelaRelatorioEmprestimos;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 
 public class ScreenEmprestimos extends ScreenEntity {
@@ -35,9 +30,6 @@ public class ScreenEmprestimos extends ScreenEntity {
 
     @Override
     public void init() {
-        debug();
-        getTitulo().setText(getName());
-
         getBtnCadastro().addActionListener(e -> {
             btnCadastro();
         });
