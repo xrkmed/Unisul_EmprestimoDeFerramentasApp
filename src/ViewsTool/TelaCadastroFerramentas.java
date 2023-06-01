@@ -142,35 +142,37 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(255, 51, 51));
         jLabel14.setText("Cadastro Ferramentas");
 
-        btnCancelarCad.setText("Cancelar cadastro");
-        btnCancelarCad.setToolTipText("Descarta as Opções Selecionadas ");
+        btnCancelarCad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-minus-custom.png"))); // NOI18N
+        btnCancelarCad.setToolTipText("Cancelar");
+        btnCancelarCad.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         btnCancelarCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarCadActionPerformed(evt);
             }
         });
 
-        btnConcluirCad.setBackground(new java.awt.Color(153, 255, 153));
         btnConcluirCad.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        btnConcluirCad.setText("Concluir Cadastro");
-        btnConcluirCad.setToolTipText("Finaliza o Cadastro Com Sucesso ");
+        btnConcluirCad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-check-custom.png"))); // NOI18N
+        btnConcluirCad.setToolTipText("Salvar Cadastro");
+        btnConcluirCad.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         btnConcluirCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConcluirCadActionPerformed(evt);
             }
         });
 
-        btnSelectFabricante.setText("Selecionar um Fabricante");
-        btnSelectFabricante.setToolTipText("Selecione um Fabrincante Para a Ferramenta");
+        btnSelectFabricante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/plus-box-custom.png"))); // NOI18N
+        btnSelectFabricante.setToolTipText("Selecionar Fabricante");
+        btnSelectFabricante.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         btnSelectFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSelectFabricanteActionPerformed(evt);
             }
         });
 
-        btnRemoverFabricante.setBackground(new java.awt.Color(255, 102, 102));
-        btnRemoverFabricante.setText("Remover o Fabricante Selecionado ");
-        btnRemoverFabricante.setToolTipText("Remove o Fabricante Selecionado ");
+        btnRemoverFabricante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/minus-box-custom.png"))); // NOI18N
+        btnRemoverFabricante.setToolTipText("Remover Fabricante");
+        btnRemoverFabricante.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         btnRemoverFabricante.setEnabled(false);
         btnRemoverFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

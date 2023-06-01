@@ -220,8 +220,15 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnCancelarCad">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cancelar cadastro"/>
-            <Property name="toolTipText" type="java.lang.String" value="Descarta as Op&#xe7;&#xf5;es Selecionadas "/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Views/Icons/content-save-minus-custom.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Cancelar"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder/>
+              </Border>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarCadActionPerformed"/>
@@ -229,14 +236,18 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnConcluirCad">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="99" green="ff" red="99" type="rgb"/>
-            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="15" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Concluir Cadastro"/>
-            <Property name="toolTipText" type="java.lang.String" value="Finaliza o Cadastro Com Sucesso "/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Views/Icons/content-save-check-custom.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Salvar Cadastro"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder/>
+              </Border>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConcluirCadActionPerformed"/>
@@ -244,8 +255,15 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSelectFabricante">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Selecionar um Fabricante"/>
-            <Property name="toolTipText" type="java.lang.String" value="Selecione um Fabrincante Para a Ferramenta"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Views/Icons/plus-box-custom.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Selecionar Fabricante"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder/>
+              </Border>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSelectFabricanteActionPerformed"/>
@@ -253,11 +271,15 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnRemoverFabricante">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="ff" type="rgb"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Views/Icons/minus-box-custom.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Remover o Fabricante Selecionado "/>
-            <Property name="toolTipText" type="java.lang.String" value="Remove o Fabricante Selecionado "/>
+            <Property name="toolTipText" type="java.lang.String" value="Remover Fabricante"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder/>
+              </Border>
+            </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
