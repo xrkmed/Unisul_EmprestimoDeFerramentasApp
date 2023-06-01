@@ -15,7 +15,7 @@ import com.itextpdf.text.Paragraph;
 
 public class ScreenFabricantes extends ScreenEntity {
 
-    private final String[] columnNames = {"ID", "Nome", "CNPJ", "Ferramentas", "Ferramentas em uso", "Valor total"};
+    private final String[] columnNames = {"ID", "Nome", "CNPJ", "Ferramentas", "Em Uso", "Valor total"};
 
     public ScreenFabricantes() {
         super();
@@ -32,6 +32,7 @@ public class ScreenFabricantes extends ScreenEntity {
 
     @Override
     public void init() {
+        debug();
         getTitulo().setText(getName());
 
         getBtnCadastro().addActionListener(e -> {
@@ -79,6 +80,15 @@ public class ScreenFabricantes extends ScreenEntity {
             if (getTable().getColumnModel().getColumnCount() > 0) {
                 getTable().getColumnModel().getColumn(0).setMinWidth(65);
                 getTable().getColumnModel().getColumn(0).setMaxWidth(65);
+                getTable().getColumnModel().getColumn(1).setMinWidth(486);
+                getTable().getColumnModel().getColumn(2).setMinWidth(169);
+                getTable().getColumnModel().getColumn(2).setMaxWidth(169);
+                getTable().getColumnModel().getColumn(3).setMinWidth(109);
+                getTable().getColumnModel().getColumn(3).setMaxWidth(109);
+                getTable().getColumnModel().getColumn(4).setMinWidth(78);
+                getTable().getColumnModel().getColumn(4).setMaxWidth(78);
+                getTable().getColumnModel().getColumn(5).setMinWidth(149);
+                getTable().getColumnModel().getColumn(5).setMaxWidth(200);
             }
 
             ArrayList<Object[]> manufacturerData = ManufacturerDAO.getInstance().getFabricantesData();

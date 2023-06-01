@@ -10,16 +10,16 @@ public class FiltrosEntity {
     public static DefaultComboBoxModel<FiltrosClass> get(ScreenEntity screen) {
         if(screen instanceof ScreenAmigos){
             return new DefaultComboBoxModel<FiltrosClass>(new FiltrosClass[]{
-                new FiltrosClass("Apenas emprestimos em aberto", FiltrosEnum.FILTRO_FILTRAR, (Object[] data) -> {
+                new FiltrosClass("Empréstimos em Aberto", FiltrosEnum.FILTRO_FILTRAR, (Object[] data) -> {
                     return (int)data[4] > 0;
                 }),
-                new FiltrosClass("Apenas emprestimos em atraso", FiltrosEnum.FILTRO_FILTRAR, (Object[] data) -> {
+                new FiltrosClass("Empréstimos em Atraso", FiltrosEnum.FILTRO_FILTRAR, (Object[] data) -> {
                     return (int)data[5] > 0;
                 }),
-                new FiltrosClass("Nomes em ordem crescente", FiltrosEnum.FILTRO_ORDENAR, (data1, data2) -> {
+                new FiltrosClass("Nome Crescente", FiltrosEnum.FILTRO_ORDENAR, (data1, data2) -> {
                     return ((String)data1[1]).compareTo((String)data2[1]);
                 }),
-                new FiltrosClass("Nomes em ordem decrescente", FiltrosEnum.FILTRO_ORDENAR, (data1, data2) -> {
+                new FiltrosClass("Nome Decrescente", FiltrosEnum.FILTRO_ORDENAR, (data1, data2) -> {
                     return -((String)data1[1]).compareTo((String)data2[1]);
                 }),
             });
