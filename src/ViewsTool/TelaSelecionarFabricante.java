@@ -9,6 +9,9 @@ import DAO.ManufacturerDAO;
 import Resources.CNPJResource;
 import Resources.ManufacturerResource;
 import ViewsManufacturer.TelaCadastroFabricantes;
+import ViewsManufacturer.TelaCadastroFabricantes;
+import ViewsManufacturer.TelaCadastroFabricantes;
+import ViewsTool.TelaCadastroFerramentas;
 
 public class TelaSelecionarFabricante extends javax.swing.JFrame {
 
@@ -29,6 +32,7 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
         new Thread(new Runnable() {
             @Override
             public void run() {
+               
                 ManufacturerDAO dao = ManufacturerDAO.getInstance();
                 jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
                 jTable2.getColumnModel().getColumn(0).setMinWidth(35);
@@ -245,7 +249,6 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
 
         textFiltrarNome.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
         textFiltrarNome.setToolTipText("Filtrar por Nome");
-        textFiltrarNome.setEnabled(false);
         textFiltrarNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFiltrarNomeActionPerformed(evt);
@@ -361,7 +364,7 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
             model.setRowCount(0);
 
             for (ManufacturerResource manufacturer : manufacturers) {
-                if (filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0) {
+                if ( textFiltrarNome.getText().trim().length() > 0) {
                     if (!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())) {
                         continue;
                     }
@@ -420,21 +423,15 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCadastroFabricante;
-    private javax.swing.JButton btnCancelarCad;
-    private javax.swing.JButton btnConcluirCad;
-    private javax.swing.JButton btnRemoverFabricante;
     private javax.swing.JButton btnSelecionarFabricante;
-    private javax.swing.JButton btnSelectFabricante;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane3;
-    private javax.swing.JLayeredPane jLayeredPane5;
     private javax.swing.JLayeredPane jLayeredPane7;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
