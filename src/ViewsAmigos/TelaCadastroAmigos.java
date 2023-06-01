@@ -744,15 +744,18 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeletar2ActionPerformed
 
     private void btnVisualizarEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarEmprestimosActionPerformed
-        if (!textNome.getText().equals("")) {
+        if (selectedFriend != null) {
             try {
-                ArrayList<Object[]> datas = LoansDAO.getInstance().getEmprestimosEmAberto(textNome.getText().toUpperCase());
+                ArrayList<Object[]> datas = LoansDAO.getInstance().getEmprestimosEmAberto(selectedFriend.getName());
                 String mensagem = "";
                 for (Object[] data : datas) {
                     mensagem += data[0] + " " + data[1] + " " + data[2] + " " + data[3] + " " + data[4] + " " + data[5] + " " + data[6] + " " + data[7] + "\n";
+                    JOptionPane.showMessageDialog(null, mensagem);
+                    return;
                 }
-                JOptionPane.showMessageDialog(null, mensagem.equals("") ? "não tem imprestimos ativos" : mensagem);
+                JOptionPane.showMessageDialog(null, "não tem imprestimos ativos");
             } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
             }
         }
     }//GEN-LAST:event_btnVisualizarEmprestimosActionPerformed
