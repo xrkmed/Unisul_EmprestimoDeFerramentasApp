@@ -99,6 +99,17 @@ public class LoansDAO {
         return datas;
     }
 
+    public ArrayList<Object[]> getEmprestimosEmAberto(String amigoNome) throws DatabaseResultQueryException, SQLException {
+        ArrayList<Object[]> datas = new ArrayList<>();
+
+        for (Object[] data : getEmprestimosEmAberto()) {
+            if (data[1].equals(amigoNome)) {
+               datas.add(data);
+            }
+        }
+        return datas;
+    }
+
     public void finalizarEmprestimo(LoanModel e, String observacoes) throws DatabaseResultQueryException, SQLException {
         List<String> ferramentasNome = new ArrayList<>();
         double totalValorFerramentas = 0.;

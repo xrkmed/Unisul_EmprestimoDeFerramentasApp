@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
 import DAO.FriendsDAO;
+import DAO.LoansDAO;
 import DAO.LocalidadesDAO;
 import Model.FriendModel;
 import Resources.AddressResource;
 import Resources.CEPResource;
 import Resources.PhoneDocument;
 import Resources.PhoneValidResource;
+import java.awt.event.FocusAdapter;
 
 public class TelaCadastroAmigos extends javax.swing.JFrame {
 
@@ -38,6 +40,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }
 
     private void configFrame() {
+
         AbstractDocument document = (AbstractDocument) textTelefone.getDocument();
 
         document.setDocumentFilter(new PhoneDocument());
@@ -53,6 +56,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
             }
         });
         pThread.start();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -81,11 +85,11 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         textTelefone = new javax.swing.JTextField();
         jLayeredPane5 = new javax.swing.JLayeredPane();
-        btnVisualizarEmprestimos2 = new javax.swing.JButton();
+        btnVisualizarEmprestimos = new javax.swing.JButton();
         btnDeletar2 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         btnCadastrar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnCriarEmprestimo = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -124,6 +128,11 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                 textComplementoActionPerformed(evt);
             }
         });
+        textComplemento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textComplementoKeyPressed(evt);
+            }
+        });
 
         textNumero.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textNumero.setToolTipText("Digite o Numero da Casa");
@@ -155,10 +164,25 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         textRua.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textRua.setToolTipText("Digite o nome da rua");
         textRua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        textRua.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textRuaKeyPressed(evt);
+            }
+        });
 
         textBairro.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textBairro.setToolTipText("Digite o nome da rua");
         textBairro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        textBairro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textBairroActionPerformed(evt);
+            }
+        });
+        textBairro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textBairroKeyTyped(evt);
+            }
+        });
 
         selectCidade.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         selectCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a sua cidade" }));
@@ -184,6 +208,11 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         textCEP.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textCEP.setToolTipText("Insira CEP do seu amigo");
         textCEP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        textCEP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textCEPActionPerformed(evt);
+            }
+        });
         textCEP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 textCEPKeyPressed(evt);
@@ -309,6 +338,11 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                 textNomeActionPerformed(evt);
             }
         });
+        textNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textNomeKeyPressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel2.setText("Telefone:");
@@ -316,6 +350,16 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         textTelefone.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textTelefone.setToolTipText("Digite o telefone do seu amigo");
         textTelefone.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        textTelefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textTelefoneActionPerformed(evt);
+            }
+        });
+        textTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textTelefoneKeyPressed(evt);
+            }
+        });
 
         jLayeredPane2.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(textNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -355,10 +399,15 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
         jLayeredPane5.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        btnVisualizarEmprestimos2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/eye-custom.png"))); // NOI18N
-        btnVisualizarEmprestimos2.setToolTipText("Visualizar Empréstimos");
-        btnVisualizarEmprestimos2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        btnVisualizarEmprestimos2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVisualizarEmprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/eye-custom.png"))); // NOI18N
+        btnVisualizarEmprestimos.setToolTipText("Visualizar Empréstimos");
+        btnVisualizarEmprestimos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnVisualizarEmprestimos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVisualizarEmprestimos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisualizarEmprestimosActionPerformed(evt);
+            }
+        });
 
         btnDeletar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-minus-custom.png"))); // NOI18N
         btnDeletar2.setToolTipText("Cancelar");
@@ -391,16 +440,21 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/plus-custom.png"))); // NOI18N
-        jButton1.setToolTipText("Criar Novo Empréstimo");
-        jButton1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCriarEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/plus-custom.png"))); // NOI18N
+        btnCriarEmprestimo.setToolTipText("Criar Novo Empréstimo");
+        btnCriarEmprestimo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnCriarEmprestimo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCriarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCriarEmprestimoActionPerformed(evt);
+            }
+        });
 
-        jLayeredPane5.setLayer(btnVisualizarEmprestimos2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane5.setLayer(btnVisualizarEmprestimos, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(btnDeletar2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(btnCadastrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane5.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane5.setLayer(btnCriarEmprestimo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane5Layout = new javax.swing.GroupLayout(jLayeredPane5);
         jLayeredPane5.setLayout(jLayeredPane5Layout);
@@ -410,9 +464,9 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCriarEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addComponent(btnVisualizarEmprestimos2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnVisualizarEmprestimos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(btnDeletar2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
@@ -425,10 +479,10 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnDeletar2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVisualizarEmprestimos2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVisualizarEmprestimos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCriarEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4))
         );
 
@@ -565,7 +619,8 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_textNumeroActionPerformed
 
     private void textNumeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyPressed
-
+        btnVisualizarEmprestimos.setEnabled(false);
+        btnCriarEmprestimo.setEnabled(false);
     }//GEN-LAST:event_textNumeroKeyPressed
 
     private void textNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyReleased
@@ -612,6 +667,10 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_selectEstadoActionPerformed
 
     private void textCEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCEPKeyPressed
+        
+       btnVisualizarEmprestimos.setEnabled(false);
+            btnCriarEmprestimo.setEnabled(false);
+
         if (textCEP.getText().length() > 8) {
             JOptionPane.showMessageDialog(null, "CEP inválido (Digite apenas números)");
             textCEP.setText("");
@@ -684,6 +743,61 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnDeletar2ActionPerformed
 
+    private void btnVisualizarEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarEmprestimosActionPerformed
+        if (!textNome.getText().equals("")) {
+            try {
+                ArrayList<Object[]> datas = LoansDAO.getInstance().getEmprestimosEmAberto(textNome.getText().toUpperCase());
+                String mensagem = "";
+                for (Object[] data : datas) {
+                    mensagem += data[0] + " " + data[1] + " " + data[2] + " " + data[3] + " " + data[4] + " " + data[5] + " " + data[6] + " " + data[7] + "\n";
+                }
+                JOptionPane.showMessageDialog(null, mensagem.equals("") ? "não tem imprestimos ativos" : mensagem);
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_btnVisualizarEmprestimosActionPerformed
+
+    private void textTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textTelefoneActionPerformed
+
+    private void btnCriarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarEmprestimoActionPerformed
+       if(!textNome.getText().equals("")){
+       
+       }
+    }//GEN-LAST:event_btnCriarEmprestimoActionPerformed
+
+    private void textCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCEPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textCEPActionPerformed
+
+    private void textRuaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textRuaKeyPressed
+  btnVisualizarEmprestimos.setEnabled(false);
+            btnCriarEmprestimo.setEnabled(false);
+    }//GEN-LAST:event_textRuaKeyPressed
+
+    private void textComplementoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textComplementoKeyPressed
+       btnVisualizarEmprestimos.setEnabled(false);
+            btnCriarEmprestimo.setEnabled(false);
+    }//GEN-LAST:event_textComplementoKeyPressed
+
+    private void textNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNomeKeyPressed
+
+    }//GEN-LAST:event_textNomeKeyPressed
+
+    private void textTelefoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textTelefoneKeyPressed
+
+    }//GEN-LAST:event_textTelefoneKeyPressed
+
+    private void textBairroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textBairroKeyTyped
+ btnVisualizarEmprestimos.setEnabled(false);
+            btnCriarEmprestimo.setEnabled(false);
+    }//GEN-LAST:event_textBairroKeyTyped
+
+    private void textBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBairroActionPerformed
+ 
+    }//GEN-LAST:event_textBairroActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -695,9 +809,9 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarCep;
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnCriarEmprestimo;
     private javax.swing.JButton btnDeletar2;
-    private javax.swing.JButton btnVisualizarEmprestimos2;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnVisualizarEmprestimos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -236,6 +236,7 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textComplementoActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textComplementoKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="textNumero">
@@ -266,6 +267,9 @@
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textRuaKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="textBairro">
           <Properties>
@@ -277,6 +281,10 @@
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textBairroActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textBairroKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="selectCidade">
           <Properties>
@@ -334,6 +342,7 @@
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textCEPActionPerformed"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textCEPKeyPressed"/>
           </Events>
         </Component>
@@ -425,6 +434,7 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textNomeActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textNomeKeyPressed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -445,6 +455,10 @@
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textTelefoneActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textTelefoneKeyPressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -464,9 +478,9 @@
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnCriarEmprestimo" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                  <Component id="btnVisualizarEmprestimos2" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnVisualizarEmprestimos" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="btnDeletar2" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -481,10 +495,10 @@
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
                       <Component id="btnDeletar2" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="btnVisualizarEmprestimos2" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="btnVisualizarEmprestimos" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="jLabel14" alignment="2" min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="btnCadastrar" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="btnCriarEmprestimo" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
               </Group>
@@ -492,7 +506,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnVisualizarEmprestimos2">
+        <Component class="javax.swing.JButton" name="btnVisualizarEmprestimos">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/eye-custom.png"/>
@@ -507,6 +521,9 @@
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVisualizarEmprestimosActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnDeletar2">
           <Properties>
@@ -564,7 +581,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btnCriarEmprestimo">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Views/Icons/plus-custom.png"/>
@@ -579,6 +596,9 @@
               <Color id="Hand Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCriarEmprestimoActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
