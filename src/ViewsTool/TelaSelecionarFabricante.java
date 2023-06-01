@@ -12,6 +12,7 @@ import ViewsManufacturer.TelaCadastroFabricantes;
 import ViewsManufacturer.TelaCadastroFabricantes;
 import ViewsManufacturer.TelaCadastroFabricantes;
 import ViewsTool.TelaCadastroFerramentas;
+import java.awt.event.KeyEvent;
 
 public class TelaSelecionarFabricante extends javax.swing.JFrame {
 
@@ -255,6 +256,9 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
             }
         });
         textFiltrarNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textFiltrarNomeKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 textFiltrarNomeKeyReleased(evt);
             }
@@ -364,7 +368,7 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
             model.setRowCount(0);
 
             for (ManufacturerResource manufacturer : manufacturers) {
-                if ( textFiltrarNome.getText().trim().length() > 0) {
+                if (textFiltrarNome.getText().trim().length() > 0) {
                     if (!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())) {
                         continue;
                     }
@@ -379,6 +383,7 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
     }
 
     private void textFiltrarNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFiltrarNomeKeyReleased
+
     }//GEN-LAST:event_textFiltrarNomeKeyReleased
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -411,6 +416,13 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
     private void btnCadastroFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroFabricanteActionPerformed
         new TelaCadastroFabricantes().setVisible(true);
     }//GEN-LAST:event_btnCadastroFabricanteActionPerformed
+
+    private void textFiltrarNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFiltrarNomeKeyPressed
+        if(evt.getKeyCode() == 10){
+           loadValores();
+        }
+       
+    }//GEN-LAST:event_textFiltrarNomeKeyPressed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

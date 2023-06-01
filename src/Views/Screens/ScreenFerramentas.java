@@ -83,18 +83,16 @@ public class ScreenFerramentas extends ScreenEntity {
             getTable().setModel(model);
 
             if (getTable().getColumnModel().getColumnCount() > 0) {
-                getTable().getColumnModel().getColumn(0).setPreferredWidth(35);
-                getTable().getColumnModel().getColumn(0).setMinWidth(35);
-                getTable().getColumnModel().getColumn(0).setMaxWidth(35);
-                getTable().getColumnModel().getColumn(0).setResizable(false);
-                getTable().getColumnModel().getColumn(1).setResizable(false);
-                getTable().getColumnModel().getColumn(1).setPreferredWidth(400);
-                getTable().getColumnModel().getColumn(2).setResizable(false);
-                getTable().getColumnModel().getColumn(3).setResizable(false);
-                getTable().getColumnModel().getColumn(4).setResizable(false);
-                getTable().getColumnModel().getColumn(4).setPreferredWidth(100);
-                getTable().getColumnModel().getColumn(5).setResizable(false);
-                getTable().getColumnModel().getColumn(5).setPreferredWidth(100);
+                getTable().getColumnModel().getColumn(0).setMinWidth(65);
+                getTable().getColumnModel().getColumn(0).setMaxWidth(65);
+                getTable().getColumnModel().getColumn(1).setWidth(300);
+                getTable().getColumnModel().getColumn(2).setWidth(260);
+                getTable().getColumnModel().getColumn(3).setMinWidth(135);
+                getTable().getColumnModel().getColumn(3).setMaxWidth(135);
+                getTable().getColumnModel().getColumn(4).setWidth(195);
+                getTable().getColumnModel().getColumn(5).setMinWidth(110);
+                getTable().getColumnModel().getColumn(5).setMaxWidth(110);
+               
             }
 
             for (Object[] data : datas) {
