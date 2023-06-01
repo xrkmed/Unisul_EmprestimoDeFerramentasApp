@@ -668,13 +668,8 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
     private void textCEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCEPKeyPressed
         
-        if (textBairro.getText().equals("") && textCEP.getText().equals("") && textComplemento.getText().equals("") && textRua.getText().equals("") && textTelefone.getText().equals("")) {
-            btnVisualizarEmprestimos.setEnabled(true);
-            btnCriarEmprestimo.setEnabled(true);
-        } else {
-            btnVisualizarEmprestimos.setEnabled(false);
+       btnVisualizarEmprestimos.setEnabled(false);
             btnCriarEmprestimo.setEnabled(false);
-        }
 
         if (textCEP.getText().length() > 8) {
             JOptionPane.showMessageDialog(null, "CEP inválido (Digite apenas números)");
@@ -767,7 +762,9 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_textTelefoneActionPerformed
 
     private void btnCriarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarEmprestimoActionPerformed
-        // TODO add your handling code here:
+       if(!textNome.getText().equals("")){
+       
+       }
     }//GEN-LAST:event_btnCriarEmprestimoActionPerformed
 
     private void textCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCEPActionPerformed
@@ -775,23 +772,13 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_textCEPActionPerformed
 
     private void textRuaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textRuaKeyPressed
-        if (textBairro.getText().equals("") && textCEP.getText().equals("") && textComplemento.getText().equals("") && textRua.getText().equals("") && textTelefone.getText().equals("")) {
-            btnVisualizarEmprestimos.setEnabled(true);
-            btnCriarEmprestimo.setEnabled(true);
-        } else {
-            btnVisualizarEmprestimos.setEnabled(false);
+  btnVisualizarEmprestimos.setEnabled(false);
             btnCriarEmprestimo.setEnabled(false);
-        }
     }//GEN-LAST:event_textRuaKeyPressed
 
     private void textComplementoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textComplementoKeyPressed
-        if (textBairro.getText().equals("") && textCEP.getText().equals("") && textComplemento.getText().equals("") && textRua.getText().equals("") && textTelefone.getText().equals("")) {
-            btnVisualizarEmprestimos.setEnabled(true);
-            btnCriarEmprestimo.setEnabled(true);
-        } else {
-            btnVisualizarEmprestimos.setEnabled(false);
+       btnVisualizarEmprestimos.setEnabled(false);
             btnCriarEmprestimo.setEnabled(false);
-        }
     }//GEN-LAST:event_textComplementoKeyPressed
 
     private void textNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNomeKeyPressed
@@ -803,13 +790,8 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_textTelefoneKeyPressed
 
     private void textBairroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textBairroKeyTyped
- if (textBairro.getText().equals("") && textCEP.getText().equals("") && textComplemento.getText().equals("") && textRua.getText().equals("") && textTelefone.getText().equals("")) {
-            btnVisualizarEmprestimos.setEnabled(true);
-            btnCriarEmprestimo.setEnabled(true);
-        } else {
-            btnVisualizarEmprestimos.setEnabled(false);
+ btnVisualizarEmprestimos.setEnabled(false);
             btnCriarEmprestimo.setEnabled(false);
-        }
     }//GEN-LAST:event_textBairroKeyTyped
 
     private void textBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBairroActionPerformed
