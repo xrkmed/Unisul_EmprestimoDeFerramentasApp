@@ -1,6 +1,8 @@
 package Views.Screens;
 
 import java.util.ArrayList;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
@@ -8,6 +10,8 @@ import Controllers.FiltrosClass;
 import Controllers.FiltrosEnum;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
+import Controllers.Filtros.FiltrosFiltrar;
+import Controllers.Filtros.FiltrosOrdenar;
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
 import Model.FriendModel;
@@ -200,6 +204,25 @@ public class ScreenAmigos extends ScreenEntity {
                 }
             }
         });
+    }
+
+    /* FILTROS */
+
+    @Override
+    public DefaultComboBoxModel<FiltrosClass> get() {
+        return new DefaultComboBoxModel<FiltrosClass>(new FiltrosClass[]{
+            new FiltrosFiltrar("Empréstimos em Aberto", (Object[] data) -> {
+                return (int) data[4] > 0;
+            }),
+            new FiltrosFiltrar("Empréstimos em Atraso", (Object[] data) -> {
+                return (int) data[5] > 0;
+            }),
+            new FiltrosOrdenar("Nome Crescente", (data1, data2) -> {
+                return ((String) data1[1]).compareTo((String) data2[1]);
+            }),
+            new FiltrosOrdenar("Nome Decrescente", (data1, data2) -> {
+                return -((String) data1[1]).compareTo((String) data2[1]);
+            }),});
     }
 
 }

@@ -1,9 +1,12 @@
 package Views.Screens;
 
 import java.util.ArrayList;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
+import Controllers.FiltrosClass;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import DAO.ManufacturerDAO;
@@ -168,6 +171,12 @@ public class ScreenFabricantes extends ScreenEntity {
                 }
             }
         });
+    }
+
+    /* FILTROS */
+    @Override
+    public DefaultComboBoxModel<FiltrosClass> get() {
+        return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{new FiltrosClass("")});
     }
 
 }
