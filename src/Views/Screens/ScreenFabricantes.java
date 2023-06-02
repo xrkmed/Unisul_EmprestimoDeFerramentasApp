@@ -1,7 +1,6 @@
 package Views.Screens;
 
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
@@ -124,7 +123,7 @@ public class ScreenFabricantes extends ScreenEntity {
     }
 
     public void btnDeletar() {
-        int id = (int)getTable().getValueAt(getTable().getSelectedRow(), 0);
+        int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
         try {
             ManufacturerResource ManuDel = ManufacturerDAO.getInstance().getManufacturer(id);
             if (ManuDel != null) {
@@ -141,7 +140,8 @@ public class ScreenFabricantes extends ScreenEntity {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao remover fabricante", "Erro", JOptionPane.ERROR_MESSAGE);
-        }    }
+        }
+    }
 
     public void btnVisualizar() {
         JOptionPane.showMessageDialog(null, "working!");

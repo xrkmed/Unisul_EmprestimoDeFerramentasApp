@@ -1,9 +1,7 @@
 package Resources;
 
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-
 import ViewsEmprestimo.TelaRelatorioEmprestimos;
 import ViewsTool.TelaRelatorioFerramentas;
 import ViewsAmigos.TelaRelatorioAmigos;
@@ -57,7 +55,6 @@ public class DirectoryChooserFrame extends JFrame {
                 ((TelaRelatorioFabricante) parent).setDirectory(selectedDirectory);
                 this.dispose();
             }
-
 
         }
     }

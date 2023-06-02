@@ -55,8 +55,9 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             this.dispose();
         }
     }
-    public TelaCadastroEmprestimo(FriendModel a){
-    this();
+
+    public TelaCadastroEmprestimo(FriendModel a) {
+        this();
         setSelectedFriend(a);
     }
 
@@ -575,7 +576,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 tool.getId(),
                 tool.getNome(),
                 (tool.getManufacturer() != null ? tool.getManufacturer().getName() : "Sem fabricante"),
-                "R$"+BRLResource.PRICE_FORMATTER.format(tool.getPrice())
+                "R$" + BRLResource.PRICE_FORMATTER.format(tool.getPrice())
             });
             totalValue += tool.getPrice();
         }

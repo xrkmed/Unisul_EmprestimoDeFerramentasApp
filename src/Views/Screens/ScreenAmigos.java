@@ -10,14 +10,12 @@ import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
-import Exceptions.DatabaseResultQueryException;
 import Model.FriendModel;
 import Model.LoanModel;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsAmigos.TelaCadastroAmigos;
 import com.itextpdf.text.Paragraph;
-import java.sql.SQLException;
 
 public class ScreenAmigos extends ScreenEntity {
 
@@ -138,9 +136,9 @@ public class ScreenAmigos extends ScreenEntity {
 
     /* FUNCOES DOS BOTOES */
     public void btnCadastro() {
-    
+
         try {
-                int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+            int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             FriendModel selectedFriend = FriendsDAO.getInstance().getFriend(id);
             new TelaCadastroAmigos(selectedFriend).setVisible(true);
         } catch (Exception e) {

@@ -11,8 +11,6 @@ import Resources.AddressResource;
 import Resources.CEPResource;
 import Resources.PhoneDocument;
 import Resources.PhoneValidResource;
-import java.awt.event.FocusAdapter;
-import javax.swing.text.View;
 
 public class TelaCadastroAmigos extends javax.swing.JFrame {
 
@@ -21,8 +19,9 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     public TelaCadastroAmigos() {
         initComponents();
         configFrame();
-        
+
     }
+
     public TelaCadastroAmigos(FriendModel selectedFriend) {
         this();
         this.selectedFriend = selectedFriend;
@@ -37,9 +36,9 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         textNumero.setText(selectedFriend.getAddress().getNumber() + "");
         textTelefone.setText(selectedFriend.getPhone());
         btnCadastrar.setText("Finalizar alteração");
-       
+
         //jButton2.setText("Cancelar alteração");
-         btnCriarEmprestimo.setEnabled(true);
+        btnCriarEmprestimo.setEnabled(true);
         btnVisualizarEmprestimos.setEnabled(true);
     }
 
@@ -624,7 +623,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_textNumeroActionPerformed
 
     private void textNumeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyPressed
-   
+
     }//GEN-LAST:event_textNumeroKeyPressed
 
     private void textNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyReleased
@@ -671,9 +670,9 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_selectEstadoActionPerformed
 
     private void textCEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCEPKeyPressed
-        
-       btnVisualizarEmprestimos.setEnabled(false);
-            btnCriarEmprestimo.setEnabled(false);
+
+        btnVisualizarEmprestimos.setEnabled(false);
+        btnCriarEmprestimo.setEnabled(false);
 
         if (textCEP.getText().length() > 8) {
             JOptionPane.showMessageDialog(null, "CEP inválido (Digite apenas números)");
@@ -769,7 +768,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_textTelefoneActionPerformed
 
     private void btnCriarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarEmprestimoActionPerformed
-     new ViewsEmprestimo.TelaCadastroEmprestimo(selectedFriend).setVisible(true);
+        new ViewsEmprestimo.TelaCadastroEmprestimo(selectedFriend).setVisible(true);
     }//GEN-LAST:event_btnCriarEmprestimoActionPerformed
 
     private void textCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCEPActionPerformed
@@ -777,13 +776,13 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_textCEPActionPerformed
 
     private void textRuaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textRuaKeyPressed
-  btnVisualizarEmprestimos.setEnabled(false);
-            btnCriarEmprestimo.setEnabled(false);
+        btnVisualizarEmprestimos.setEnabled(false);
+        btnCriarEmprestimo.setEnabled(false);
     }//GEN-LAST:event_textRuaKeyPressed
 
     private void textComplementoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textComplementoKeyPressed
-       btnVisualizarEmprestimos.setEnabled(false);
-            btnCriarEmprestimo.setEnabled(false);
+        btnVisualizarEmprestimos.setEnabled(false);
+        btnCriarEmprestimo.setEnabled(false);
     }//GEN-LAST:event_textComplementoKeyPressed
 
     private void textNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNomeKeyPressed
@@ -795,12 +794,12 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_textTelefoneKeyPressed
 
     private void textBairroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textBairroKeyTyped
- btnVisualizarEmprestimos.setEnabled(false);
-            btnCriarEmprestimo.setEnabled(false);
+        btnVisualizarEmprestimos.setEnabled(false);
+        btnCriarEmprestimo.setEnabled(false);
     }//GEN-LAST:event_textBairroKeyTyped
 
     private void textBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBairroActionPerformed
- 
+
     }//GEN-LAST:event_textBairroActionPerformed
 
     public static void main(String args[]) {

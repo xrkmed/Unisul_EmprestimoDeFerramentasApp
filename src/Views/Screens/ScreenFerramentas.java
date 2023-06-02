@@ -6,7 +6,6 @@ import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
-import DAO.FriendsDAO;
 import DAO.ToolsDAO;
 import Model.ToolModel;
 import Resources.DirectoryChooserFrame;
@@ -113,8 +112,8 @@ public class ScreenFerramentas extends ScreenEntity {
 
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
                         getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
-                    } 
-                  
+                    }
+
                 }
 //                  data[3] = "R$"+data[3].toString();
                 ((DefaultTableModel) getTable().getModel()).addRow(data);
@@ -135,11 +134,11 @@ public class ScreenFerramentas extends ScreenEntity {
     }
 
     public void btnDeletar() {
-        int id = (int)getTable().getValueAt(getTable().getSelectedRow(), 0);   
+        int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
 
-        try{
-                    ToolModel toolsDel = ToolsDAO.getInstance().getTool(id);
-        int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover a ferramenta " + toolsDel.getNome() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
+        try {
+            ToolModel toolsDel = ToolsDAO.getInstance().getTool(id);
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover a ferramenta " + toolsDel.getNome() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
             if (dialogResult == JOptionPane.YES_OPTION) {
                 if (!toolsDel.isAvailable()) {
                     JOptionPane.showMessageDialog(null, "Não é possível remover uma ferramenta que esta em uso por algum amigo.");
@@ -148,11 +147,10 @@ public class ScreenFerramentas extends ScreenEntity {
             }
             ToolsDAO.getInstance().removeTool(toolsDel);
             carregarDados();
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-    
 
     public void btnVisualizar() {
         JOptionPane.showMessageDialog(null, "working!");

@@ -2,7 +2,6 @@ package ViewsTool;
 
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
-
 import DAO.ToolsDAO;
 import Model.ToolModel;
 import Resources.BRLResource;
@@ -276,9 +275,9 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
             }
 
             if (this.tool == null) {
-                if(selectedManufacturer == null){
-                JOptionPane.showMessageDialog(null, "Selecione uma empresa por obsequio");
-                return;
+                if (selectedManufacturer == null) {
+                    JOptionPane.showMessageDialog(null, "Selecione uma empresa por obsequio");
+                    return;
                 }
                 ToolsDAO.getInstance().addTool(textFerramentaNome.getText().toUpperCase(), price, (selectedManufacturer != null ? selectedManufacturer.getId() : -1));
                 JOptionPane.showMessageDialog(null, "Ferramenta cadastrada com sucesso!");
