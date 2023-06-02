@@ -153,9 +153,10 @@ public class ScreenAmigos extends ScreenEntity {
 
     public void btnDeletar() {
 
-        int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+        
 
         try {
+            int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             FriendModel friendsDel = FriendsDAO.getInstance().getFriend(id);
             int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o cadastro de " + friendsDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
             if (dialogResult == JOptionPane.YES_OPTION) {
@@ -171,7 +172,7 @@ public class ScreenAmigos extends ScreenEntity {
                 carregarDados();
             }
         } catch (Exception e) {
-            //TODO
+            System.out.println(e);
         }
     }
 
