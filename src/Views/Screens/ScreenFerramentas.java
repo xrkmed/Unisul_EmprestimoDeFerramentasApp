@@ -7,7 +7,9 @@ import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
+import DAO.FriendsDAO;
 import DAO.ToolsDAO;
+import Model.ToolModel;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsTool.TelaCadastroFerramentas;
@@ -37,7 +39,7 @@ public class ScreenFerramentas extends ScreenEntity {
 
     @Override
     public void init() {
-        debug();
+//        debug();
         getTitulo().setText(getName());
 
         getBtnCadastro().addActionListener(e -> {
@@ -133,8 +135,24 @@ public class ScreenFerramentas extends ScreenEntity {
     }
 
     public void btnDeletar() {
-        JOptionPane.showMessageDialog(null, "working!");
+        int id = (int)getTable().getValueAt(getTable().getSelectedRow(), 0);   
+
+        try{
+                    ToolModel toolsDel = ToolsDAO.getInstance().getTool(id);
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover a ferramenta " + toolsDel.getNome() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
+            if (dialogResult == JOptionPane.YES_OPTION) {
+                if (!toolsDel.isAvailable()) {
+                    JOptionPane.showMessageDialog(null, "Não é possível remover uma ferramenta que esta em uso por algum amigo.");
+                    return;
+                }
+            }
+            ToolsDAO.getInstance().removeTool(toolsDel);
+            carregarDados();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
+    
 
     public void btnVisualizar() {
         JOptionPane.showMessageDialog(null, "working!");

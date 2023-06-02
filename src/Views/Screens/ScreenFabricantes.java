@@ -8,7 +8,9 @@ import Controllers.ColorsRenderer;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import DAO.ManufacturerDAO;
+import DAO.ToolsDAO;
 import Resources.DirectoryChooserFrame;
+import Resources.ManufacturerResource;
 import Views.TelaInicial;
 import ViewsManufacturer.TelaCadastroFabricantes;
 import com.itextpdf.text.Paragraph;
@@ -32,7 +34,7 @@ public class ScreenFabricantes extends ScreenEntity {
 
     @Override
     public void init() {
-        debug();
+//        debug();
         getTitulo().setText(getName());
 
         getBtnCadastro().addActionListener(e -> {
@@ -125,8 +127,24 @@ public class ScreenFabricantes extends ScreenEntity {
     }
 
     public void btnDeletar() {
-        JOptionPane.showMessageDialog(null, "working!");
-    }
+        int id = (int)getTable().getValueAt(getTable().getSelectedRow(), 0);
+        try {
+            ManufacturerResource ManuDel = ManufacturerDAO.getInstance().getManufacturer(id);
+            if (ManuDel != null) {
+                int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o fabricante " + ManuDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
+                if (dialogResult == JOptionPane.YES_OPTION) {
+                    if (!ToolsDAO.getInstance().getToolsByManufacturer(ManuDel.getId()).isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Não é possível remover um fabricante que possui ferramentas cadastradas!");
+                        return;
+                    }
+
+                    ManufacturerDAO.getInstance().removeManufacturer(ManuDel.getId());
+                    carregarDados();
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao remover fabricante", "Erro", JOptionPane.ERROR_MESSAGE);
+        }    }
 
     public void btnVisualizar() {
         JOptionPane.showMessageDialog(null, "working!");
