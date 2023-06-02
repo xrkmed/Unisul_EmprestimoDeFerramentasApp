@@ -12,6 +12,7 @@ import Resources.CEPResource;
 import Resources.PhoneDocument;
 import Resources.PhoneValidResource;
 import java.awt.event.FocusAdapter;
+import javax.swing.text.View;
 
 public class TelaCadastroAmigos extends javax.swing.JFrame {
 
@@ -20,10 +21,8 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     public TelaCadastroAmigos() {
         initComponents();
         configFrame();
-             btnVisualizarEmprestimos.setEnabled(false);
-        btnCriarEmprestimo.setEnabled(false);
+        
     }
-
     public TelaCadastroAmigos(FriendModel selectedFriend) {
         this();
         this.selectedFriend = selectedFriend;
@@ -40,10 +39,13 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         btnCadastrar.setText("Finalizar alteração");
        
         //jButton2.setText("Cancelar alteração");
+         btnCriarEmprestimo.setEnabled(true);
+        btnVisualizarEmprestimos.setEnabled(true);
     }
 
     private void configFrame() {
-
+        btnCriarEmprestimo.setEnabled(false);
+        btnVisualizarEmprestimos.setEnabled(false);
         AbstractDocument document = (AbstractDocument) textTelefone.getDocument();
 
         document.setDocumentFilter(new PhoneDocument());
@@ -767,9 +769,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_textTelefoneActionPerformed
 
     private void btnCriarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarEmprestimoActionPerformed
-       if(!textNome.getText().equals("")){
-       
-       }
+     new ViewsEmprestimo.TelaCadastroEmprestimo(selectedFriend).setVisible(true);
     }//GEN-LAST:event_btnCriarEmprestimoActionPerformed
 
     private void textCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCEPActionPerformed
