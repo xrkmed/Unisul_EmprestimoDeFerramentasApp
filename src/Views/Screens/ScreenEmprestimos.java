@@ -3,6 +3,8 @@ package Views.Screens;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
+import Controllers.FiltrosClass;
+import Controllers.FiltrosEnum;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import DAO.LoansDAO;
@@ -14,6 +16,7 @@ import ViewsEmprestimo.TelaFinalizarEmprestimo;
 import com.itextpdf.text.Paragraph;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class ScreenEmprestimos extends ScreenEntity {
 
@@ -81,18 +84,39 @@ public class ScreenEmprestimos extends ScreenEntity {
                 getTable().getColumnModel().getColumn(0).setMaxWidth(65);
             }
 
-            for (Object[] data : LoansDAO.getInstance().getEmprestimosEmAberto()) {
-                if (Integer.parseInt(data[4].toString()) > 0 && Integer.parseInt(data[4].toString()) <= 7) {
-                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
+            ArrayList<Object[]> dataArray = new ArrayList<>();
+            if(getFiltros().getSelectedItem() != null){
+                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                if(f.getType() == FiltrosEnum.FILTRO_GERAR){
+                    dataArray = (ArrayList<Object[]>) f.run();
+                }
+            }
+
+            if(dataArray.size() == 0){
+                dataArray = LoansDAO.getInstance().getEmprestimosEmAberto();
+            }
+
+            for (Object[] data : dataArray) {
+                if(data[4].toString().contains("Finalizado em")){
+                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightGreen);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
                         getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
                     }
-                }
-
-                if (Integer.parseInt(data[4].toString()) < 0) {
-                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
-                    for (int i = 0; i < getTable().getColumnCount(); i++) {
-                        getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
+                }else{
+                    if(!getTitulo().getText().equalsIgnoreCase("emprestimos finalizados")){
+                        if (Integer.parseInt(data[4].toString()) > 0 && Integer.parseInt(data[4].toString()) <= 7) {
+                            renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
+                            for (int i = 0; i < getTable().getColumnCount(); i++) {
+                                getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
+                            }
+                        }
+    
+                        if (Integer.parseInt(data[4].toString()) < 0) {
+                            renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
+                            for (int i = 0; i < getTable().getColumnCount(); i++) {
+                                getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
+                            }
+                        }
                     }
                 }
 
