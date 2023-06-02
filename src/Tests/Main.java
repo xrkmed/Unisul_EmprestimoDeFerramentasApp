@@ -1,6 +1,5 @@
 package Tests;
 
-import Controllers.Extras.SMTP;
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
 import DAO.ToolsDAO;
@@ -22,12 +21,11 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         Main.tela = new TelaInicial();
         Main.tela.setVisible(true);
-        
-        //SMTP.send("particular.guilherme.martins@gmail.com", "noreply (A3 Grupo Supimpa)", "Seja bem vindo ao aplicativo!\nVoce tem <strong>3 emprestimos em aberto</strong> para gerenciar.");
 
+        //SMTP.send("particular.guilherme.martins@gmail.com", "noreply (A3 Grupo Supimpa)", "Seja bem vindo ao aplicativo!\nVoce tem <strong>3 emprestimos em aberto</strong> para gerenciar.");
         //Initialize Connection
         Database.getInstance().getConnection();
     }

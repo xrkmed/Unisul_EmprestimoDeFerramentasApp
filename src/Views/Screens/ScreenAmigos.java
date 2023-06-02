@@ -1,10 +1,8 @@
 package Views.Screens;
 
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 import Controllers.ColorsRenderer;
 import Controllers.FiltrosClass;
 import Controllers.FiltrosEnum;
@@ -43,8 +41,6 @@ public class ScreenAmigos extends ScreenEntity {
 
     @Override
     public void init() {
-        getTitulo().setText(getName());
-
         getBtnCadastro().addActionListener(e -> {
             btnCadastro();
         });

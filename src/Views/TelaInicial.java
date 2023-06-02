@@ -9,11 +9,7 @@ import Views.Screens.ScreenEmprestimos;
 import Views.Screens.ScreenEntity;
 import Views.Screens.ScreenFabricantes;
 import Views.Screens.ScreenFerramentas;
-import ViewsEmprestimo.TelaCadastroEmprestimo;
-import com.formdev.flatlaf.FlatClientProperties;
-
 import java.awt.Color;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -39,7 +35,7 @@ public class TelaInicial extends javax.swing.JFrame {
         return tabelaPrincipal;
     }
 
-    public JComboBox<FiltrosClass> getComboBox(){
+    public JComboBox<FiltrosClass> getComboBox() {
         return comboFiltros;
     }
 
@@ -68,7 +64,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     public void updateTela(ScreenEntity e) {
-        if(actualThread != null && actualThread.isAlive()){
+        if (actualThread != null && actualThread.isAlive()) {
             JOptionPane.showMessageDialog(null, "Aguarde alguns instantes...");
             return;
         }
@@ -83,17 +79,18 @@ public class TelaInicial extends javax.swing.JFrame {
         comboFiltros.setModel(FiltrosEntity.get(e));
         comboFiltros.setSelectedItem(null);
 
-        if(e instanceof ScreenAmigos){
+        if (e instanceof ScreenAmigos) {
             btnAmigos.setBackground(new Color(155, 155, 155));
-        }else if(e instanceof ScreenEmprestimos){
+        } else if (e instanceof ScreenEmprestimos) {
             btnEmprestimos.setBackground(new Color(155, 155, 155));
-        }else if(e instanceof ScreenFerramentas){
+        } else if (e instanceof ScreenFerramentas) {
             bntFerramentas.setBackground(new Color(155, 155, 155));
-        }else if(e instanceof ScreenFabricantes){
+        } else if (e instanceof ScreenFabricantes) {
             bntFabricantes.setBackground(new Color(155, 155, 155));
         }
 
         telaAtual = e;
+        getTitulo().setText(e.getName());
         ((DefaultTableModel) getTable().getModel()).setRowCount(0);
 
         actualThread = new Thread(new Runnable() {
@@ -517,13 +514,13 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAmigosActionPerformed
 
     private void btnEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmprestimosActionPerformed
-        if(!(telaAtual instanceof ScreenEmprestimos)){
+        if (!(telaAtual instanceof ScreenEmprestimos)) {
             updateTela(new ScreenEmprestimos(this));
         }
     }//GEN-LAST:event_btnEmprestimosActionPerformed
 
     private void bntFabricantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFabricantesActionPerformed
-        if(!(telaAtual instanceof ScreenFabricantes)){
+        if (!(telaAtual instanceof ScreenFabricantes)) {
             updateTela(new ScreenFabricantes(this));
         }
     }//GEN-LAST:event_bntFabricantesActionPerformed
