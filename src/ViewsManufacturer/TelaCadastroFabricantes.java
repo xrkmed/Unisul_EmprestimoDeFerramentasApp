@@ -341,21 +341,21 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
                 }
             }
         } else {
-            int option = JOptionPane.showConfirmDialog(null, "O CNPJ Informado nao e valido, voce pode obtar por cadastrar o CNPJ correto ou continuar o cadastro com este CNPJ, deseja continuar?", "CNPJ Inválido", JOptionPane.YES_NO_OPTION);
+            int option = JOptionPane.showConfirmDialog(null, "O CNPJ Informado não é válido, você pode obtar por cadastrar o CNPJ correto ou continuar o cadastro com este CNPJ, deseja continuar?", "CNPJ Inválido", JOptionPane.YES_NO_OPTION);
             if (option == JOptionPane.NO_OPTION) {
                 return;
             }
         }
 
         if (textoNomeFantasia.getText().length() > 50) {
-            JOptionPane.showMessageDialog(null, "Nome do fabricante muito grande!");
+            JOptionPane.showMessageDialog(null, "Nome do fabricante muito longo!");
             textoNomeFantasia.setText("");
             return;
         }
 
         try {
             if (validCnpj && ManufacturerDAO.getInstance().getManufacturer(CNPJResource.returnCNPJUnformat(textoCNPJ.getText())) != null) {
-                JOptionPane.showMessageDialog(null, "Fabricante com este CNPJ já cadastrado!");
+                JOptionPane.showMessageDialog(null, "Já existe um cadastro com o CNPJ informado!");
                 textoCNPJ.setText("");
                 return;
             }
@@ -392,12 +392,12 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
             });
             consultarCNPJ.start();
 
-            JOptionPane.showMessageDialog(null, "Aguarde enquanto consultamos o CNPJ informado...");
+            JOptionPane.showMessageDialog(null, "Verificando CNPJ.");
 
         } else {
-            textoEndereco.setText("Nao informado");
+            textoEndereco.setText("Não Informado");
             textoRazaoSocial.setText(textoNomeFantasia.getText());
-            textoTelefone.setText("Nao informado");
+            textoTelefone.setText("Não Informado");
             textoStatus.setText("OK");
             textoCapitalSocial.setText("Desconhecido");
             textoSituacao.setText("SEM CONSULTA");
@@ -424,7 +424,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
 
             try {
                 if (ManufacturerDAO.getInstance().getManufacturerByNome(textoNomeFantasia.getText().trim()) != null) {
-                    JOptionPane.showMessageDialog(null, "Fabricante com este nome fantasia já cadastrado!");
+                    JOptionPane.showMessageDialog(null, "Já existe um cadastro de fabricante com o nome fantasia informado!");
                     return;
                 }
 
