@@ -86,6 +86,8 @@ public class ScreenEmprestimos extends ScreenEntity {
                 getTable().getColumnModel().getColumn(0).setMaxWidth(65);
             }
 
+            getTitulo().setText(getName());
+
             if(getFiltros().getSelectedItem() != null){
                 FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
                 if(f.getType() == FiltrosEnum.FILTRO_GERAR){
@@ -140,6 +142,11 @@ public class ScreenEmprestimos extends ScreenEntity {
         int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
         try {
             LoanModel loan = LoansDAO.getInstance().getLoan(id);
+            if(loan.getReturned()){
+                JOptionPane.showMessageDialog(null, "Este emprestimo já foi finalizado!");
+                return;
+            }
+            
             TelaFinalizarEmprestimo tela = new TelaFinalizarEmprestimo(loan, getTable().getValueAt(getTable().getSelectedRow(), 1).toString());
             tela.setVisible(true);
             tela.addWindowListener(new WindowAdapter() {
