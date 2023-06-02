@@ -20,6 +20,8 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     public TelaCadastroAmigos() {
         initComponents();
         configFrame();
+             btnVisualizarEmprestimos.setEnabled(false);
+        btnCriarEmprestimo.setEnabled(false);
     }
 
     public TelaCadastroAmigos(FriendModel selectedFriend) {
@@ -36,6 +38,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         textNumero.setText(selectedFriend.getAddress().getNumber() + "");
         textTelefone.setText(selectedFriend.getPhone());
         btnCadastrar.setText("Finalizar alteração");
+       
         //jButton2.setText("Cancelar alteração");
     }
 
@@ -619,8 +622,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_textNumeroActionPerformed
 
     private void textNumeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyPressed
-        btnVisualizarEmprestimos.setEnabled(false);
-        btnCriarEmprestimo.setEnabled(false);
+   
     }//GEN-LAST:event_textNumeroKeyPressed
 
     private void textNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyReleased
