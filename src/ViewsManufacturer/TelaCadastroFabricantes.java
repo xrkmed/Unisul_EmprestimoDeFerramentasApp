@@ -353,11 +353,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
             return;
         }
 
-        if (textoNomeFantasia.getText().length() < 2) {
-            JOptionPane.showMessageDialog(null, "Nome do fabricante muito pequeno!");
-            textoNomeFantasia.setText("");
-            return;
-        }
+        
 
         try {
             if (validCnpj && ManufacturerDAO.getInstance().getManufacturer(CNPJResource.returnCNPJUnformat(textoCNPJ.getText())) != null) {
