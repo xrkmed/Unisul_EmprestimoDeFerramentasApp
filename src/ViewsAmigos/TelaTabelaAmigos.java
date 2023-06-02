@@ -359,12 +359,44 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             StatusRenderer renderer = new StatusRenderer();
             //statusRed.addHighlightedRow(1, Color.RED);
             ArrayList<Object[]> amigosData = FriendsDAO.getInstance().loadFriendsTabela();
-         
-                
-            
+            if (filtrarRanque.isSelected()) {
+                switch (rankType.getSelectedItem().toString().toLowerCase()) {
+                    case "nome": {
+                        amigosData.sort((Object[] object1, Object[] object2) -> {
+                            String s1 = (String) object1[1];
+                            String s2 = (String) object2[1];
+                            return s1.compareTo(s2);
+                        });
+                        break;
+                    }
+                    case "emprestimos em aberto": {
+                        amigosData.sort((Object[] object1, Object[] object2) -> {
+                            Integer i1 = (Integer) object1[4];
+                            Integer i2 = (Integer) object2[4];
+                            return i2.compareTo(i1);
+                        });
+                        break;
+                    }
+                    case "emprestimos atrasados": {
+                        amigosData.sort((Object[] object1, Object[] object2) -> {
+                            Integer i1 = (Integer) object1[5];
+                            Integer i2 = (Integer) object2[5];
+                            return i2.compareTo(i1);
+                        });
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            }
 
             for (Object[] data : amigosData) {
-             
+                if (filtroAmigosEmEmprestimo.isSelected() && data[4].toString().equals("0")) {
+                    continue;
+                }
+                if (filtroAmigosDevolverFerramenta.isSelected() && data[5].toString().equals("0")) {
+                    continue;
+                }
                 if (filtroAmigosSemEmprestimoAberto.isSelected() && !data[4].toString().equals("0") && !data[6].toString().equals("0")) {
                     continue;
                 } else {
@@ -373,9 +405,17 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                         jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
                     }
                 }
-               
+                if (filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0) {
+                    if (!data[1].toString().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())) {
+                        continue;
+                    }
+                }
 
-              
+                if (filtroEndereco.isSelected() && textFiltrarEndereco.getText().trim().length() > 0) {
+                    if (!data[3].toString().toUpperCase().contains(textFiltrarEndereco.getText().toUpperCase().trim())) {
+                        continue;
+                    }
+                }
 
                 if (Integer.parseInt(data[4].toString()) > 0) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
