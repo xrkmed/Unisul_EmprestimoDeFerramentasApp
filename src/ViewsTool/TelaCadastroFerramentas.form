@@ -143,6 +143,7 @@
               <Font name="Liberation Sans" size="14" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Fabricante:"/>
+            <Property name="toolTipText" type="java.lang.String" value="Selecione ou Remova nos Bot&#xf5;es &quot;+&quot; e &quot;-&quot;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -159,6 +160,7 @@
               <Font name="Liberation Sans" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Selecionado: Nenhum"/>
+            <Property name="toolTipText" type="java.lang.String" value="Selecione ou Remova nos Bot&#xf5;es &quot;+&quot; e &quot;-&quot;"/>
           </Properties>
         </Component>
       </SubComponents>
