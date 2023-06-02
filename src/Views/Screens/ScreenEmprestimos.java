@@ -6,6 +6,7 @@ import Controllers.ColorsRenderer;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import DAO.LoansDAO;
+import Exceptions.DatabaseResultQueryException;
 import Model.LoanModel;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
@@ -14,6 +15,7 @@ import ViewsEmprestimo.TelaFinalizarEmprestimo;
 import com.itextpdf.text.Paragraph;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
 public class ScreenEmprestimos extends ScreenEntity {
 
@@ -115,8 +117,9 @@ public class ScreenEmprestimos extends ScreenEntity {
     }
 
     public void btnDeletar() {
-        int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+       
         try {
+             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             LoanModel loan = LoansDAO.getInstance().getLoan(id);
             TelaFinalizarEmprestimo tela = new TelaFinalizarEmprestimo(loan, getTable().getValueAt(getTable().getSelectedRow(), 1).toString());
             tela.setVisible(true);
@@ -127,8 +130,12 @@ public class ScreenEmprestimos extends ScreenEntity {
                 }
             });
 
-        } catch (Exception e) {
-            //TODO
+          } catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Nada selecionado vei");
+        }catch( DatabaseResultQueryException e){
+            System.out.println("Talvez o banco de dados explodiu, não resultou nada");
+        } catch( SQLException e){
+            System.out.println("Os comandos enviados SQL enviados tem algum problema");
         }
     }
 
