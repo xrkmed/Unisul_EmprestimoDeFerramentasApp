@@ -4,7 +4,6 @@ import Controllers.ColorsRenderer;
 import Controllers.StatusRenderer;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;

@@ -3,7 +3,6 @@ package ViewsEmprestimo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
-
 import DAO.LoansDAO;
 import Model.LoanModel;
 

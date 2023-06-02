@@ -40,7 +40,7 @@ public class ManufacturerResource {
     }
 
     public void setCNPJ(String cnpj) {
-        if(!cnpj.equals("00.000.000/0000-00") && !CNPJResource.validarCNPJ(cnpj)) {
+        if (!cnpj.equals("00.000.000/0000-00") && !CNPJResource.validarCNPJ(cnpj)) {
             cnpj = "00.000.000/0000-00";
         }
 

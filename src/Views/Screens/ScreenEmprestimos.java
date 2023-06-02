@@ -11,11 +11,6 @@ import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
 import ViewsEmprestimo.TelaFinalizarEmprestimo;
-import ViewsEmprestimo.TelaRelatorioEmprestimos;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -120,8 +115,8 @@ public class ScreenEmprestimos extends ScreenEntity {
     }
 
     public void btnDeletar() {
-        int id = (int)getTable().getValueAt(getTable().getSelectedRow(), 0);
-        try{
+        int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+        try {
             LoanModel loan = LoansDAO.getInstance().getLoan(id);
             TelaFinalizarEmprestimo tela = new TelaFinalizarEmprestimo(loan, getTable().getValueAt(getTable().getSelectedRow(), 1).toString());
             tela.setVisible(true);
@@ -131,8 +126,8 @@ public class ScreenEmprestimos extends ScreenEntity {
                     carregarDados();
                 }
             });
-           
-        }catch(Exception e){
+
+        } catch (Exception e) {
             //TODO
         }
     }

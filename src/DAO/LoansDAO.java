@@ -104,7 +104,7 @@ public class LoansDAO {
 
         for (Object[] data : getEmprestimosEmAberto()) {
             if (data[1].equals(amigoNome)) {
-               datas.add(data);
+                datas.add(data);
             }
         }
         return datas;
