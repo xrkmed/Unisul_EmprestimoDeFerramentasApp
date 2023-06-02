@@ -113,9 +113,10 @@ public class ScreenFerramentas extends ScreenEntity {
 
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
                         getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
-                    }
+                    } 
+                  
                 }
-
+//                  data[3] = "R$"+data[3].toString();
                 ((DefaultTableModel) getTable().getModel()).addRow(data);
             }
         } catch (Exception e) {
