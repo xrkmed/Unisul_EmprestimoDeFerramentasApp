@@ -9,6 +9,7 @@ import Controllers.FiltrosEnum;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import Controllers.Filtros.FiltrosGerar;
+import Controllers.Filtros.FiltrosOrdenar;
 import DAO.LoansDAO;
 import Model.LoanModel;
 import Resources.DirectoryChooserFrame;
@@ -181,10 +182,11 @@ public class ScreenEmprestimos extends ScreenEntity {
     }
 
     /* FILTROS */
-    
+
     @Override
     public DefaultComboBoxModel<FiltrosClass> get() {
         return new DefaultComboBoxModel<FiltrosClass>(new FiltrosClass[]{
+            new FiltrosOrdenar("Ordenar por ID"),
             new FiltrosGerar("Todos os emprestimos", () -> {
                 try {            
                     StatusRenderer renderer = new StatusRenderer();
