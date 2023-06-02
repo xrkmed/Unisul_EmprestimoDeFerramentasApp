@@ -72,13 +72,13 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
         jLabel2.setText("Nome:");
 
         textFerramentaNome.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        textFerramentaNome.setToolTipText("Nome da ferramenta");
+        textFerramentaNome.setToolTipText("Nome da Ferramenta");
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel3.setText("Valor:");
 
         textFerramentaValor.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        textFerramentaValor.setToolTipText("Valor pago na ferramenta");
+        textFerramentaValor.setToolTipText("Valor da Ferramenta");
 
         jLabel4.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel4.setText("Fabricante:");
