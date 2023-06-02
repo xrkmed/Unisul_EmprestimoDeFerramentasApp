@@ -242,7 +242,7 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void updateFabricante(ManufacturerResource e) {
-        textSelecionado.setText("Selecionado: " + e.getName());
+        textSelecionado.setText(e.getName());
         this.selectedManufacturer = e;
         btnRemoverFabricante.setEnabled(true);
     }
