@@ -10,12 +10,14 @@ import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
+import Exceptions.DatabaseResultQueryException;
 import Model.FriendModel;
 import Model.LoanModel;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsAmigos.TelaCadastroAmigos;
 import com.itextpdf.text.Paragraph;
+import java.sql.SQLException;
 
 public class ScreenAmigos extends ScreenEntity {
 
@@ -95,9 +97,9 @@ public class ScreenAmigos extends ScreenEntity {
                 getTable().getColumnModel().getColumn(5).setMaxWidth(110);
             }
 
-            if(getFiltros().getSelectedItem() != null){
+            if (getFiltros().getSelectedItem() != null) {
                 FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                if(f.getType() == FiltrosEnum.FILTRO_ORDENAR){
+                if (f.getType() == FiltrosEnum.FILTRO_ORDENAR) {
                     amigosData.sort((Object[] data1, Object[] data2) -> {
                         return f.compare(data1, data2);
                     });
@@ -105,13 +107,13 @@ public class ScreenAmigos extends ScreenEntity {
             }
 
             for (Object[] data : amigosData) {
-                if(getFiltros().getSelectedItem() != null){
+                if (getFiltros().getSelectedItem() != null) {
                     FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                    if(f.getType() == FiltrosEnum.FILTRO_FILTRAR && !f.run(data)){
+                    if (f.getType() == FiltrosEnum.FILTRO_FILTRAR && !f.run(data)) {
                         continue;
                     }
                 }
-                
+
                 if (Integer.parseInt(data[4].toString()) > 0) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
@@ -136,7 +138,15 @@ public class ScreenAmigos extends ScreenEntity {
 
     /* FUNCOES DOS BOTOES */
     public void btnCadastro() {
-        new TelaCadastroAmigos().setVisible(true);
+    
+        try {
+                int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+            FriendModel selectedFriend = FriendsDAO.getInstance().getFriend(id);
+            new TelaCadastroAmigos(selectedFriend).setVisible(true);
+        } catch (Exception e) {
+            new TelaCadastroAmigos().setVisible(true);
+        }
+
     }
 
     public void btnEditar() {
@@ -144,30 +154,29 @@ public class ScreenAmigos extends ScreenEntity {
     }
 
     public void btnDeletar() {
-        
-    int id = (int)getTable().getValueAt(getTable().getSelectedRow(), 0);   
-    
-    
 
-        try{
+        int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+
+        try {
             FriendModel friendsDel = FriendsDAO.getInstance().getFriend(id);
             int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o cadastro de " + friendsDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
             if (dialogResult == JOptionPane.YES_OPTION) {
-                    LoansDAO loansDAO = LoansDAO.getInstance();
-                    for (LoanModel loan : loansDAO.getAllLoans()) {
-                        if (loan.getFriend().getId() == friendsDel.getId() && loan.getReturned() == false) {
-                            JOptionPane.showMessageDialog(null, "Não é possível remover o cadastro de " + friendsDel.getName() + " pois ele possui empréstimos pendentes.");
-                            return;
-                        }
+                LoansDAO loansDAO = LoansDAO.getInstance();
+                for (LoanModel loan : loansDAO.getAllLoans()) {
+                    if (loan.getFriend().getId() == friendsDel.getId() && loan.getReturned() == false) {
+                        JOptionPane.showMessageDialog(null, "Não é possível remover o cadastro de " + friendsDel.getName() + " pois ele possui empréstimos pendentes.");
+                        return;
                     }
-                    FriendsDAO dao = FriendsDAO.getInstance();
-                    dao.removeFriend(friendsDel);
-                    carregarDados();
+                }
+                FriendsDAO dao = FriendsDAO.getInstance();
+                dao.removeFriend(friendsDel);
+                carregarDados();
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             //TODO
         }
-                }
+    }
+
     public void btnVisualizar() {
         JOptionPane.showMessageDialog(null, "working!");
     }
