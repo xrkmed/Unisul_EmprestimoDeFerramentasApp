@@ -339,23 +339,14 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
             StatusRenderer statusRenderer = new StatusRenderer();
             //new Object[]{result.getInt("id"), "-", result.getString("name"), result.getString("razao_social"), BRLResource.PRICE_FORMATTER.format(result.getDouble("price")), result.getString("nome"), new SimpleDateFormat("dd/MM/yyyy").format(result.getDate("endDate").toString())});
             for (Object[] data : datas) {
-                if (filtroFiltrarNome.isSelected() && textFiltrarNome.getText().trim().length() > 0) {
+                if ( textFiltrarNome.getText().trim().length() > 0) {
                     if (!data[2].toString().toLowerCase().contains(textFiltrarNome.getText().toLowerCase())) {
                         continue;
                     }
                 }
 
-                if (filtroFiltrarUso.isSelected() && textFiltrarUso.getText().trim().length() > 0) {
-                    if (!data[5].toString().toLowerCase().contains(textFiltrarUso.getText().toLowerCase())) {
-                        continue;
-                    }
-                }
-
-                if (filtroFabricante.isSelected() && textFiltrarFabricante.getText().trim().length() > 0) {
-                    if (!data[3].toString().toLowerCase().contains(textFiltrarFabricante.getText().toLowerCase())) {
-                        continue;
-                    }
-                }
+              
+                
 
                 if (!data[5].toString().equals("Disponivel")) {
                     continue;
