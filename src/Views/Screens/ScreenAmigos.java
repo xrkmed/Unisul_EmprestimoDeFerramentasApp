@@ -9,6 +9,9 @@ import Controllers.FiltrosEnum;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import DAO.FriendsDAO;
+import DAO.LoansDAO;
+import Model.FriendModel;
+import Model.LoanModel;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsAmigos.TelaCadastroAmigos;
@@ -141,9 +144,30 @@ public class ScreenAmigos extends ScreenEntity {
     }
 
     public void btnDeletar() {
-        JOptionPane.showMessageDialog(null, "working!");
-    }
+        
+    int id = (int)getTable().getValueAt(getTable().getSelectedRow(), 0);   
+    
+    
 
+        try{
+            FriendModel friendsDel = FriendsDAO.getInstance().getFriend(id);
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o cadastro de " + friendsDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
+            if (dialogResult == JOptionPane.YES_OPTION) {
+                    LoansDAO loansDAO = LoansDAO.getInstance();
+                    for (LoanModel loan : loansDAO.getAllLoans()) {
+                        if (loan.getFriend().getId() == friendsDel.getId() && loan.getReturned() == false) {
+                            JOptionPane.showMessageDialog(null, "Não é possível remover o cadastro de " + friendsDel.getName() + " pois ele possui empréstimos pendentes.");
+                            return;
+                        }
+                    }
+                    FriendsDAO dao = FriendsDAO.getInstance();
+                    dao.removeFriend(friendsDel);
+                    carregarDados();
+            }
+        }catch(Exception e){
+            //TODO
+        }
+                }
     public void btnVisualizar() {
         JOptionPane.showMessageDialog(null, "working!");
     }
