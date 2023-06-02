@@ -71,8 +71,7 @@ public class ScreenEmprestimos extends ScreenEntity {
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
                     return canEdit[columnIndex];
-                }
-            ;
+                };
             };
 
             getTable().setModel(model);
@@ -84,19 +83,15 @@ public class ScreenEmprestimos extends ScreenEntity {
                 getTable().getColumnModel().getColumn(0).setMaxWidth(65);
             }
 
-            ArrayList<Object[]> dataArray = new ArrayList<>();
             if(getFiltros().getSelectedItem() != null){
                 FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
                 if(f.getType() == FiltrosEnum.FILTRO_GERAR){
-                    dataArray = (ArrayList<Object[]>) f.run();
+                    f.run();
+                    return;
                 }
             }
 
-            if(dataArray.size() == 0){
-                dataArray = LoansDAO.getInstance().getEmprestimosEmAberto();
-            }
-
-            for (Object[] data : dataArray) {
+            for (Object[] data : LoansDAO.getInstance().getEmprestimosEmAberto()) {
                 if(data[4].toString().contains("Finalizado em")){
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightGreen);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
