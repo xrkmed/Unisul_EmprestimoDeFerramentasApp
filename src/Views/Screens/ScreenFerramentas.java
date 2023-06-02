@@ -177,16 +177,16 @@ public class ScreenFerramentas extends ScreenEntity {
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
                 if (directoryChooserFrame.getSelectedDirectory().length() > 0) {
                     try {
-                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
+                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATÓRIO FERRAMENTAS", 10);
                         String fileName = "RelatorioFerramentas";
                         PDFEntity.export(directoryChooserFrame.getSelectedDirectory() + "/", fileName, getTable(), paragraphRelatorio);
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
                     } catch (Exception e) {
                         e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente novamente mais tarde...");
+                        JOptionPane.showMessageDialog(null, "Não foi possivel exportar o PDF, tente novamente mais tarde!");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente selecionar um diretorio valido!");
+                    JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente selecionar um diretório válido!");
                 }
             }
         });
@@ -196,7 +196,7 @@ public class ScreenFerramentas extends ScreenEntity {
     @Override
     public DefaultComboBoxModel<FiltrosClass> get() {
         return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{
-            new FiltrosOrdenar("Ordenar por ID"),
+            new FiltrosOrdenar("ID"),
         });
     }
 

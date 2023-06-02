@@ -103,7 +103,7 @@ public class ScreenEmprestimos extends ScreenEntity {
                         getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
                     }
                 }else{
-                    if(!getTitulo().getText().equalsIgnoreCase("emprestimos finalizados")){
+                    if(!getTitulo().getText().equalsIgnoreCase("Empréstimos Finalizados")){
                         if (Integer.parseInt(data[4].toString()) > 0 && Integer.parseInt(data[4].toString()) <= 7) {
                             renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                             for (int i = 0; i < getTable().getColumnCount(); i++) {
@@ -173,16 +173,16 @@ public class ScreenEmprestimos extends ScreenEntity {
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
                 if (directoryChooserFrame.getSelectedDirectory().length() > 0) {
                     try {
-                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
+                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATÓRIO EMPRÉSTIMOS EM ABERTO", 10);
                         String fileName = "RelatorioEmprestimosEmAberto";
                         PDFEntity.export(directoryChooserFrame.getSelectedDirectory() + "/", fileName, getTable(), paragraphRelatorio);
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
                     } catch (Exception e) {
                         e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente novamente mais tarde...");
+                        JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente novamente mais tarde!");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente selecionar um diretorio valido!");
+                    JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente selecionar um diretório válido!");
                 }
             }
         });
@@ -193,8 +193,8 @@ public class ScreenEmprestimos extends ScreenEntity {
     @Override
     public DefaultComboBoxModel<FiltrosClass> get() {
         return new DefaultComboBoxModel<FiltrosClass>(new FiltrosClass[]{
-            new FiltrosOrdenar("Ordenar por ID"),
-            new FiltrosGerar("Todos os emprestimos", () -> {
+            new FiltrosOrdenar("ID"),
+            new FiltrosGerar("Todos Empréstimos", () -> {
                 try {            
                     StatusRenderer renderer = new StatusRenderer();
                     ((DefaultTableModel) getTable().getModel()).setRowCount(0);
@@ -207,7 +207,7 @@ public class ScreenEmprestimos extends ScreenEntity {
                      for(Object[] emprestimo : emprestimosFinalizados){
                          emprestimos.add(new Object[]{emprestimo[0], emprestimo[1], emprestimo[2], emprestimo[3], "Finalizado em " + emprestimo[4], emprestimo[8], emprestimo[6], emprestimo[7]});
                      }
-                     getTitulo().setText("Todos os emprestimos");
+                     getTitulo().setText("Todos Empréstimos");
         
                     for (Object[] data : emprestimos) {
                         if(data[4].toString().contains("Finalizado em")){
@@ -239,9 +239,9 @@ public class ScreenEmprestimos extends ScreenEntity {
 
                 return null;
             }),
-            new FiltrosGerar("Emprestimos finalizados", () -> {
+            new FiltrosGerar("Empréstimos Finalizados", () -> {
                 try {            
-                    String[] columnNames = {"ID", "Amigo", "Data Início", "Data Devoluçao", "Data Finalizado", "Observações", "Num. Ferramentas", "V. Total Ferramentas", "V. Recebido", "Ferramentas"};
+                    String[] columnNames = {"ID", "Amigo", "Data Início", "Data Devolução", "Data Finalizado", "Observações", "Num. Ferramentas", "V. Total Ferramentas", "V. Recebido", "Ferramentas"};
                     DefaultTableModel model = new DefaultTableModel(new Object[0][columnNames.length], columnNames) {
                         boolean[] canEdit = new boolean[]{
                             false, false, false, false, false, false, false, false, false, false
@@ -261,7 +261,7 @@ public class ScreenEmprestimos extends ScreenEntity {
                         getTable().getColumnModel().getColumn(0).setMaxWidth(65);
                     }
 
-                    getTitulo().setText("Emprestimos finalizados");
+                    getTitulo().setText("Empréstimos Finalizados");
         
                     for (Object[] data : LoansDAO.getInstance().relatorioEmprestimos()) {            
                         ((DefaultTableModel) getTable().getModel()).addRow(data);
