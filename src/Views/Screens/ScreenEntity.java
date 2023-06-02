@@ -44,7 +44,7 @@ public class ScreenEntity {
     }
 
     public String getName() {
-        return "Lista vazia";
+        return "Lista Vazia";
     }
 
     public void carregarDados() {
