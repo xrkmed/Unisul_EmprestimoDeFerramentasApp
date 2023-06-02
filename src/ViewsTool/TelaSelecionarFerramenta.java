@@ -76,6 +76,7 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         btnSelecionarFerramenta = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnCadastrarFerramenta = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         selecionadoManufacturer = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -85,7 +86,6 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Selecionar Ferramenta - Grupo Supimpa");
-        setPreferredSize(null);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -178,7 +178,7 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
         jLabel14.setText("Selecinar Ferramenta");
 
         textFiltrarNome.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
-        textFiltrarNome.setToolTipText("Filtrar por Nome");
+        textFiltrarNome.setToolTipText("Busca por Nome");
         textFiltrarNome.setEnabled(false);
         textFiltrarNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,11 +212,21 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel1.setText("Nome:");
 
+        btnCadastrarFerramenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/tools-custom (1).png"))); // NOI18N
+        btnCadastrarFerramenta.setToolTipText("Cadastrar Ferramenta");
+        btnCadastrarFerramenta.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnCadastrarFerramenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarFerramentaActionPerformed(evt);
+            }
+        });
+
         jLayeredPane5.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(textFiltrarNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(btnBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(btnSelecionarFerramenta, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane5.setLayer(btnCadastrarFerramenta, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane5Layout = new javax.swing.GroupLayout(jLayeredPane5);
         jLayeredPane5.setLayout(jLayeredPane5Layout);
@@ -232,6 +242,8 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
+                .addComponent(btnCadastrarFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(btnSelecionarFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
         );
@@ -244,7 +256,8 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
                     .addComponent(textFiltrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCadastrarFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4))
         );
 
@@ -403,6 +416,10 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
         loadValores();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnCadastrarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFerramentaActionPerformed
+        new TelaCadastroFerramentas().setVisible(true);
+    }//GEN-LAST:event_btnCadastrarFerramentaActionPerformed
+
 
     public static void main(String args[]) {
 
@@ -415,6 +432,7 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCadastrarFerramenta;
     private javax.swing.JButton btnSelecionarFerramenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
