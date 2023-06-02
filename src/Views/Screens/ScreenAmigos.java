@@ -14,12 +14,14 @@ import Controllers.Filtros.FiltrosFiltrar;
 import Controllers.Filtros.FiltrosOrdenar;
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
+import Exceptions.DatabaseResultQueryException;
 import Model.FriendModel;
 import Model.LoanModel;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsAmigos.TelaCadastroAmigos;
 import com.itextpdf.text.Paragraph;
+import java.sql.SQLException;
 
 public class ScreenAmigos extends ScreenEntity {
 
@@ -157,9 +159,10 @@ public class ScreenAmigos extends ScreenEntity {
 
     public void btnDeletar() {
 
-        int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+        
 
         try {
+            int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             FriendModel friendsDel = FriendsDAO.getInstance().getFriend(id);
             int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o cadastro de " + friendsDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
             if (dialogResult == JOptionPane.YES_OPTION) {
@@ -174,8 +177,16 @@ public class ScreenAmigos extends ScreenEntity {
                 dao.removeFriend(friendsDel);
                 carregarDados();
             }
-        } catch (Exception e) {
-            //TODO
+        }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Nada selecionado vei");
+        }catch( DatabaseResultQueryException e){
+            System.out.println("Talvez o banco de dados explodiu, não resultou nada");
+        } catch( SQLException e){
+            System.out.println("Os comandos enviados SQL enviados tem algum problema");
+        }
+
+        catch (Exception e) {
+            System.out.println(e);
         }
     }
 

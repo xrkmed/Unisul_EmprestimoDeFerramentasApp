@@ -11,11 +11,14 @@ import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import Controllers.Filtros.FiltrosOrdenar;
 import DAO.ToolsDAO;
+import Exceptions.DatabaseResultQueryException;
 import Model.ToolModel;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsTool.TelaCadastroFerramentas;
 import com.itextpdf.text.Paragraph;
+import java.sql.SQLException;
+
 
 public class ScreenFerramentas extends ScreenEntity {
 
@@ -138,9 +141,9 @@ public class ScreenFerramentas extends ScreenEntity {
     }
 
     public void btnDeletar() {
-        int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
 
         try {
+            int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ToolModel toolsDel = ToolsDAO.getInstance().getTool(id);
             int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover a ferramenta " + toolsDel.getNome() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
             if (dialogResult == JOptionPane.YES_OPTION) {
@@ -151,8 +154,14 @@ public class ScreenFerramentas extends ScreenEntity {
             }
             ToolsDAO.getInstance().removeTool(toolsDel);
             carregarDados();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Nada selecionado vei");
+        } catch (DatabaseResultQueryException e) {
+            System.out.println("Talvez o banco de dados explodiu, não resultou nada");
+        } catch (SQLException e) {
+            System.out.println("Os comandos enviados SQL enviados tem algum problema");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null,"erro desconhecido\n"+ e.getMessage());
         }
     }
 
