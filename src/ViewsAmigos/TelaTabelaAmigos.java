@@ -115,7 +115,6 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
         textFiltrarNome.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
         textFiltrarNome.setToolTipText("Busca por Nome");
-        textFiltrarNome.setEnabled(false);
         textFiltrarNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFiltrarNomeActionPerformed(evt);
@@ -364,15 +363,17 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             
 
             for (Object[] data : amigosData) {
-             
-                if (filtroAmigosSemEmprestimoAberto.isSelected() && !data[4].toString().equals("0") && !data[6].toString().equals("0")) {
-                    continue;
-                } else {
+                    if(!textFiltrarNome.getText().equals("")){
+                        if(!data[1].toString().trim().contains(textFiltrarNome.getText().toUpperCase().trim())){
+                        continue;
+                        }
+                    }
+              
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.white);
                     for (int i = 0; i < jTable2.getColumnCount(); i++) {
                         jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
                     }
-                }
+                
                
 
               
