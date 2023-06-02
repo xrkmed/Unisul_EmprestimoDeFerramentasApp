@@ -1,11 +1,15 @@
 package Views.Screens;
 
 import java.util.ArrayList;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
+import Controllers.FiltrosClass;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
+import Controllers.Filtros.FiltrosOrdenar;
 import DAO.ManufacturerDAO;
 import DAO.ToolsDAO;
 import Exceptions.DatabaseResultQueryException;
@@ -178,6 +182,14 @@ public class ScreenFabricantes extends ScreenEntity {
                     JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente selecionar um diretorio valido!");
                 }
             }
+        });
+    }
+
+    /* FILTROS */
+    @Override
+    public DefaultComboBoxModel<FiltrosClass> get() {
+        return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{
+            new FiltrosOrdenar("Ordenar por ID"),
         });
     }
 

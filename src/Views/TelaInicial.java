@@ -1,7 +1,6 @@
 package Views;
 
 import Controllers.FiltrosClass;
-import Controllers.FiltrosEntity;
 import Controllers.ThemeController;
 import Resources.Enum_Themes;
 import Views.Screens.ScreenAmigos;
@@ -76,8 +75,8 @@ public class TelaInicial extends javax.swing.JFrame {
         bntSeguranca.setBackground(new Color(205, 205, 205));
         btnConfig.setBackground(new Color(205, 205, 205));
 
-        comboFiltros.setModel(FiltrosEntity.get(e));
-        comboFiltros.setSelectedItem(null);
+        comboFiltros.setModel(e.get());
+        comboFiltros.setSelectedIndex(0);
 
         if (e instanceof ScreenAmigos) {
             btnAmigos.setBackground(new Color(155, 155, 155));
