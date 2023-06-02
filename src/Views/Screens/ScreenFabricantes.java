@@ -8,11 +8,13 @@ import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import DAO.ManufacturerDAO;
 import DAO.ToolsDAO;
+import Exceptions.DatabaseResultQueryException;
 import Resources.DirectoryChooserFrame;
 import Resources.ManufacturerResource;
 import Views.TelaInicial;
 import ViewsManufacturer.TelaCadastroFabricantes;
 import com.itextpdf.text.Paragraph;
+import java.sql.SQLException;
 
 public class ScreenFabricantes extends ScreenEntity {
 
@@ -123,8 +125,9 @@ public class ScreenFabricantes extends ScreenEntity {
     }
 
     public void btnDeletar() {
-        int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+       
         try {
+             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ManufacturerResource ManuDel = ManufacturerDAO.getInstance().getManufacturer(id);
             if (ManuDel != null) {
                 int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o fabricante " + ManuDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
@@ -138,7 +141,15 @@ public class ScreenFabricantes extends ScreenEntity {
                     carregarDados();
                 }
             }
-        } catch (Exception e) {
+        }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Nada selecionado vei");
+        }catch( DatabaseResultQueryException e){
+            System.out.println("Talvez o banco de dados explodiu, não resultou nada");
+        } catch( SQLException e){
+            System.out.println("Os comandos enviados SQL enviados tem algum problema");
+        }
+ 
+        catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao remover fabricante", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }

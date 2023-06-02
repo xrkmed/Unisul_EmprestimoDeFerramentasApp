@@ -10,12 +10,14 @@ import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
+import Exceptions.DatabaseResultQueryException;
 import Model.FriendModel;
 import Model.LoanModel;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsAmigos.TelaCadastroAmigos;
 import com.itextpdf.text.Paragraph;
+import java.sql.SQLException;
 
 public class ScreenAmigos extends ScreenEntity {
 
@@ -171,7 +173,15 @@ public class ScreenAmigos extends ScreenEntity {
                 dao.removeFriend(friendsDel);
                 carregarDados();
             }
-        } catch (Exception e) {
+        }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Nada selecionado vei");
+        }catch( DatabaseResultQueryException e){
+            System.out.println("Talvez o banco de dados explodiu, não resultou nada");
+        } catch( SQLException e){
+            System.out.println("Os comandos enviados SQL enviados tem algum problema");
+        }
+
+        catch (Exception e) {
             System.out.println(e);
         }
     }
