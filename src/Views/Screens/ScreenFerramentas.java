@@ -9,6 +9,7 @@ import Controllers.ColorsRenderer;
 import Controllers.FiltrosClass;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
+import Controllers.Filtros.FiltrosOrdenar;
 import DAO.ToolsDAO;
 import Model.ToolModel;
 import Resources.DirectoryChooserFrame;
@@ -185,7 +186,9 @@ public class ScreenFerramentas extends ScreenEntity {
     /* FILTROS */
     @Override
     public DefaultComboBoxModel<FiltrosClass> get() {
-        return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{new FiltrosClass("")});
+        return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{
+            new FiltrosOrdenar("Ordenar por ID"),
+        });
     }
 
 }

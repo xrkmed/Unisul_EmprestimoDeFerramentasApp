@@ -211,6 +211,7 @@ public class ScreenAmigos extends ScreenEntity {
     @Override
     public DefaultComboBoxModel<FiltrosClass> get() {
         return new DefaultComboBoxModel<FiltrosClass>(new FiltrosClass[]{
+            new FiltrosOrdenar("Ordenar por ID"),
             new FiltrosFiltrar("Empréstimos em Aberto", (Object[] data) -> {
                 return (int) data[4] > 0;
             }),

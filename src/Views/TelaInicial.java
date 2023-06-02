@@ -76,7 +76,7 @@ public class TelaInicial extends javax.swing.JFrame {
         btnConfig.setBackground(new Color(205, 205, 205));
 
         comboFiltros.setModel(e.get());
-        comboFiltros.setSelectedItem(null);
+        comboFiltros.setSelectedIndex(0);
 
         if (e instanceof ScreenAmigos) {
             btnAmigos.setBackground(new Color(155, 155, 155));
