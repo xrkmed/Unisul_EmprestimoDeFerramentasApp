@@ -200,7 +200,7 @@ public class ScreenEmprestimos extends ScreenEntity {
     @Override
     public DefaultComboBoxModel<FiltrosClass> get() {
         return new DefaultComboBoxModel<FiltrosClass>(new FiltrosClass[]{
-            new FiltrosOrdenar("ID"),
+            new FiltrosOrdenar("Em Aberto"),
             new FiltrosGerar("Todos Empréstimos", () -> {
                 try {            
                     StatusRenderer renderer = new StatusRenderer();
