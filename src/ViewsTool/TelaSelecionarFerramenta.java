@@ -179,7 +179,6 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
 
         textFiltrarNome.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
         textFiltrarNome.setToolTipText("Busca por Nome");
-        textFiltrarNome.setEnabled(false);
         textFiltrarNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFiltrarNomeActionPerformed(evt);
@@ -210,7 +209,7 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
-        jLabel1.setText("Nome:");
+        jLabel1.setText("Fabricante:");
 
         btnCadastrarFerramenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/tools-custom (1).png"))); // NOI18N
         btnCadastrarFerramenta.setToolTipText("Cadastrar Ferramenta");
@@ -352,6 +351,7 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
             StatusRenderer statusRenderer = new StatusRenderer();
             //new Object[]{result.getInt("id"), "-", result.getString("name"), result.getString("razao_social"), BRLResource.PRICE_FORMATTER.format(result.getDouble("price")), result.getString("nome"), new SimpleDateFormat("dd/MM/yyyy").format(result.getDate("endDate").toString())});
             for (Object[] data : datas) {
+             
                 if ( textFiltrarNome.getText().trim().length() > 0) {
                     if (!data[2].toString().toLowerCase().contains(textFiltrarNome.getText().toLowerCase())) {
                         continue;
