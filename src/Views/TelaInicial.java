@@ -500,6 +500,7 @@ public class TelaInicial extends javax.swing.JFrame {
         if (!(telaAtual instanceof ScreenFerramentas)) {
             updateTela(new ScreenFerramentas(this));
         }
+        campoFiltroNome.setText(null);
     }//GEN-LAST:event_bntFerramentasActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -510,18 +511,21 @@ public class TelaInicial extends javax.swing.JFrame {
         if (!(telaAtual instanceof ScreenAmigos)) {
             updateTela(new ScreenAmigos(this));
         }
+        campoFiltroNome.setText(null);
     }//GEN-LAST:event_btnAmigosActionPerformed
 
     private void btnEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmprestimosActionPerformed
         if (!(telaAtual instanceof ScreenEmprestimos)) {
             updateTela(new ScreenEmprestimos(this));
         }
+        campoFiltroNome.setText(null);
     }//GEN-LAST:event_btnEmprestimosActionPerformed
 
     private void bntFabricantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntFabricantesActionPerformed
         if (!(telaAtual instanceof ScreenFabricantes)) {
             updateTela(new ScreenFabricantes(this));
         }
+        campoFiltroNome.setText(null);
     }//GEN-LAST:event_bntFabricantesActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed

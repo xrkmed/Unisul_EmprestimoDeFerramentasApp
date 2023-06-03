@@ -22,7 +22,7 @@ import java.sql.SQLException;
 
 public class ScreenFabricantes extends ScreenEntity {
 
-    private final String[] columnNames = {"ID", "Nome", "CNPJ", "Ferramentas", "Em Uso", "Valor total"};
+    private final String[] columnNames = {"ID", "Nome", "CNPJ", "Ferramentas", "Em Uso", "Valor Total"};
 
     public ScreenFabricantes() {
         super();
@@ -134,7 +134,7 @@ public class ScreenFabricantes extends ScreenEntity {
              int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ManufacturerResource ManuDel = ManufacturerDAO.getInstance().getManufacturer(id);
             if (ManuDel != null) {
-                int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o fabricante " + ManuDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
+                int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja remover o fabricante " + ManuDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
                 if (dialogResult == JOptionPane.YES_OPTION) {
                     if (!ToolsDAO.getInstance().getToolsByManufacturer(ManuDel.getId()).isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Não é possível remover um fabricante que possui ferramentas cadastradas!");
@@ -170,16 +170,16 @@ public class ScreenFabricantes extends ScreenEntity {
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
                 if (directoryChooserFrame.getSelectedDirectory().length() > 0) {
                     try {
-                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
+                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATÓRIO FABRICANTES", 10);
                         String fileName = "RelatorioFabricantes";
                         PDFEntity.export(directoryChooserFrame.getSelectedDirectory() + "/", fileName, getTable(), paragraphRelatorio);
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
                     } catch (Exception e) {
                         e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente novamente mais tarde...");
+                        JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente novamente mais tarde!");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente selecionar um diretorio valido!");
+                    JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente selecionar um diretório válido!");
                 }
             }
         });
@@ -189,7 +189,7 @@ public class ScreenFabricantes extends ScreenEntity {
     @Override
     public DefaultComboBoxModel<FiltrosClass> get() {
         return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{
-            new FiltrosOrdenar("Ordenar por ID"),
+            new FiltrosOrdenar("ID"),
         });
     }
 
