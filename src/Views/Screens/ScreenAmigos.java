@@ -74,7 +74,6 @@ public class ScreenAmigos extends ScreenEntity {
         try {
             StatusRenderer renderer = new StatusRenderer();
             //statusRed.addHighlightedRow(1, Color.RED);
-            ArrayList<Object[]> amigosData = FriendsDAO.getInstance().loadFriendsTabela();
 
             DefaultTableModel model = new DefaultTableModel(new Object[0][columnNames.length], columnNames) {
                 boolean[] canEdit = new boolean[]{
@@ -100,6 +99,16 @@ public class ScreenAmigos extends ScreenEntity {
                 getTable().getColumnModel().getColumn(5).setPreferredWidth(110);
                 getTable().getColumnModel().getColumn(5).setMaxWidth(110);
             }
+
+            if(getFiltros().getSelectedItem() != null){
+                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                if(f.getType() == FiltrosEnum.FILTRO_GERAR){
+                    f.run();
+                    return;
+                }
+            }
+
+            ArrayList<Object[]> amigosData = FriendsDAO.getInstance().loadFriendsTabela();
 
             if (getFiltros().getSelectedItem() != null) {
                 FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
