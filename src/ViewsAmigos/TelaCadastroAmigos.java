@@ -734,7 +734,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         }
 
         if (!PhoneValidResource.isValidPhoneNumber(PhoneValidResource.unformatPhoneNumber(textTelefone.getText()))) {
-            erros.add("Telefone inválido. Digite apenas números (Ex: 11912345678)");
+            erros.add("Telefone inválido. Digite o DDD e os 9 digitos seguintes, como o exemplo a seguir:\n(48) 99584-4856");
             textTelefone.setText("");
             textTelefone.setEnabled(true);
         }
