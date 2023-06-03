@@ -21,6 +21,7 @@ import com.itextpdf.text.Paragraph;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ScreenEmprestimos extends ScreenEntity {
@@ -98,7 +99,25 @@ public class ScreenEmprestimos extends ScreenEntity {
                 }
             }
 
-            for (Object[] data : LoansDAO.getInstance().getEmprestimosEmAberto()) {
+            ArrayList<Object[]> datas = LoansDAO.getInstance().getEmprestimosEmAberto();
+
+            if (getFiltros().getSelectedItem() != null) {
+                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                if (f.getType() == FiltrosEnum.FILTRO_ORDENAR) {
+                    datas.sort((Object[] data1, Object[] data2) -> {
+                        return f.compare(data1, data2);
+                    });
+                }
+            }
+
+            for (Object[] data : datas) {
+                if (getFiltros().getSelectedItem() != null) {
+                    FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                    if (f.getType() == FiltrosEnum.FILTRO_FILTRAR && !f.run(data)) {
+                        continue;
+                    }
+                }
+                
                 if(data[4].toString().contains("Finalizado em")){
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightGreen);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
@@ -279,7 +298,7 @@ public class ScreenEmprestimos extends ScreenEntity {
                 }
 
                 return null;
-            }),
+            })
         });
     }
 

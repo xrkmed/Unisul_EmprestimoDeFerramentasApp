@@ -7,8 +7,10 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
 import Controllers.FiltrosClass;
+import Controllers.FiltrosEnum;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
+import Controllers.Filtros.FiltrosFiltrar;
 import Controllers.Filtros.FiltrosOrdenar;
 import DAO.ManufacturerDAO;
 import DAO.ToolsDAO;
@@ -95,9 +97,34 @@ public class ScreenFabricantes extends ScreenEntity {
                 getTable().getColumnModel().getColumn(5).setMaxWidth(200);
             }
 
+            
+            if(getFiltros().getSelectedItem() != null){
+                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                if(f.getType() == FiltrosEnum.FILTRO_GERAR){
+                    f.run();
+                    return;
+                }
+            }
+
             ArrayList<Object[]> manufacturerData = ManufacturerDAO.getInstance().getFabricantesData();
 
+            if (getFiltros().getSelectedItem() != null) {
+                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                if (f.getType() == FiltrosEnum.FILTRO_ORDENAR) {
+                    manufacturerData.sort((Object[] data1, Object[] data2) -> {
+                        return f.compare(data1, data2);
+                    });
+                }
+            }
+
             for (Object[] data : manufacturerData) {
+                if (getFiltros().getSelectedItem() != null) {
+                    FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                    if (f.getType() == FiltrosEnum.FILTRO_FILTRAR && !f.run(data)) {
+                        continue;
+                    }
+                }
+
                 if (Integer.parseInt(data[3].toString()) == Integer.parseInt(data[4].toString())) {
                     if (Integer.parseInt(data[3].toString()) > 0) {
                         renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
@@ -190,7 +217,13 @@ public class ScreenFabricantes extends ScreenEntity {
     public DefaultComboBoxModel<FiltrosClass> get() {
         return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{
             new FiltrosOrdenar("ID"),
-        });
+            new FiltrosOrdenar("Nome em Ordem Alfabética Crescente", (data1, data2) -> {
+                String nome1 = (String) data1[1];
+                String nome2 = (String) data2[1];
+                return nome1.compareToIgnoreCase(nome2);
+            })
+        })
+        ;
     }
 
 }

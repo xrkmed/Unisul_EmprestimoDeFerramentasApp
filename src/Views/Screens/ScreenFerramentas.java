@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
 import Controllers.FiltrosClass;
+import Controllers.FiltrosEnum;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import Controllers.Filtros.FiltrosOrdenar;
@@ -71,7 +72,6 @@ public class ScreenFerramentas extends ScreenEntity {
         try {
             StatusRenderer renderer = new StatusRenderer();
             //statusRed.addHighlightedRow(1, Color.RED);
-            ArrayList<Object[]> datas = ToolsDAO.getInstance().getFerramentasValue();
 
             DefaultTableModel model = new DefaultTableModel(new Object[0][columnNames.length], columnNames) {
                 boolean[] canEdit = new boolean[]{
@@ -101,8 +101,34 @@ public class ScreenFerramentas extends ScreenEntity {
                 getTable().getColumnModel().getColumn(5).setMaxWidth(110);
 
             }
+            
+            if(getFiltros().getSelectedItem() != null){
+                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                if(f.getType() == FiltrosEnum.FILTRO_GERAR){
+                    f.run();
+                    return;
+                }
+            }
+
+            ArrayList<Object[]> datas = ToolsDAO.getInstance().getFerramentasValue();
+            
+            if (getFiltros().getSelectedItem() != null) {
+                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                if (f.getType() == FiltrosEnum.FILTRO_ORDENAR) {
+                    datas.sort((Object[] data1, Object[] data2) -> {
+                        return f.compare(data1, data2);
+                    });
+                }
+            }
 
             for (Object[] data : datas) {
+                if (getFiltros().getSelectedItem() != null) {
+                    FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                    if (f.getType() == FiltrosEnum.FILTRO_FILTRAR && !f.run(data)) {
+                        continue;
+                    }
+                }
+                
                 if (!data[4].toString().equalsIgnoreCase("disponivel")) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
@@ -197,6 +223,9 @@ public class ScreenFerramentas extends ScreenEntity {
     public DefaultComboBoxModel<FiltrosClass> get() {
         return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{
             new FiltrosOrdenar("ID"),
+            new FiltrosOrdenar("Nome em Ordem Alfabética Crescente", (data1, data2) -> {
+                return ((String) data1[1]).compareTo((String) data2[1]);
+            }),
         });
     }
 
