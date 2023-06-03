@@ -365,6 +365,7 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
             model.setRowCount(0);
 
             for (ManufacturerResource manufacturer : manufacturers) {
+                
                 if (textFiltrarNome.getText().trim().length() > 0) {
                     if (!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())) {
                         continue;
