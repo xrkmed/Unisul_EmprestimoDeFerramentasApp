@@ -695,46 +695,46 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         ArrayList<String> erros = new ArrayList<String>();
 
         if (!CEPResource.verificarNomeCompleto(textNome.getText())) {
-            erros.add("Nome inválido. Digite o nome completo (Ex: João da Silva)");
+            erros.add("Nome Inválido! Digite o nome completo (Ex: João da Silva)");
             textNome.setText("");
             textNome.setEnabled(true);
         }
 
         if (!CEPResource.verificarCEP(textCEP.getText())) {
-            erros.add("CEP inválido. Digite apenas números (Ex: 12345678)");
+            erros.add("CEP Inválido! Digite apenas números (Ex: 12345678)");
             textCEP.setText("");
             textCEP.setEnabled(true);
         }
 
         if (!CEPResource.verificarNumeroCasa(textNumero.getText())) {
-            erros.add("Número inválido. Digite apenas números (Ex: 123)");
+            erros.add("Número Inválido! Digite apenas números (Ex: 123)");
             textNumero.setText("");
             textNumero.setEnabled(true);
         }
 
         if (!CEPResource.verificarBairro(textBairro.getText())) {
-            erros.add("Bairro inválido. Digite apenas o nome do bairro (Ex: Jardim Paulista)");
+            erros.add("Bairro Inválido! Digite apenas o nome do bairro (Ex: Jardim Paulista)");
             textBairro.setText("");
             textBairro.setEnabled(true);
         }
 
         if (!CEPResource.verificarCidade(selectCidade.getSelectedItem().toString())) {
-            erros.add("Cidade inválida. Digite apenas o nome da cidade (Ex: São Paulo)");
+            erros.add("Cidade Inválida! Digite apenas o nome da cidade (Ex: São Paulo)");
             selectCidade.setEnabled(true);
         }
 
         if (!CEPResource.verificarEstado(selectEstado.getSelectedItem().toString())) {
-            erros.add("Estado inválido. Digite apenas a sigla do estado (Ex: SP)");
+            erros.add("Estado Inválido! Digite apenas a sigla do estado (Ex: SP)");
         }
 
         if (!CEPResource.verificarRua(textRua.getText())) {
-            erros.add("Rua inválida. Digite apenas o nome da rua (Ex: Rua Paulista)");
+            erros.add("Rua Inválida! Digite apenas o nome da rua (Ex: Rua Paulista)");
             textRua.setText("");
             textRua.setEnabled(true);
         }
 
         if (!PhoneValidResource.isValidPhoneNumber(PhoneValidResource.unformatPhoneNumber(textTelefone.getText()))) {
-            erros.add("Telefone inválido. Digite apenas números (Ex: 11912345678)");
+            erros.add("Telefone Inválido! Use o formato (DDD) 9.1234-1234");
             textTelefone.setText("");
             textTelefone.setEnabled(true);
         }

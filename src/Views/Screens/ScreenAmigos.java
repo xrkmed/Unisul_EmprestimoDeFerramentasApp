@@ -169,6 +169,8 @@ public class ScreenAmigos extends ScreenEntity {
                 new TelaCadastroAmigos(selectedFriend).setVisible(true);
             }
         } catch (Exception e) {
+        } finally {
+            carregarDados();
         }
     }
 
