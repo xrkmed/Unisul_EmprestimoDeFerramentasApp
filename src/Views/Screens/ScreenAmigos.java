@@ -12,6 +12,7 @@ import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import Controllers.Filtros.FiltrosFiltrar;
 import Controllers.Filtros.FiltrosOrdenar;
+import Controllers.ScreenType;
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
 import Exceptions.DatabaseResultQueryException;
@@ -155,22 +156,13 @@ public class ScreenAmigos extends ScreenEntity {
     }
 
     public void btnEditar() {
-        int id = -1;
         try {
-            boolean flag = false;
-            id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
-
-            if (id > 0) {
-                flag = true;
-            }
-
-            if (flag) {
-                FriendModel selectedFriend = FriendsDAO.getInstance().getFriend(id);
-                new TelaCadastroAmigos(selectedFriend).setVisible(true);
-            }
+            int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+            FriendModel selectedFriend = FriendsDAO.getInstance().getFriend(id);
+            new TelaCadastroAmigos(selectedFriend, ScreenType.SCREEN_TYPE_EDIT).setVisible(true);
         } catch (Exception e) {
-        } finally {
-            carregarDados();
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -207,7 +199,14 @@ public class ScreenAmigos extends ScreenEntity {
     }
 
     public void btnVisualizar() {
-        JOptionPane.showMessageDialog(null, "working!");
+        try {
+            int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+            FriendModel selectedFriend = FriendsDAO.getInstance().getFriend(id);
+            new TelaCadastroAmigos(selectedFriend, ScreenType.SCREEN_TYPE_VIEW).setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 
     public void btnExportar() {
