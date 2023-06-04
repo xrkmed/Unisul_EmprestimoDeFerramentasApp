@@ -1,16 +1,25 @@
 package Views.Screens;
 
 import java.util.ArrayList;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
+import Controllers.FiltrosClass;
+import Controllers.FiltrosEnum;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
+import Controllers.Filtros.FiltrosOrdenar;
 import DAO.ToolsDAO;
+import Exceptions.DatabaseResultQueryException;
+import Model.ToolModel;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsTool.TelaCadastroFerramentas;
 import com.itextpdf.text.Paragraph;
+import java.sql.SQLException;
+
 
 public class ScreenFerramentas extends ScreenEntity {
 
@@ -63,7 +72,6 @@ public class ScreenFerramentas extends ScreenEntity {
         try {
             StatusRenderer renderer = new StatusRenderer();
             //statusRed.addHighlightedRow(1, Color.RED);
-            ArrayList<Object[]> datas = ToolsDAO.getInstance().getFerramentasValue();
 
             DefaultTableModel model = new DefaultTableModel(new Object[0][columnNames.length], columnNames) {
                 boolean[] canEdit = new boolean[]{
@@ -93,8 +101,34 @@ public class ScreenFerramentas extends ScreenEntity {
                 getTable().getColumnModel().getColumn(5).setMaxWidth(110);
 
             }
+            
+            if(getFiltros().getSelectedItem() != null){
+                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                if(f.getType() == FiltrosEnum.FILTRO_GERAR){
+                    f.run();
+                    return;
+                }
+            }
+
+            ArrayList<Object[]> datas = ToolsDAO.getInstance().getFerramentasValue();
+            
+            if (getFiltros().getSelectedItem() != null) {
+                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                if (f.getType() == FiltrosEnum.FILTRO_ORDENAR) {
+                    datas.sort((Object[] data1, Object[] data2) -> {
+                        return f.compare(data1, data2);
+                    });
+                }
+            }
 
             for (Object[] data : datas) {
+                if (getFiltros().getSelectedItem() != null) {
+                    FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                    if (f.getType() == FiltrosEnum.FILTRO_FILTRAR && !f.run(data)) {
+                        continue;
+                    }
+                }
+                
                 if (!data[4].toString().equalsIgnoreCase("disponivel")) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
@@ -112,8 +146,9 @@ public class ScreenFerramentas extends ScreenEntity {
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
                         getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
                     }
-                }
 
+                }
+//                  data[3] = "R$"+data[3].toString();
                 ((DefaultTableModel) getTable().getModel()).addRow(data);
             }
         } catch (Exception e) {
@@ -132,7 +167,31 @@ public class ScreenFerramentas extends ScreenEntity {
     }
 
     public void btnDeletar() {
-        JOptionPane.showMessageDialog(null, "working!");
+
+        try {
+            int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+            ToolModel toolsDel = ToolsDAO.getInstance().getTool(id);
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover a ferramenta " + toolsDel.getNome() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
+            if (dialogResult == JOptionPane.YES_OPTION) {
+                if (!toolsDel.isAvailable()) {
+                    JOptionPane.showMessageDialog(null, "Não é possível remover uma ferramenta que esta em uso por algum amigo.");
+                    return;
+                }
+            }
+            ToolsDAO.getInstance().removeTool(toolsDel);
+            carregarDados();
+        } catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Nada selecionado vei");
+            e.printStackTrace();
+        }catch( DatabaseResultQueryException e){
+            System.out.println("Talvez o banco de dados explodiu, mas não retornou nada");
+            e.printStackTrace();
+        } catch( SQLException e){
+            System.out.println("Os comandos enviados SQL enviados tem algum problema");
+            e.printStackTrace();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"erro desconhecido\n"+ e.getMessage());
+        }
     }
 
     public void btnVisualizar() {
@@ -147,18 +206,29 @@ public class ScreenFerramentas extends ScreenEntity {
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
                 if (directoryChooserFrame.getSelectedDirectory().length() > 0) {
                     try {
-                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
+                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATÓRIO FERRAMENTAS", 10);
                         String fileName = "RelatorioFerramentas";
                         PDFEntity.export(directoryChooserFrame.getSelectedDirectory() + "/", fileName, getTable(), paragraphRelatorio);
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
                     } catch (Exception e) {
                         e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente novamente mais tarde...");
+                        JOptionPane.showMessageDialog(null, "Não foi possivel exportar o PDF, tente novamente mais tarde!");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente selecionar um diretorio valido!");
+                    JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente selecionar um diretório válido!");
                 }
             }
+        });
+    }
+
+    /* FILTROS */
+    @Override
+    public DefaultComboBoxModel<FiltrosClass> get() {
+        return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{
+            new FiltrosOrdenar("ID"),
+            new FiltrosOrdenar("Nome Crescente", (data1, data2) -> {
+                return ((String) data1[1]).compareTo((String) data2[1]);
+            }),
         });
     }
 

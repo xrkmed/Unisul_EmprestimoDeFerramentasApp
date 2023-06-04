@@ -3,7 +3,6 @@ package ViewsEmprestimo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
-
 import DAO.LoansDAO;
 import Model.LoanModel;
 
@@ -81,10 +80,8 @@ public class TelaFinalizarEmprestimo extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, 0))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 912, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
         );
         jLayeredPane1Layout.setVerticalGroup(
@@ -163,7 +160,7 @@ public class TelaFinalizarEmprestimo extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLayeredPane1)
                     .addComponent(jLayeredPane7))
                 .addGap(10, 10, 10))
@@ -209,21 +206,12 @@ public class TelaFinalizarEmprestimo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnCancelar1;
-    private javax.swing.JButton btnDeletar2;
     private javax.swing.JButton btnFinalizarEmprestimo;
-    private javax.swing.JButton btnVisualizarEmprestimos2;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JLayeredPane jLayeredPane5;
-    private javax.swing.JLayeredPane jLayeredPane6;
     private javax.swing.JLayeredPane jLayeredPane7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

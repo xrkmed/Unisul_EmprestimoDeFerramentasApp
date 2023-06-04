@@ -141,7 +141,7 @@ public class ToolsDAO {
         while (result.next()) {
             String date = !result.getString("endDate").equals("Disponivel") ? DateResource.convertDatabaseData(result.getString("endDate")) : "Disponivel";
             datas.add(new Object[]{result.getInt("id_ferramenta"), result.getString("nome_ferramenta").toUpperCase(), result.getString("nome_fabricante").toUpperCase(), BRLResource.PRICE_FORMATTER.format(result.getDouble("preco_ferramenta")), result.getString("nome_amigo").toUpperCase(), date});
-       }
+        }
 
         return datas;
     }

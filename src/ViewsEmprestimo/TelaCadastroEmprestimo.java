@@ -56,6 +56,11 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         }
     }
 
+    public TelaCadastroEmprestimo(FriendModel a) {
+        this();
+        setSelectedFriend(a);
+    }
+
     public void loadTools(ToolboxResource toolbox) {
         parentToolsList = toolbox;
         for (ToolModel tool : toolbox.getTools()) {
@@ -571,7 +576,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 tool.getId(),
                 tool.getNome(),
                 (tool.getManufacturer() != null ? tool.getManufacturer().getName() : "Sem fabricante"),
-                BRLResource.PRICE_FORMATTER.format(tool.getPrice())
+                "R$" + BRLResource.PRICE_FORMATTER.format(tool.getPrice())
             });
             totalValue += tool.getPrice();
         }

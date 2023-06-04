@@ -1,6 +1,8 @@
 package Views.Screens;
 
 import java.util.ArrayList;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -42,7 +44,7 @@ public class ScreenEntity {
     }
 
     public String getName() {
-        return "Lista vazia";
+        return "Lista Vazia";
     }
 
     public void carregarDados() {
@@ -70,6 +72,10 @@ public class ScreenEntity {
         }
 
         return tableData;
+    }
+
+    public DefaultComboBoxModel<FiltrosClass> get() {
+        return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{new FiltrosClass("")});
     }
 
     public final JLabel getTitulo() {

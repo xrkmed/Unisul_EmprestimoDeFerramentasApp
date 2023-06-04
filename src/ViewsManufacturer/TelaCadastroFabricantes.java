@@ -67,7 +67,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
         jLayeredPane2.setFocusable(false);
 
         textoStatus.setEditable(false);
-        textoStatus.setToolTipText("Insira o nome da fabricante");
+        textoStatus.setToolTipText("");
 
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel7.setText("Status:");
@@ -76,25 +76,25 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
         CNPJLabel.setText("CNPJ");
 
         textoEndereco.setEditable(false);
-        textoEndereco.setToolTipText("Insira o nome da fabricante");
+        textoEndereco.setToolTipText("");
 
         jLabel4.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel4.setText("Situação:");
 
         textoSituacao.setEditable(false);
-        textoSituacao.setToolTipText("Insira o nome da fabricante");
+        textoSituacao.setToolTipText("");
 
         jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel8.setText("Capital Social:");
 
         textoCapitalSocial.setEditable(false);
-        textoCapitalSocial.setToolTipText("Insira o nome da fabricante");
+        textoCapitalSocial.setToolTipText("");
 
         jLabel9.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel9.setText("Telefone:");
 
         textoTelefone.setEditable(false);
-        textoTelefone.setToolTipText("Insira o nome da fabricante");
+        textoTelefone.setToolTipText("");
         textoTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textoTelefoneActionPerformed(evt);
@@ -124,7 +124,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
         btnVerificarFabricante.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         btnVerificarFabricante.setForeground(new java.awt.Color(51, 51, 51));
         btnVerificarFabricante.setText("Consultar CNPJ");
-        btnVerificarFabricante.setToolTipText("Realizar a Busca Automática Utilizando Somente o CNPJ");
+        btnVerificarFabricante.setToolTipText("Consultar CNPJ Diretamente da Receita Federal");
         btnVerificarFabricante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerificarFabricanteActionPerformed(evt);
@@ -331,7 +331,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
     private void btnVerificarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarFabricanteActionPerformed
 
         boolean validCnpj = false;
-        if(textoCNPJ.getText().length() == 18){
+        if (textoCNPJ.getText().length() == 18) {
             validCnpj = CNPJResource.validarCNPJ(CNPJResource.returnCNPJUnformat(textoCNPJ.getText()));
             if (!validCnpj) {
                 int option = JOptionPane.showConfirmDialog(null, "CNPJ inválido! Deseja continuar o cadastro mesmo assim?", "CNPJ Inválido", JOptionPane.YES_NO_OPTION);
@@ -340,28 +340,22 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
                     return;
                 }
             }
-        }else{
-            int option = JOptionPane.showConfirmDialog(null, "O CNPJ Informado nao e valido, voce pode obtar por cadastrar o CNPJ correto ou continuar o cadastro com este CNPJ, deseja continuar?", "CNPJ Inválido", JOptionPane.YES_NO_OPTION);
+        } else {
+            int option = JOptionPane.showConfirmDialog(null, "O CNPJ Informado não é válido, você pode obtar por cadastrar o CNPJ correto ou continuar o cadastro com este CNPJ, deseja continuar?", "CNPJ Inválido", JOptionPane.YES_NO_OPTION);
             if (option == JOptionPane.NO_OPTION) {
                 return;
             }
         }
 
         if (textoNomeFantasia.getText().length() > 50) {
-            JOptionPane.showMessageDialog(null, "Nome do fabricante muito grande!");
-            textoNomeFantasia.setText("");
-            return;
-        }
-
-        if (textoNomeFantasia.getText().length() < 2) {
-            JOptionPane.showMessageDialog(null, "Nome do fabricante muito pequeno!");
+            JOptionPane.showMessageDialog(null, "Nome do fabricante muito longo!");
             textoNomeFantasia.setText("");
             return;
         }
 
         try {
             if (validCnpj && ManufacturerDAO.getInstance().getManufacturer(CNPJResource.returnCNPJUnformat(textoCNPJ.getText())) != null) {
-                JOptionPane.showMessageDialog(null, "Fabricante com este CNPJ já cadastrado!");
+                JOptionPane.showMessageDialog(null, "Já existe um cadastro com o CNPJ informado!");
                 textoCNPJ.setText("");
                 return;
             }
@@ -398,12 +392,12 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
             });
             consultarCNPJ.start();
 
-            JOptionPane.showMessageDialog(null, "Aguarde enquanto consultamos o CNPJ informado...");
+            JOptionPane.showMessageDialog(null, "Verificando CNPJ.");
 
-        }else{
-            textoEndereco.setText("Nao informado");
+        } else {
+            textoEndereco.setText("Não Informado");
             textoRazaoSocial.setText(textoNomeFantasia.getText());
-            textoTelefone.setText("Nao informado");
+            textoTelefone.setText("Não Informado");
             textoStatus.setText("OK");
             textoCapitalSocial.setText("Desconhecido");
             textoSituacao.setText("SEM CONSULTA");
@@ -427,10 +421,10 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Nome do fabricante inválido!");
                 return;
             }
-            
+
             try {
-                if(ManufacturerDAO.getInstance().getManufacturerByNome(textoNomeFantasia.getText().trim()) != null){
-                    JOptionPane.showMessageDialog(null, "Fabricante com este nome fantasia já cadastrado!");
+                if (ManufacturerDAO.getInstance().getManufacturerByNome(textoNomeFantasia.getText().trim()) != null) {
+                    JOptionPane.showMessageDialog(null, "Já existe um cadastro de fabricante com o nome fantasia informado!");
                     return;
                 }
 
@@ -441,8 +435,8 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }
 
-        }else{
-         JOptionPane.showMessageDialog(null, "Preencha o nome do fabricante!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Preencha o nome do fabricante!");
         }
     }//GEN-LAST:event_btnFinalizarCadastro1ActionPerformed
 

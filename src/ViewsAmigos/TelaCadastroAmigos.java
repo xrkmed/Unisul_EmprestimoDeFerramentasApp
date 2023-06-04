@@ -11,7 +11,6 @@ import Resources.AddressResource;
 import Resources.CEPResource;
 import Resources.PhoneDocument;
 import Resources.PhoneValidResource;
-import java.awt.event.FocusAdapter;
 
 public class TelaCadastroAmigos extends javax.swing.JFrame {
 
@@ -20,6 +19,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     public TelaCadastroAmigos() {
         initComponents();
         configFrame();
+
     }
 
     public TelaCadastroAmigos(FriendModel selectedFriend) {
@@ -36,11 +36,15 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         textNumero.setText(selectedFriend.getAddress().getNumber() + "");
         textTelefone.setText(selectedFriend.getPhone());
         btnCadastrar.setText("Finalizar alteração");
+
         //jButton2.setText("Cancelar alteração");
+        btnCriarEmprestimo.setEnabled(true);
+        btnVisualizarEmprestimos.setEnabled(true);
     }
 
     private void configFrame() {
-
+        btnCriarEmprestimo.setEnabled(false);
+        btnVisualizarEmprestimos.setEnabled(false);
         AbstractDocument document = (AbstractDocument) textTelefone.getDocument();
 
         document.setDocumentFilter(new PhoneDocument());
@@ -516,96 +520,6 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        ArrayList<String> erros = new ArrayList<String>();
-
-        if (!CEPResource.verificarNomeCompleto(textNome.getText())) {
-            erros.add("Nome inválido. Digite o nome completo (Ex: João da Silva)");
-            textNome.setText("");
-            textNome.setEnabled(true);
-        }
-
-        if (!CEPResource.verificarCEP(textCEP.getText())) {
-            erros.add("CEP inválido. Digite apenas números (Ex: 12345678)");
-            textCEP.setText("");
-            textCEP.setEnabled(true);
-        }
-
-        if (!CEPResource.verificarNumeroCasa(textNumero.getText())) {
-            erros.add("Número inválido. Digite apenas números (Ex: 123)");
-            textNumero.setText("");
-            textNumero.setEnabled(true);
-        }
-
-        if (!CEPResource.verificarBairro(textBairro.getText())) {
-            erros.add("Bairro inválido. Digite apenas o nome do bairro (Ex: Jardim Paulista)");
-            textBairro.setText("");
-            textBairro.setEnabled(true);
-        }
-
-        if (!CEPResource.verificarCidade(selectCidade.getSelectedItem().toString())) {
-            erros.add("Cidade inválida. Digite apenas o nome da cidade (Ex: São Paulo)");
-            selectCidade.setEnabled(true);
-        }
-
-        if (!CEPResource.verificarEstado(selectEstado.getSelectedItem().toString())) {
-            erros.add("Estado inválido. Digite apenas a sigla do estado (Ex: SP)");
-        }
-
-        if (!CEPResource.verificarRua(textRua.getText())) {
-            erros.add("Rua inválida. Digite apenas o nome da rua (Ex: Rua Paulista)");
-            textRua.setText("");
-            textRua.setEnabled(true);
-        }
-
-        if (!PhoneValidResource.isValidPhoneNumber(PhoneValidResource.unformatPhoneNumber(textTelefone.getText()))) {
-            erros.add("Telefone inválido. Digite apenas números (Ex: 11912345678)");
-            textTelefone.setText("");
-            textTelefone.setEnabled(true);
-        }
-
-        if (erros.size() > 0) {
-            String mensagem = "";
-            for (String erro : erros) {
-                mensagem += erro + "\n";
-            }
-            JOptionPane.showMessageDialog(null, "[+] Alguns erros foram encontrados: \n\n\n" + mensagem);
-        } else {
-            if (selectedFriend == null) {
-                try {
-                    AddressResource address = new AddressResource(textRua.getText(), textBairro.getText(), selectCidade.getSelectedItem().toString(), selectEstado.getSelectedItem().toString(), Integer.parseInt(textNumero.getText()), textComplemento.getText(), Integer.parseInt(textCEP.getText()));
-                    FriendModel friendModel = FriendsDAO.getInstance().addFriend(textNome.getText().toUpperCase(), PhoneValidResource.unformatPhoneNumber(textTelefone.getText()), address);
-                    JOptionPane.showMessageDialog(null, "Amigo cadastrado com sucesso! (" + friendModel.getId() + ")");
-                    this.dispose();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                }
-            } else {
-                try {
-                    AddressResource address = new AddressResource(textRua.getText(), textBairro.getText(), selectCidade.getSelectedItem().toString(), selectEstado.getSelectedItem().toString(), Integer.parseInt(textNumero.getText()), textComplemento.getText(), Integer.parseInt(textCEP.getText()));
-                    FriendModel friendModel = FriendsDAO.getInstance().getFriend(selectedFriend.getId());
-                    if (friendModel == null) {
-                        throw new Exception("Amigo não encontrado");
-                    }
-
-                    friendModel.setName(textNome.getText().toUpperCase());
-                    friendModel.setPhone(PhoneValidResource.unformatPhoneNumber(textTelefone.getText()));
-                    friendModel.updateAddress(address);
-
-                    FriendsDAO.getInstance().updateFriend(friendModel.getId(), friendModel);
-                    JOptionPane.showMessageDialog(null, "Amigo alterado com sucesso!");
-                    this.dispose();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                }
-            }
-        }
-    }//GEN-LAST:event_btnCadastrarActionPerformed
-
-    private void btnCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseClicked
-
-    }//GEN-LAST:event_btnCadastrarMouseClicked
-
     private void textComplementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textComplementoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textComplementoActionPerformed
@@ -619,8 +533,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_textNumeroActionPerformed
 
     private void textNumeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyPressed
-        btnVisualizarEmprestimos.setEnabled(false);
-        btnCriarEmprestimo.setEnabled(false);
+
     }//GEN-LAST:event_textNumeroKeyPressed
 
     private void textNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNumeroKeyReleased
@@ -667,9 +580,9 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     }//GEN-LAST:event_selectEstadoActionPerformed
 
     private void textCEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCEPKeyPressed
-        
-       btnVisualizarEmprestimos.setEnabled(false);
-            btnCriarEmprestimo.setEnabled(false);
+
+        btnVisualizarEmprestimos.setEnabled(false);
+        btnCriarEmprestimo.setEnabled(false);
 
         if (textCEP.getText().length() > 8) {
             JOptionPane.showMessageDialog(null, "CEP inválido (Digite apenas números)");
@@ -739,6 +652,135 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textNomeActionPerformed
 
+    private void textTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textTelefoneActionPerformed
+
+    private void textCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCEPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textCEPActionPerformed
+
+    private void textRuaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textRuaKeyPressed
+        btnVisualizarEmprestimos.setEnabled(false);
+        btnCriarEmprestimo.setEnabled(false);
+    }//GEN-LAST:event_textRuaKeyPressed
+
+    private void textComplementoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textComplementoKeyPressed
+        btnVisualizarEmprestimos.setEnabled(false);
+        btnCriarEmprestimo.setEnabled(false);
+    }//GEN-LAST:event_textComplementoKeyPressed
+
+    private void textNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNomeKeyPressed
+
+    }//GEN-LAST:event_textNomeKeyPressed
+
+    private void textTelefoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textTelefoneKeyPressed
+
+    }//GEN-LAST:event_textTelefoneKeyPressed
+
+    private void textBairroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textBairroKeyTyped
+        btnVisualizarEmprestimos.setEnabled(false);
+        btnCriarEmprestimo.setEnabled(false);
+    }//GEN-LAST:event_textBairroKeyTyped
+
+    private void textBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBairroActionPerformed
+
+    }//GEN-LAST:event_textBairroActionPerformed
+
+    private void btnCriarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarEmprestimoActionPerformed
+        new ViewsEmprestimo.TelaCadastroEmprestimo(selectedFriend).setVisible(true);
+    }//GEN-LAST:event_btnCriarEmprestimoActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        ArrayList<String> erros = new ArrayList<String>();
+
+        if (!CEPResource.verificarNomeCompleto(textNome.getText())) {
+            erros.add("Nome Inválido! Digite o nome completo (Ex: João da Silva)");
+            textNome.setText("");
+            textNome.setEnabled(true);
+        }
+
+        if (!CEPResource.verificarCEP(textCEP.getText())) {
+            erros.add("CEP Inválido! Digite apenas números (Ex: 12345678)");
+            textCEP.setText("");
+            textCEP.setEnabled(true);
+        }
+
+        if (!CEPResource.verificarNumeroCasa(textNumero.getText())) {
+            erros.add("Número Inválido! Digite apenas números (Ex: 123)");
+            textNumero.setText("");
+            textNumero.setEnabled(true);
+        }
+
+        if (!CEPResource.verificarBairro(textBairro.getText())) {
+            erros.add("Bairro Inválido! Digite apenas o nome do bairro (Ex: Jardim Paulista)");
+            textBairro.setText("");
+            textBairro.setEnabled(true);
+        }
+
+        if (!CEPResource.verificarCidade(selectCidade.getSelectedItem().toString())) {
+            erros.add("Cidade Inválida! Digite apenas o nome da cidade (Ex: São Paulo)");
+            selectCidade.setEnabled(true);
+        }
+
+        if (!CEPResource.verificarEstado(selectEstado.getSelectedItem().toString())) {
+            erros.add("Estado Inválido! Digite apenas a sigla do estado (Ex: SP)");
+        }
+
+        if (!CEPResource.verificarRua(textRua.getText())) {
+            erros.add("Rua Inválida! Digite apenas o nome da rua (Ex: Rua Paulista)");
+            textRua.setText("");
+            textRua.setEnabled(true);
+        }
+
+        if (!PhoneValidResource.isValidPhoneNumber(PhoneValidResource.unformatPhoneNumber(textTelefone.getText()))) {
+            erros.add("Telefone Inválido! Use o formato (DDD) 9.1234-1234");
+            textTelefone.setText("");
+            textTelefone.setEnabled(true);
+        }
+
+        if (erros.size() > 0) {
+            String mensagem = "";
+            for (String erro : erros) {
+                mensagem += erro + "\n";
+            }
+            JOptionPane.showMessageDialog(null, "[+] Alguns erros foram encontrados: \n\n\n" + mensagem);
+        } else {
+            if (selectedFriend == null) {
+                try {
+                    AddressResource address = new AddressResource(textRua.getText(), textBairro.getText(), selectCidade.getSelectedItem().toString(), selectEstado.getSelectedItem().toString(), Integer.parseInt(textNumero.getText()), textComplemento.getText(), Integer.parseInt(textCEP.getText()));
+                    FriendModel friendModel = FriendsDAO.getInstance().addFriend(textNome.getText().toUpperCase(), PhoneValidResource.unformatPhoneNumber(textTelefone.getText()), address);
+                    JOptionPane.showMessageDialog(null, "Amigo cadastrado com sucesso! (" + friendModel.getId() + ")");
+                    this.dispose();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
+            } else {
+                try {
+                    AddressResource address = new AddressResource(textRua.getText(), textBairro.getText(), selectCidade.getSelectedItem().toString(), selectEstado.getSelectedItem().toString(), Integer.parseInt(textNumero.getText()), textComplemento.getText(), Integer.parseInt(textCEP.getText()));
+                    FriendModel friendModel = FriendsDAO.getInstance().getFriend(selectedFriend.getId());
+                    if (friendModel == null) {
+                        throw new Exception("Amigo não encontrado");
+                    }
+
+                    friendModel.setName(textNome.getText().toUpperCase());
+                    friendModel.setPhone(PhoneValidResource.unformatPhoneNumber(textTelefone.getText()));
+                    friendModel.updateAddress(address);
+
+                    FriendsDAO.getInstance().updateFriend(friendModel.getId(), friendModel);
+                    JOptionPane.showMessageDialog(null, "Amigo alterado com sucesso!");
+                    this.dispose();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
+            }
+        }
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCadastrarMouseClicked
+
+    }//GEN-LAST:event_btnCadastrarMouseClicked
+
     private void btnDeletar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletar2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnDeletar2ActionPerformed
@@ -759,47 +801,6 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnVisualizarEmprestimosActionPerformed
-
-    private void textTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTelefoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textTelefoneActionPerformed
-
-    private void btnCriarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarEmprestimoActionPerformed
-       if(!textNome.getText().equals("")){
-       
-       }
-    }//GEN-LAST:event_btnCriarEmprestimoActionPerformed
-
-    private void textCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCEPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textCEPActionPerformed
-
-    private void textRuaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textRuaKeyPressed
-  btnVisualizarEmprestimos.setEnabled(false);
-            btnCriarEmprestimo.setEnabled(false);
-    }//GEN-LAST:event_textRuaKeyPressed
-
-    private void textComplementoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textComplementoKeyPressed
-       btnVisualizarEmprestimos.setEnabled(false);
-            btnCriarEmprestimo.setEnabled(false);
-    }//GEN-LAST:event_textComplementoKeyPressed
-
-    private void textNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNomeKeyPressed
-
-    }//GEN-LAST:event_textNomeKeyPressed
-
-    private void textTelefoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textTelefoneKeyPressed
-
-    }//GEN-LAST:event_textTelefoneKeyPressed
-
-    private void textBairroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textBairroKeyTyped
- btnVisualizarEmprestimos.setEnabled(false);
-            btnCriarEmprestimo.setEnabled(false);
-    }//GEN-LAST:event_textBairroKeyTyped
-
-    private void textBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textBairroActionPerformed
- 
-    }//GEN-LAST:event_textBairroActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

@@ -2,7 +2,6 @@ package ViewsTool;
 
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
-
 import DAO.ToolsDAO;
 import Model.ToolModel;
 import Resources.BRLResource;
@@ -73,22 +72,24 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
         jLabel2.setText("Nome:");
 
         textFerramentaNome.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        textFerramentaNome.setToolTipText("Nome da ferramenta");
+        textFerramentaNome.setToolTipText("Nome da Ferramenta");
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel3.setText("Valor:");
 
         textFerramentaValor.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        textFerramentaValor.setToolTipText("Valor pago na ferramenta");
+        textFerramentaValor.setToolTipText("Valor da Ferramenta");
 
         jLabel4.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel4.setText("Fabricante:");
+        jLabel4.setToolTipText("Selecione ou Remova nos Botões \"+\" e \"-\"");
 
         jLabel6.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel6.setText("R$");
 
         textSelecionado.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textSelecionado.setText("Selecionado: Nenhum");
+        textSelecionado.setToolTipText("Selecione ou Remova nos Botões \"+\" e \"-\"");
 
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(textFerramentaNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -276,9 +277,9 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
             }
 
             if (this.tool == null) {
-                if(selectedManufacturer == null){
-                JOptionPane.showMessageDialog(null, "Selecione uma empresa por obsequio");
-                return;
+                if (selectedManufacturer == null) {
+                    JOptionPane.showMessageDialog(null, "Selecione uma empresa por obsequio");
+                    return;
                 }
                 ToolsDAO.getInstance().addTool(textFerramentaNome.getText().toUpperCase(), price, (selectedManufacturer != null ? selectedManufacturer.getId() : -1));
                 JOptionPane.showMessageDialog(null, "Ferramenta cadastrada com sucesso!");

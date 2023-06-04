@@ -104,7 +104,7 @@ public class LoansDAO {
 
         for (Object[] data : getEmprestimosEmAberto()) {
             if (data[1].equals(amigoNome)) {
-               datas.add(data);
+                datas.add(data);
             }
         }
         return datas;
@@ -164,7 +164,7 @@ public class LoansDAO {
                 stringFerramentas += ferramentaStr + "\n";
             }
 
-            Object[] datas = new Object[]{result.getInt("emprestimo_id"), result.getString("nome").toUpperCase(), sdf.format(result.getDate("startDate")), sdf.format(result.getDate("endDate")), sdf.format(result.getDate("finalizadoData")), result.getString("observacoes").toUpperCase(), result.getInt("totalFerramentas"), BRLResource.PRICE_FORMATTER.format(result.getDouble("totalValorFerramentas")), BRLResource.PRICE_FORMATTER.format(result.getDouble("valorRecebido")), stringFerramentas.toUpperCase()};
+            Object[] datas = new Object[]{result.getInt("emprestimo_id"), result.getString("nome").toUpperCase(), sdf.format(result.getDate("startDate")), sdf.format(result.getDate("endDate")), sdf.format(result.getDate("finalizadoData")), result.getString("observacoes").toUpperCase(), result.getInt("totalFerramentas"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("totalValorFerramentas")), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("valorRecebido")), stringFerramentas.toUpperCase()};
             relatorio.add(datas);
         }
 

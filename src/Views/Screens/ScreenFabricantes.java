@@ -2,20 +2,28 @@ package Views.Screens;
 
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
+import Controllers.FiltrosClass;
+import Controllers.FiltrosEnum;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
+import Controllers.Filtros.FiltrosOrdenar;
 import DAO.ManufacturerDAO;
+import DAO.ToolsDAO;
+import Exceptions.DatabaseResultQueryException;
 import Resources.DirectoryChooserFrame;
+import Resources.ManufacturerResource;
 import Views.TelaInicial;
 import ViewsManufacturer.TelaCadastroFabricantes;
 import com.itextpdf.text.Paragraph;
+import java.sql.SQLException;
 
 public class ScreenFabricantes extends ScreenEntity {
 
-    private final String[] columnNames = {"ID", "Nome", "CNPJ", "Ferramentas", "Em Uso", "Valor total"};
+    private final String[] columnNames = {"ID", "Nome", "CNPJ", "Ferramentas", "Em Uso", "Valor Total"};
 
     public ScreenFabricantes() {
         super();
@@ -88,9 +96,34 @@ public class ScreenFabricantes extends ScreenEntity {
                 getTable().getColumnModel().getColumn(5).setMaxWidth(200);
             }
 
+            
+            if(getFiltros().getSelectedItem() != null){
+                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                if(f.getType() == FiltrosEnum.FILTRO_GERAR){
+                    f.run();
+                    return;
+                }
+            }
+
             ArrayList<Object[]> manufacturerData = ManufacturerDAO.getInstance().getFabricantesData();
 
+            if (getFiltros().getSelectedItem() != null) {
+                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                if (f.getType() == FiltrosEnum.FILTRO_ORDENAR) {
+                    manufacturerData.sort((Object[] data1, Object[] data2) -> {
+                        return f.compare(data1, data2);
+                    });
+                }
+            }
+
             for (Object[] data : manufacturerData) {
+                if (getFiltros().getSelectedItem() != null) {
+                    FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                    if (f.getType() == FiltrosEnum.FILTRO_FILTRAR && !f.run(data)) {
+                        continue;
+                    }
+                }
+
                 if (Integer.parseInt(data[3].toString()) == Integer.parseInt(data[4].toString())) {
                     if (Integer.parseInt(data[3].toString()) > 0) {
                         renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
@@ -122,7 +155,36 @@ public class ScreenFabricantes extends ScreenEntity {
     }
 
     public void btnDeletar() {
-        JOptionPane.showMessageDialog(null, "working!");
+       
+        try {
+             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+            ManufacturerResource ManuDel = ManufacturerDAO.getInstance().getManufacturer(id);
+            if (ManuDel != null) {
+                int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja remover o fabricante " + ManuDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
+                if (dialogResult == JOptionPane.YES_OPTION) {
+                    if (!ToolsDAO.getInstance().getToolsByManufacturer(ManuDel.getId()).isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Não é possível remover um fabricante que possui ferramentas cadastradas!");
+                        return;
+                    }
+
+                    ManufacturerDAO.getInstance().removeManufacturer(ManuDel.getId());
+                    carregarDados();
+                }
+            }
+        }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Nada selecionado vei");
+            e.printStackTrace();
+        }catch( DatabaseResultQueryException e){
+            System.out.println("Talvez o banco de dados explodiu, mas não retornou nada");
+            e.printStackTrace();
+        } catch( SQLException e){
+            System.out.println("Os comandos enviados SQL enviados tem algum problema");
+            e.printStackTrace();
+        }
+ 
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao remover fabricante", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void btnVisualizar() {
@@ -137,19 +199,33 @@ public class ScreenFabricantes extends ScreenEntity {
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
                 if (directoryChooserFrame.getSelectedDirectory().length() > 0) {
                     try {
-                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
+                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATÓRIO FABRICANTES", 10);
                         String fileName = "RelatorioFabricantes";
                         PDFEntity.export(directoryChooserFrame.getSelectedDirectory() + "/", fileName, getTable(), paragraphRelatorio);
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
                     } catch (Exception e) {
                         e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente novamente mais tarde...");
+                        JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente novamente mais tarde!");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente selecionar um diretorio valido!");
+                    JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente selecionar um diretório válido!");
                 }
             }
         });
+    }
+
+    /* FILTROS */
+    @Override
+    public DefaultComboBoxModel<FiltrosClass> get() {
+        return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{
+            new FiltrosOrdenar("ID"),
+            new FiltrosOrdenar("Nome Crescente", (data1, data2) -> {
+                String nome1 = (String) data1[1];
+                String nome2 = (String) data2[1];
+                return nome1.compareToIgnoreCase(nome2);
+            })
+        })
+        ;
     }
 
 }

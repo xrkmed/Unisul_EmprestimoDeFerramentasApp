@@ -9,10 +9,7 @@ import DAO.ManufacturerDAO;
 import Resources.CNPJResource;
 import Resources.ManufacturerResource;
 import ViewsManufacturer.TelaCadastroFabricantes;
-import ViewsManufacturer.TelaCadastroFabricantes;
-import ViewsManufacturer.TelaCadastroFabricantes;
 import ViewsTool.TelaCadastroFerramentas;
-import java.awt.event.KeyEvent;
 
 public class TelaSelecionarFabricante extends javax.swing.JFrame {
 
@@ -33,7 +30,7 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
         new Thread(new Runnable() {
             @Override
             public void run() {
-               
+
                 ManufacturerDAO dao = ManufacturerDAO.getInstance();
                 jTable2.getColumnModel().getColumn(0).setPreferredWidth(35);
                 jTable2.getColumnModel().getColumn(0).setMinWidth(35);
@@ -368,6 +365,7 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
             model.setRowCount(0);
 
             for (ManufacturerResource manufacturer : manufacturers) {
+                
                 if (textFiltrarNome.getText().trim().length() > 0) {
                     if (!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())) {
                         continue;
@@ -418,10 +416,10 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastroFabricanteActionPerformed
 
     private void textFiltrarNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFiltrarNomeKeyPressed
-        if(evt.getKeyCode() == 10){
-           loadValores();
+        if (evt.getKeyCode() == 10) {
+            loadValores();
         }
-       
+
     }//GEN-LAST:event_textFiltrarNomeKeyPressed
 
     public static void main(String args[]) {

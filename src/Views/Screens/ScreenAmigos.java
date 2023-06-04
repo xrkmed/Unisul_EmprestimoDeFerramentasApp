@@ -1,6 +1,8 @@
 package Views.Screens;
 
 import java.util.ArrayList;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
@@ -8,11 +10,18 @@ import Controllers.FiltrosClass;
 import Controllers.FiltrosEnum;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
+import Controllers.Filtros.FiltrosFiltrar;
+import Controllers.Filtros.FiltrosOrdenar;
 import DAO.FriendsDAO;
+import DAO.LoansDAO;
+import Exceptions.DatabaseResultQueryException;
+import Model.FriendModel;
+import Model.LoanModel;
 import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsAmigos.TelaCadastroAmigos;
 import com.itextpdf.text.Paragraph;
+import java.sql.SQLException;
 
 public class ScreenAmigos extends ScreenEntity {
 
@@ -65,7 +74,6 @@ public class ScreenAmigos extends ScreenEntity {
         try {
             StatusRenderer renderer = new StatusRenderer();
             //statusRed.addHighlightedRow(1, Color.RED);
-            ArrayList<Object[]> amigosData = FriendsDAO.getInstance().loadFriendsTabela();
 
             DefaultTableModel model = new DefaultTableModel(new Object[0][columnNames.length], columnNames) {
                 boolean[] canEdit = new boolean[]{
@@ -92,9 +100,19 @@ public class ScreenAmigos extends ScreenEntity {
                 getTable().getColumnModel().getColumn(5).setMaxWidth(110);
             }
 
-            if(getFiltros().getSelectedItem() != null){
+            if (getFiltros().getSelectedItem() != null) {
                 FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                if(f.getType() == FiltrosEnum.FILTRO_ORDENAR){
+                if (f.getType() == FiltrosEnum.FILTRO_GERAR) {
+                    f.run();
+                    return;
+                }
+            }
+
+            ArrayList<Object[]> amigosData = FriendsDAO.getInstance().loadFriendsTabela();
+
+            if (getFiltros().getSelectedItem() != null) {
+                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
+                if (f.getType() == FiltrosEnum.FILTRO_ORDENAR) {
                     amigosData.sort((Object[] data1, Object[] data2) -> {
                         return f.compare(data1, data2);
                     });
@@ -102,13 +120,13 @@ public class ScreenAmigos extends ScreenEntity {
             }
 
             for (Object[] data : amigosData) {
-                if(getFiltros().getSelectedItem() != null){
+                if (getFiltros().getSelectedItem() != null) {
                     FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                    if(f.getType() == FiltrosEnum.FILTRO_FILTRAR && !f.run(data)){
+                    if (f.getType() == FiltrosEnum.FILTRO_FILTRAR && !f.run(data)) {
                         continue;
                     }
                 }
-                
+
                 if (Integer.parseInt(data[4].toString()) > 0) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
@@ -137,11 +155,55 @@ public class ScreenAmigos extends ScreenEntity {
     }
 
     public void btnEditar() {
-        JOptionPane.showMessageDialog(null, "working!");
+        int id = -1;
+        try {
+            boolean flag = false;
+            id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+
+            if (id > 0) {
+                flag = true;
+            }
+
+            if (flag) {
+                FriendModel selectedFriend = FriendsDAO.getInstance().getFriend(id);
+                new TelaCadastroAmigos(selectedFriend).setVisible(true);
+            }
+        } catch (Exception e) {
+        } finally {
+            carregarDados();
+        }
     }
 
     public void btnDeletar() {
-        JOptionPane.showMessageDialog(null, "working!");
+
+        try {
+            int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+            FriendModel friendsDel = FriendsDAO.getInstance().getFriend(id);
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o cadastro de " + friendsDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
+            if (dialogResult == JOptionPane.YES_OPTION) {
+                LoansDAO loansDAO = LoansDAO.getInstance();
+                for (LoanModel loan : loansDAO.getAllLoans()) {
+                    if (loan.getFriend().getId() == friendsDel.getId() && loan.getReturned() == false) {
+                        JOptionPane.showMessageDialog(null, "Não é possível remover o cadastro de " + friendsDel.getName() + " pois ele possui empréstimos pendentes.");
+                        return;
+                    }
+                }
+                FriendsDAO dao = FriendsDAO.getInstance();
+                dao.removeFriend(friendsDel);
+                carregarDados();
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Nada selecionado vei");
+            e.printStackTrace();
+        } catch (DatabaseResultQueryException e) {
+            System.out.println("Talvez o banco de dados explodiu, mas não retornou nada");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Os comandos enviados SQL enviados tem algum problema");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public void btnVisualizar() {
@@ -156,19 +218,38 @@ public class ScreenAmigos extends ScreenEntity {
             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
                 if (directoryChooserFrame.getSelectedDirectory().length() > 0) {
                     try {
-                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATORIO", 10);
+                        Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATÓRIO AMIGOS", 10);
                         String fileName = "RelatorioAmigos";
                         PDFEntity.export(directoryChooserFrame.getSelectedDirectory() + "/", fileName, getTable(), paragraphRelatorio);
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
                     } catch (Exception e) {
                         e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente novamente mais tarde...");
+                        JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente novamente mais tarde!");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Nao foi possivel exportar o PDF, tente selecionar um diretorio valido!");
+                    JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente selecionar um diretório válido!");
                 }
             }
         });
+    }
+
+    /* FILTROS */
+    @Override
+    public DefaultComboBoxModel<FiltrosClass> get() {
+        return new DefaultComboBoxModel<FiltrosClass>(new FiltrosClass[]{
+            new FiltrosOrdenar("ID"),
+            new FiltrosFiltrar("Empréstimos em Aberto", (Object[] data) -> {
+                return (int) data[4] > 0;
+            }),
+            new FiltrosFiltrar("Empréstimos em Atraso", (Object[] data) -> {
+                return (int) data[5] > 0;
+            }),
+            new FiltrosOrdenar("Nome Crescente", (data1, data2) -> {
+                return ((String) data1[1]).compareTo((String) data2[1]);
+            }),
+            new FiltrosOrdenar("Nome Decrescente", (data1, data2) -> {
+                return -((String) data1[1]).compareTo((String) data2[1]);
+            }),});
     }
 
 }
