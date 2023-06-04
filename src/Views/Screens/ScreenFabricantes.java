@@ -10,7 +10,6 @@ import Controllers.FiltrosClass;
 import Controllers.FiltrosEnum;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
-import Controllers.Filtros.FiltrosFiltrar;
 import Controllers.Filtros.FiltrosOrdenar;
 import DAO.ManufacturerDAO;
 import DAO.ToolsDAO;
@@ -220,7 +219,7 @@ public class ScreenFabricantes extends ScreenEntity {
     public DefaultComboBoxModel<FiltrosClass> get() {
         return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{
             new FiltrosOrdenar("ID"),
-            new FiltrosOrdenar("Nome em Ordem Alfabética Crescente", (data1, data2) -> {
+            new FiltrosOrdenar("Nome Crescente", (data1, data2) -> {
                 String nome1 = (String) data1[1];
                 String nome2 = (String) data2[1];
                 return nome1.compareToIgnoreCase(nome2);
