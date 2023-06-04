@@ -3,6 +3,8 @@ package ViewsAmigos;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
+
+import Controllers.ScreenType;
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
 import DAO.LocalidadesDAO;
@@ -22,21 +24,54 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
     }
 
-    public TelaCadastroAmigos(FriendModel selectedFriend) {
+    public TelaCadastroAmigos(FriendModel selectedFriend, ScreenType screenType) {
         this();
         this.selectedFriend = selectedFriend;
-        this.setTitle("Alterar cadastro de " + selectedFriend.getName().toUpperCase());
+        this.setTitle((screenType == ScreenType.SCREEN_TYPE_EDIT ? "Alterar" : "Visualizar") + " cadastro de " + selectedFriend.getName().toUpperCase());
         textNome.setText(selectedFriend.getName());
         textCEP.setText("" + selectedFriend.getAddress().getCEP());
-        selectEstado.setSelectedItem(selectedFriend.getAddress().getState());
-        selectCidade.setSelectedItem(selectedFriend.getAddress().getCity());
-        textRua.setText(selectedFriend.getAddress().getStreet());
-        textBairro.setText(selectedFriend.getAddress().getDistrict());
-        textComplemento.setText(selectedFriend.getAddress().getComplemento());
-        textNumero.setText(selectedFriend.getAddress().getNumber() + "");
-        textTelefone.setText(selectedFriend.getPhone());
-        btnCadastrar.setText("Finalizar alteração");
+        Thread t = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                try{
+                    AddressResource cepBuscado = CEPResource.buscarCEP(Integer.parseInt(textCEP.getText()));
 
+                    selectEstado.setSelectedItem(cepBuscado.getState());
+                    selectCidade.removeAllItems();
+                    selectCidade.addItem(cepBuscado.getCity());
+                    selectCidade.setSelectedItem(cepBuscado.getCity());
+                    selectCidade.setEnabled(false);
+                    textRua.setText(selectedFriend.getAddress().getStreet());
+                    textBairro.setText(selectedFriend.getAddress().getDistrict());
+                    textComplemento.setText(selectedFriend.getAddress().getComplemento());
+                    textNumero.setText(selectedFriend.getAddress().getNumber() + "");
+                    
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    e.printStackTrace();
+                }finally{
+                    if(screenType == ScreenType.SCREEN_TYPE_VIEW){
+                        textNome.setEditable(false);
+                        textTelefone.setEditable(false);
+                        textComplemento.setEditable(false);
+                        textNumero.setEditable(false);
+                        textRua.setEditable(false);
+                        textBairro.setEditable(false);
+                        selectCidade.setEnabled(false);
+                        selectEstado.setEnabled(false);
+                        textCEP.setEditable(false);
+                        btnBuscarCep.setEnabled(false);
+                        btnCadastrar.setToolTipText("Fechar tela");
+                        btnDeletar2.setToolTipText("Cancelar");
+                    }else{
+                        btnCadastrar.setToolTipText("Finalizar alteração");
+                        btnDeletar2.setToolTipText("Cancelar alteração");
+                    }
+                }
+            }
+        });
+        t.start();
+        textTelefone.setText(selectedFriend.getPhone());
         //jButton2.setText("Cancelar alteração");
         btnCriarEmprestimo.setEnabled(true);
         btnVisualizarEmprestimos.setEnabled(true);
@@ -627,12 +662,10 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
             if (cepBuscado.getDistrict().length() > 0) {
                 textBairro.setText(cepBuscado.getDistrict());
-                textBairro.setEnabled(false);
             }
 
             if (cepBuscado.getStreet().length() > 0) {
                 textRua.setText(cepBuscado.getStreet());
-                textRua.setEnabled(false);
             }
 
         } catch (NumberFormatException e) {
