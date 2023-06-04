@@ -226,7 +226,7 @@ public class ScreenFerramentas extends ScreenEntity {
     public DefaultComboBoxModel<FiltrosClass> get() {
         return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{
             new FiltrosOrdenar("ID"),
-            new FiltrosOrdenar("Nome em Ordem Alfabética Crescente", (data1, data2) -> {
+            new FiltrosOrdenar("Nome Crescente", (data1, data2) -> {
                 return ((String) data1[1]).compareTo((String) data2[1]);
             }),
         });
