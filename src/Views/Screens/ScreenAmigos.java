@@ -100,9 +100,9 @@ public class ScreenAmigos extends ScreenEntity {
                 getTable().getColumnModel().getColumn(5).setMaxWidth(110);
             }
 
-            if(getFiltros().getSelectedItem() != null){
+            if (getFiltros().getSelectedItem() != null) {
                 FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                if(f.getType() == FiltrosEnum.FILTRO_GERAR){
+                if (f.getType() == FiltrosEnum.FILTRO_GERAR) {
                     f.run();
                     return;
                 }
@@ -151,24 +151,28 @@ public class ScreenAmigos extends ScreenEntity {
 
     /* FUNCOES DOS BOTOES */
     public void btnCadastro() {
-
-        try {
-            int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
-            FriendModel selectedFriend = FriendsDAO.getInstance().getFriend(id);
-            new TelaCadastroAmigos(selectedFriend).setVisible(true);
-        } catch (Exception e) {
-            new TelaCadastroAmigos().setVisible(true);
-        }
-
+        new TelaCadastroAmigos().setVisible(true);
     }
 
     public void btnEditar() {
-        JOptionPane.showMessageDialog(null, "working!");
+        int id = -1;
+        try {
+            boolean flag = false;
+            id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+
+            if (id > 0) {
+                flag = true;
+            }
+
+            if (flag) {
+                FriendModel selectedFriend = FriendsDAO.getInstance().getFriend(id);
+                new TelaCadastroAmigos(selectedFriend).setVisible(true);
+            }
+        } catch (Exception e) {
+        }
     }
 
     public void btnDeletar() {
-
-        
 
         try {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
@@ -186,18 +190,16 @@ public class ScreenAmigos extends ScreenEntity {
                 dao.removeFriend(friendsDel);
                 carregarDados();
             }
-        }catch(ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Nada selecionado vei");
             e.printStackTrace();
-        }catch( DatabaseResultQueryException e){
+        } catch (DatabaseResultQueryException e) {
             System.out.println("Talvez o banco de dados explodiu, mas não retornou nada");
             e.printStackTrace();
-        } catch( SQLException e){
+        } catch (SQLException e) {
             System.out.println("Os comandos enviados SQL enviados tem algum problema");
             e.printStackTrace();
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -230,7 +232,6 @@ public class ScreenAmigos extends ScreenEntity {
     }
 
     /* FILTROS */
-
     @Override
     public DefaultComboBoxModel<FiltrosClass> get() {
         return new DefaultComboBoxModel<FiltrosClass>(new FiltrosClass[]{
