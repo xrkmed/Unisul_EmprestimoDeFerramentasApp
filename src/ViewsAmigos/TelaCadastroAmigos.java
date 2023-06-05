@@ -33,23 +33,25 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         Thread t = new Thread(new Runnable(){
             @Override
             public void run(){
+                AddressResource cep = new AddressResource();
                 try{
-                    AddressResource cepBuscado = CEPResource.buscarCEP(Integer.parseInt(textCEP.getText()));
-
-                    selectEstado.setSelectedItem(cepBuscado.getState());
+                    cep = CEPResource.buscarCEP(Integer.parseInt(textCEP.getText()));
+                }catch(IllegalArgumentException e){
+                    cep = selectedFriend.getAddress();
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    e.printStackTrace();
+                }finally{
+                    selectEstado.setSelectedItem(cep.getState());
                     selectCidade.removeAllItems();
-                    selectCidade.addItem(cepBuscado.getCity());
-                    selectCidade.setSelectedItem(cepBuscado.getCity());
+                    selectCidade.addItem(cep.getCity());
+                    selectCidade.setSelectedItem(cep.getCity());
                     selectCidade.setEnabled(false);
                     textRua.setText(selectedFriend.getAddress().getStreet());
                     textBairro.setText(selectedFriend.getAddress().getDistrict());
                     textComplemento.setText(selectedFriend.getAddress().getComplemento());
                     textNumero.setText(selectedFriend.getAddress().getNumber() + "");
-                    
-                }catch(Exception e){
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                    e.printStackTrace();
-                }finally{
+
                     if(screenType == ScreenType.SCREEN_TYPE_VIEW){
                         textNome.setEditable(false);
                         textTelefone.setEditable(false);

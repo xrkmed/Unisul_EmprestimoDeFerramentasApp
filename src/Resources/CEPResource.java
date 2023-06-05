@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class CEPResource {
 
-    public static AddressResource buscarCEP(Integer cep) throws IOException {
+    public static AddressResource buscarCEP(Integer cep) throws IOException, IllegalArgumentException {
         String urlStr = "https://viacep.com.br/ws/" + cep + "/json/";
         URL url = new URL(urlStr);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -22,6 +22,10 @@ public class CEPResource {
 
         JsonParser parser = new JsonParser();
         JsonElement jsonElement = parser.parse(new InputStreamReader(conn.getInputStream()));
+
+        if(jsonElement.getAsJsonObject().get("erro") != null && jsonElement.getAsJsonObject().get("erro").getAsBoolean()) {
+            throw new IllegalArgumentException("CEP inválido");
+        }
 
         String rua = jsonElement.getAsJsonObject().get("logradouro").getAsString();
         String bairro = jsonElement.getAsJsonObject().get("bairro").getAsString();
