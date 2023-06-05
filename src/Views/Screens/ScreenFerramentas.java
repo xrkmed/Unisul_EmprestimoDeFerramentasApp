@@ -35,7 +35,7 @@ public class ScreenFerramentas extends ScreenEntity {
 
     @Override
     public String getName() {
-        return "Tela Ferramentas";
+        return "Ferramentas";
     }
 
     @Override

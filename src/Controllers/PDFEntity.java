@@ -1,5 +1,6 @@
 package Controllers;
 
+import Views.TelaInicial;
 import javax.swing.JTable;
 
 import com.itextpdf.text.Document;
@@ -72,4 +73,5 @@ public class PDFEntity {
 
         document.close();
     }
+   
 }
