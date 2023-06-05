@@ -397,6 +397,11 @@ public class TelaInicial extends javax.swing.JFrame {
                 tabelaPrincipalMouseClicked(evt);
             }
         });
+        tabelaPrincipal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tabelaPrincipalKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaPrincipal);
 
         jMenu1.setText("Opções");
@@ -567,8 +572,14 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_comboFiltrosItemStateChanged
 
     private void tabelaPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPrincipalMouseClicked
-        System.out.println();
+        if(evt.getClickCount() == 2){
+            getBtnVisualizar().doClick();
+        }
     }//GEN-LAST:event_tabelaPrincipalMouseClicked
+
+    private void tabelaPrincipalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaPrincipalKeyPressed
+
+    }//GEN-LAST:event_tabelaPrincipalKeyPressed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
