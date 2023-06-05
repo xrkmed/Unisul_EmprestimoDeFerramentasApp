@@ -35,7 +35,7 @@ public class ScreenFabricantes extends ScreenEntity {
 
     @Override
     public String getName() {
-        return "Lista de Fabricantes";
+        return "Fabricantes";
     }
 
     @Override

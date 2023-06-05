@@ -38,7 +38,7 @@ public class ScreenAmigos extends ScreenEntity {
 
     @Override
     public String getName() {
-        return "Tela Amigos";
+        return "Amigos";
     }
 
     @Override
