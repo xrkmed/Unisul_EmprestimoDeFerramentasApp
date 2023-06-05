@@ -96,10 +96,9 @@ public class ScreenFabricantes extends ScreenEntity {
                 getTable().getColumnModel().getColumn(5).setMaxWidth(200);
             }
 
-            
-            if(getFiltros().getSelectedItem() != null){
+            if (getFiltros().getSelectedItem() != null) {
                 FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                if(f.getType() == FiltrosEnum.FILTRO_GERAR){
+                if (f.getType() == FiltrosEnum.FILTRO_GERAR) {
                     f.run();
                     return;
                 }
@@ -155,9 +154,9 @@ public class ScreenFabricantes extends ScreenEntity {
     }
 
     public void btnDeletar() {
-       
+
         try {
-             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+            int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ManufacturerResource ManuDel = ManufacturerDAO.getInstance().getManufacturer(id);
             if (ManuDel != null) {
                 int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja remover o fabricante " + ManuDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
@@ -171,19 +170,20 @@ public class ScreenFabricantes extends ScreenEntity {
                     carregarDados();
                 }
             }
-        }catch(ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Nada selecionado vei");
             e.printStackTrace();
-        }catch( DatabaseResultQueryException e){
+
+        } catch (DatabaseResultQueryException e) {
             System.out.println("Talvez o banco de dados explodiu, mas não retornou nada");
             e.printStackTrace();
-        } catch( SQLException e){
+
+        } catch (SQLException e) {
             System.out.println("Os comandos enviados SQL enviados tem algum problema");
             e.printStackTrace();
-        }
- 
-        catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao remover fabricante", "Erro", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -224,8 +224,7 @@ public class ScreenFabricantes extends ScreenEntity {
                 String nome2 = (String) data2[1];
                 return nome1.compareToIgnoreCase(nome2);
             })
-        })
-        ;
+        });
     }
 
 }
