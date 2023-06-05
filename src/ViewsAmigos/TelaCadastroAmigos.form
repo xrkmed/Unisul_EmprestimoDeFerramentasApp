@@ -36,9 +36,9 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLayeredPane1" max="32767" attributes="0"/>
-                  <Component id="jLayeredPane2" max="32767" attributes="0"/>
-                  <Component id="jLayeredPane5" max="32767" attributes="0"/>
+                  <Component id="jLayeredPane1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLayeredPane2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLayeredPane5" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
           </Group>
@@ -102,21 +102,20 @@
                   </Group>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="textRua" alignment="0" max="32767" attributes="0"/>
-                      <Component id="textBairro" alignment="0" max="32767" attributes="0"/>
-                      <Component id="textComplemento" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="textNumero" max="32767" attributes="0"/>
-                          <EmptySpace min="168" pref="168" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="selectCidade" alignment="0" max="32767" attributes="0"/>
-                              <Component id="selectEstado" alignment="0" pref="190" max="32767" attributes="0"/>
-                              <Component id="textCEP" alignment="0" max="32767" attributes="0"/>
+                      <Component id="textRua" alignment="0" min="-2" pref="379" max="-2" attributes="0"/>
+                      <Component id="textNumero" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
+                      <Component id="textComplemento" alignment="0" min="-2" pref="379" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="selectEstado" pref="180" max="32767" attributes="0"/>
+                                  <Component id="textCEP" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                              <Component id="btnBuscarCep" min="-2" pref="140" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="49" max="32767" attributes="0"/>
-                          <Component id="btnBuscarCep" min="-2" pref="140" max="-2" attributes="0"/>
+                          <Component id="textBairro" alignment="0" max="32767" attributes="0"/>
+                          <Component id="selectCidade" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -231,7 +230,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Descreva um Complemento"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
+              <Color id="Text Cursor"/>
             </Property>
           </Properties>
           <Events>
@@ -246,7 +245,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Digite o Numero da Casa"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
+              <Color id="Text Cursor"/>
             </Property>
           </Properties>
           <Events>
@@ -264,7 +263,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Digite o nome da rua"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
+              <Color id="Text Cursor"/>
             </Property>
           </Properties>
           <Events>
@@ -278,7 +277,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Digite o nome da rua"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
+              <Color id="Text Cursor"/>
             </Property>
           </Properties>
           <Events>
@@ -293,14 +292,17 @@
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="1">
-                <StringItem index="0" value="Selecione a sua cidade"/>
+                <StringItem index="0" value="Selecione a Cidade"/>
               </StringArray>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Selecione a sua cidade"/>
+            <Property name="toolTipText" type="java.lang.String" value="Selecione a Cidade"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[186, 23]"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectCidadeActionPerformed"/>
@@ -316,12 +318,15 @@
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="1">
-                <StringItem index="0" value="Selecione o Seu Estado"/>
+                <StringItem index="0" value="Selecione o Estado"/>
               </StringArray>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Escolha o Estado Desejado "/>
+            <Property name="toolTipText" type="java.lang.String" value="Selecione o Estado"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[186, 23]"/>
             </Property>
           </Properties>
           <Events>
@@ -338,7 +343,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Insira CEP do seu amigo"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
+              <Color id="Text Cursor"/>
             </Property>
           </Properties>
           <Events>
@@ -383,7 +388,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="textTelefone" max="32767" attributes="0"/>
+                      <Component id="textTelefone" pref="379" max="32767" attributes="0"/>
                       <Component id="textNome" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -427,7 +432,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Digite o nome completo do seu amigo"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
+              <Color id="Text Cursor"/>
             </Property>
             <Property name="inheritsPopupMenu" type="boolean" value="true"/>
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
@@ -452,7 +457,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Digite o telefone do seu amigo"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Hand Cursor"/>
+              <Color id="Text Cursor"/>
             </Property>
           </Properties>
           <Events>
@@ -477,7 +482,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="81" max="32767" attributes="0"/>
                   <Component id="btnCriarEmprestimo" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="btnVisualizarEmprestimos" min="-2" pref="32" max="-2" attributes="0"/>
