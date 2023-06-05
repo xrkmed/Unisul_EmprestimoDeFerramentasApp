@@ -77,7 +77,8 @@ public class ScreenEmprestimos extends ScreenEntity {
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
                     return canEdit[columnIndex];
-                };
+                }
+            ;
             };
 
             getTable().setModel(model);
@@ -91,9 +92,9 @@ public class ScreenEmprestimos extends ScreenEntity {
 
             getTitulo().setText(getName());
 
-            if(getFiltros().getSelectedItem() != null){
+            if (getFiltros().getSelectedItem() != null) {
                 FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                if(f.getType() == FiltrosEnum.FILTRO_GERAR){
+                if (f.getType() == FiltrosEnum.FILTRO_GERAR) {
                     f.run();
                     return;
                 }
@@ -117,21 +118,21 @@ public class ScreenEmprestimos extends ScreenEntity {
                         continue;
                     }
                 }
-                
-                if(data[4].toString().contains("Finalizado em")){
+
+                if (data[4].toString().contains("Finalizado em")) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightGreen);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
                         getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
                     }
-                }else{
-                    if(!getTitulo().getText().equalsIgnoreCase("Empréstimos Finalizados")){
+                } else {
+                    if (!getTitulo().getText().equalsIgnoreCase("Empréstimos Finalizados")) {
                         if (Integer.parseInt(data[4].toString()) > 0 && Integer.parseInt(data[4].toString()) <= 7) {
                             renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                             for (int i = 0; i < getTable().getColumnCount(); i++) {
                                 getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
                             }
                         }
-    
+
                         if (Integer.parseInt(data[4].toString()) < 0) {
                             renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
                             for (int i = 0; i < getTable().getColumnCount(); i++) {
@@ -160,15 +161,15 @@ public class ScreenEmprestimos extends ScreenEntity {
     }
 
     public void btnDeletar() {
-       
+
         try {
-             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+            int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             LoanModel loan = LoansDAO.getInstance().getLoan(id);
-            if(loan.getReturned()){
+            if (loan.getReturned()) {
                 JOptionPane.showMessageDialog(null, "Este emprestimo já foi finalizado!");
                 return;
             }
-            
+
             TelaFinalizarEmprestimo tela = new TelaFinalizarEmprestimo(loan, getTable().getValueAt(getTable().getSelectedRow(), 1).toString());
             tela.setVisible(true);
             tela.addWindowListener(new WindowAdapter() {
@@ -178,14 +179,19 @@ public class ScreenEmprestimos extends ScreenEntity {
                 }
             });
 
-          } catch(ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Nada selecionado vei");
             e.printStackTrace();
-        }catch( DatabaseResultQueryException e){
+
+        } catch (DatabaseResultQueryException e) {
             System.out.println("Talvez o banco de dados explodiu, mas não retornou nada");
             e.printStackTrace();
-        } catch( SQLException e){
+
+        } catch (SQLException e) {
             System.out.println("Os comandos enviados SQL enviados tem algum problema");
+            e.printStackTrace();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -218,40 +224,39 @@ public class ScreenEmprestimos extends ScreenEntity {
     }
 
     /* FILTROS */
-
     @Override
     public DefaultComboBoxModel<FiltrosClass> get() {
         return new DefaultComboBoxModel<FiltrosClass>(new FiltrosClass[]{
             new FiltrosOrdenar("Em Aberto"),
             new FiltrosGerar("Todos Empréstimos", () -> {
-                try {            
+                try {
                     StatusRenderer renderer = new StatusRenderer();
                     ((DefaultTableModel) getTable().getModel()).setRowCount(0);
                     ArrayList<Object[]> emprestimosEmAberto = LoansDAO.getInstance().getEmprestimosEmAberto();
                     ArrayList<Object[]> emprestimosFinalizados = LoansDAO.getInstance().relatorioEmprestimos();
                     ArrayList<Object[]> emprestimos = new ArrayList<>();
-                    for(Object[] emprestimo : emprestimosEmAberto){
+                    for (Object[] emprestimo : emprestimosEmAberto) {
                         emprestimos.add(emprestimo);
                     }
-                     for(Object[] emprestimo : emprestimosFinalizados){
-                         emprestimos.add(new Object[]{emprestimo[0], emprestimo[1], emprestimo[2], emprestimo[3], "Finalizado em " + emprestimo[4], emprestimo[8], emprestimo[6], emprestimo[7]});
-                     }
-                     getTitulo().setText("Todos Empréstimos");
-        
+                    for (Object[] emprestimo : emprestimosFinalizados) {
+                        emprestimos.add(new Object[]{emprestimo[0], emprestimo[1], emprestimo[2], emprestimo[3], "Finalizado em " + emprestimo[4], emprestimo[8], emprestimo[6], emprestimo[7]});
+                    }
+                    getTitulo().setText("Todos Empréstimos");
+
                     for (Object[] data : emprestimos) {
-                        if(data[4].toString().contains("Finalizado em")){
+                        if (data[4].toString().contains("Finalizado em")) {
                             renderer.addHighlightedRow(getTable().getModel().getRowCount(), ColorsRenderer.lightGreen);
                             for (int i = 0; i < getTable().getColumnCount(); i++) {
                                 getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
                             }
-                        }else{
+                        } else {
                             if (Integer.parseInt(data[4].toString()) > 0 && Integer.parseInt(data[4].toString()) <= 7) {
                                 renderer.addHighlightedRow(getTable().getModel().getRowCount(), ColorsRenderer.lightYellow);
                                 for (int i = 0; i < getTable().getColumnCount(); i++) {
                                     getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
                                 }
                             }
-        
+
                             if (Integer.parseInt(data[4].toString()) < 0) {
                                 renderer.addHighlightedRow(getTable().getModel().getRowCount(), ColorsRenderer.lightRed);
                                 for (int i = 0; i < getTable().getColumnCount(); i++) {
@@ -259,7 +264,7 @@ public class ScreenEmprestimos extends ScreenEntity {
                                 }
                             }
                         }
-        
+
                         ((DefaultTableModel) getTable().getModel()).addRow(data);
                     }
                 } catch (Exception e) {
@@ -269,32 +274,33 @@ public class ScreenEmprestimos extends ScreenEntity {
                 return null;
             }),
             new FiltrosGerar("Empréstimos Finalizados", () -> {
-                try {            
+                try {
                     String[] columnNames = {"ID", "Amigo", "Data Início", "Data Devolução", "Data Finalizado", "Observações", "Num. Ferramentas", "V. Total Ferramentas", "V. Recebido", "Ferramentas"};
                     DefaultTableModel model = new DefaultTableModel(new Object[0][columnNames.length], columnNames) {
                         boolean[] canEdit = new boolean[]{
                             false, false, false, false, false, false, false, false, false, false
                         };
-        
+
                         public boolean isCellEditable(int rowIndex, int columnIndex) {
                             return canEdit[columnIndex];
-                        };
+                        }
+                    ;
                     };
         
                     getTable().setModel(model);
-        
+
                     ((DefaultTableModel) getTable().getModel()).setRowCount(0);
-        
+
                     if (getTable().getColumnModel().getColumnCount() > 0) {
                         getTable().getColumnModel().getColumn(0).setMinWidth(65);
                         getTable().getColumnModel().getColumn(0).setMaxWidth(65);
                     }
 
                     getTitulo().setText("Empréstimos Finalizados");
-        
-                    for (Object[] data : LoansDAO.getInstance().relatorioEmprestimos()) {            
+
+                    for (Object[] data : LoansDAO.getInstance().relatorioEmprestimos()) {
                         ((DefaultTableModel) getTable().getModel()).addRow(data);
-        
+
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Erro ao carregar os dados da tabela: " + e.getMessage());

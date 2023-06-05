@@ -20,7 +20,6 @@ import ViewsTool.TelaCadastroFerramentas;
 import com.itextpdf.text.Paragraph;
 import java.sql.SQLException;
 
-
 public class ScreenFerramentas extends ScreenEntity {
 
     private final String[] columnNames = {"ID", "Nome", "Fabricante", "Preço", "Em Uso Por", "Data Devolução"};
@@ -101,17 +100,17 @@ public class ScreenFerramentas extends ScreenEntity {
                 getTable().getColumnModel().getColumn(5).setMaxWidth(110);
 
             }
-            
-            if(getFiltros().getSelectedItem() != null){
+
+            if (getFiltros().getSelectedItem() != null) {
                 FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                if(f.getType() == FiltrosEnum.FILTRO_GERAR){
+                if (f.getType() == FiltrosEnum.FILTRO_GERAR) {
                     f.run();
                     return;
                 }
             }
 
             ArrayList<Object[]> datas = ToolsDAO.getInstance().getFerramentasValue();
-            
+
             if (getFiltros().getSelectedItem() != null) {
                 FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
                 if (f.getType() == FiltrosEnum.FILTRO_ORDENAR) {
@@ -128,7 +127,7 @@ public class ScreenFerramentas extends ScreenEntity {
                         continue;
                     }
                 }
-                
+
                 if (!data[4].toString().equalsIgnoreCase("disponivel")) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
@@ -180,17 +179,20 @@ public class ScreenFerramentas extends ScreenEntity {
             }
             ToolsDAO.getInstance().removeTool(toolsDel);
             carregarDados();
-        } catch(ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Nada selecionado vei");
             e.printStackTrace();
-        }catch( DatabaseResultQueryException e){
+
+        } catch (DatabaseResultQueryException e) {
             System.out.println("Talvez o banco de dados explodiu, mas não retornou nada");
             e.printStackTrace();
-        } catch( SQLException e){
+
+        } catch (SQLException e) {
             System.out.println("Os comandos enviados SQL enviados tem algum problema");
             e.printStackTrace();
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"erro desconhecido\n"+ e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -228,8 +230,7 @@ public class ScreenFerramentas extends ScreenEntity {
             new FiltrosOrdenar("ID"),
             new FiltrosOrdenar("Nome Crescente", (data1, data2) -> {
                 return ((String) data1[1]).compareTo((String) data2[1]);
-            }),
-        });
+            }),});
     }
 
 }
