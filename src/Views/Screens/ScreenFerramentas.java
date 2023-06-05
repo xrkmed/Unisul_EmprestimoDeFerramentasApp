@@ -147,7 +147,7 @@ public class ScreenFerramentas extends ScreenEntity {
                     }
 
                 }
-//                  data[3] = "R$"+data[3].toString();
+                  data[3] = "R$"+data[3].toString();
                 ((DefaultTableModel) getTable().getModel()).addRow(data);
             }
         } catch (Exception e) {
