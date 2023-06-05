@@ -163,7 +163,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
         textComplemento.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textComplemento.setToolTipText("Descreva um Complemento");
-        textComplemento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        textComplemento.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         textComplemento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textComplementoActionPerformed(evt);
@@ -177,7 +177,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
         textNumero.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textNumero.setToolTipText("Digite o Numero da Casa");
-        textNumero.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        textNumero.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         textNumero.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
@@ -204,7 +204,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
         textRua.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textRua.setToolTipText("Digite o nome da rua");
-        textRua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        textRua.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         textRua.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 textRuaKeyPressed(evt);
@@ -213,7 +213,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
         textBairro.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textBairro.setToolTipText("Digite o nome da rua");
-        textBairro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        textBairro.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         textBairro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textBairroActionPerformed(evt);
@@ -226,10 +226,11 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         });
 
         selectCidade.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        selectCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a sua cidade" }));
-        selectCidade.setToolTipText("Selecione a sua cidade");
+        selectCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione a Cidade" }));
+        selectCidade.setToolTipText("Selecione a Cidade");
         selectCidade.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         selectCidade.setEnabled(false);
+        selectCidade.setMaximumSize(new java.awt.Dimension(186, 23));
         selectCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectCidadeActionPerformed(evt);
@@ -237,9 +238,10 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         });
 
         selectEstado.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        selectEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o Seu Estado" }));
-        selectEstado.setToolTipText("Escolha o Estado Desejado ");
+        selectEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o Estado" }));
+        selectEstado.setToolTipText("Selecione o Estado");
         selectEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        selectEstado.setMaximumSize(new java.awt.Dimension(186, 23));
         selectEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectEstadoActionPerformed(evt);
@@ -248,7 +250,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
         textCEP.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textCEP.setToolTipText("Insira CEP do seu amigo");
-        textCEP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        textCEP.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         textCEP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textCEPActionPerformed(evt);
@@ -314,19 +316,18 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                         .addGap(69, 69, 69)))
                 .addGap(10, 10, 10)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textRua)
-                    .addComponent(textBairro)
-                    .addComponent(textComplemento)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(textNumero)
-                        .addGap(168, 168, 168))
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(selectCidade, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(selectEstado, javax.swing.GroupLayout.Alignment.LEADING, 0, 190, Short.MAX_VALUE)
-                            .addComponent(textCEP, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                        .addComponent(btnBuscarCep, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(textRua, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jLayeredPane1Layout.createSequentialGroup()
+                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(selectEstado, 0, 180, Short.MAX_VALUE)
+                                .addComponent(textCEP))
+                            .addGap(59, 59, 59)
+                            .addComponent(btnBuscarCep, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textBairro, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(selectCidade, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(15, 15, 15))
         );
         jLayeredPane1Layout.setVerticalGroup(
@@ -371,7 +372,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
         textNome.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textNome.setToolTipText("Digite o nome completo do seu amigo");
-        textNome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        textNome.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         textNome.setInheritsPopupMenu(true);
         textNome.setName(""); // NOI18N
         textNome.addActionListener(new java.awt.event.ActionListener() {
@@ -390,7 +391,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
         textTelefone.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textTelefone.setToolTipText("Digite o telefone do seu amigo");
-        textTelefone.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        textTelefone.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         textTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textTelefoneActionPerformed(evt);
@@ -418,7 +419,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(21, 21, 21)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textTelefone)
+                    .addComponent(textTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
                     .addComponent(textNome))
                 .addGap(15, 15, 15))
         );
@@ -504,7 +505,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
             .addGroup(jLayeredPane5Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addComponent(btnCriarEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(btnVisualizarEmprestimos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -536,9 +537,9 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLayeredPane1)
-                    .addComponent(jLayeredPane2)
-                    .addComponent(jLayeredPane5))
+                    .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
