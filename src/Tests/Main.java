@@ -31,3 +31,24 @@ public class Main {
     }
 
 }
+
+/*
+- Função filtrar texto digitado em todas as telas
+- Colocar função do botão de pesquisar "Lupa"
+- Alterar ToolTip botão de "Deletar" para "Finalizar Empréstimo"
+- Alterar ícone do botão de "Deletar" na janela "Empréstimos em Aberto"
+- Exception ao usar botão "Visualizar" em "TelaAmigos" sem amigo selecionado
+- Rever todas as "ToolTips"
+- Adicionar função aos botões de "Editar" e "Visualizar" em todas as telas exeto em "Tela Amigos"
+- Remover mensagnes sem sentido no "Sys.out"
+- Revisar textos e mensagens nas exceptions
+- Adicionar legenda das cores nas tabelas (Ex.: Tela Empréstimos em Aberto -> Amarelo == Data Entrega D-7)
+- Deixar tom do vermelho mais claro
+- Adicionar botão de atribuição de ferramentas a um fabricante
+- Alterar layout da tela menciona acima
+- Fazer "Integração" com Google Agendas
+- Remover telas de "Relatório" e telas repetidas
+
+
+
+*/
