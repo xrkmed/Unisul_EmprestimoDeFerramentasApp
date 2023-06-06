@@ -113,7 +113,7 @@ public class AddressDAO {
     
     private int getAmigosUsaEndereco(int id){
         try {
-            ResultSet _res = DBQuery.executeQuery("SELECT COUNT(*) FROM tb_amigos WHERE endereco_id = ?", id);
+            ResultSet _res = DBQuery.executeQuery("SELECT COUNT(*) FROM amigo_has_endereco WHERE endereco_id = ?", id);
             if(_res.next()){
                 return _res.getInt(1);
             }
