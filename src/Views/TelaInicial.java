@@ -12,8 +12,11 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 public class TelaInicial extends javax.swing.JFrame {
@@ -24,6 +27,27 @@ public class TelaInicial extends javax.swing.JFrame {
     public TelaInicial() {
         initComponents();
         updateTela(new ScreenAmigos(this));
+
+
+        menuEditar.setText(btnEditar.getToolTipText());
+        menuDeletar.setText(btnDeletar.getToolTipText());
+        menuVisualizar.setText(btnVisualizar.getToolTipText());
+        
+        menuEditar.addActionListener(l -> {
+            telaAtual.getBtnEditar().doClick();
+        });
+
+        menuDeletar.addActionListener(l -> {
+            telaAtual.getBtnDeletar().doClick();
+        });
+
+        menuVisualizar.addActionListener(l -> {
+            telaAtual.getBtnVisualizar().doClick();
+        });
+    }
+
+    public JPopupMenu getPopOpcoes(){
+        return popOpcoes;
     }
 
     public ScreenEntity getTelaAtual() {
@@ -106,6 +130,10 @@ public class TelaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popOpcoes = new javax.swing.JPopupMenu();
+        menuDeletar = new javax.swing.JMenuItem();
+        menuEditar = new javax.swing.JMenuItem();
+        menuVisualizar = new javax.swing.JMenuItem();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         campoFiltroNome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -138,6 +166,22 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+
+        menuDeletar.setText("btnDeletar");
+        popOpcoes.add(menuDeletar);
+
+        menuEditar.setText("btnEditar");
+        menuEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEditarActionPerformed(evt);
+            }
+        });
+        popOpcoes.add(menuEditar);
+
+        menuVisualizar.setText("btnVisualizar");
+        popOpcoes.add(menuVisualizar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Grupo Supimpa - ToolStock Manager");
@@ -466,6 +510,18 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setText("Legendas");
+
+        jMenuItem3.setText("Cores da Tabela");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -572,14 +628,46 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_comboFiltrosItemStateChanged
 
     private void tabelaPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaPrincipalMouseClicked
-        if(evt.getClickCount() == 2){
-            getBtnVisualizar().doClick();
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            int row = tabelaPrincipal.rowAtPoint(evt.getPoint());
+
+            if (row >= 0 && row < tabelaPrincipal.getRowCount()) {
+                tabelaPrincipal.setRowSelectionInterval(row, row);
+                popOpcoes.show(tabelaPrincipal, evt.getX(), evt.getY());
+            }
+        }else{
+            if(evt.getClickCount() == 2){
+                getBtnVisualizar().doClick();
+            }
         }
     }//GEN-LAST:event_tabelaPrincipalMouseClicked
 
     private void tabelaPrincipalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabelaPrincipalKeyPressed
 
     }//GEN-LAST:event_tabelaPrincipalKeyPressed
+
+    private void menuEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuEditarActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        String mensagem = "Cores e seus significados:\n\n" +
+                "Fundo vermelho:\n" +
+                "- Linhas de tabela com fundo vermelho indicam que:\n" +
+                "   - Na tabela de emprestimos: Um empréstimo está atrasado;\n" +
+                "   - Na tabela de ferramenta: Uma ferramenta deveria ter sido devolvida;\n" +
+                "   - Na tabela de amigos: Um amigo está com um empréstimo atrasado;\n" +
+                "   - Na tabela de fabricante: Uma fabricante está com todas as ferramentas em uso.\n\n" +
+                "Fundo amarelo:\n" +
+                "- Linhas de tabela com fundo amarelo indicam que:\n" +
+                "   - Na tabela de empréstimos: este empréstimo ira vencer dentro de 7 dias.\n\n" +
+                "   - Na tabela de amigos: este amigo esta com pelo menos um emprestimo em aberto.\n\n" +
+                "Fundo laranja claro:\n" +
+                "- Linhas de tabela com fundo laranja claro indicam que:\n" +
+                "   - Na tabela de fabricante: A fabricante não tem nenhuma ferramenta cadastrada.";
+
+        JOptionPane.showMessageDialog(null, mensagem, "Legenda de Cores", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -612,16 +700,22 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelListaNome;
+    private javax.swing.JMenuItem menuDeletar;
+    private javax.swing.JMenuItem menuEditar;
+    private javax.swing.JMenuItem menuVisualizar;
+    private javax.swing.JPopupMenu popOpcoes;
     private javax.swing.JTable tabelaPrincipal;
     // End of variables declaration//GEN-END:variables
 }
