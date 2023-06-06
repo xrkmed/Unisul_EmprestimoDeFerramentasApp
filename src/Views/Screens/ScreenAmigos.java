@@ -186,18 +186,6 @@ public class ScreenAmigos extends ScreenEntity {
                 dao.removeFriend(friendsDel);
                 carregarDados();
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-           JOptionPane.showMessageDialog(null, "Selecione um amigo primeiro");
-            e.printStackTrace();
-
-        } catch (DatabaseResultQueryException e) {
-            System.out.println("Talvez o banco de dados explodiu, mas não retornou nada");
-            e.printStackTrace();
-
-        } catch (SQLException e) {
-            System.out.println("Os comandos enviados SQL enviados tem algum problema");
-            e.printStackTrace();
-
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -208,9 +196,7 @@ public class ScreenAmigos extends ScreenEntity {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             FriendModel selectedFriend = FriendsDAO.getInstance().getFriend(id);
             new TelaCadastroAmigos(selectedFriend, ScreenType.SCREEN_TYPE_VIEW).setVisible(true);
-        } catch (IndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(null, "Selecione um amigo primeiro");
-        } catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
         }
     }

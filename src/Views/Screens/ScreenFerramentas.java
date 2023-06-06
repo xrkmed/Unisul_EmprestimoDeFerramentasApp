@@ -182,11 +182,8 @@ public class ScreenFerramentas extends ScreenEntity {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ToolModel selectedTool = ToolsDAO.getInstance().getTool(id);
             new TelaCadastroFerramentas(selectedTool, ScreenType.SCREEN_TYPE_EDIT).setVisible(true);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(null, "Selecione alguma ferramenta primeiro");
-            e.printStackTrace();
-
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -206,19 +203,20 @@ public class ScreenFerramentas extends ScreenEntity {
             }
             ToolsDAO.getInstance().removeTool(toolsDel);
             carregarDados();
-        } catch (ArrayIndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(null, "Selecione alguma ferramenta primeiro");
-            e.printStackTrace();
-
-        } catch (DatabaseResultQueryException e) {
-            System.out.println("Talvez o banco de dados explodiu, mas não retornou nada");
-            e.printStackTrace();
-
-        } catch (SQLException e) {
-            System.out.println("Os comandos enviados SQL enviados tem algum problema");
-            e.printStackTrace();
-
-        } catch (Exception e) {
+        } //        catch (ArrayIndexOutOfBoundsException e) {
+        //            JOptionPane.showMessageDialog(null, "Selecione alguma ferramenta primeiro");
+        //            e.printStackTrace();
+        //
+        //        } catch (DatabaseResultQueryException e) {
+        //            System.out.println("Talvez o banco de dados explodiu, mas não retornou nada");
+        //            e.printStackTrace();
+        //
+        //        } catch (SQLException e) {
+        //            System.out.println("Os comandos enviados SQL enviados tem algum problema");
+        //            e.printStackTrace();
+        //
+        //        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -228,11 +226,8 @@ public class ScreenFerramentas extends ScreenEntity {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ToolModel selectedTool = ToolsDAO.getInstance().getTool(id);
             new TelaCadastroFerramentas(selectedTool, ScreenType.SCREEN_TYPE_VIEW).setVisible(true);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(null, "Selecione alguma ferramenta primeiro");
-            e.printStackTrace();
-
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
