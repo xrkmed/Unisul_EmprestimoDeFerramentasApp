@@ -98,7 +98,7 @@ public class ManufacturerDAO {
 
     public ArrayList<Object[]> getFabricantesData() throws DatabaseResultQueryException, SQLException {
         ArrayList<Object[]> datas = new ArrayList<>();
-        ResultSet result = DBQuery.executeQuery("SELECT f.id AS id, f.razao_social AS nome, f.cnpj AS cnpj, COUNT(DISTINCT ferr.id) AS `quantidade_ferramentas`, COUNT(DISTINCT CASE WHEN em.dataFinalizado IS NULL THEN fe.ferramenta_id END) AS `em_uso`, SUM(ferr.price) AS `valor_total_ferramentas` FROM tb_fabricantes AS f LEFT JOIN tb_ferramentas AS ferr ON f.id = ferr.fabricante_id LEFT JOIN tb_ferramentas_emprestimo AS fe ON ferr.id = fe.ferramenta_id LEFT JOIN tb_emprestimos AS em ON fe.emprestimo_id = em.id GROUP BY f.id, f.razao_social, f.cnpj;");
+        ResultSet result = DBQuery.executeQuery("SELECT f.id AS id, f.razao_social AS nome, f.cnpj AS cnpj, COUNT(DISTINCT ferr.id) AS `quantidade_ferramentas`, COUNT(DISTINCT CASE WHEN em.dataFinalizado IS NULL THEN fe.ferramenta_id END) AS `em_uso`, SUM(ferr.price) AS `valor_total_ferramentas` FROM tb_fabricantes AS f LEFT JOIN ferramenta_has_fabricante fhf ON fhf.fabricante_id = f.id LEFT JOIN tb_ferramentas AS ferr ON fhf.ferramenta_id = ferr.id LEFT JOIN tb_ferramentas_emprestimo AS fe ON ferr.id = fe.ferramenta_id LEFT JOIN tb_emprestimos AS em ON fe.emprestimo_id = em.id AND em.dataFinalizado IS NULL GROUP BY f.id, f.razao_social, f.cnpj;");
         while (result.next()) {
             datas.add(new Object[]{result.getInt("id"), result.getString("nome").toUpperCase(), CNPJResource.returnCNPJFormat(result.getString("cnpj")), result.getInt("quantidade_ferramentas"), result.getInt("em_uso"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getLong("valor_total_ferramentas"))});
         }

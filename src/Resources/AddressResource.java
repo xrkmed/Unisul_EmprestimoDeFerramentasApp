@@ -30,6 +30,9 @@ public class AddressResource {
         return this.id;
     }
 
+    public void setId(int id){
+        this.id = id;
+    }
 
     public String getStreet() {
         return this.street;

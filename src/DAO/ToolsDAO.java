@@ -27,15 +27,14 @@ public class ToolsDAO {
 
     //Methods
     public ToolModel addTool(String nome, double price, int fabricanteId) throws IllegalArgumentException, DatabaseResultQueryException, SQLException {
-        String query = "INSERT INTO tb_ferramentas (name, price, fabricante_id) VALUES (?, ?, ?);";
-
-        if (fabricanteId == -1) {
-            query = "INSERT INTO tb_ferramentas (name, price) VALUES (?, ?);";
-        }
-
-        ResultSet result = DBQuery.insertOrUpdateQuery(query, nome.toUpperCase(), price, (fabricanteId != -1 ? fabricanteId : null));
+        ResultSet result = DBQuery.insertOrUpdateQuery("INSERT INTO tb_ferramentas (name, price) VALUES (?, ?);", nome.toUpperCase(), price);
         while (result.next()) {
-            ToolModel tool = new ToolModel(result.getInt(1), nome.toUpperCase(), (fabricanteId != -1 ? ManufacturerDAO.getInstance().getManufacturer(fabricanteId) : null), price, 0);
+            int ferramentaId = result.getInt(1);
+            if(fabricanteId != -1){
+                DBQuery.insertOrUpdateQuery("INSERT INTO ferramenta_has_fabricante (ferramenta_id, fabricante_id) VALUES (?, ?)", ferramentaId, fabricanteId);
+            }
+
+            ToolModel tool = new ToolModel(ferramentaId, nome.toUpperCase(), (fabricanteId != -1 ? ManufacturerDAO.getInstance().getManufacturer(fabricanteId) : null), price, 0);
             return tool;
         }
 
@@ -43,13 +42,12 @@ public class ToolsDAO {
     }
 
     public void removeTool(ToolModel e) throws DatabaseResultQueryException {
-        DBQuery.insertOrUpdateQuery("DELETE FROM tb_ferramentas_emprestimo WHERE ferramenta_id = '" + e.getId() + "';");
         DBQuery.insertOrUpdateQuery("DELETE FROM tb_ferramentas WHERE id = '" + e.getId() + "';");
     }
 
     public ArrayList<ToolModel> getTools() throws SQLException, DatabaseResultQueryException {
         ArrayList<ToolModel> ferramentas = new ArrayList<>();
-        ResultSet result = DBQuery.executeQuery("SELECT f.id, f.name, f.price, f.fabricante_id, fe.emprestimo_id FROM tb_ferramentas AS f LEFT JOIN tb_ferramentas_emprestimo AS fe ON f.id = fe.ferramenta_id LEFT JOIN tb_emprestimos AS e ON fe.emprestimo_id = e.id;");
+        ResultSet result = DBQuery.executeQuery("SELECT f.id, f.name, f.price, IFNULL(FHF.fabricante_id, -1) as fabricante_id, IFNULL(fe.emprestimo_id, 0) as emprestimo_id FROM tb_ferramentas AS f LEFT JOIN ferramenta_has_fabricante FHF ON FHF.ferramenta_id = f.id LEFT JOIN tb_ferramentas_emprestimo AS fe ON f.id = fe.ferramenta_id LEFT JOIN tb_emprestimos AS e ON fe.emprestimo_id = e.id GROUP BY f.id, FHF.fabricante_id;");
 
         while (result.next()) {
             ToolModel tool = new ToolModel(result.getInt("id"), result.getString("name").toUpperCase(), ManufacturerDAO.getInstance().getManufacturer(result.getInt("fabricante_id")), result.getDouble("price"), result.getInt("emprestimo_id"));
@@ -60,7 +58,7 @@ public class ToolsDAO {
     }
 
     public ToolModel getTool(int id) throws SQLException, DatabaseResultQueryException {
-        ResultSet result = DBQuery.executeQuery("SELECT f.id, f.name, f.price, f.fabricante_id, fe.emprestimo_id FROM tb_ferramentas AS f LEFT JOIN tb_ferramentas_emprestimo AS fe ON f.id = fe.ferramenta_id LEFT JOIN tb_emprestimos AS e ON fe.emprestimo_id = e.id WHERE f.id = ?", id);
+        ResultSet result = DBQuery.executeQuery("SELECT f.id, f.name, f.price, IFNULL(FHF.fabricante_id, -1) as fabricante_id, IFNULL(fe.emprestimo_id, 0) as emprestimo_id FROM tb_ferramentas AS f LEFT JOIN ferramenta_has_fabricante FHF ON FHF.ferramenta_id = f.id LEFT JOIN tb_ferramentas_emprestimo AS fe ON f.id = fe.ferramenta_id LEFT JOIN tb_emprestimos AS e ON fe.emprestimo_id = e.id WHERE f.id = ? GROUP BY f.id, FHF.fabricante_id;", id);
         ToolModel tool = null;
         Integer toolId = 0, toolManufacturerId = 0, toolLoanId = 0;
         String toolName = "";
@@ -78,7 +76,7 @@ public class ToolsDAO {
     }
 
     public ToolModel getTool(String name) throws DatabaseResultQueryException, SQLException {
-        ResultSet result = DBQuery.executeQuery("SELECT f.id, f.name, f.price, f.fabricante_id, fe.emprestimo_id FROM tb_ferramentas AS f LEFT JOIN tb_ferramentas_emprestimo AS fe ON f.id = fe.ferramenta_id LEFT JOIN tb_emprestimos AS e ON fe.emprestimo_id = e.id WHERE f.name = ?", name);
+        ResultSet result = DBQuery.executeQuery("SELECT f.id, f.name, f.price, IFNULL(FHF.fabricante_id, -1) as fabricante_id, IFNULL(fe.emprestimo_id, 0) as emprestimo_id FROM tb_ferramentas AS f LEFT JOIN ferramenta_has_fabricante FHF ON FHF.ferramenta_id = f.id LEFT JOIN tb_ferramentas_emprestimo AS fe ON f.id = fe.ferramenta_id LEFT JOIN tb_emprestimos AS e ON fe.emprestimo_id = e.id WHERE f.name = ? GROUP BY f.id, FHF.fabricante_id;", name);
 
         ToolModel tool = null;
         Integer toolId = 0, toolManufacturerId = 0, toolLoanId = 0;
@@ -98,7 +96,7 @@ public class ToolsDAO {
 
     public ArrayList<ToolModel> getToolsByManufacturer(int manufacturerId) throws DatabaseResultQueryException, SQLException {
         ArrayList<ToolModel> ferramentas = new ArrayList<>();
-        ResultSet result = DBQuery.executeQuery("SELECT f.id, f.name, f.price, f.fabricante_id, fe.emprestimo_id FROM tb_ferramentas AS f LEFT JOIN tb_ferramentas_emprestimo AS fe ON f.id = fe.ferramenta_id LEFT JOIN tb_emprestimos AS e ON fe.emprestimo_id = e.id WHERE f.fabricante_id = ?;", manufacturerId);
+        ResultSet result = DBQuery.executeQuery("SELECT f.id, f.name, f.price, fhf.fabricante_id, fe.emprestimo_id FROM tb_ferramentas AS f LEFT JOIN ferramenta_has_fabricante fhf ON fhf.ferramenta_id = f.id LEFT JOIN tb_ferramentas_emprestimo AS fe ON f.id = fe.ferramenta_id LEFT JOIN tb_emprestimos AS e ON fe.emprestimo_id = e.id WHERE fhf.fabricante_id = ?;", manufacturerId);
 
         while (result.next()) {
             ToolModel tool = new ToolModel(result.getInt("id"), result.getString("name").toUpperCase(), ManufacturerDAO.getInstance().getManufacturer(result.getInt("fabricante_id")), result.getDouble("price"), result.getInt("emprestimo_id"));
@@ -110,7 +108,7 @@ public class ToolsDAO {
 
     public ArrayList<ToolModel> getToolsWithoutManufacturer() throws DatabaseResultQueryException, SQLException {
         ArrayList<ToolModel> ferramentas = new ArrayList<>();
-        ResultSet result = DBQuery.executeQuery("SELECT f.id, f.name, f.price, f.fabricante_id, fe.emprestimo_id FROM tb_ferramentas AS f LEFT JOIN tb_ferramentas_emprestimo AS fe ON f.id = fe.ferramenta_id LEFT JOIN tb_emprestimos AS e ON fe.emprestimo_id = e.id WHERE f.fabricante_id IS NULL;");
+        ResultSet result = DBQuery.executeQuery("SELECT f.id, f.name, f.price, -1 as fabricante_id, fe.emprestimo_id FROM tb_ferramentas AS f LEFT JOIN ferramenta_has_fabricante fhf ON fhf.ferramenta_id = f.id LEFT JOIN tb_ferramentas_emprestimo AS fe ON f.id = fe.ferramenta_id LEFT JOIN tb_emprestimos AS e ON fe.emprestimo_id = e.id WHERE fhf.fabricante_id IS NULL;");
 
         while (result.next()) {
             ToolModel tool = new ToolModel(result.getInt("id"), result.getString("name").toUpperCase(), null, result.getDouble("price"), result.getInt("emprestimo_id"));
@@ -129,29 +127,28 @@ public class ToolsDAO {
     }
 
     public void updateManufacturer(int id, int manufacturerId) throws DatabaseResultQueryException {
-        DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET fabricante_id = " + (manufacturerId == -1 ? null : "'" + manufacturerId + "'") + " WHERE id = '" + id + "';");
+        DBQuery.insertOrUpdateQuery("DELETE FROM ferramenta_has_fabricante WHERE ferramenta_id = ?", id);
+
+        if(manufacturerId != -1){
+            DBQuery.insertOrUpdateQuery("INSERT INTO ferramenta_has_fabricante (ferramenta_id, fabricante_id) VALUES (?, ?)", id, manufacturerId);
+        }
     }
 
     public void updateTool(Integer id, ToolModel reference) throws DatabaseResultQueryException {
-        DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET name = ?, price = ?, fabricante_id = ? WHERE id = ?;", reference.getNome(), reference.getPrice(), (reference.getManufacturer() != null ? reference.getManufacturer().getId() : null), id);
+        DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET name = ?, price = ? WHERE id = ?;", reference.getNome(), reference.getPrice(), id);
+        DBQuery.insertOrUpdateQuery("DELETE FROM ferramenta_has_fabricante WHERE ferramenta_id = ?", id);
+
+        if(reference.getManufacturer() != null){
+            DBQuery.insertOrUpdateQuery("INSERT INTO ferramenta_has_fabricante (ferramenta_id, fabricante_id) VALUES (?, ?)", id, reference.getManufacturer().getId());
+        }
     }
 
     public ArrayList<Object[]> getFerramentasValue() throws DatabaseResultQueryException, SQLException, ParseException {
         ArrayList<Object[]> datas = new ArrayList<>();
-        ResultSet result = DBQuery.executeQuery("SELECT ferr.id AS id, ferr.name AS nome, fab.razao_social AS nome_fabricante, ferr.price AS preco_ferramenta, IF(em.dataFinalizado IS NULL, IF(em.dataFinalizado IS NOT NULL, 'Disponivel', amigo.nome), 'Disponivel') AS nome_amigo, IF(em.dataFinalizado IS NULL, IF(em.dataFinalizado IS NOT NULL, 'Disponivel', em.previsaoDataEntrega), 'Disponivel') AS dataPrevisaoDevolucao FROM tb_ferramentas AS ferr LEFT JOIN tb_fabricantes AS fab ON ferr.fabricante_id = fab.id LEFT JOIN ( SELECT fe.ferramenta_id, MAX(fe.emprestimo_id) AS max_emprestimo_id FROM tb_ferramentas_emprestimo AS fe GROUP BY fe.ferramenta_id ) AS max_fe ON ferr.id = max_fe.ferramenta_id LEFT JOIN tb_emprestimos AS em ON max_fe.max_emprestimo_id = em.id LEFT JOIN tb_amigos AS amigo ON em.amigo_id = amigo.id;");
+        ResultSet result = DBQuery.executeQuery("SELECT ferr.id AS id, ferr.name AS nome, IFNULL(fab.razao_social, 'Sem fabricante') AS nome_fabricante, ferr.price AS preco_ferramenta, IFNULL(IF(em.dataFinalizado IS NOT NULL, 'Disponivel', amigo.nome), 'Disponivel') AS nome_amigo, IF(em.dataFinalizado IS NULL, IFNULL(em.previsaoDataEntrega, 'Disponivel'), 'Disponivel') AS dataPrevisaoDevolucao FROM tb_ferramentas AS ferr LEFT JOIN ferramenta_has_fabricante fhf ON fhf.ferramenta_id = ferr.id LEFT JOIN tb_fabricantes AS fab ON fhf.fabricante_id = fab.id LEFT JOIN ( SELECT fe.ferramenta_id, MAX(fe.emprestimo_id) AS max_emprestimo_id FROM tb_ferramentas_emprestimo AS fe GROUP BY fe.ferramenta_id ) AS max_fe ON ferr.id = max_fe.ferramenta_id LEFT JOIN tb_emprestimos AS em ON max_fe.max_emprestimo_id = em.id LEFT JOIN tb_amigos AS amigo ON em.amigo_id = amigo.id WHERE em.dataFinalizado IS NULL OR em.id IS NULL;");
         while (result.next()) {
             String date = !result.getString("dataPrevisaoDevolucao").equals("Disponivel") ? DateResource.convertDatabaseData(result.getString("dataPrevisaoDevolucao")) : "Disponivel";
             datas.add(new Object[]{result.getInt("id"), result.getString("nome").toUpperCase(), result.getString("nome_fabricante").toUpperCase(), BRLResource.PRICE_FORMATTER.format(result.getDouble("preco_ferramenta")), result.getString("nome_amigo").toUpperCase(), date});
-        }
-
-        return datas;
-    }
-
-    public ArrayList<Object[]> getRelatorioObjectTools() throws DatabaseResultQueryException, SQLException {
-        ArrayList<Object[]> datas = new ArrayList<>();
-        ResultSet result = DBQuery.executeQuery("SELECT tb_ferramentas.id, tb_ferramentas.name, tb_ferramentas.price, SUM(CASE WHEN tb_emprestimos.id > 0 THEN 1 ELSE 0 END) as total_loans FROM tb_ferramentas LEFT JOIN tb_emprestimos ON tb_ferramentas.emprestimo_id = tb_emprestimos.id GROUP BY tb_ferramentas.id, tb_ferramentas.name, tb_ferramentas.price, tb_emprestimos.id;");
-        while (result.next()) {
-            datas.add(new Object[]{result.getInt("id"), result.getString("name").toUpperCase(), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("price")), result.getInt("total_loans")});
         }
 
         return datas;
