@@ -36,8 +36,9 @@ public class FriendsDAO {
 
         ResultSet _resAddress = DBQuery.executeQuery("SELECT id FROM tb_enderecos WHERE cep = ?", address.getCEP());
         if(!_resAddress.next()) {
-            _resAddress = DBQuery.insertOrUpdateQuery("INSERT INTO tb_enderecos (rua, bairro, cidade, uf, cep) VALUES (?, ?, ?, ?, ?)", address.getStreet(), address.getDistrict(), address.getCity(), address.getState(), address.getCEP());
+            _resAddress = AddressDAO.getInstance().insertAddress(address);
         }
+
         
         if(_resAddress.next()){
             ResultSet _insertAmigo = DBQuery.insertOrUpdateQuery("INSERT INTO tb_amigos (nome, telefone, endereco_id, numero, complemento) VALUES (?, ?, ?, ?, ?);", nome.toUpperCase(), telefone.toUpperCase(), _resAddress.getInt(1), address.getNumber(), address.getComplemento());
@@ -87,14 +88,12 @@ public class FriendsDAO {
         if(target.getAddress().toString() != reference.getAddress().toString()){
             AddressResource _address = AddressDAO.getInstance().getAddress(reference.getAddress().getCEP());
             if(_address == null){
-                ResultSet _newAddress = DBQuery.insertOrUpdateQuery("INSERT INTO tb_enderecos (rua, bairro, cidade, uf, cep) VALUES (?, ?, ?, ?, ?)", reference.getAddress().getStreet(), reference.getAddress().getDistrict(), reference.getAddress().getCity(), reference.getAddress().getState(), reference.getAddress().getCEP());
+                ResultSet _newAddress = AddressDAO.getInstance().insertAddress(reference.getAddress());
                 while(_newAddress.next()){
-                    System.out.println("inseriu cep novo");
                     DBQuery.insertOrUpdateQuery("UPDATE tb_amigos SET endereco_id = ? WHERE id = ?", _newAddress.getInt(1), target.getId());
                     break;
                 }
             }else{
-                System.out.println("achou cep");
                 DBQuery.insertOrUpdateQuery("UPDATE tb_amigos SET endereco_id = ? WHERE id = ?", _address.getId(), target.getId());
             }
         }
