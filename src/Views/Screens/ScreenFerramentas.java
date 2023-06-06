@@ -18,7 +18,10 @@ import Resources.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsTool.TelaCadastroFerramentas;
 import com.itextpdf.text.Paragraph;
+
+import java.util.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 public class ScreenFerramentas extends ScreenEntity {
 
@@ -145,8 +148,20 @@ public class ScreenFerramentas extends ScreenEntity {
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
                         getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
                     }
-
                 }
+
+                if (!data[5].toString().equalsIgnoreCase("disponivel")){
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    Date date = sdf.parse(data[5].toString());
+                    Date now = new Date();
+                    if (date.before(now)){
+                        renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
+                        for (int i = 0; i < getTable().getColumnCount(); i++) {
+                            getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
+                        }
+                    }
+                }
+
                   data[3] = "R$"+data[3].toString();
                 ((DefaultTableModel) getTable().getModel()).addRow(data);
             }

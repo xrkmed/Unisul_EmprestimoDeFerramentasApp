@@ -6,6 +6,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import Controllers.FiltrosClass;
 import Views.TelaInicial;
@@ -100,6 +101,10 @@ public class ScreenEntity {
 
     public final JButton getBtnExportar() {
         return tela.getBtnExportar();
+    }
+
+    public final JPopupMenu getPopOpcoes(){
+        return tela.getPopOpcoes();
     }
 
     public final JComboBox<FiltrosClass> getFiltros() {
