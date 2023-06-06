@@ -34,15 +34,21 @@ public class TelaInicial extends javax.swing.JFrame {
         menuVisualizar.setText(btnVisualizar.getToolTipText());
         
         menuEditar.addActionListener(l -> {
-            telaAtual.getBtnEditar().doClick();
+            if(telaAtual.getBtnEditar().getActionListeners().length > 0){
+                telaAtual.getBtnEditar().getActionListeners()[0].actionPerformed(null);
+            }
         });
 
         menuDeletar.addActionListener(l -> {
-            telaAtual.getBtnDeletar().doClick();
+            if(telaAtual.getBtnDeletar().getActionListeners().length > 0){
+                telaAtual.getBtnDeletar().getActionListeners()[0].actionPerformed(null);
+            }
         });
 
         menuVisualizar.addActionListener(l -> {
-            telaAtual.getBtnVisualizar().doClick();
+            if(telaAtual.getBtnVisualizar().getActionListeners().length > 0){
+                telaAtual.getBtnVisualizar().getActionListeners()[0].actionPerformed(null);
+            }
         });
     }
 
@@ -637,7 +643,9 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         }else{
             if(evt.getClickCount() == 2){
-                getBtnVisualizar().doClick();
+                if(getBtnVisualizar().getActionListeners().length > 0){
+                    getBtnVisualizar().getActionListeners()[0].actionPerformed(null);
+                }
             }
         }
     }//GEN-LAST:event_tabelaPrincipalMouseClicked

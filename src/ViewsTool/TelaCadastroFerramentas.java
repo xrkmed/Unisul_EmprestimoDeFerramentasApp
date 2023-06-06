@@ -2,6 +2,8 @@ package ViewsTool;
 
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
+
+import Controllers.ScreenType;
 import DAO.ToolsDAO;
 import Model.ToolModel;
 import Resources.BRLResource;
@@ -18,7 +20,7 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
         initFrameConfig();
     }
 
-    public TelaCadastroFerramentas(ToolModel tool) {
+    public TelaCadastroFerramentas(ToolModel tool, ScreenType viewType) {
         this();
         this.tool = tool;
 
@@ -32,6 +34,15 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
         if (this.selectedManufacturer != null) {
             this.textSelecionado.setText("Selecionado: " + this.selectedManufacturer.getName());
             this.btnRemoverFabricante.setEnabled(true);
+        }
+
+        if (viewType == ScreenType.SCREEN_TYPE_VIEW) {
+            this.textFerramentaNome.setEditable(false);
+            this.textFerramentaValor.setEditable(false);
+            this.btnSelectFabricante.setEnabled(false);
+            this.btnRemoverFabricante.setEnabled(false);
+            this.btnConcluirCad.setEnabled(false);
+            this.btnCancelarCad.setText("Voltar");
         }
 
     }

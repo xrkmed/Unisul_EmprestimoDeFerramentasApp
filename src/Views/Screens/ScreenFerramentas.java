@@ -9,6 +9,7 @@ import Controllers.ColorsRenderer;
 import Controllers.FiltrosClass;
 import Controllers.FiltrosEnum;
 import Controllers.PDFEntity;
+import Controllers.ScreenType;
 import Controllers.StatusRenderer;
 import Controllers.Filtros.FiltrosOrdenar;
 import DAO.ToolsDAO;
@@ -177,7 +178,14 @@ public class ScreenFerramentas extends ScreenEntity {
     }
 
     public void btnEditar() {
-        JOptionPane.showMessageDialog(null, "working!");
+        try {
+            int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+            ToolModel selectedTool = ToolsDAO.getInstance().getTool(id);
+            new TelaCadastroFerramentas(selectedTool, ScreenType.SCREEN_TYPE_EDIT).setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 
     public void btnDeletar() {
@@ -212,7 +220,14 @@ public class ScreenFerramentas extends ScreenEntity {
     }
 
     public void btnVisualizar() {
-        JOptionPane.showMessageDialog(null, "working!");
+        try {
+            int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
+            ToolModel selectedTool = ToolsDAO.getInstance().getTool(id);
+            new TelaCadastroFerramentas(selectedTool, ScreenType.SCREEN_TYPE_VIEW).setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 
     public void btnExportar() {

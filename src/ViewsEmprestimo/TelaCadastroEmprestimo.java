@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AbstractDocument;
+
+import Controllers.ScreenType;
 import DAO.LoansDAO;
 import DAO.ToolsDAO;
 import Model.FriendModel;
@@ -38,7 +40,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         configFrame();
     }
 
-    public TelaCadastroEmprestimo(LoanModel emprestimo) {
+    public TelaCadastroEmprestimo(LoanModel emprestimo, ScreenType viewType) {
         this();
         this.emprestimo = emprestimo;
         try {
@@ -49,6 +51,15 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             textValorReceber.setText(BRLResource.PRICE_FORMATTER.format(emprestimo.getPrice()));
             jLabel3.setText("Alterar emprestimo");
             btnCadastrarEmprestimo.setText("Alterar emprestimo");
+
+            if(viewType == ScreenType.SCREEN_TYPE_VIEW){
+                textValorReceber.setEditable(false);
+                textDataDevolucao.setEditable(false);
+                btnSelecionarBeneficiado.setEnabled(false);
+                btnRemoverBeneficiado.setEnabled(false);
+                btnAdicionarFerramenta.setEnabled(false);
+                btnRemoverFerramenta.setEnabled(false);
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Algum erro interno aconteceu no sistema, tente novamente mais tarde ou contacte o administrador!");
             System.out.println(e.getMessage());

@@ -1,6 +1,7 @@
 package ViewsTool;
 
 import Controllers.ColorsRenderer;
+import Controllers.ScreenType;
 import Controllers.StatusRenderer;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -674,7 +675,7 @@ public class TelaTabelaFerramentas extends javax.swing.JFrame {
 
     private void btnAlterarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarFerramentaActionPerformed
         if (selectedTool != null) {
-            TelaCadastroFerramentas tela = new TelaCadastroFerramentas(selectedTool);
+            TelaCadastroFerramentas tela = new TelaCadastroFerramentas(selectedTool, ScreenType.SCREEN_TYPE_EDIT);
             tela.setVisible(true);
             tela.addWindowListener(new WindowAdapter() {
                 @Override

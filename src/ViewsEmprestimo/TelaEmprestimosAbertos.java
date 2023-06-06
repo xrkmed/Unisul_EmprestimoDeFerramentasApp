@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
+import Controllers.ScreenType;
 import Controllers.StatusRenderer;
 import DAO.LoansDAO;
 import Model.LoanModel;
@@ -470,7 +471,7 @@ public class TelaEmprestimosAbertos extends javax.swing.JFrame {
 
     private void btnAlterarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarEmprestimoActionPerformed
         if (selectedLoan != null) {
-            TelaCadastroEmprestimo tela = new TelaCadastroEmprestimo(selectedLoan);
+            TelaCadastroEmprestimo tela = new TelaCadastroEmprestimo(selectedLoan, ScreenType.SCREEN_TYPE_EDIT);
             tela.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
