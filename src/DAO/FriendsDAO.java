@@ -38,12 +38,16 @@ public class FriendsDAO {
         if(!_resAddress.next()) {
             _resAddress = DBQuery.insertOrUpdateQuery("INSERT INTO tb_enderecos (rua, bairro, cidade, uf, cep) VALUES (?, ?, ?, ?, ?)", address.getStreet(), address.getDistrict(), address.getCity(), address.getState(), address.getCEP());
         }
+        
+        if(_resAddress.next()){
+            ResultSet _insertAmigo = DBQuery.insertOrUpdateQuery("INSERT INTO tb_amigos (nome, telefone, endereco_id, numero, complemento) VALUES (?, ?, ?, ?, ?);", nome.toUpperCase(), telefone.toUpperCase(), _resAddress.getInt(1), address.getNumber(), address.getComplemento());
+            while(_insertAmigo.next()){
+                FriendModel _friend = new FriendModel(_insertAmigo.getInt(1), nome.toUpperCase(), address, telefone);
 
-        ResultSet _insertAmigo = DBQuery.insertOrUpdateQuery("INSERT INTO tb_amigos (nome, telefone, endereco_id, numero, complemento) VALUES (?, ?, ?, ?, ?);", nome.toUpperCase(), telefone.toUpperCase(), _resAddress.getInt(1), address.getNumber(), address.getComplemento());
-        while(_insertAmigo.next()){
-            FriendModel _friend = new FriendModel(_insertAmigo.getInt(1), nome.toUpperCase(), address, telefone);
-
-            return _friend;
+                return _friend;
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possível adicionar o amigo!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
 
         return null;

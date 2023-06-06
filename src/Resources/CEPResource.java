@@ -70,15 +70,15 @@ public class CEPResource {
     }
 
     public static boolean verificarRua(String rua) {
-        return rua.length() >= 4 && rua.length() <= 64;
+        return rua.length() >= 4;
     }
 
-    public static boolean verificarCidade(String rua) {
-        return rua.length() >= 3 && rua.length() <= 16;
+    public static boolean verificarCidade(String cidade) {
+        return cidade.length() >= 3;
     }
 
-    public static boolean verificarBairro(String rua) {
-        return rua.length() >= 3 && rua.length() <= 64;
+    public static boolean verificarBairro(String bairro) {
+        return bairro.length() >= 3;
     }
 
     public static boolean verificarTelefone(String telefone) {
