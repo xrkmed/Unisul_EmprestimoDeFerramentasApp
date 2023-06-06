@@ -4,6 +4,7 @@ import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 
 public class PriceDocument extends DocumentFilter {
+    // Esta classe serve para formatar o preco de uma ferramenta no formato de moeda brasileira
 
     @Override
     public void remove(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length) throws javax.swing.text.BadLocationException {
