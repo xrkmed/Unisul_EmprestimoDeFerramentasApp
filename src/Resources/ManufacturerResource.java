@@ -35,6 +35,10 @@ public class ManufacturerResource {
         return this.name;
     }
 
+    public void setName(String name){
+        this.name = name;
+    }
+
     public String getCNPJ() {
         return this.cnpj != null ? this.cnpj : "00.000.000/0000-00";
     }

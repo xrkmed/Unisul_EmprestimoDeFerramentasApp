@@ -68,6 +68,10 @@ public class ManufacturerDAO {
         return null;
     }
 
+    public void updateManufacturer(ManufacturerResource origin, ManufacturerResource updated) throws DatabaseResultQueryException{
+        DBQuery.insertOrUpdateQuery("UPDATE tb_fabricantes SET razao_social = ?, cnpj = ? WHERE id = ?", updated.getName().toUpperCase(), CNPJResource.returnCNPJUnformat(updated.getCNPJ()), origin.getId());
+    }
+
     public ManufacturerResource getManufacturer(String cnpj) throws DatabaseResultQueryException, SQLException {
         if (CNPJResource.validarCNPJ(cnpj)) {
             ResultSet manufacturers = DBQuery.executeQuery("SELECT id, razao_social, cnpj FROM tb_fabricantes WHERE cnpj = ? LIMIT 1;", cnpj);

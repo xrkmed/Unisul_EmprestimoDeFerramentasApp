@@ -3,6 +3,7 @@ package ViewsManufacturer;
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
 import Controllers.CNPJEntity;
+import Controllers.ScreenType;
 import DAO.ManufacturerDAO;
 import Exceptions.CNPJNotFound;
 import Resources.CNPJDocument;
@@ -12,10 +13,49 @@ import Resources.ManufacturerResource;
 public class TelaCadastroFabricantes extends javax.swing.JFrame {
 
     private CNPJEntity cnpjObject = null;
+    private ManufacturerResource selectedManufacturer = null;
 
     public TelaCadastroFabricantes() {
         initComponents();
         configFrame();
+    }
+    
+    public TelaCadastroFabricantes(ManufacturerResource selectedManufacturer, ScreenType screenType){
+        this();
+        this.selectedManufacturer = selectedManufacturer;
+        textoNomeFantasia.setText(selectedManufacturer.getName());
+        textoRazaoSocial.setText(selectedManufacturer.getName());
+        CNPJLabel.setText(selectedManufacturer.getCNPJ());
+        textoCNPJ.setText(selectedManufacturer.getCNPJ());
+        jLabel14.setText("Dados do Fabricante");
+        try{
+            cnpjObject = CNPJResource.consultarCNPJ(CNPJResource.returnCNPJUnformat(textoCNPJ.getText()));
+
+            textoEndereco.setText(cnpjObject.getSampleAddress());
+            textoRazaoSocial.setText(cnpjObject.getNome());
+            textoTelefone.setText(cnpjObject.getTelefone());
+            textoStatus.setText(cnpjObject.getStatus());
+            textoCapitalSocial.setText("R$ " + cnpjObject.getCapitalSocial());
+            textoSituacao.setText(cnpjObject.getSituacao());
+            CNPJLabel.setText(cnpjObject.getCNPJ());
+        }catch(Exception e){
+            textoEndereco.setText("Não Informado");
+            textoRazaoSocial.setText(textoNomeFantasia.getText());
+            textoTelefone.setText("Não Informado");
+            textoStatus.setText("OK");
+            textoCapitalSocial.setText("Desconhecido");
+            textoSituacao.setText("SEM CONSULTA");
+        }
+
+        if (screenType == ScreenType.SCREEN_TYPE_EDIT) {
+            textoNomeFantasia.setEditable(true);
+            textoCNPJ.setEditable(true);
+            btnVerificarFabricante.setEnabled(true);
+        } else {
+            textoNomeFantasia.setEditable(false);
+            textoCNPJ.setEditable(false);
+            btnVerificarFabricante.setEnabled(false);
+        }
     }
 
     private void configFrame() {
@@ -354,7 +394,8 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
         }
 
         try {
-            if (validCnpj && ManufacturerDAO.getInstance().getManufacturer(CNPJResource.returnCNPJUnformat(textoCNPJ.getText())) != null) {
+            ManufacturerResource _res = ManufacturerDAO.getInstance().getManufacturer(CNPJResource.returnCNPJUnformat(textoCNPJ.getText()));
+            if (validCnpj && _res != selectedManufacturer) {
                 JOptionPane.showMessageDialog(null, "Já existe um cadastro com o CNPJ informado!");
                 textoCNPJ.setText("");
                 return;
@@ -410,8 +451,18 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
     private void btnFinalizarCadastro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCadastro1ActionPerformed
         if (cnpjObject != null && cnpjObject.getStatus().equals("OK")) {
             try {
-                ManufacturerDAO.getInstance().addManufacturer(cnpjObject.getNome(), CNPJResource.returnCNPJUnformat(cnpjObject.getCNPJ()));
-                JOptionPane.showMessageDialog(null, "Fabricante " + cnpjObject.getNome() + " (" + cnpjObject.getCNPJ() + ") cadastrado com sucesso!");
+                if(selectedManufacturer == null){
+                    ManufacturerDAO.getInstance().addManufacturer(cnpjObject.getNome(), CNPJResource.returnCNPJUnformat(cnpjObject.getCNPJ()));
+                    JOptionPane.showMessageDialog(null, "Fabricante " + cnpjObject.getNome() + " (" + cnpjObject.getCNPJ() + ") cadastrado com sucesso!");
+                }else{
+                    ManufacturerResource _res = ManufacturerDAO.getInstance().getManufacturer(selectedManufacturer.getId());
+                    _res.setCNPJ(CNPJResource.returnCNPJUnformat(cnpjObject.getCNPJ()));
+                    _res.setName(cnpjObject.getNome());
+                    
+                    ManufacturerDAO.getInstance().updateManufacturer(selectedManufacturer, _res);
+                    JOptionPane.showMessageDialog(null, "Fabricante " + cnpjObject.getNome() + " alterado com sucesso!");
+                }
+                
                 this.dispose();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
@@ -428,8 +479,18 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
                     return;
                 }
 
-                ManufacturerResource manufacturer = ManufacturerDAO.getInstance().addManufacturer(textoNomeFantasia.getText(), "00000000000000");
-                JOptionPane.showMessageDialog(null, "Fabricante " + manufacturer.getName() + " cadastrado com sucesso!");
+                if(selectedManufacturer == null){
+                    ManufacturerResource manufacturer = ManufacturerDAO.getInstance().addManufacturer(textoNomeFantasia.getText(), "00000000000000");
+                    JOptionPane.showMessageDialog(null, "Fabricante " + manufacturer.getName() + " cadastrado com sucesso!");
+                }else{
+                    ManufacturerResource _res = ManufacturerDAO.getInstance().getManufacturer(selectedManufacturer.getId());
+                    _res.setCNPJ("00.000.000/0000-00");
+                    _res.setName(textoNomeFantasia.getText());
+                    
+                    ManufacturerDAO.getInstance().updateManufacturer(selectedManufacturer, _res);
+                    JOptionPane.showMessageDialog(null, "Fabricante " + textoNomeFantasia.getText() + " alterado com sucesso!");
+                }
+
                 this.dispose();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
