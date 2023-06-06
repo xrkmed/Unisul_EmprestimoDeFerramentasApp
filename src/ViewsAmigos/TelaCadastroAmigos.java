@@ -655,7 +655,6 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
             textCEP.requestFocus();
             return;
         }
-        JOptionPane.showMessageDialog(null, "Aguarde enquanto o CEP é consultado...", "Aguarde", JOptionPane.INFORMATION_MESSAGE);
 
         try {
             int opcao = JOptionPane.showConfirmDialog(this, "Para buscar um CEP, voce precisa ter uma conexao estavel com a internet, deseja procurar um CEP?", "Confirmar busca", JOptionPane.YES_NO_OPTION);
@@ -663,28 +662,40 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                 return;
             }
 
-            AddressResource cepBuscado = AddressDAO.getInstance().getAddress(Integer.parseInt(textCEP.getText()));
-            if(cepBuscado == null){
-                cepBuscado = CEPResource.buscarCEP(Integer.parseInt(textCEP.getText()));
-            }
+            Thread pBuscarCep = new Thread(new Runnable(){
+                @Override
+                public void run(){
+                    try{
+                        AddressResource cepBuscado = AddressDAO.getInstance().getAddress(Integer.parseInt(textCEP.getText()));
+                        if(cepBuscado == null){
+                            cepBuscado = CEPResource.buscarCEP(Integer.parseInt(textCEP.getText()));
+                        }
 
-            selectEstado.setSelectedItem(cepBuscado.getState());
-            selectCidade.removeAllItems();
-            selectCidade.addItem(cepBuscado.getCity());
-            selectCidade.setSelectedItem(cepBuscado.getCity());
-            selectCidade.setEnabled(false);
+                        selectEstado.setSelectedItem(cepBuscado.getState());
+                        selectCidade.removeAllItems();
+                        selectCidade.addItem(cepBuscado.getCity());
+                        selectCidade.setSelectedItem(cepBuscado.getCity());
+                        selectCidade.setEnabled(false);
+            
+                        if (cepBuscado.getDistrict().length() > 0) {
+                            textBairro.setText(cepBuscado.getDistrict());
+                        }
+            
+                        if (cepBuscado.getStreet().length() > 0) {
+                            textRua.setText(cepBuscado.getStreet());
+                        }
+            
+                        textRua.setEditable(textRua.getText().isEmpty());
+                        textBairro.setEditable(textBairro.getText().isEmpty());
+                    }catch(Exception e){
+                        JOptionPane.showMessageDialog(null, "CEP não encontrado");
+                        textCEP.requestFocus();
+                    }
+                }
+            });
 
-            if (cepBuscado.getDistrict().length() > 0) {
-                textBairro.setText(cepBuscado.getDistrict());
-            }
-
-            if (cepBuscado.getStreet().length() > 0) {
-                textRua.setText(cepBuscado.getStreet());
-            }
-
-            textRua.setEditable(textRua.getText().isEmpty());
-            textBairro.setEditable(textBairro.getText().isEmpty());
-
+            pBuscarCep.start();
+            JOptionPane.showMessageDialog(null, "Aguarde enquanto o CEP é consultado...", "Aguarde", JOptionPane.INFORMATION_MESSAGE);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "CEP em formato invalido (Digite apenas números)");
             textCEP.requestFocus();
