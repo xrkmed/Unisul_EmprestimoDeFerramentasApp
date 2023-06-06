@@ -151,11 +151,11 @@ public class ScreenFerramentas extends ScreenEntity {
                     }
                 }
 
-                if (!data[5].toString().equalsIgnoreCase("disponivel")){
+                if (!data[5].toString().equalsIgnoreCase("disponivel")) {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date date = sdf.parse(data[5].toString());
                     Date now = new Date();
-                    if (date.before(now)){
+                    if (date.before(now)) {
                         renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
                         for (int i = 0; i < getTable().getColumnCount(); i++) {
                             getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
@@ -163,7 +163,7 @@ public class ScreenFerramentas extends ScreenEntity {
                     }
                 }
 
-                  data[3] = "R$"+data[3].toString();
+                data[3] = "R$" + data[3].toString();
                 ((DefaultTableModel) getTable().getModel()).addRow(data);
             }
         } catch (Exception e) {
@@ -182,7 +182,8 @@ public class ScreenFerramentas extends ScreenEntity {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ToolModel selectedTool = ToolsDAO.getInstance().getTool(id);
             new TelaCadastroFerramentas(selectedTool, ScreenType.SCREEN_TYPE_EDIT).setVisible(true);
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -202,19 +203,20 @@ public class ScreenFerramentas extends ScreenEntity {
             }
             ToolsDAO.getInstance().removeTool(toolsDel);
             carregarDados();
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Nada selecionado vei");
-            e.printStackTrace();
-
-        } catch (DatabaseResultQueryException e) {
-            System.out.println("Talvez o banco de dados explodiu, mas não retornou nada");
-            e.printStackTrace();
-
-        } catch (SQLException e) {
-            System.out.println("Os comandos enviados SQL enviados tem algum problema");
-            e.printStackTrace();
-
-        } catch (Exception e) {
+        } //        catch (ArrayIndexOutOfBoundsException e) {
+        //            JOptionPane.showMessageDialog(null, "Selecione alguma ferramenta primeiro");
+        //            e.printStackTrace();
+        //
+        //        } catch (DatabaseResultQueryException e) {
+        //            System.out.println("Talvez o banco de dados explodiu, mas não retornou nada");
+        //            e.printStackTrace();
+        //
+        //        } catch (SQLException e) {
+        //            System.out.println("Os comandos enviados SQL enviados tem algum problema");
+        //            e.printStackTrace();
+        //
+        //        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -224,7 +226,8 @@ public class ScreenFerramentas extends ScreenEntity {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ToolModel selectedTool = ToolsDAO.getInstance().getTool(id);
             new TelaCadastroFerramentas(selectedTool, ScreenType.SCREEN_TYPE_VIEW).setVisible(true);
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
