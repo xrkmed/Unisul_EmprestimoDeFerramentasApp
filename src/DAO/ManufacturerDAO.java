@@ -94,9 +94,9 @@ public class ManufacturerDAO {
 
     public ArrayList<Object[]> getFabricantesData() throws DatabaseResultQueryException, SQLException {
         ArrayList<Object[]> datas = new ArrayList<>();
-        ResultSet result = DBQuery.executeQuery("SELECT F.id AS id_fabricante, F.razao_social AS nome_fabricante, F.cnpj AS cnpj_fabricante, COUNT(T.id) AS quantidade_ferramentas, COUNT(CASE WHEN T.emprestimo_id <> 0 THEN 1 END) AS quantidade_ferramentas_com_emprestimo, SUM(T.price) AS valor_total_ferramentas FROM tb_fabricantes F LEFT JOIN tb_ferramentas T ON F.id = T.fabricante_id GROUP BY F.id, F.razao_social, F.cnpj;");
+        ResultSet result = DBQuery.executeQuery("SELECT f.id AS id, f.razao_social AS nome, f.cnpj AS cnpj, COUNT(DISTINCT ferr.id) AS `quantidade_ferramentas`, COUNT(DISTINCT CASE WHEN em.dataFinalizado IS NULL THEN fe.ferramenta_id END) AS `em_uso`, SUM(ferr.price) AS `valor_total_ferramentas` FROM tb_fabricantes AS f LEFT JOIN tb_ferramentas AS ferr ON f.id = ferr.fabricante_id LEFT JOIN tb_ferramentas_emprestimo AS fe ON ferr.id = fe.ferramenta_id LEFT JOIN tb_emprestimos AS em ON fe.emprestimo_id = em.id GROUP BY f.id, f.razao_social, f.cnpj;");
         while (result.next()) {
-            datas.add(new Object[]{result.getInt("id_fabricante"), result.getString("nome_fabricante").toUpperCase(), CNPJResource.returnCNPJFormat(result.getString("cnpj_fabricante")), result.getInt("quantidade_ferramentas"), result.getInt("quantidade_ferramentas_com_emprestimo"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getLong("valor_total_ferramentas"))});
+            datas.add(new Object[]{result.getInt("id"), result.getString("nome").toUpperCase(), CNPJResource.returnCNPJFormat(result.getString("cnpj")), result.getInt("quantidade_ferramentas"), result.getInt("em_uso"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getLong("valor_total_ferramentas"))});
         }
 
         return datas;

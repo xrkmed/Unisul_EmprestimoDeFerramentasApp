@@ -36,7 +36,7 @@ public class LoansDAO {
     //Methods
     public LoanModel addLoan(Date startDate, Date endDate, double valorReceber, int friendId) throws IllegalArgumentException, DatabaseResultQueryException, SQLException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        ResultSet result = DBQuery.insertOrUpdateQuery("INSERT INTO tb_emprestimos (startDate, endDate, finalizado, valor_receber, amigo_id) VALUES (?, ?, ?, ?, ?);", sdf.format(startDate), sdf.format(endDate), false, valorReceber, friendId);
+        ResultSet result = DBQuery.insertOrUpdateQuery("INSERT INTO tb_emprestimos (startDate, previsaoDataEntrega, valorEmprestimo, amigo_id) VALUES (?, ?, ?, ?);", sdf.format(startDate), sdf.format(endDate), valorReceber, friendId);
         while (result.next()) {
             LoanModel loan = new LoanModel(result.getInt(1), startDate, endDate, false, valorReceber);
             return loan;
@@ -45,25 +45,25 @@ public class LoansDAO {
     }
 
     public void removeLoan(int id) throws DatabaseResultQueryException {
+        DBQuery.insertOrUpdateQuery("DELETE FROM tb_ferramentas_emprestimo WHERE emprestimo_id = ?;", id);
         DBQuery.insertOrUpdateQuery("DELETE FROM tb_emprestimos WHERE id = ?;", id);
-        DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET emprestimo_id = 0 WHERE emprestimo_id = ?", id);
     }
 
     public LoanModel getLoan(int id) throws DatabaseResultQueryException, SQLException {
-        ResultSet result = DBQuery.executeQuery("SELECT id, startDate, endDate, finalizado, valor_receber FROM tb_emprestimos WHERE id = ?;", id);
+        ResultSet result = DBQuery.executeQuery("SELECT id, startDate, previsaoDataEntrega, dataFinalizado IS NOT NULL AS finalizado, valorEmprestimo FROM tb_emprestimos WHERE id = ?;", id);
 
         while (result.next()) {
-            LoanModel loan = new LoanModel(result.getInt("id"), result.getDate("startDate"), result.getDate("endDate"), result.getBoolean("finalizado"), result.getDouble("valor_receber"));
+            LoanModel loan = new LoanModel(result.getInt("id"), result.getDate("startDate"), result.getDate("previsaoDataEntrega"), result.getBoolean("finalizado"), result.getDouble("valorEmprestimo"));
             return loan;
         }
         return null;
     }
 
     public LoanModel getLoanByToolId(int id) throws DatabaseResultQueryException, SQLException {
-        ResultSet result = DBQuery.executeQuery("SELECT tb_emprestimos.id, tb_emprestimos.startDate, tb_emprestimos.endDate, tb_emprestimos.finalizado, tb_emprestimos.valor_receber FROM tb_ferramentas JOIN tb_emprestimos ON tb_ferramentas.emprestimo_id = tb_emprestimos.id WHERE tb_ferramentas.id = ?;", id);
+        ResultSet result = DBQuery.executeQuery("SELECT emp.id, emp.amigo_id, emp.startDate, emp.previsaoDataEntrega, emp.valorEmprestimo FROM tb_emprestimos AS emp INNER JOIN tb_ferramentas_emprestimo AS fe ON emp.id = fe.emprestimo_id WHERE fe.ferramenta_id = ?;", id);
 
         while (result.next()) {
-            LoanModel loan = new LoanModel(result.getInt("id"), result.getDate("startDate"), result.getDate("endDate"), result.getBoolean("finalizado"), result.getDouble("valor_receber"));
+            LoanModel loan = new LoanModel(result.getInt("id"), result.getDate("startDate"), result.getDate("previsaoDataEntrega"), result.getBoolean("finalizado"), result.getDouble("valor_receber"));
             return loan;
         }
         return null;
@@ -80,10 +80,10 @@ public class LoansDAO {
 
     public ArrayList<LoanModel> getAllLoans() throws DatabaseResultQueryException, SQLException {
         ArrayList<LoanModel> loans = new ArrayList<>();
-        ResultSet result = DBQuery.executeQuery("SELECT id, startDate, endDate, finalizado, valor_receber FROM tb_emprestimos;");
+        ResultSet result = DBQuery.executeQuery("SELECT id, startDate, previsaoDataEntrega, dataFinalizado IS NOT NULL AS finalizado, valorEmprestimo FROM tb_emprestimos;");
 
         while (result.next()) {
-            LoanModel loan = new LoanModel(result.getInt("id"), result.getDate("startDate"), result.getDate("endDate"), result.getBoolean("finalizado"), result.getDouble("valor_receber"));
+            LoanModel loan = new LoanModel(result.getInt("id"), result.getDate("startDate"), result.getDate("previsaoDataEntrega"), result.getBoolean("finalizado"), result.getDouble("valorEmprestimo"));
             loans.add(loan);
         }
         return loans;
@@ -91,7 +91,7 @@ public class LoansDAO {
 
     public ArrayList<Object[]> getEmprestimosEmAberto() throws DatabaseResultQueryException, SQLException {
         ArrayList<Object[]> datas = new ArrayList<>();
-        ResultSet result = DBQuery.executeQuery("SELECT E.id AS id_emprestimo, A.nome AS nome_amigo, E.startDate, E.endDate, DATEDIFF(E.endDate, CURDATE()) AS dias_restantes, E.valor_receber AS valor_emprestimo, COALESCE(SUM(F.price), 0) AS soma_valor_ferramentas, COUNT(F.id) AS quantidade_ferramentas FROM tb_emprestimos E JOIN tb_amigos A ON E.amigo_id = A.id LEFT JOIN tb_ferramentas F ON E.id = F.emprestimo_id WHERE E.finalizado = 0 GROUP BY E.id, A.nome, E.startDate, E.endDate, E.valor_receber;");
+        ResultSet result = DBQuery.executeQuery("SELECT e.id AS `id_emprestimo`, a.nome AS `nome_amigo`, e.startDate, e.previsaoDataEntrega AS `endDate`, DATEDIFF(e.previsaoDataEntrega, CURDATE()) AS `dias_restantes`, SUM(f.price) AS `valor_emprestimo`, COUNT(DISTINCT fe.ferramenta_id) AS `quantidade_ferramentas`, SUM(f.price) AS `soma_valor_ferramentas` FROM tb_emprestimos AS e LEFT JOIN tb_amigos AS a ON e.amigo_id = a.id LEFT JOIN tb_ferramentas_emprestimo AS fe ON e.id = fe.emprestimo_id LEFT JOIN tb_ferramentas AS f ON fe.ferramenta_id = f.id WHERE e.dataFinalizado IS NULL GROUP BY e.id, a.nome, e.startDate, e.previsaoDataEntrega;");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         while (result.next()) {
             datas.add(new Object[]{result.getInt("id_emprestimo"), result.getString("nome_amigo").toUpperCase(), sdf.format(result.getDate("startDate")), sdf.format(result.getDate("endDate")), result.getInt("dias_restantes"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("valor_emprestimo")), result.getInt("quantidade_ferramentas"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("soma_valor_ferramentas"))});
@@ -111,25 +111,11 @@ public class LoansDAO {
     }
 
     public void finalizarEmprestimo(LoanModel e, String observacoes) throws DatabaseResultQueryException, SQLException {
-        List<String> ferramentasNome = new ArrayList<>();
-        double totalValorFerramentas = 0.;
-        for (ToolModel tool : getTools(e.getId()).getTools()) {
-            ferramentasNome.add(tool.getNome() + " por R$ " + BRLResource.PRICE_FORMATTER.format(tool.getPrice()) + " (" + new SimpleDateFormat("dd/MM/yyyy").format(new Date()) + ")");
-            DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET emprestimo_id = NULL WHERE id = ?;", tool.getId());
-            totalValorFerramentas += tool.getPrice();
-        }
-        try {
-            byte[] blobObject = DBQuery.prepareBlob(ferramentasNome);
-
-            DBQuery.insertOrUpdateQuery("UPDATE tb_emprestimos SET finalizado = true WHERE id = ?;", e.getId());
-            DBQuery.insertOrUpdateQuery("INSERT INTO tb_emprestimos_historico (emprestimo_id, finalizadoData, observacoes, totalFerramentas, totalValorFerramentas, valorRecebido, ferramentasList) VALUES (?, ?, ?, ?, ?, ?, ?)", e.getId(), new Date(), observacoes, ferramentasNome.size(), totalValorFerramentas, e.getPrice(), new ByteArrayInputStream(blobObject));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        DBQuery.insertOrUpdateQuery("UPDATE tb_emprestimos SET dataFinalizado = ?, observacoes = ? WHERE id = ?;", new Date(), observacoes, e.getId());
     }
 
     public ToolboxResource getTools(int loanId) throws DatabaseResultQueryException, SQLException {
-        ResultSet result = DBQuery.executeQuery("SELECT F.id, F.name, F.price, F.fabricante_id, F.emprestimo_id FROM tb_ferramentas F WHERE F.emprestimo_id = ?;", loanId);
+        ResultSet result = DBQuery.executeQuery("SELECT ferr.id, ferr.name, ferr.price, ferr.fabricante_id FROM tb_ferramentas AS ferr INNER JOIN tb_ferramentas_emprestimo AS fe ON ferr.id = fe.ferramenta_id AND fe.emprestimo_id = ?;", loanId);
         ToolboxResource data = new ToolboxResource();
         while (result.next()) {
             ToolModel tool = new ToolModel(result.getInt("id"), result.getString("name"), ManufacturerDAO.getInstance().getManufacturer(result.getInt("fabricante_id")), result.getDouble("price"), loanId);
@@ -142,7 +128,7 @@ public class LoansDAO {
 
     public LoanModel updateLoan(LoanModel origin, Date startDate, Date endDate, double valorReceber, int friendId) throws DatabaseResultQueryException, SQLException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        ResultSet result = DBQuery.insertOrUpdateQuery("UPDATE tb_emprestimos SET startDate = ?, endDate = ?, finalizado = ?, valor_receber = ?, amigo_id = ? WHERE id = ?", sdf.format(startDate), sdf.format(endDate), origin.getReturned(), valorReceber, friendId, origin.getId());
+        ResultSet result = DBQuery.insertOrUpdateQuery("UPDATE tb_emprestimos SET startDate = ?, previsaoDataEntrega = ?, valorEmprestimo = ?, amigo_id = ? WHERE id = ?", sdf.format(startDate), sdf.format(endDate), valorReceber, friendId, origin.getId());
         while (result.next()) {
             origin = new LoanModel(origin.getId(), startDate, endDate, origin.getReturned(), valorReceber);
         }
@@ -150,21 +136,11 @@ public class LoansDAO {
     }
 
     public ArrayList<Object[]> relatorioEmprestimos() throws DatabaseResultQueryException, SQLException, IOException, ClassNotFoundException {
-        ResultSet result = DBQuery.executeQuery("SELECT H.emprestimo_id, H.finalizadoData, H.observacoes, H.totalFerramentas, H.totalValorFerramentas, H.ferramentasList, H.valorRecebido, A.nome, E.startDate, E.endDate FROM tb_emprestimos_historico H LEFT JOIN tb_emprestimos E ON E.id = H.emprestimo_id LEFT JOIN tb_amigos A ON A.id = E.amigo_id; ");
-        ArrayList<Object[]> relatorio = new ArrayList<>();
+        ResultSet result = DBQuery.executeQuery("SELECT em.id AS emprestimo_id, em.dataFinalizado AS finalizadoData, em.observacoes, COUNT(fe.ferramenta_id) AS total_ferramentas, SUM(ferr.price) AS totalValorFerramentas, GROUP_CONCAT(ferr.name SEPARATOR ', ') AS ferramentas_emprestadas, em.valorEmprestimo AS valorRecebido, amigo.nome AS nome_amigo, em.startDate AS data_inicio, em.previsaoDataEntrega AS dataPrevisaoEntrega FROM tb_emprestimos AS em LEFT JOIN tb_ferramentas_emprestimo AS fe ON em.id = fe.emprestimo_id LEFT JOIN tb_ferramentas AS ferr ON fe.ferramenta_id = ferr.id LEFT JOIN tb_amigos AS amigo ON em.amigo_id = amigo.id GROUP BY em.id;");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        ArrayList<Object[]> relatorio = new ArrayList<>();
         while (result.next()) {
-            String stringFerramentas = "";
-            Blob blob = result.getBlob("ferramentasList");
-            byte[] blobBytes = blob.getBytes(1, (int) blob.length());
-            ByteArrayInputStream bais = new ByteArrayInputStream(blobBytes);
-            ObjectInputStream ois = new ObjectInputStream(bais);
-            List<String> listaStringsLida = (ArrayList<String>) ois.readObject();
-            for (String ferramentaStr : listaStringsLida) {
-                stringFerramentas += ferramentaStr + "\n";
-            }
-
-            Object[] datas = new Object[]{result.getInt("emprestimo_id"), result.getString("nome").toUpperCase(), sdf.format(result.getDate("startDate")), sdf.format(result.getDate("endDate")), sdf.format(result.getDate("finalizadoData")), result.getString("observacoes").toUpperCase(), result.getInt("totalFerramentas"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("totalValorFerramentas")), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("valorRecebido")), stringFerramentas.toUpperCase()};
+            Object[] datas = new Object[]{result.getInt("emprestimo_id"), result.getString("nome_amigo").toUpperCase(), sdf.format(result.getDate("data_inicio")), sdf.format(result.getDate("dataPrevisaoEntrega")), sdf.format(result.getDate("finalizadoData")), result.getString("observacoes").toUpperCase(), result.getInt("total_ferramentas"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("totalValorFerramentas")), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("valorRecebido")), result.getString("ferramentas_emprestadas").toUpperCase()};
             relatorio.add(datas);
         }
 

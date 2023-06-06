@@ -625,7 +625,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
 
                     for (ToolModel tool : parentToolsList.getTools()) {
                         if (!toolsList.containsTool(tool.getId())) {
-                            ToolsDAO.getInstance().removeToolFromLoan(tool.getId());
+                            ToolsDAO.getInstance().removeToolFromLoan(this.emprestimo.getId(), tool.getId());
                         }
                     }
                     for (ToolModel tool : toolsList.getTools()) {

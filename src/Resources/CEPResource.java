@@ -50,7 +50,7 @@ public class CEPResource {
         }
 
         conn.disconnect();
-        return new AddressResource(rua, bairro, cidade, uf, null, complemento, cep);
+        return new AddressResource(0, rua, bairro, cidade, uf, null, complemento, cep);
     }
 
     public static boolean verificarNomeCompleto(String nome) {
