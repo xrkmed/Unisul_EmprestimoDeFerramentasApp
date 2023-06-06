@@ -20,6 +20,9 @@ public class DBQuery {
                 statement.setObject(i + 1, params[i]);
             }
 
+            // PEGAR A QUERY
+            System.out.println(statement.toString());
+
             return statement.executeQuery();
         } catch (SQLException e) {
             throw new DatabaseResultQueryException(e.getMessage());
@@ -32,6 +35,9 @@ public class DBQuery {
             for (int i = 0; i < params.length; i++) {
                 statement.setObject(i + 1, params[i]);
             }
+
+            // PEGAR A QUERY
+            System.out.println(statement.toString());
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {

@@ -784,7 +784,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         } else {
             if (selectedFriend == null) {
                 try {
-                    AddressResource address = new AddressResource(textRua.getText(), textBairro.getText(), selectCidade.getSelectedItem().toString(), selectEstado.getSelectedItem().toString(), Integer.parseInt(textNumero.getText()), textComplemento.getText(), Integer.parseInt(textCEP.getText()));
+                    AddressResource address = new AddressResource(0, textRua.getText(), textBairro.getText(), selectCidade.getSelectedItem().toString(), selectEstado.getSelectedItem().toString(), Integer.parseInt(textNumero.getText()), textComplemento.getText(), Integer.parseInt(textCEP.getText()));
                     FriendModel friendModel = FriendsDAO.getInstance().addFriend(textNome.getText().toUpperCase(), PhoneValidResource.unformatPhoneNumber(textTelefone.getText()), address);
                     JOptionPane.showMessageDialog(null, "Amigo cadastrado com sucesso! (" + friendModel.getId() + ")");
                     this.dispose();
@@ -793,7 +793,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                 }
             } else {
                 try {
-                    AddressResource address = new AddressResource(textRua.getText(), textBairro.getText(), selectCidade.getSelectedItem().toString(), selectEstado.getSelectedItem().toString(), Integer.parseInt(textNumero.getText()), textComplemento.getText(), Integer.parseInt(textCEP.getText()));
+                    AddressResource address = new AddressResource(0, textRua.getText(), textBairro.getText(), selectCidade.getSelectedItem().toString(), selectEstado.getSelectedItem().toString(), Integer.parseInt(textNumero.getText()), textComplemento.getText(), Integer.parseInt(textCEP.getText()));
                     FriendModel friendModel = FriendsDAO.getInstance().getFriend(selectedFriend.getId());
                     if (friendModel == null) {
                         throw new Exception("Amigo não encontrado");
@@ -803,7 +803,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                     friendModel.setPhone(PhoneValidResource.unformatPhoneNumber(textTelefone.getText()));
                     friendModel.updateAddress(address);
 
-                    FriendsDAO.getInstance().updateFriend(friendModel.getId(), friendModel);
+                    FriendsDAO.getInstance().updateFriend(selectedFriend, friendModel);
                     JOptionPane.showMessageDialog(null, "Amigo alterado com sucesso!");
                     this.dispose();
                 } catch (Exception e) {

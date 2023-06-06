@@ -2,6 +2,7 @@ package Resources;
 
 public class AddressResource {
 
+    private int id;
     private String street;
     private String city;
     private String state;
@@ -14,7 +15,8 @@ public class AddressResource {
 
     }
 
-    public AddressResource(String street, String district, String city, String state, Integer number, String complemento, Integer CEP) {
+    public AddressResource(int id, String street, String district, String city, String state, Integer number, String complemento, Integer CEP) {
+        this.id = id;
         this.street = street;
         this.city = city;
         this.state = state;
@@ -23,6 +25,11 @@ public class AddressResource {
         this.number = number;
         this.complemento = complemento;
     }
+
+    public int getId(){
+        return this.id;
+    }
+
 
     public String getStreet() {
         return this.street;
