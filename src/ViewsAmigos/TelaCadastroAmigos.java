@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
 
 import Controllers.ScreenType;
+import DAO.AddressDAO;
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
 import DAO.LocalidadesDAO;
@@ -35,7 +36,11 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
             public void run(){
                 AddressResource cep = new AddressResource();
                 try{
-                    cep = CEPResource.buscarCEP(Integer.parseInt(textCEP.getText()));
+                    cep = AddressDAO.getInstance().getAddress(selectedFriend.getAddress().getCEP());
+
+                    if(cep == null){
+                        cep = CEPResource.buscarCEP(selectedFriend.getAddress().getCEP());
+                    }
                 }catch(IllegalArgumentException e){
                     cep = selectedFriend.getAddress();
                 }catch(Exception e){
@@ -51,6 +56,9 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                     textBairro.setText(selectedFriend.getAddress().getDistrict());
                     textComplemento.setText(selectedFriend.getAddress().getComplemento());
                     textNumero.setText(selectedFriend.getAddress().getNumber() + "");
+
+                    textRua.setEditable(textRua.getText().isEmpty());
+                    textBairro.setEditable(textRua.getText().isEmpty());
 
                     if(screenType == ScreenType.SCREEN_TYPE_VIEW){
                         textNome.setEditable(false);
@@ -655,7 +663,10 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                 return;
             }
 
-            AddressResource cepBuscado = CEPResource.buscarCEP(Integer.parseInt(textCEP.getText()));
+            AddressResource cepBuscado = AddressDAO.getInstance().getAddress(Integer.parseInt(textCEP.getText()));
+            if(cepBuscado == null){
+                cepBuscado = CEPResource.buscarCEP(Integer.parseInt(textCEP.getText()));
+            }
 
             selectEstado.setSelectedItem(cepBuscado.getState());
             selectCidade.removeAllItems();
@@ -670,6 +681,9 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
             if (cepBuscado.getStreet().length() > 0) {
                 textRua.setText(cepBuscado.getStreet());
             }
+
+            textRua.setEditable(textRua.getText().isEmpty());
+            textBairro.setEditable(textBairro.getText().isEmpty());
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "CEP em formato invalido (Digite apenas números)");
