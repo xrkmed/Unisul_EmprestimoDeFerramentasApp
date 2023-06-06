@@ -4,6 +4,7 @@ import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 
 public class PhoneDocument extends DocumentFilter {
+    // Esta classe serve para formatar o numero de telefone no formato de telefone brasileiro
 
     @Override
     public void remove(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length) throws javax.swing.text.BadLocationException {

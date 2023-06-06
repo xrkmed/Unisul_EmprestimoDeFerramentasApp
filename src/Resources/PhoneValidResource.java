@@ -1,6 +1,7 @@
 package Resources;
 
 public class PhoneValidResource {
+    // Esta classe serve para validar e formatar numeros de telefone
 
     public static boolean isValidPhoneNumber(String phoneNumber) {
         // Implementação da validação do número de telefone

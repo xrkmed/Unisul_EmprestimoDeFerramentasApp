@@ -24,7 +24,7 @@ public class AddressDAO {
 
     //Methods
 
-    public AddressResource getAddress(int cep) throws SQLException, DatabaseResultQueryException{
+    public AddressResource getAddress(int cep) throws SQLException, DatabaseResultQueryException {
         ResultSet result = DBQuery.executeQuery("SELECT * FROM tb_enderecos WHERE cep = ?", cep);
         while(result.next()){
             AddressResource _res = new AddressResource(result.getInt("id"), result.getString("rua"), result.getString("bairro"), result.getString("cidade"), result.getString("uf"), null, null, result.getInt("cep"));
@@ -32,6 +32,11 @@ public class AddressDAO {
         }
 
         return null;
+    }
+
+    public ResultSet insertAddress(AddressResource _add) throws DatabaseResultQueryException {
+        ResultSet _res = DBQuery.insertOrUpdateQuery("INSERT INTO tb_enderecos (rua, bairro, cidade, uf, cep) VALUES (?, ?, ?, ?, ?)", _add.getStreet(), _add.getDistrict(), _add.getCity(), _add.getState(), _add.getCEP());
+        return _res;
     }
     
 }
