@@ -160,6 +160,8 @@ public class ScreenAmigos extends ScreenEntity {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             FriendModel selectedFriend = FriendsDAO.getInstance().getFriend(id);
             new TelaCadastroAmigos(selectedFriend, ScreenType.SCREEN_TYPE_EDIT).setVisible(true);
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "Selecione um amigo primeiro");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -185,7 +187,7 @@ public class ScreenAmigos extends ScreenEntity {
                 carregarDados();
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Nada selecionado vei");
+           JOptionPane.showMessageDialog(null, "Selecione um amigo primeiro");
             e.printStackTrace();
 
         } catch (DatabaseResultQueryException e) {
@@ -196,7 +198,7 @@ public class ScreenAmigos extends ScreenEntity {
             System.out.println("Os comandos enviados SQL enviados tem algum problema");
             e.printStackTrace();
 
-        } catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -206,9 +208,10 @@ public class ScreenAmigos extends ScreenEntity {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             FriendModel selectedFriend = FriendsDAO.getInstance().getFriend(id);
             new TelaCadastroAmigos(selectedFriend, ScreenType.SCREEN_TYPE_VIEW).setVisible(true);
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "Selecione um amigo primeiro");
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 

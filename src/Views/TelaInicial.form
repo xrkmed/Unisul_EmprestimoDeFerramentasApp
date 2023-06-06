@@ -295,6 +295,9 @@
               <Color id="Default Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVisualizarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnDeletar">
           <Properties>
@@ -329,6 +332,9 @@
               <Color id="Default Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="bntBuscar">
           <Properties>

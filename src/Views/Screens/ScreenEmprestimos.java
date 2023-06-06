@@ -162,6 +162,8 @@ public class ScreenEmprestimos extends ScreenEntity {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             LoanModel selectedLoan = LoansDAO.getInstance().getLoan(id);
             new TelaCadastroEmprestimo(selectedLoan, ScreenType.SCREEN_TYPE_EDIT).setVisible(true);
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "Selecione algum emprestimo primeiro");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -188,7 +190,7 @@ public class ScreenEmprestimos extends ScreenEntity {
             });
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Nada selecionado vei");
+            JOptionPane.showMessageDialog(null, "Selecione algum emprestimo primeiro");
             e.printStackTrace();
 
         } catch (DatabaseResultQueryException e) {
@@ -209,6 +211,10 @@ public class ScreenEmprestimos extends ScreenEntity {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             LoanModel selectedLoan = LoansDAO.getInstance().getLoan(id);
             new TelaCadastroEmprestimo(selectedLoan, ScreenType.SCREEN_TYPE_VIEW).setVisible(true);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "Selecione algum emprestimo primeiro");
+            e.printStackTrace();
+
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());

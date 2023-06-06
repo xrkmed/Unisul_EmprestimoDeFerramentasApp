@@ -215,6 +215,11 @@ public class TelaInicial extends javax.swing.JFrame {
         btnVisualizar.setToolTipText("Modo Leitura");
         btnVisualizar.setBorder(null);
         btnVisualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisualizarActionPerformed(evt);
+            }
+        });
 
         btnDeletar.setBackground(new java.awt.Color(205, 205, 205));
         btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-document-remove-custom.png"))); // NOI18N
@@ -227,6 +232,11 @@ public class TelaInicial extends javax.swing.JFrame {
         btnEditar.setToolTipText("Editar");
         btnEditar.setBorder(null);
         btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         bntBuscar.setBackground(new java.awt.Color(205, 205, 205));
         bntBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/magnify-custom.png"))); // NOI18N
@@ -676,6 +686,14 @@ public class TelaInicial extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(null, mensagem, "Legenda de Cores", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVisualizarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
