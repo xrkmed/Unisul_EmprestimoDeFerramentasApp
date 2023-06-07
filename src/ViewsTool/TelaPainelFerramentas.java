@@ -378,18 +378,23 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
 
-        for (ToolModel tool : tools) {
-            if (!tool.isAvailable()) {
-                renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
-                for (int i = 0; i < table.getColumnCount(); i++) {
-                    table.getColumnModel().getColumn(i).setCellRenderer(renderer);
+        try{
+            for (ToolModel tool : tools) {
+                if (!tool.isAvailable()) {
+                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
+                    for (int i = 0; i < table.getColumnCount(); i++) {
+                        table.getColumnModel().getColumn(i).setCellRenderer(renderer);
+                    }
                 }
-            }
 
-            model.addRow(new Object[]{
-                tool.getId(),
-                tool.getNome()
-            });
+                model.addRow(new Object[]{
+                    tool.getId(),
+                    tool.getNome()
+                });
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar os dados da tabela, contacte o administrador. \n\nDetalhes do erro: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
