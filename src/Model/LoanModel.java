@@ -4,13 +4,12 @@ import java.sql.SQLException;
 import java.util.Date;
 import DAO.LoansDAO;
 import Exceptions.DatabaseResultQueryException;
-import Resources.ToolboxResource;
 import java.util.Objects;
 
 public class LoanModel {
 
     private Integer id;
-    private ToolboxResource tools;
+    private ToolboxModel tools;
     private Date startDate;
     private Date endDate;
     private boolean returned;
@@ -25,7 +24,7 @@ public class LoanModel {
         this.endDate = endDate;
         this.returned = returned;
         this.price = price;
-        tools = new ToolboxResource();
+        tools = new ToolboxModel();
     }
 
     public Integer getId() {

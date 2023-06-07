@@ -3,7 +3,7 @@ package Controllers;
 import javax.swing.JFrame;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
-import Resources.Enum_Themes;
+import Enums.Themes;
 import Views.TelaInicial;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
@@ -11,7 +11,7 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 public class ThemeController {
 
     private static ThemeController instance;
-    private Enum_Themes theme = Enum_Themes.LIGHT;
+    private Themes theme = Themes.LIGHT;
 
     private ThemeController() {
     }
@@ -23,11 +23,11 @@ public class ThemeController {
         return instance;
     }
 
-    public Enum_Themes getTheme() {
+    public Themes getTheme() {
         return theme;
     }
 
-    public LookAndFeel getLookAndFeel(Enum_Themes theme) {
+    public LookAndFeel getLookAndFeel(Themes theme) {
         switch (theme) {
             case DARK:
                 return new FlatMacDarkLaf();
@@ -43,7 +43,7 @@ public class ThemeController {
         return getLookAndFeel(getTheme());
     }
 
-    public void setTheme(Enum_Themes theme, JFrame parent) {
+    public void setTheme(Themes theme, JFrame parent) {
         if (this.theme == theme) {
             return;
         }

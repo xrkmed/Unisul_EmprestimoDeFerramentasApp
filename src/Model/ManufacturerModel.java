@@ -1,21 +1,23 @@
-package Resources;
+package Model;
 
-public class ManufacturerResource {
+import Resources.CNPJResource;
+
+public class ManufacturerModel {
 
     private Integer id;
     private String name;
     private String cnpj;
 
-    public ManufacturerResource() {
+    public ManufacturerModel() {
 
     }
 
-    public ManufacturerResource(String name, String cnpj) {
+    public ManufacturerModel(String name, String cnpj) {
         this.name = name;
         this.setCNPJ(cnpj);
     }
 
-    public ManufacturerResource(Integer id, String name, String cnpj) {
+    public ManufacturerModel(Integer id, String name, String cnpj) {
         this.id = id;
         this.name = name;
         this.setCNPJ(cnpj);

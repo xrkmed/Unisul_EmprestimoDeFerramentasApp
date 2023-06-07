@@ -1,11 +1,11 @@
 package Views;
 
-import Controllers.FiltrosClass;
+import Model.FiltrosModel;
 import Controllers.ThemeController;
-import Resources.Enum_Themes;
+import Enums.Themes;
 import Views.Screens.ScreenAmigos;
 import Views.Screens.ScreenEmprestimos;
-import Views.Screens.ScreenEntity;
+import Model.ScreenModel;
 import Views.Screens.ScreenFabricantes;
 import Views.Screens.ScreenFerramentas;
 import java.awt.Color;
@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class TelaInicial extends javax.swing.JFrame {
 
-    private ScreenEntity telaAtual;
+    private ScreenModel telaAtual;
     private Thread actualThread;
 
     public TelaInicial() {
@@ -56,7 +56,7 @@ public class TelaInicial extends javax.swing.JFrame {
         return popOpcoes;
     }
 
-    public ScreenEntity getTelaAtual() {
+    public ScreenModel getTelaAtual() {
         return telaAtual;
     }
 
@@ -64,7 +64,7 @@ public class TelaInicial extends javax.swing.JFrame {
         return tabelaPrincipal;
     }
 
-    public JComboBox<FiltrosClass> getComboBox() {
+    public JComboBox<FiltrosModel> getComboBox() {
         return comboFiltros;
     }
 
@@ -92,7 +92,7 @@ public class TelaInicial extends javax.swing.JFrame {
         return btnExportar;
     }
 
-    public void updateTela(ScreenEntity e) {
+    public void updateTela(ScreenModel e) {
         if (actualThread != null && actualThread.isAlive()) {
             JOptionPane.showMessageDialog(null, "Aguarde alguns instantes...");
             return;
@@ -244,7 +244,7 @@ public class TelaInicial extends javax.swing.JFrame {
         bntBuscar.setBorder(null);
         bntBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        comboFiltros.setModel(new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[] { new FiltrosClass("")  }));
+        comboFiltros.setModel(new javax.swing.DefaultComboBoxModel<>(new FiltrosModel[] { new FiltrosModel("")  }));
         comboFiltros.setToolTipText("Selecione um filtro");
         comboFiltros.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         comboFiltros.addItemListener(new java.awt.event.ItemListener() {
@@ -613,11 +613,11 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        ThemeController.getInstance().setTheme(Enum_Themes.DARK, this);
+        ThemeController.getInstance().setTheme(Themes.DARK, this);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        ThemeController.getInstance().setTheme(Enum_Themes.LIGHT, this);
+        ThemeController.getInstance().setTheme(Themes.LIGHT, this);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void bntCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCadastrarActionPerformed
@@ -636,7 +636,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfigActionPerformed
 
     private void comboFiltrosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboFiltrosItemStateChanged
-        FiltrosClass selecionado = (FiltrosClass) comboFiltros.getSelectedItem();
+        FiltrosModel selecionado = (FiltrosModel) comboFiltros.getSelectedItem();
         if (selecionado != null) {
             ((DefaultTableModel) getTable().getModel()).setRowCount(0);
             telaAtual.carregarDados();
@@ -718,7 +718,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btnExportar;
     private javax.swing.JButton btnVisualizar;
     private javax.swing.JTextField campoFiltroNome;
-    private javax.swing.JComboBox<FiltrosClass> comboFiltros;
+    private javax.swing.JComboBox<FiltrosModel> comboFiltros;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;

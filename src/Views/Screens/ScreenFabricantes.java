@@ -1,28 +1,29 @@
 package Views.Screens;
 
+import Model.ScreenModel;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
-import Controllers.FiltrosClass;
-import Controllers.FiltrosEnum;
+import Model.FiltrosModel;
+import Enums.Filtros;
 import Controllers.PDFEntity;
-import Controllers.ScreenType;
+import Enums.ScreenSelectionType;
 import Controllers.StatusRenderer;
 import Controllers.Filtros.FiltrosOrdenar;
 import DAO.ManufacturerDAO;
 import DAO.ToolsDAO;
 import Exceptions.DatabaseResultQueryException;
-import Resources.DirectoryChooserFrame;
-import Resources.ManufacturerResource;
+import Controllers.DirectoryChooserFrame;
+import Model.ManufacturerModel;
 import Views.TelaInicial;
 import ViewsManufacturer.TelaCadastroFabricantes;
 import com.itextpdf.text.Paragraph;
 import java.sql.SQLException;
 
-public class ScreenFabricantes extends ScreenEntity {
+public class ScreenFabricantes extends ScreenModel {
 
     private final String[] columnNames = {"ID", "Nome", "CNPJ", "Ferramentas", "Em Uso", "Valor Total"};
 
@@ -98,8 +99,8 @@ public class ScreenFabricantes extends ScreenEntity {
             }
 
             if (getFiltros().getSelectedItem() != null) {
-                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                if (f.getType() == FiltrosEnum.FILTRO_GERAR) {
+                FiltrosModel f = (FiltrosModel) getFiltros().getSelectedItem();
+                if (f.getType() == Filtros.FILTRO_GERAR) {
                     f.run();
                     return;
                 }
@@ -108,8 +109,8 @@ public class ScreenFabricantes extends ScreenEntity {
             ArrayList<Object[]> manufacturerData = ManufacturerDAO.getInstance().getFabricantesData();
 
             if (getFiltros().getSelectedItem() != null) {
-                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                if (f.getType() == FiltrosEnum.FILTRO_ORDENAR) {
+                FiltrosModel f = (FiltrosModel) getFiltros().getSelectedItem();
+                if (f.getType() == Filtros.FILTRO_ORDENAR) {
                     manufacturerData.sort((Object[] data1, Object[] data2) -> {
                         return f.compare(data1, data2);
                     });
@@ -118,8 +119,8 @@ public class ScreenFabricantes extends ScreenEntity {
 
             for (Object[] data : manufacturerData) {
                 if (getFiltros().getSelectedItem() != null) {
-                    FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                    if (f.getType() == FiltrosEnum.FILTRO_FILTRAR && !f.run(data)) {
+                    FiltrosModel f = (FiltrosModel) getFiltros().getSelectedItem();
+                    if (f.getType() == Filtros.FILTRO_FILTRAR && !f.run(data)) {
                         continue;
                     }
                 }
@@ -153,9 +154,9 @@ public class ScreenFabricantes extends ScreenEntity {
     public void btnEditar() {
         try {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
-            ManufacturerResource selectedManufacturer = ManufacturerDAO.getInstance().getManufacturer(id);
-            new TelaCadastroFabricantes(selectedManufacturer, ScreenType.SCREEN_TYPE_EDIT).setVisible(true);
-        }  catch (Exception e) {
+            ManufacturerModel selectedManufacturer = ManufacturerDAO.getInstance().getManufacturer(id);
+            new TelaCadastroFabricantes(selectedManufacturer, ScreenSelectionType.SCREEN_TYPE_EDIT).setVisible(true);
+        } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -165,7 +166,7 @@ public class ScreenFabricantes extends ScreenEntity {
 
         try {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
-            ManufacturerResource ManuDel = ManufacturerDAO.getInstance().getManufacturer(id);
+            ManufacturerModel ManuDel = ManufacturerDAO.getInstance().getManufacturer(id);
             if (ManuDel != null) {
                 int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja remover o fabricante " + ManuDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
                 if (dialogResult == JOptionPane.YES_OPTION) {
@@ -186,8 +187,8 @@ public class ScreenFabricantes extends ScreenEntity {
     public void btnVisualizar() {
         try {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
-            ManufacturerResource selectedManufacturer = ManufacturerDAO.getInstance().getManufacturer(id);
-            new TelaCadastroFabricantes(selectedManufacturer, ScreenType.SCREEN_TYPE_VIEW).setVisible(true);
+            ManufacturerModel selectedManufacturer = ManufacturerDAO.getInstance().getManufacturer(id);
+            new TelaCadastroFabricantes(selectedManufacturer, ScreenSelectionType.SCREEN_TYPE_VIEW).setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -219,8 +220,8 @@ public class ScreenFabricantes extends ScreenEntity {
 
     /* FILTROS */
     @Override
-    public DefaultComboBoxModel<FiltrosClass> get() {
-        return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{
+    public DefaultComboBoxModel<FiltrosModel> get() {
+        return new javax.swing.DefaultComboBoxModel<>(new FiltrosModel[]{
             new FiltrosOrdenar("ID"),
             new FiltrosOrdenar("Nome Crescente", (data1, data2) -> {
                 String nome1 = (String) data1[1];

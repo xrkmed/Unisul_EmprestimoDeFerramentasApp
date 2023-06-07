@@ -1,9 +1,10 @@
-package Resources;
+package Documents;
 
+import Resources.DateResource;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 
-public class CNPJDocument extends DocumentFilter {
+public class DateDocument extends DocumentFilter {
 
     @Override
     public void remove(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length) throws javax.swing.text.BadLocationException {
@@ -21,13 +22,8 @@ public class CNPJDocument extends DocumentFilter {
         StringBuilder sb = new StringBuilder(doc.getText(0, doc.getLength()));
         sb.replace(offset, offset + length, text);
 
-        String filteredText = sb.toString().replaceAll("[^\\d]", "");
+        String filteredText = DateResource.formatDateString(sb.toString());
 
-        if (CNPJResource.validarCNPJ(filteredText)) {
-            super.replace(fb, 0, doc.getLength(), CNPJResource.returnCNPJFormat(filteredText), attr);
-        } else {
-            super.replace(fb, 0, doc.getLength(), filteredText, attr);
-        }
+        super.replace(fb, 0, doc.getLength(), filteredText, attr);
     }
-
 }

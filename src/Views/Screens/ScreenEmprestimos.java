@@ -1,20 +1,21 @@
 package Views.Screens;
 
+import Model.ScreenModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
-import Controllers.FiltrosClass;
-import Controllers.FiltrosEnum;
+import Model.FiltrosModel;
+import Enums.Filtros;
 import Controllers.PDFEntity;
-import Controllers.ScreenType;
+import Enums.ScreenSelectionType;
 import Controllers.StatusRenderer;
 import Controllers.Filtros.FiltrosGerar;
 import Controllers.Filtros.FiltrosOrdenar;
 import DAO.LoansDAO;
 import Exceptions.DatabaseResultQueryException;
 import Model.LoanModel;
-import Resources.DirectoryChooserFrame;
+import Controllers.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
 import ViewsEmprestimo.TelaFinalizarEmprestimo;
@@ -25,7 +26,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class ScreenEmprestimos extends ScreenEntity {
+public class ScreenEmprestimos extends ScreenModel {
 
     private final String[] columnNames = {"ID", "Amigo", "Data Início", "Data Devolução", "Dias Restantes", "A Receber", "Qtd. Ferramentas", "Valor Ferramentas"};
 
@@ -94,8 +95,8 @@ public class ScreenEmprestimos extends ScreenEntity {
             getTitulo().setText(getName());
 
             if (getFiltros().getSelectedItem() != null) {
-                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                if (f.getType() == FiltrosEnum.FILTRO_GERAR) {
+                FiltrosModel f = (FiltrosModel) getFiltros().getSelectedItem();
+                if (f.getType() == Filtros.FILTRO_GERAR) {
                     f.run();
                     return;
                 }
@@ -104,8 +105,8 @@ public class ScreenEmprestimos extends ScreenEntity {
             ArrayList<Object[]> datas = LoansDAO.getInstance().getEmprestimosEmAberto();
 
             if (getFiltros().getSelectedItem() != null) {
-                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                if (f.getType() == FiltrosEnum.FILTRO_ORDENAR) {
+                FiltrosModel f = (FiltrosModel) getFiltros().getSelectedItem();
+                if (f.getType() == Filtros.FILTRO_ORDENAR) {
                     datas.sort((Object[] data1, Object[] data2) -> {
                         return f.compare(data1, data2);
                     });
@@ -114,8 +115,8 @@ public class ScreenEmprestimos extends ScreenEntity {
 
             for (Object[] data : datas) {
                 if (getFiltros().getSelectedItem() != null) {
-                    FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                    if (f.getType() == FiltrosEnum.FILTRO_FILTRAR && !f.run(data)) {
+                    FiltrosModel f = (FiltrosModel) getFiltros().getSelectedItem();
+                    if (f.getType() == Filtros.FILTRO_FILTRAR && !f.run(data)) {
                         continue;
                     }
                 }
@@ -161,7 +162,7 @@ public class ScreenEmprestimos extends ScreenEntity {
         try {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             LoanModel selectedLoan = LoansDAO.getInstance().getLoan(id);
-            new TelaCadastroEmprestimo(selectedLoan, ScreenType.SCREEN_TYPE_EDIT).setVisible(true);
+            new TelaCadastroEmprestimo(selectedLoan, ScreenSelectionType.SCREEN_TYPE_EDIT).setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -196,7 +197,7 @@ public class ScreenEmprestimos extends ScreenEntity {
         try {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             LoanModel selectedLoan = LoansDAO.getInstance().getLoan(id);
-            new TelaCadastroEmprestimo(selectedLoan, ScreenType.SCREEN_TYPE_VIEW).setVisible(true);
+            new TelaCadastroEmprestimo(selectedLoan, ScreenSelectionType.SCREEN_TYPE_VIEW).setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -228,8 +229,8 @@ public class ScreenEmprestimos extends ScreenEntity {
 
     /* FILTROS */
     @Override
-    public DefaultComboBoxModel<FiltrosClass> get() {
-        return new DefaultComboBoxModel<FiltrosClass>(new FiltrosClass[]{
+    public DefaultComboBoxModel<FiltrosModel> get() {
+        return new DefaultComboBoxModel<FiltrosModel>(new FiltrosModel[]{
             new FiltrosOrdenar("Em Aberto"),
             new FiltrosGerar("Todos Empréstimos", () -> {
                 try {

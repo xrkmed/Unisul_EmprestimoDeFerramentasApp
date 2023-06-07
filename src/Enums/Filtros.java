@@ -1,6 +1,6 @@
-package Controllers;
+package Enums;
 
-public enum FiltrosEnum {
+public enum Filtros {
     FILTRO_ORDENAR,
     FILTRO_FILTRAR,
     FILTRO_GERAR

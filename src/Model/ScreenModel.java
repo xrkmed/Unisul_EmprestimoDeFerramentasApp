@@ -1,4 +1,4 @@
-package Views.Screens;
+package Model;
 
 import java.util.ArrayList;
 
@@ -8,17 +8,17 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
-import Controllers.FiltrosClass;
+import Model.FiltrosModel;
 import Views.TelaInicial;
 
-public class ScreenEntity {
+public class ScreenModel {
 
     private TelaInicial tela;
 
-    public ScreenEntity() {
+    public ScreenModel() {
     }
 
-    public ScreenEntity(TelaInicial telaInicial) {
+    public ScreenModel(TelaInicial telaInicial) {
         this.tela = telaInicial;
 
         for (java.awt.event.ActionListener al : getBtnCadastro().getActionListeners()) {
@@ -75,8 +75,8 @@ public class ScreenEntity {
         return tableData;
     }
 
-    public DefaultComboBoxModel<FiltrosClass> get() {
-        return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{new FiltrosClass("")});
+    public DefaultComboBoxModel<FiltrosModel> get() {
+        return new javax.swing.DefaultComboBoxModel<>(new FiltrosModel[]{new FiltrosModel("")});
     }
 
     public final JLabel getTitulo() {
@@ -107,7 +107,7 @@ public class ScreenEntity {
         return tela.getPopOpcoes();
     }
 
-    public final JComboBox<FiltrosClass> getFiltros() {
+    public final JComboBox<FiltrosModel> getFiltros() {
         return tela.getComboBox();
     }
 

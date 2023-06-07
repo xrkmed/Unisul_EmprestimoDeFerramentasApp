@@ -2,34 +2,31 @@ package Model;
 
 import DAO.LoansDAO;
 import Exceptions.DatabaseResultQueryException;
-import Resources.ManufacturerResource;
 import java.sql.SQLException;
 import java.util.Objects;
 
 public class ToolModel {
 
     private Integer id;
-    private ManufacturerResource manufacturer;
+    private ManufacturerModel manufacturer;
     private double price;
     private String nome;
-    private Integer loanId;
 
     public ToolModel() {
     }
 
-    public ToolModel(Integer id, String nome, ManufacturerResource manufacturer, double price, Integer loanId) {
+    public ToolModel(Integer id, String nome, ManufacturerModel manufacturer, double price) {
         this.id = id;
         this.nome = nome;
         this.manufacturer = manufacturer;
         this.price = price;
-        this.loanId = loanId;
     }
 
     public Integer getId() {
         return this.id;
     }
 
-    public ManufacturerResource getManufacturer() {
+    public ManufacturerModel getManufacturer() {
         return this.manufacturer;
     }
 
@@ -45,8 +42,8 @@ public class ToolModel {
         return LoansDAO.getInstance().getLoanByToolId(id);
     }
 
-    public boolean isAvailable() {
-        return loanId == 0;
+    public boolean isAvailable() throws DatabaseResultQueryException, SQLException {
+        return this.getLoan() == null; 
     }
 
     @Override
