@@ -230,10 +230,10 @@ public class ScreenAmigos extends ScreenEntity {
         return new DefaultComboBoxModel<FiltrosClass>(new FiltrosClass[]{
             new FiltrosOrdenar("ID"),
             new FiltrosFiltrar("Empréstimos em Aberto", (Object[] data) -> {
-                return (int) data[4] > 0;
+                return (int) data[3] > 0;
             }),
             new FiltrosFiltrar("Empréstimos em Atraso", (Object[] data) -> {
-                return (int) data[5] > 0;
+                return (int) data[4] > 0;
             }),
             new FiltrosOrdenar("Nome Crescente", (data1, data2) -> {
                 return ((String) data1[1]).compareTo((String) data2[1]);
