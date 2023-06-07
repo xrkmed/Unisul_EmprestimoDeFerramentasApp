@@ -3,7 +3,7 @@ package Views;
 import ViewsAmigos.TelaTabelaAmigos;
 import ViewsEmprestimo.TelaCadastroEmprestimo;
 import Controllers.ThemeController;
-import Resources.Enum_Themes;
+import Enums.Themes;
 
 public class TelaPrincipalOld extends javax.swing.JFrame {
 
@@ -331,13 +331,7 @@ public class TelaPrincipalOld extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarFerramentaActionPerformed
 
     private void btnFerramentasCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFerramentasCadActionPerformed
-        Thread newThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                new ViewsTool.TelaTabelaFerramentas().setVisible(true);
-            }
-        });
-        newThread.start();
+
     }//GEN-LAST:event_btnFerramentasCadActionPerformed
 
     private void btnRelatorioAmigosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioAmigosActionPerformed
@@ -366,13 +360,7 @@ public class TelaPrincipalOld extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarFabricanteActionPerformed
 
     private void btnVisualizarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarFabricanteActionPerformed
-        Thread newThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                new ViewsManufacturer.TelaTabelaFabricante().setVisible(true);
-            }
-        });
-        newThread.start();
+
     }//GEN-LAST:event_btnVisualizarFabricanteActionPerformed
 
     private void btnControleGastosFabricantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnControleGastosFabricantesActionPerformed
@@ -383,13 +371,7 @@ public class TelaPrincipalOld extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRelatorioFabricantesActionPerformed
 
     private void btnEmprestimosEmAbertoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmprestimosEmAbertoActionPerformed
-        Thread newThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                new ViewsEmprestimo.TelaEmprestimosAbertos().setVisible(true);
-            }
-        });
-        newThread.start();
+
     }//GEN-LAST:event_btnEmprestimosEmAbertoActionPerformed
 
     private void btnRelatorioEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioEmprestimoActionPerformed
@@ -400,11 +382,11 @@ public class TelaPrincipalOld extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRankingAmigosActionPerformed
 
     private void btnTemaLightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTemaLightActionPerformed
-        ThemeController.getInstance().setTheme(Enum_Themes.LIGHT, this);
+        ThemeController.getInstance().setTheme(Themes.LIGHT, this);
     }//GEN-LAST:event_btnTemaLightActionPerformed
 
     private void btnTemaDarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTemaDarkActionPerformed
-        ThemeController.getInstance().setTheme(Enum_Themes.DARK, this);
+        ThemeController.getInstance().setTheme(Themes.DARK, this);
     }//GEN-LAST:event_btnTemaDarkActionPerformed
 
     public static void main(String args[]) {

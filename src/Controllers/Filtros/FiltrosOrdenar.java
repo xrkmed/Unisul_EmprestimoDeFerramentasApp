@@ -2,14 +2,14 @@ package Controllers.Filtros;
 
 import java.util.Comparator;
 
-import Controllers.FiltrosClass;
-import Controllers.FiltrosEnum;
+import Model.FiltrosModel;
+import Enums.Filtros;
 
-public class FiltrosOrdenar extends FiltrosClass {
+public class FiltrosOrdenar extends FiltrosModel {
     private Comparator<? super Object[]> comparator;
     
     public FiltrosOrdenar(String name, Comparator<? super Object[]> comparator) {
-        super(name, FiltrosEnum.FILTRO_ORDENAR);
+        super(name, Filtros.FILTRO_ORDENAR);
         this.comparator = comparator;
     }
 
@@ -19,7 +19,7 @@ public class FiltrosOrdenar extends FiltrosClass {
 
     @Override
     public int compare(Object[] data, Object[] data2) {
-        if (comparator == null || getType() != FiltrosEnum.FILTRO_ORDENAR) {
+        if (comparator == null || getType() != Filtros.FILTRO_ORDENAR) {
             return 0;
         }
 

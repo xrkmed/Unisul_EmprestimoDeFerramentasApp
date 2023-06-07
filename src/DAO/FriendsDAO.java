@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import Database.DBQuery;
 import Exceptions.DatabaseResultQueryException;
 import Model.FriendModel;
-import Resources.PhoneValidResource;
+import Resources.PhoneResource;
 
 public class FriendsDAO {
 
@@ -78,7 +78,7 @@ public class FriendsDAO {
         ArrayList<Object[]> datasObject = new ArrayList<>();
         ResultSet result = DBQuery.executeQuery("SELECT a.id AS ID, a.nome AS Nome, a.telefone AS Telefone, COUNT(DISTINCT CASE WHEN em.dataFinalizado IS NULL THEN em.id END) AS `Emprestimos Abertos`, COUNT(DISTINCT CASE WHEN em.dataFinalizado IS NULL AND em.previsaoDataEntrega < CURDATE() THEN em.id END) AS `Emprestimos Atrasados` FROM tb_amigos AS a LEFT JOIN tb_emprestimos AS em ON a.id = em.amigo_id GROUP BY a.id, a.nome, a.telefone;");
         while (result.next()) {
-            Object[] data = {result.getInt("ID"), result.getString("Nome").toUpperCase(), PhoneValidResource.formatPhoneNumber(result.getLong("Telefone") + ""), result.getInt("Emprestimos Abertos"), result.getInt("Emprestimos Atrasados")};
+            Object[] data = {result.getInt("ID"), result.getString("Nome").toUpperCase(), PhoneResource.formatPhoneNumber(result.getLong("Telefone") + ""), result.getInt("Emprestimos Abertos"), result.getInt("Emprestimos Atrasados")};
 
             datasObject.add(data);
         }

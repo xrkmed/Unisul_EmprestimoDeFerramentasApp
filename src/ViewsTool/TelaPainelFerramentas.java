@@ -9,19 +9,19 @@ import Controllers.ColorsRenderer;
 import Controllers.StatusRenderer;
 import DAO.ToolsDAO;
 import Model.ToolModel;
-import Resources.ManufacturerResource;
+import Model.ManufacturerModel;
 
 public class TelaPainelFerramentas extends javax.swing.JFrame {
 
     private ToolModel selectedTool = null;
-    private ManufacturerResource manufacturer = null;
+    private ManufacturerModel manufacturer = null;
 
     public TelaPainelFerramentas() {
         initComponents();
         configFrame();
     }
 
-    public TelaPainelFerramentas(ManufacturerResource manufacturer) {
+    public TelaPainelFerramentas(ManufacturerModel manufacturer) {
         this();
         this.manufacturer = manufacturer;
         this.setTitle("Ferramentas do Fabricante " + manufacturer.getName());

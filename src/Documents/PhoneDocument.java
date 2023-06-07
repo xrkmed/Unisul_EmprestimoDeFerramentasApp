@@ -1,9 +1,11 @@
-package Resources;
+package Documents;
 
+import Resources.PhoneResource;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 
-public class DateDocument extends DocumentFilter {
+public class PhoneDocument extends DocumentFilter {
+    // Esta classe serve para formatar o numero de telefone no formato de telefone brasileiro
 
     @Override
     public void remove(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length) throws javax.swing.text.BadLocationException {
@@ -21,8 +23,12 @@ public class DateDocument extends DocumentFilter {
         StringBuilder sb = new StringBuilder(doc.getText(0, doc.getLength()));
         sb.replace(offset, offset + length, text);
 
-        String filteredText = DateResource.formatDateString(sb.toString());
+        String filteredText = sb.toString().replaceAll("[^\\d]", "");
 
-        super.replace(fb, 0, doc.getLength(), filteredText, attr);
+        if (PhoneResource.isValidPhoneNumber(filteredText)) {
+            super.replace(fb, 0, doc.getLength(), PhoneResource.formatPhoneNumber(filteredText), attr);
+        } else {
+            super.replace(fb, 0, doc.getLength(), filteredText, attr);
+        }
     }
 }

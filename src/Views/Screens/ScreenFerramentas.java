@@ -1,21 +1,22 @@
 package Views.Screens;
 
+import Model.ScreenModel;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
-import Controllers.FiltrosClass;
-import Controllers.FiltrosEnum;
+import Model.FiltrosModel;
+import Enums.Filtros;
 import Controllers.PDFEntity;
-import Controllers.ScreenType;
+import Enums.ScreenSelectionType;
 import Controllers.StatusRenderer;
 import Controllers.Filtros.FiltrosOrdenar;
 import DAO.ToolsDAO;
 import Exceptions.DatabaseResultQueryException;
 import Model.ToolModel;
-import Resources.DirectoryChooserFrame;
+import Controllers.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsTool.TelaCadastroFerramentas;
 import com.itextpdf.text.Paragraph;
@@ -24,7 +25,7 @@ import java.util.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
-public class ScreenFerramentas extends ScreenEntity {
+public class ScreenFerramentas extends ScreenModel {
 
     private final String[] columnNames = {"ID", "Nome", "Fabricante", "Preço", "Em Uso Por", "Data Devolução"};
 
@@ -106,8 +107,8 @@ public class ScreenFerramentas extends ScreenEntity {
             }
 
             if (getFiltros().getSelectedItem() != null) {
-                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                if (f.getType() == FiltrosEnum.FILTRO_GERAR) {
+                FiltrosModel f = (FiltrosModel) getFiltros().getSelectedItem();
+                if (f.getType() == Filtros.FILTRO_GERAR) {
                     f.run();
                     return;
                 }
@@ -116,8 +117,8 @@ public class ScreenFerramentas extends ScreenEntity {
             ArrayList<Object[]> datas = ToolsDAO.getInstance().getFerramentasValue();
 
             if (getFiltros().getSelectedItem() != null) {
-                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                if (f.getType() == FiltrosEnum.FILTRO_ORDENAR) {
+                FiltrosModel f = (FiltrosModel) getFiltros().getSelectedItem();
+                if (f.getType() == Filtros.FILTRO_ORDENAR) {
                     datas.sort((Object[] data1, Object[] data2) -> {
                         return f.compare(data1, data2);
                     });
@@ -126,8 +127,8 @@ public class ScreenFerramentas extends ScreenEntity {
 
             for (Object[] data : datas) {
                 if (getFiltros().getSelectedItem() != null) {
-                    FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                    if (f.getType() == FiltrosEnum.FILTRO_FILTRAR && !f.run(data)) {
+                    FiltrosModel f = (FiltrosModel) getFiltros().getSelectedItem();
+                    if (f.getType() == Filtros.FILTRO_FILTRAR && !f.run(data)) {
                         continue;
                     }
                 }
@@ -181,7 +182,7 @@ public class ScreenFerramentas extends ScreenEntity {
         try {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ToolModel selectedTool = ToolsDAO.getInstance().getTool(id);
-            new TelaCadastroFerramentas(selectedTool, ScreenType.SCREEN_TYPE_EDIT).setVisible(true);
+            new TelaCadastroFerramentas(selectedTool, ScreenSelectionType.SCREEN_TYPE_EDIT).setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -223,7 +224,7 @@ public class ScreenFerramentas extends ScreenEntity {
         try {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ToolModel selectedTool = ToolsDAO.getInstance().getTool(id);
-            new TelaCadastroFerramentas(selectedTool, ScreenType.SCREEN_TYPE_VIEW).setVisible(true);
+            new TelaCadastroFerramentas(selectedTool, ScreenSelectionType.SCREEN_TYPE_VIEW).setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -255,8 +256,8 @@ public class ScreenFerramentas extends ScreenEntity {
 
     /* FILTROS */
     @Override
-    public DefaultComboBoxModel<FiltrosClass> get() {
-        return new javax.swing.DefaultComboBoxModel<>(new FiltrosClass[]{
+    public DefaultComboBoxModel<FiltrosModel> get() {
+        return new javax.swing.DefaultComboBoxModel<>(new FiltrosModel[]{
             new FiltrosOrdenar("ID"),
             new FiltrosOrdenar("Nome Crescente", (data1, data2) -> {
                 return ((String) data1[1]).compareTo((String) data2[1]);

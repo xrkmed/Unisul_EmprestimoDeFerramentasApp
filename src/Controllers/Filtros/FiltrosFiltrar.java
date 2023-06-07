@@ -2,15 +2,15 @@ package Controllers.Filtros;
 
 import java.util.function.Function;
 
-import Controllers.FiltrosClass;
-import Controllers.FiltrosEnum;
+import Model.FiltrosModel;
+import Enums.Filtros;
 
-public class FiltrosFiltrar extends FiltrosClass {
+public class FiltrosFiltrar extends FiltrosModel {
 
     private Function<? super Object[], Boolean> predicate;
     
     public FiltrosFiltrar(String name, Function<? super Object[], Boolean> func) {
-        super(name, FiltrosEnum.FILTRO_FILTRAR);
+        super(name, Filtros.FILTRO_FILTRAR);
         this.predicate = func;
     }
 
@@ -20,7 +20,7 @@ public class FiltrosFiltrar extends FiltrosClass {
 
     @Override
     public boolean run(Object[] data) {
-        if (predicate == null || getType() != FiltrosEnum.FILTRO_FILTRAR) {
+        if (predicate == null || getType() != Filtros.FILTRO_FILTRAR) {
             return true;
         }
 

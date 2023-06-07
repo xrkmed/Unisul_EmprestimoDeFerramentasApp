@@ -1,30 +1,31 @@
 package Views.Screens;
 
+import Model.ScreenModel;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
-import Controllers.FiltrosClass;
-import Controllers.FiltrosEnum;
+import Model.FiltrosModel;
+import Enums.Filtros;
 import Controllers.PDFEntity;
 import Controllers.StatusRenderer;
 import Controllers.Filtros.FiltrosFiltrar;
 import Controllers.Filtros.FiltrosOrdenar;
-import Controllers.ScreenType;
+import Enums.ScreenSelectionType;
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
 import Exceptions.DatabaseResultQueryException;
 import Model.FriendModel;
 import Model.LoanModel;
-import Resources.DirectoryChooserFrame;
+import Controllers.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsAmigos.TelaCadastroAmigos;
 import com.itextpdf.text.Paragraph;
 import java.sql.SQLException;
 
-public class ScreenAmigos extends ScreenEntity {
+public class ScreenAmigos extends ScreenModel {
 
     private final String[] columnNames = {"ID", "Nome", "Telefone", "Empr. Abertos", "Empr. Atrasados"};
 
@@ -102,8 +103,8 @@ public class ScreenAmigos extends ScreenEntity {
             }
 
             if (getFiltros().getSelectedItem() != null) {
-                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                if (f.getType() == FiltrosEnum.FILTRO_GERAR) {
+                FiltrosModel f = (FiltrosModel) getFiltros().getSelectedItem();
+                if (f.getType() == Filtros.FILTRO_GERAR) {
                     f.run();
                     return;
                 }
@@ -112,8 +113,8 @@ public class ScreenAmigos extends ScreenEntity {
             ArrayList<Object[]> amigosData = FriendsDAO.getInstance().loadFriendsTabela();
 
             if (getFiltros().getSelectedItem() != null) {
-                FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                if (f.getType() == FiltrosEnum.FILTRO_ORDENAR) {
+                FiltrosModel f = (FiltrosModel) getFiltros().getSelectedItem();
+                if (f.getType() == Filtros.FILTRO_ORDENAR) {
                     amigosData.sort((Object[] data1, Object[] data2) -> {
                         return f.compare(data1, data2);
                     });
@@ -122,8 +123,8 @@ public class ScreenAmigos extends ScreenEntity {
 
             for (Object[] data : amigosData) {
                 if (getFiltros().getSelectedItem() != null) {
-                    FiltrosClass f = (FiltrosClass) getFiltros().getSelectedItem();
-                    if (f.getType() == FiltrosEnum.FILTRO_FILTRAR && !f.run(data)) {
+                    FiltrosModel f = (FiltrosModel) getFiltros().getSelectedItem();
+                    if (f.getType() == Filtros.FILTRO_FILTRAR && !f.run(data)) {
                         continue;
                     }
                 }
@@ -159,7 +160,7 @@ public class ScreenAmigos extends ScreenEntity {
         try {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             FriendModel selectedFriend = FriendsDAO.getInstance().getFriend(id);
-            new TelaCadastroAmigos(selectedFriend, ScreenType.SCREEN_TYPE_EDIT).setVisible(true);
+            new TelaCadastroAmigos(selectedFriend, ScreenSelectionType.SCREEN_TYPE_EDIT).setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -205,7 +206,7 @@ public class ScreenAmigos extends ScreenEntity {
         try {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             FriendModel selectedFriend = FriendsDAO.getInstance().getFriend(id);
-            new TelaCadastroAmigos(selectedFriend, ScreenType.SCREEN_TYPE_VIEW).setVisible(true);
+            new TelaCadastroAmigos(selectedFriend, ScreenSelectionType.SCREEN_TYPE_VIEW).setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -237,8 +238,8 @@ public class ScreenAmigos extends ScreenEntity {
 
     /* FILTROS */
     @Override
-    public DefaultComboBoxModel<FiltrosClass> get() {
-        return new DefaultComboBoxModel<FiltrosClass>(new FiltrosClass[]{
+    public DefaultComboBoxModel<FiltrosModel> get() {
+        return new DefaultComboBoxModel<FiltrosModel>(new FiltrosModel[]{
             new FiltrosOrdenar("ID"),
             new FiltrosFiltrar("Empréstimos em Aberto", (Object[] data) -> {
                 return (int) data[3] > 0;

@@ -6,7 +6,7 @@ import java.net.URL;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-import Controllers.CNPJEntity;
+import Model.CNPJModel;
 import Exceptions.CNPJNotFound;
 
 public class CNPJResource {
@@ -79,7 +79,7 @@ public class CNPJResource {
         return nome.length() > 3 && nome.length() <= 64;
     }
 
-    public static CNPJEntity consultarCNPJ(String cnpj) throws CNPJNotFound {
+    public static CNPJModel consultarCNPJ(String cnpj) throws CNPJNotFound {
         try {
             String urlConsulta = "https://www.receitaws.com.br/v1/cnpj/" + cnpj;
 
@@ -92,7 +92,7 @@ public class CNPJResource {
                 JsonElement jsonElement = parser.parse(new InputStreamReader(conn.getInputStream()));
 
                 String sampleAddressStr = jsonElement.getAsJsonObject().get("logradouro").getAsString() + ", " + jsonElement.getAsJsonObject().get("numero").getAsString() + " - " + jsonElement.getAsJsonObject().get("bairro").getAsString() + ", " + jsonElement.getAsJsonObject().get("municipio").getAsString() + " - " + jsonElement.getAsJsonObject().get("uf").getAsString() + ", " + jsonElement.getAsJsonObject().get("cep").getAsString();
-                CNPJEntity cnpjObject = new CNPJEntity(jsonElement.getAsJsonObject().get("nome").getAsString(), jsonElement.getAsJsonObject().get("telefone").getAsString(), Double.parseDouble(jsonElement.getAsJsonObject().get("capital_social").getAsString()), sampleAddressStr, jsonElement.getAsJsonObject().get("status").getAsString(), jsonElement.getAsJsonObject().get("situacao").getAsString(), jsonElement.getAsJsonObject().get("cnpj").getAsString());
+                CNPJModel cnpjObject = new CNPJModel(jsonElement.getAsJsonObject().get("nome").getAsString(), jsonElement.getAsJsonObject().get("telefone").getAsString(), Double.parseDouble(jsonElement.getAsJsonObject().get("capital_social").getAsString()), sampleAddressStr, jsonElement.getAsJsonObject().get("status").getAsString(), jsonElement.getAsJsonObject().get("situacao").getAsString(), jsonElement.getAsJsonObject().get("cnpj").getAsString());
 
                 conn.disconnect();
                 return cnpjObject;

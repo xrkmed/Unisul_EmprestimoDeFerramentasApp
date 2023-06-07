@@ -1,20 +1,23 @@
-package Controllers;
+package Model;
 
+import Enums.Filtros;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.function.Function;
 
-public class FiltrosClass {
+public class FiltrosModel {
+    
+    //Classe pai de Filtros, as classes herdadas se encontram em Controllers.Filtros
 
     private final String filterName;
-    private final FiltrosEnum type;
+    private final Filtros type;
 
-    public FiltrosClass(String name, FiltrosEnum type) {
+    public FiltrosModel(String name, Filtros type) {
         this.filterName = name;
         this.type = type;
     }
 
-    public FiltrosClass(String value) {
+    public FiltrosModel(String value) {
         this.filterName = value;
         this.type = null;
         //this.screen = null;
@@ -32,7 +35,7 @@ public class FiltrosClass {
         return 0;
     }
 
-    public FiltrosEnum getType() {
+    public Filtros getType() {
         return type;
     }
 
