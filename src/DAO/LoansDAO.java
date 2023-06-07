@@ -115,7 +115,7 @@ public class LoansDAO {
     }
 
     public ToolboxModel getTools(int loanId) throws DatabaseResultQueryException, SQLException {
-        ResultSet result = DBQuery.executeQuery("SELECT ferr.id, ferr.name, ferr.price, FHF.fabricante_id FROM tb_ferramentas AS ferr LEFT JOIN ferramenta_has_fabricante FHF ON FHF.ferramenta_id = ferr.id INNER JOIN tb_ferramentas_emprestimo AS fe ON ferr.id = fe.ferramenta_id AND fe.emprestimo_id = ?;", loanId);
+        ResultSet result = DBQuery.executeQuery("SELECT ferr.id, ferr.name, ferr.price, ferr.fabricante_id FROM tb_ferramentas AS ferr INNER JOIN tb_ferramentas_emprestimo AS fe ON ferr.id = fe.ferramenta_id AND fe.emprestimo_id = ?;", loanId);
         ToolboxModel data = new ToolboxModel();
         while (result.next()) {
             ToolModel tool = new ToolModel(result.getInt("id"), result.getString("name"), ManufacturerDAO.getInstance().getManufacturer(result.getInt("fabricante_id")), result.getDouble("price"));
