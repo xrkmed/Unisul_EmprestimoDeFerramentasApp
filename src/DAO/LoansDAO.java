@@ -60,7 +60,7 @@ public class LoansDAO {
     }
 
     public LoanModel getLoanByToolId(int id) throws DatabaseResultQueryException, SQLException {
-        ResultSet result = DBQuery.executeQuery("SELECT emp.id, emp.amigo_id, emp.startDate, emp.previsaoDataEntrega, emp.valorEmprestimo FROM tb_emprestimos AS emp INNER JOIN tb_ferramentas_emprestimo AS fe ON emp.id = fe.emprestimo_id WHERE fe.ferramenta_id = ?;", id);
+        ResultSet result = DBQuery.executeQuery("SELECT emp.id, emp.amigo_id, emp.startDate, emp.previsaoDataEntrega, emp.valorEmprestimo FROM tb_emprestimos AS emp LEFT JOIN tb_ferramentas_emprestimo AS fe ON emp.id = fe.emprestimo_id WHERE fe.ferramenta_id = ?;", id);
 
         while (result.next()) {
             LoanModel loan = new LoanModel(result.getInt("id"), result.getDate("startDate"), result.getDate("previsaoDataEntrega"), result.getBoolean("finalizado"), result.getDouble("valor_receber"));
@@ -115,7 +115,7 @@ public class LoansDAO {
     }
 
     public ToolboxModel getTools(int loanId) throws DatabaseResultQueryException, SQLException {
-        ResultSet result = DBQuery.executeQuery("SELECT ferr.id, ferr.name, ferr.price, ferr.fabricante_id FROM tb_ferramentas AS ferr INNER JOIN tb_ferramentas_emprestimo AS fe ON ferr.id = fe.ferramenta_id AND fe.emprestimo_id = ?;", loanId);
+        ResultSet result = DBQuery.executeQuery("SELECT ferr.id, ferr.name, ferr.price, FHF.fabricante_id FROM tb_ferramentas AS ferr LEFT JOIN ferramenta_has_fabricante FHF ON FHF.ferramenta_id = ferr.id LEFT JOIN tb_ferramentas_emprestimo AS fe ON ferr.id = fe.ferramenta_id; AND fe.emprestimo_id = ?;", loanId);
         ToolboxModel data = new ToolboxModel();
         while (result.next()) {
             ToolModel tool = new ToolModel(result.getInt("id"), result.getString("name"), ManufacturerDAO.getInstance().getManufacturer(result.getInt("fabricante_id")), result.getDouble("price"));
