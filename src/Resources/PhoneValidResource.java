@@ -22,5 +22,14 @@ public class PhoneValidResource {
         formattedText.append(phoneNumber.substring(6));
         return formattedText.toString();
     }
+    
+    public static boolean verificarNomeCompleto(String nome) {
+        return nome.length() > 3 && nome.length() <= 64 && nome.matches("^[a-zA-Z\\s]+$");
+    }
+
+    public static boolean verificarTelefone(String telefone) {
+        String numeros = telefone.replaceAll("[^0-9]", "");
+        return numeros.matches("^\\d{10,11}$");
+    }
 
 }
