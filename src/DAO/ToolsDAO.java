@@ -120,7 +120,7 @@ public class ToolsDAO {
     }
 
     public void updateTool(Integer id, ToolModel reference) throws DatabaseResultQueryException {
-        int manufacturerId = (reference.getManufacturer() != null ? reference.getManufacturer().getId() : -1);
+        Object manufacturerId = (reference.getManufacturer() != null ? reference.getManufacturer().getId() : null);
         DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET name = ?, price = ?, fabricante_id = ? WHERE id = ?;", reference.getNome(), reference.getPrice(), manufacturerId, id);
     }
 

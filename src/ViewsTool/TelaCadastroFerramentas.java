@@ -288,10 +288,6 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
             }
 
             if (this.tool == null) {
-                if (selectedManufacturer == null) {
-                    JOptionPane.showMessageDialog(null, "Selecione uma empresa por obsequio");
-                    return;
-                }
                 ToolsDAO.getInstance().addTool(textFerramentaNome.getText().toUpperCase(), price, (selectedManufacturer != null ? selectedManufacturer.getId() : -1));
                 JOptionPane.showMessageDialog(null, "Ferramenta cadastrada com sucesso!");
                 this.dispose();
