@@ -1,10 +1,11 @@
-package Resources;
+package Documents;
 
+import Resources.BRLFormat;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 
-public class PhoneDocument extends DocumentFilter {
-    // Esta classe serve para formatar o numero de telefone no formato de telefone brasileiro
+public class PriceDocument extends DocumentFilter {
+    // Esta classe serve para formatar o preco de uma ferramenta no formato de moeda brasileira
 
     @Override
     public void remove(javax.swing.text.DocumentFilter.FilterBypass fb, int offset, int length) throws javax.swing.text.BadLocationException {
@@ -23,11 +24,20 @@ public class PhoneDocument extends DocumentFilter {
         sb.replace(offset, offset + length, text);
 
         String filteredText = sb.toString().replaceAll("[^\\d]", "");
+        if (filteredText.length() > 9) {
+            return;
+        }
 
-        if (PhoneValidResource.isValidPhoneNumber(filteredText)) {
-            super.replace(fb, 0, doc.getLength(), PhoneValidResource.formatPhoneNumber(filteredText), attr);
-        } else {
-            super.replace(fb, 0, doc.getLength(), filteredText, attr);
+        try {
+            if (!filteredText.isEmpty()) {
+                double value = Double.parseDouble(filteredText) / 100.0;
+                String formattedText = BRLFormat.PRICE_FORMATTER.format(value);
+                super.replace(fb, 0, doc.getLength(), formattedText, attr);
+            } else {
+                super.replace(fb, 0, doc.getLength(), "", attr);
+            }
+        } catch (Exception ex) {
+            super.replace(fb, 0, doc.getLength(), "", attr);
         }
     }
 }

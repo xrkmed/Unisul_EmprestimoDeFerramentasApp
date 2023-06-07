@@ -15,8 +15,8 @@ import Exceptions.DatabaseResultQueryException;
 import Model.FriendModel;
 import Model.LoanModel;
 import Model.ToolModel;
-import Resources.BRLResource;
-import Resources.ToolboxResource;
+import Resources.BRLFormat;
+import Model.ToolboxModel;
 
 public class LoansDAO {
 
@@ -94,7 +94,7 @@ public class LoansDAO {
         ResultSet result = DBQuery.executeQuery("SELECT e.id AS `id_emprestimo`, a.nome AS `nome_amigo`, e.startDate, e.previsaoDataEntrega AS `endDate`, DATEDIFF(e.previsaoDataEntrega, CURDATE()) AS `dias_restantes`, e.valorEmprestimo AS `valor_emprestimo`, COUNT(DISTINCT fe.ferramenta_id) AS `quantidade_ferramentas`, SUM(f.price) AS `soma_valor_ferramentas` FROM tb_emprestimos AS e LEFT JOIN tb_amigos AS a ON e.amigo_id = a.id LEFT JOIN tb_ferramentas_emprestimo AS fe ON e.id = fe.emprestimo_id LEFT JOIN tb_ferramentas AS f ON fe.ferramenta_id = f.id WHERE e.dataFinalizado IS NULL GROUP BY e.id, a.nome, e.startDate, e.previsaoDataEntrega;");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         while (result.next()) {
-            datas.add(new Object[]{result.getInt("id_emprestimo"), result.getString("nome_amigo").toUpperCase(), sdf.format(result.getDate("startDate")), sdf.format(result.getDate("endDate")), result.getInt("dias_restantes"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("valor_emprestimo")), result.getInt("quantidade_ferramentas"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("soma_valor_ferramentas"))});
+            datas.add(new Object[]{result.getInt("id_emprestimo"), result.getString("nome_amigo").toUpperCase(), sdf.format(result.getDate("startDate")), sdf.format(result.getDate("endDate")), result.getInt("dias_restantes"), "R$ " + BRLFormat.PRICE_FORMATTER.format(result.getDouble("valor_emprestimo")), result.getInt("quantidade_ferramentas"), "R$ " + BRLFormat.PRICE_FORMATTER.format(result.getDouble("soma_valor_ferramentas"))});
         }
         return datas;
     }
@@ -114,11 +114,11 @@ public class LoansDAO {
         DBQuery.insertOrUpdateQuery("UPDATE tb_emprestimos SET dataFinalizado = ?, observacoes = ? WHERE id = ?;", new Date(), observacoes, e.getId());
     }
 
-    public ToolboxResource getTools(int loanId) throws DatabaseResultQueryException, SQLException {
+    public ToolboxModel getTools(int loanId) throws DatabaseResultQueryException, SQLException {
         ResultSet result = DBQuery.executeQuery("SELECT ferr.id, ferr.name, ferr.price, ferr.fabricante_id FROM tb_ferramentas AS ferr INNER JOIN tb_ferramentas_emprestimo AS fe ON ferr.id = fe.ferramenta_id AND fe.emprestimo_id = ?;", loanId);
-        ToolboxResource data = new ToolboxResource();
+        ToolboxModel data = new ToolboxModel();
         while (result.next()) {
-            ToolModel tool = new ToolModel(result.getInt("id"), result.getString("name"), ManufacturerDAO.getInstance().getManufacturer(result.getInt("fabricante_id")), result.getDouble("price"), loanId);
+            ToolModel tool = new ToolModel(result.getInt("id"), result.getString("name"), ManufacturerDAO.getInstance().getManufacturer(result.getInt("fabricante_id")), result.getDouble("price"));
             data.addTool(tool);
         }
 
@@ -140,7 +140,7 @@ public class LoansDAO {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         ArrayList<Object[]> relatorio = new ArrayList<>();
         while (result.next()) {
-            Object[] datas = new Object[]{result.getInt("emprestimo_id"), result.getString("nome_amigo").toUpperCase(), sdf.format(result.getDate("data_inicio")), sdf.format(result.getDate("dataPrevisaoEntrega")), sdf.format(result.getDate("finalizadoData")), result.getString("observacoes").toUpperCase(), result.getInt("total_ferramentas"), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("totalValorFerramentas")), "R$ " + BRLResource.PRICE_FORMATTER.format(result.getDouble("valorRecebido")), result.getString("ferramentas_emprestadas").toUpperCase()};
+            Object[] datas = new Object[]{result.getInt("emprestimo_id"), result.getString("nome_amigo").toUpperCase(), sdf.format(result.getDate("data_inicio")), sdf.format(result.getDate("dataPrevisaoEntrega")), sdf.format(result.getDate("finalizadoData")), result.getString("observacoes").toUpperCase(), result.getInt("total_ferramentas"), "R$ " + BRLFormat.PRICE_FORMATTER.format(result.getDouble("totalValorFerramentas")), "R$ " + BRLFormat.PRICE_FORMATTER.format(result.getDouble("valorRecebido")), result.getString("ferramentas_emprestadas").toUpperCase()};
             relatorio.add(datas);
         }
 

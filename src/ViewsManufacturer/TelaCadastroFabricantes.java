@@ -2,25 +2,25 @@ package ViewsManufacturer;
 
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
-import Controllers.CNPJEntity;
-import Controllers.ScreenType;
+import Model.CNPJModel;
+import Enums.ScreenSelectionType;
 import DAO.ManufacturerDAO;
 import Exceptions.CNPJNotFound;
-import Resources.CNPJDocument;
+import Documents.CNPJDocument;
 import Resources.CNPJResource;
-import Resources.ManufacturerResource;
+import Model.ManufacturerModel;
 
 public class TelaCadastroFabricantes extends javax.swing.JFrame {
 
-    private CNPJEntity cnpjObject = null;
-    private ManufacturerResource selectedManufacturer = null;
+    private CNPJModel cnpjObject = null;
+    private ManufacturerModel selectedManufacturer = null;
 
     public TelaCadastroFabricantes() {
         initComponents();
         configFrame();
     }
     
-    public TelaCadastroFabricantes(ManufacturerResource selectedManufacturer, ScreenType screenType){
+    public TelaCadastroFabricantes(ManufacturerModel selectedManufacturer, ScreenSelectionType screenType){
         this();
         this.selectedManufacturer = selectedManufacturer;
         textoNomeFantasia.setText(selectedManufacturer.getName());
@@ -47,7 +47,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
             textoSituacao.setText("SEM CONSULTA");
         }
 
-        if (screenType == ScreenType.SCREEN_TYPE_EDIT) {
+        if (screenType == ScreenSelectionType.SCREEN_TYPE_EDIT) {
             textoNomeFantasia.setEditable(true);
             textoCNPJ.setEditable(true);
             btnVerificarFabricante.setEnabled(true);
@@ -394,7 +394,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
         }
 
         try {
-            ManufacturerResource _res = ManufacturerDAO.getInstance().getManufacturer(CNPJResource.returnCNPJUnformat(textoCNPJ.getText()));
+            ManufacturerModel _res = ManufacturerDAO.getInstance().getManufacturer(CNPJResource.returnCNPJUnformat(textoCNPJ.getText()));
             if (validCnpj && _res != selectedManufacturer) {
                 JOptionPane.showMessageDialog(null, "Já existe um cadastro com o CNPJ informado!");
                 textoCNPJ.setText("");
@@ -455,7 +455,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
                     ManufacturerDAO.getInstance().addManufacturer(cnpjObject.getNome(), CNPJResource.returnCNPJUnformat(cnpjObject.getCNPJ()));
                     JOptionPane.showMessageDialog(null, "Fabricante " + cnpjObject.getNome() + " (" + cnpjObject.getCNPJ() + ") cadastrado com sucesso!");
                 }else{
-                    ManufacturerResource _res = ManufacturerDAO.getInstance().getManufacturer(selectedManufacturer.getId());
+                    ManufacturerModel _res = ManufacturerDAO.getInstance().getManufacturer(selectedManufacturer.getId());
                     _res.setCNPJ(CNPJResource.returnCNPJUnformat(cnpjObject.getCNPJ()));
                     _res.setName(cnpjObject.getNome());
                     
@@ -480,10 +480,10 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
                 }
 
                 if(selectedManufacturer == null){
-                    ManufacturerResource manufacturer = ManufacturerDAO.getInstance().addManufacturer(textoNomeFantasia.getText(), "00000000000000");
+                    ManufacturerModel manufacturer = ManufacturerDAO.getInstance().addManufacturer(textoNomeFantasia.getText(), "00000000000000");
                     JOptionPane.showMessageDialog(null, "Fabricante " + manufacturer.getName() + " cadastrado com sucesso!");
                 }else{
-                    ManufacturerResource _res = ManufacturerDAO.getInstance().getManufacturer(selectedManufacturer.getId());
+                    ManufacturerModel _res = ManufacturerDAO.getInstance().getManufacturer(selectedManufacturer.getId());
                     _res.setCNPJ("00.000.000/0000-00");
                     _res.setName(textoNomeFantasia.getText());
                     

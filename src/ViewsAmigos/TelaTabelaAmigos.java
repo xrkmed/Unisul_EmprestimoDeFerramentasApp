@@ -13,7 +13,7 @@ import DAO.FriendsDAO;
 import DAO.LoansDAO;
 import Model.FriendModel;
 import Model.LoanModel;
-import Resources.PhoneValidResource;
+import Resources.PhoneResource;
 
 public class TelaTabelaAmigos extends javax.swing.JFrame {
 
@@ -51,7 +51,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                             if (selectedRow != -1) {
                                 selectedFriend = FriendsDAO.getInstance().getFriend(Integer.parseInt(jTable2.getValueAt(selectedRow, 0).toString()));
                                 selecionadoNome.setText(selectedFriend.getName().toUpperCase());
-                                selecionadoTelefone.setText(PhoneValidResource.formatPhoneNumber(selectedFriend.getPhone()));
+                                selecionadoTelefone.setText(PhoneResource.formatPhoneNumber(selectedFriend.getPhone()));
                             } else {
                                 selectedFriend = null;
                                 selecionadoNome.setText("");

@@ -1,4 +1,4 @@
-package Resources;
+package Controllers;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;

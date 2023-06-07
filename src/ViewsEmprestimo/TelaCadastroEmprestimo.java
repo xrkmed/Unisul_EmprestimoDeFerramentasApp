@@ -12,17 +12,17 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AbstractDocument;
 
-import Controllers.ScreenType;
+import Enums.ScreenSelectionType;
 import DAO.LoansDAO;
 import DAO.ToolsDAO;
 import Model.FriendModel;
 import Model.LoanModel;
 import Model.ToolModel;
-import Resources.BRLResource;
-import Resources.DateDocument;
+import Resources.BRLFormat;
+import Documents.DateDocument;
 import Resources.DateResource;
-import Resources.PriceDocument;
-import Resources.ToolboxResource;
+import Documents.PriceDocument;
+import Model.ToolboxModel;
 import ViewsAmigos.TelaTabelaAmigos;
 import ViewsTool.TelaSelecionarFerramenta;
 
@@ -30,9 +30,9 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
 
     private ToolModel selectedTool = null;
     private FriendModel selectedFriend = null;
-    private ToolboxResource toolsList = new ToolboxResource();
+    private ToolboxModel toolsList = new ToolboxModel();
 
-    private ToolboxResource parentToolsList = new ToolboxResource();
+    private ToolboxModel parentToolsList = new ToolboxModel();
     private LoanModel emprestimo = null;
 
     public TelaCadastroEmprestimo() {
@@ -40,7 +40,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         configFrame();
     }
 
-    public TelaCadastroEmprestimo(LoanModel emprestimo, ScreenType viewType) {
+    public TelaCadastroEmprestimo(LoanModel emprestimo, ScreenSelectionType viewType) {
         this();
         this.emprestimo = emprestimo;
         try {
@@ -48,11 +48,11 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             loadTools(LoansDAO.getInstance().getTools(emprestimo.getId()));
             this.setVisible(true);
             textDataDevolucao.setText(new SimpleDateFormat("dd/MM/yyyy").format(emprestimo.getEndDate()));
-            textValorReceber.setText(BRLResource.PRICE_FORMATTER.format(emprestimo.getPrice()));
+            textValorReceber.setText(BRLFormat.PRICE_FORMATTER.format(emprestimo.getPrice()));
             jLabel3.setText("Alterar emprestimo");
             btnCadastrarEmprestimo.setText("Alterar emprestimo");
 
-            if(viewType == ScreenType.SCREEN_TYPE_VIEW){
+            if(viewType == ScreenSelectionType.SCREEN_TYPE_VIEW){
                 textValorReceber.setEditable(false);
                 textDataDevolucao.setEditable(false);
                 btnSelecionarBeneficiado.setEnabled(false);
@@ -72,7 +72,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
         setSelectedFriend(a);
     }
 
-    public void loadTools(ToolboxResource toolbox) {
+    public void loadTools(ToolboxModel toolbox) {
         parentToolsList = toolbox;
         for (ToolModel tool : toolbox.getTools()) {
             addFerramenta(tool);
@@ -587,12 +587,12 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                 tool.getId(),
                 tool.getNome(),
                 (tool.getManufacturer() != null ? tool.getManufacturer().getName() : "Sem fabricante"),
-                "R$" + BRLResource.PRICE_FORMATTER.format(tool.getPrice())
+                "R$" + BRLFormat.PRICE_FORMATTER.format(tool.getPrice())
             });
             totalValue += tool.getPrice();
         }
 
-        lblValorFerramentas.setText("Valor Total Empréstimo: R$" + BRLResource.PRICE_FORMATTER.format(totalValue));
+        lblValorFerramentas.setText("Valor Total Empréstimo: R$" + BRLFormat.PRICE_FORMATTER.format(totalValue));
     }
 
     private void btnCadastrarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarEmprestimoActionPerformed
@@ -616,7 +616,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
                     return;
                 }
 
-                double valorReceber = BRLResource.PRICE_FORMATTER.parse(textValorReceber.getText()).doubleValue();
+                double valorReceber = BRLFormat.PRICE_FORMATTER.parse(textValorReceber.getText()).doubleValue();
                 if (valorReceber < 0) {
                     JOptionPane.showMessageDialog(this, "O valor a receber deve ser de no minimo zero reais.", "Erro", JOptionPane.ERROR_MESSAGE);
                     return;

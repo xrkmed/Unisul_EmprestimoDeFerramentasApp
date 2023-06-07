@@ -1,6 +1,8 @@
-package Controllers;
+package Model;
 
-public class CNPJEntity {
+public class CNPJModel {
+    
+    //Esta classe serve de retorno para a consulta api de CNPJ, retornando uma classe CNPJModel da consulta e integrando no JFrame.
 
     private String nome;
     private String telefone;
@@ -10,10 +12,10 @@ public class CNPJEntity {
     private String situacao;
     private String cnpj;
 
-    public CNPJEntity() {
+    public CNPJModel() {
     }
 
-    public CNPJEntity(String nome, String telefone, double capitalSocial, String sampleAddress, String status, String situacao, String cnpj) {
+    public CNPJModel(String nome, String telefone, double capitalSocial, String sampleAddress, String status, String situacao, String cnpj) {
         this.nome = nome;
         this.telefone = telefone;
         this.capitalSocial = capitalSocial;

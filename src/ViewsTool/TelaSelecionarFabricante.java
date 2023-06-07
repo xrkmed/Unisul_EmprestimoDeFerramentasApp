@@ -7,13 +7,13 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import DAO.ManufacturerDAO;
 import Resources.CNPJResource;
-import Resources.ManufacturerResource;
+import Model.ManufacturerModel;
 import ViewsManufacturer.TelaCadastroFabricantes;
 import ViewsTool.TelaCadastroFerramentas;
 
 public class TelaSelecionarFabricante extends javax.swing.JFrame {
 
-    private ManufacturerResource selectedManufacturer = null;
+    private ManufacturerModel selectedManufacturer = null;
     private JFrame parent = null;
 
     public TelaSelecionarFabricante() {
@@ -59,7 +59,7 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
         }).start();
     }
 
-    public ManufacturerResource getSelectedManufacturer() {
+    public ManufacturerModel getSelectedManufacturer() {
         return this.selectedManufacturer;
     }
 
@@ -352,19 +352,19 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
 
     }//GEN-LAST:event_textFiltrarNomeActionPerformed
 
-    private void updateManufacturer(ManufacturerResource manufacturer) {
+    private void updateManufacturer(ManufacturerModel manufacturer) {
         selectedManufacturer = manufacturer;
     }
 
     private void loadValores() {
         try {
             ManufacturerDAO dao = ManufacturerDAO.getInstance();
-            ArrayList<ManufacturerResource> manufacturers = dao.getManufacturers();
+            ArrayList<ManufacturerModel> manufacturers = dao.getManufacturers();
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             //CONFIGURACOES DA TABELA
             model.setRowCount(0);
 
-            for (ManufacturerResource manufacturer : manufacturers) {
+            for (ManufacturerModel manufacturer : manufacturers) {
                 
                 if (textFiltrarNome.getText().trim().length() > 0) {
                     if (!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())) {

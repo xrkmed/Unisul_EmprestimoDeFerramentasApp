@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import Controllers.FiltrosClass;
-import Controllers.FiltrosEnum;
+import Model.FiltrosModel;
+import Enums.Filtros;
 
-public class FiltrosGerar extends FiltrosClass {
+public class FiltrosGerar extends FiltrosModel {
 
     private Supplier<ArrayList<? extends Object>> function;
     
     public FiltrosGerar(String name, Supplier<ArrayList<? extends Object>> func) {
-        super(name, FiltrosEnum.FILTRO_GERAR);
+        super(name, Filtros.FILTRO_GERAR);
         this.function = func;
     }
 
@@ -22,7 +22,7 @@ public class FiltrosGerar extends FiltrosClass {
 
     @Override
     public ArrayList<? extends Object> run() {
-        if (function == null || getType() != FiltrosEnum.FILTRO_GERAR) {
+        if (function == null || getType() != Filtros.FILTRO_GERAR) {
             return null;
         }
 

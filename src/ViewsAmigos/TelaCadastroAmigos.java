@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
 
-import Controllers.ScreenType;
+import Enums.ScreenSelectionType;
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
 import Model.FriendModel;
-import Resources.PhoneDocument;
-import Resources.PhoneValidResource;
+import Documents.PhoneDocument;
+import Resources.PhoneResource;
 
 public class TelaCadastroAmigos extends javax.swing.JFrame {
 
@@ -21,10 +21,10 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
     }
 
-    public TelaCadastroAmigos(FriendModel selectedFriend, ScreenType screenType) {
+    public TelaCadastroAmigos(FriendModel selectedFriend, ScreenSelectionType screenType) {
         this();
         this.selectedFriend = selectedFriend;
-        this.setTitle((screenType == ScreenType.SCREEN_TYPE_EDIT ? "Alterar" : "Visualizar") + " cadastro de " + selectedFriend.getName().toUpperCase());
+        this.setTitle((screenType == ScreenSelectionType.SCREEN_TYPE_EDIT ? "Alterar" : "Visualizar") + " cadastro de " + selectedFriend.getName().toUpperCase());
         textNome.setText(selectedFriend.getName());
         textTelefone.setText(selectedFriend.getPhone());
         //jButton2.setText("Cancelar alteração");
@@ -275,13 +275,13 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         ArrayList<String> erros = new ArrayList<String>();
 
-        if (!PhoneValidResource.verificarNomeCompleto(textNome.getText())) {
+        if (!PhoneResource.verificarNomeCompleto(textNome.getText())) {
             erros.add("Nome Inválido! Digite o nome completo (Ex: João da Silva)");
             textNome.setText("");
             textNome.setEnabled(true);
         }
 
-        if (!PhoneValidResource.isValidPhoneNumber(PhoneValidResource.unformatPhoneNumber(textTelefone.getText()))) {
+        if (!PhoneResource.isValidPhoneNumber(PhoneResource.unformatPhoneNumber(textTelefone.getText()))) {
             erros.add("Telefone Inválido! Use o formato (DDD) 9.1234-1234");
             textTelefone.setText("");
             textTelefone.setEnabled(true);
@@ -296,7 +296,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         } else {
             if (selectedFriend == null) {
                 try {
-                    FriendModel friendModel = FriendsDAO.getInstance().addFriend(textNome.getText().toUpperCase(), PhoneValidResource.unformatPhoneNumber(textTelefone.getText()));
+                    FriendModel friendModel = FriendsDAO.getInstance().addFriend(textNome.getText().toUpperCase(), PhoneResource.unformatPhoneNumber(textTelefone.getText()));
                     JOptionPane.showMessageDialog(null, "Amigo cadastrado com sucesso! (" + friendModel.getId() + ")");
                     this.dispose();
                 } catch (Exception e) {
@@ -310,7 +310,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                     }
 
                     friendModel.setName(textNome.getText().toUpperCase());
-                    friendModel.setPhone(PhoneValidResource.unformatPhoneNumber(textTelefone.getText()));
+                    friendModel.setPhone(PhoneResource.unformatPhoneNumber(textTelefone.getText()));
                     FriendsDAO.getInstance().updateFriend(selectedFriend, friendModel);
                     JOptionPane.showMessageDialog(null, "Amigo alterado com sucesso!");
                     this.dispose();

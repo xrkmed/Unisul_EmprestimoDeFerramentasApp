@@ -3,17 +3,17 @@ package ViewsTool;
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
 
-import Controllers.ScreenType;
+import Enums.ScreenSelectionType;
 import DAO.ToolsDAO;
 import Exceptions.DatabaseResultQueryException;
 import Model.ToolModel;
-import Resources.BRLResource;
-import Resources.ManufacturerResource;
-import Resources.PriceDocument;
+import Resources.BRLFormat;
+import Model.ManufacturerModel;
+import Documents.PriceDocument;
 
 public class TelaCadastroFerramentas extends javax.swing.JFrame {
 
-    private ManufacturerResource selectedManufacturer = null;
+    private ManufacturerModel selectedManufacturer = null;
     private ToolModel tool = null;
 
     public TelaCadastroFerramentas() {
@@ -21,13 +21,13 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
         initFrameConfig();
     }
 
-    public TelaCadastroFerramentas(ToolModel tool, ScreenType viewType) {
+    public TelaCadastroFerramentas(ToolModel tool, ScreenSelectionType viewType) {
         this();
         this.tool = tool;
 
         this.setTitle("Alteraçao da ferramenta " + tool.getNome());
         this.textFerramentaNome.setText(tool.getNome());
-        this.textFerramentaValor.setText(BRLResource.PRICE_FORMATTER.format(tool.getPrice()));
+        this.textFerramentaValor.setText(BRLFormat.PRICE_FORMATTER.format(tool.getPrice()));
         this.selectedManufacturer = tool.getManufacturer();
         btnConcluirCad.setText("Concluir alteração");
         btnCancelarCad.setText("Cancelar alteração");
@@ -37,7 +37,7 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
             this.btnRemoverFabricante.setEnabled(true);
         }
 
-        if (viewType == ScreenType.SCREEN_TYPE_VIEW) {
+        if (viewType == ScreenSelectionType.SCREEN_TYPE_VIEW) {
             this.textFerramentaNome.setEditable(false);
             this.textFerramentaValor.setEditable(false);
             this.btnSelectFabricante.setEnabled(false);
@@ -254,7 +254,7 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void updateFabricante(ManufacturerResource e) {
+    public void updateFabricante(ManufacturerModel e) {
         textSelecionado.setText(e.getName());
         this.selectedManufacturer = e;
         btnRemoverFabricante.setEnabled(true);
@@ -282,7 +282,7 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
                 return;
             }
 
-            double price = BRLResource.PRICE_FORMATTER.parse(textFerramentaValor.getText()).doubleValue();
+            double price = BRLFormat.PRICE_FORMATTER.parse(textFerramentaValor.getText()).doubleValue();
             if (price <= 0) {
                 JOptionPane.showMessageDialog(null, "O valor da ferramenta deve ser maior que 0!");
                 return;
@@ -297,7 +297,7 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Ferramenta cadastrada com sucesso!");
                 this.dispose();
             } else {
-                ToolModel newTool = new ToolModel(0, textFerramentaNome.getText().toUpperCase(), selectedManufacturer, price, 0);
+                ToolModel newTool = new ToolModel(0, textFerramentaNome.getText().toUpperCase(), selectedManufacturer, price);
                 ToolsDAO.getInstance().updateTool(tool.getId(), newTool);
                 JOptionPane.showMessageDialog(null, "Ferramenta alterada com sucesso!");
                 this.dispose();
@@ -311,8 +311,8 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "coloque no máximo de 22 caracteres para o nome da ferramenta");
         }
         catch (Exception e) {
+
             JOptionPane.showMessageDialog(null, e.getMessage());
-            return;
         }
 
 
