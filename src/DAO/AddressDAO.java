@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.naming.spi.DirStateFactory.Result;
+import javax.swing.JOptionPane;
 
 import Database.DBQuery;
 import Exceptions.DatabaseResultQueryException;
@@ -48,24 +49,38 @@ public class AddressDAO {
         }
 
         AddressResource addressAlreadyExists = getAddress(newAddress.getCEP());
-        if(addressAlreadyExists != null && addressAlreadyExists.toString().toLowerCase().equals(newAddress.toString().toLowerCase())){
-            return addressAlreadyExists.getId();
+        if(addressAlreadyExists != null){
+            // mostrar um joptionpane para atualizar o cep
+            int option = JOptionPane.showOptionDialog(null, "O endereço já existe no nosso banco de dados, deseja atualizar o cadastro no banco de dados?\n\nEndereco cadastrado: " + addressAlreadyExists, "Endereço já existe", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            if(option == JOptionPane.NO_OPTION){
+                 throw new IllegalArgumentException("Endereço já existe no banco de dados!");
+            }
         }
 
         int ufId = getUF(newAddress.getState());
-        int cityId = getCity(newAddress.getCity());
-        int districtId = getDistrict(newAddress.getDistrict());
-        DBQuery.insertOrUpdateQuery("UPDATE enderecos SET endereco = ?, bairro_id = ?, cidade_id = ?, uf_id = ?, cep = ? WHERE id = ?", newAddress.getStreet(), districtId, cityId, ufId, newAddress.getCEP(), endId);
 
+        ResultSet _res = DBQuery.executeQuery("SELECT UF.id AS idUF, CID.id AS idCidade, B.id AS idBairro FROM endereco_uf UF LEFT JOIN endereco_cidade CID ON CID.cidade = ? LEFT JOIN endereco_bairro B ON B.bairro = ? WHERE UF.uf = ? GROUP BY UF.id, B.id, CID.id;", newAddress.getCity(), newAddress.getDistrict(), newAddress.getState());
+        if(_res.next()){
+            int cityId = _res.getObject("idCidade") == null ? cadastrarCidade(newAddress.getCity()) : _res.getInt("idCidade");
+            int districtId = _res.getObject("idBairro") == null ? cadastrarBairro(newAddress.getDistrict()) : _res.getInt("idBairro");
+
+            DBQuery.insertOrUpdateQuery("UPDATE enderecos SET endereco = ?, bairro_id = ?, cidade_id = ?, uf_id = ?, cep = ? WHERE id = ?", newAddress.getStreet(), districtId, cityId, ufId, newAddress.getCEP(), endId);
+        }
+        
         return endId;
     }
 
     public ResultSet insertAddress(AddressResource _add) throws DatabaseResultQueryException, SQLException {
         int ufId = getUF(_add.getState());
-        int cityId = getCity(_add.getCity());
-        int districtId = getDistrict(_add.getDistrict());
-        ResultSet _res = DBQuery.insertOrUpdateQuery("INSERT INTO enderecos (endereco, bairro_id, cidade_id, uf_id, cep) VALUES (?, ?, ?, ?, ?)", _add.getStreet(), districtId, cityId, ufId, _add.getCEP());
-        return _res;
+        ResultSet _res = DBQuery.executeQuery("SELECT UF.id AS idUF, CID.id AS idCidade, B.id AS idBairro FROM endereco_uf UF LEFT JOIN endereco_cidade CID ON CID.cidade = ? LEFT JOIN endereco_bairro B ON B.bairro = ? WHERE UF.uf = ? GROUP BY UF.id, B.id, CID.id;", _add.getCity(), _add.getDistrict(), _add.getState());
+        if(_res.next()){
+            int cityId = _res.getObject("idCidade") == null ? cadastrarCidade(_add.getCity()) : _res.getInt("idCidade");
+            int districtId = _res.getObject("idBairro") == null ? cadastrarBairro(_add.getDistrict()) : _res.getInt("idBairro");
+            ResultSet _return = DBQuery.insertOrUpdateQuery("INSERT INTO enderecos (endereco, bairro_id, cidade_id, uf_id, cep) VALUES (?, ?, ?, ?, ?)", _add.getStreet(), districtId, cityId, ufId, _add.getCEP());
+            return _return;
+        }
+
+        return null;
     }
 
     private int getUF(String UF) throws DatabaseResultQueryException, SQLException{
@@ -82,12 +97,7 @@ public class AddressDAO {
         return -1;
     }
 
-    private int getCity(String city) throws DatabaseResultQueryException, SQLException{
-        ResultSet _result = DBQuery.executeQuery("SELECT id FROM endereco_cidade WHERE cidade = ?", city);
-        if(_result.next()){
-            return _result.getInt(1);
-        }
-
+    private int cadastrarCidade(String city) throws DatabaseResultQueryException, SQLException{
         ResultSet _res = DBQuery.insertOrUpdateQuery("INSERT INTO endereco_cidade (cidade) VALUES (?)", city);
         if(_res.next()){
             return _res.getInt(1);
@@ -96,12 +106,7 @@ public class AddressDAO {
         return -1;
     }
 
-    private int getDistrict(String district) throws DatabaseResultQueryException, SQLException{
-        ResultSet _result = DBQuery.executeQuery("SELECT id FROM endereco_bairro WHERE bairro = ?", district);
-        if(_result.next()){
-            return _result.getInt(1);
-        }
-
+    private int cadastrarBairro(String district) throws DatabaseResultQueryException, SQLException{
         ResultSet _res = DBQuery.insertOrUpdateQuery("INSERT INTO endereco_bairro (bairro) VALUES (?)", district);
         if(_res.next()){
             return _res.getInt(1);
