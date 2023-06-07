@@ -1,22 +1,19 @@
 package Model;
 
-import Resources.AddressResource;
 import java.util.Objects;
 
 public class FriendModel {
 
     private Integer id;
     private String name;
-    private AddressResource address;
     private String phone;
 
     public FriendModel() {
     }
 
-    public FriendModel(Integer id, String name, AddressResource address, String phone) {
+    public FriendModel(Integer id, String name, String phone) {
         this.id = id;
         this.name = name;
-        this.address = address;
         this.phone = phone;
     }
 
@@ -32,10 +29,6 @@ public class FriendModel {
         this.name = name;
     }
 
-    public AddressResource getAddress() {
-        return this.address;
-    }
-
     public String getPhone() {
         return this.phone;
     }
@@ -44,13 +37,9 @@ public class FriendModel {
         this.phone = phone;
     }
 
-    public void updateAddress(AddressResource e) {
-        this.address = e;
-    }
-
     @Override
     public String toString() {
-        return "FriendModel{" + "id=" + id + ", name=" + name + ", address=" + address + ", phone=" + phone + '}';
+        return "FriendModel{" + "id=" + id + ", name=" + name + ", phone=" + phone + '}';
     }
 
     @Override

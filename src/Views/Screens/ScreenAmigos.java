@@ -26,7 +26,7 @@ import java.sql.SQLException;
 
 public class ScreenAmigos extends ScreenEntity {
 
-    private final String[] columnNames = {"ID", "Nome", "Telefone", "Endereço", "Empr. Abertos", "Empr. Atrasados"};
+    private final String[] columnNames = {"ID", "Nome", "Telefone", "Empr. Abertos", "Empr. Atrasados"};
 
     public ScreenAmigos() {
         super();
@@ -78,7 +78,7 @@ public class ScreenAmigos extends ScreenEntity {
 
             DefaultTableModel model = new DefaultTableModel(new Object[0][columnNames.length], columnNames) {
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false, false
+                    false, false, false, false, false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -95,10 +95,10 @@ public class ScreenAmigos extends ScreenEntity {
                 getTable().getColumnModel().getColumn(1).setPreferredWidth(350);
                 getTable().getColumnModel().getColumn(2).setPreferredWidth(150);
                 getTable().getColumnModel().getColumn(3).setPreferredWidth(400);
+                getTable().getColumnModel().getColumn(3).setPreferredWidth(110);
+                getTable().getColumnModel().getColumn(3).setMaxWidth(110);
                 getTable().getColumnModel().getColumn(4).setPreferredWidth(110);
                 getTable().getColumnModel().getColumn(4).setMaxWidth(110);
-                getTable().getColumnModel().getColumn(5).setPreferredWidth(110);
-                getTable().getColumnModel().getColumn(5).setMaxWidth(110);
             }
 
             if (getFiltros().getSelectedItem() != null) {
@@ -128,14 +128,14 @@ public class ScreenAmigos extends ScreenEntity {
                     }
                 }
 
-                if (Integer.parseInt(data[4].toString()) > 0) {
+                if (Integer.parseInt(data[3].toString()) > 0) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
                         getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);
                     }
                 }
 
-                if (Integer.parseInt(data[5].toString()) > 0) {
+                if (Integer.parseInt(data[4].toString()) > 0) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
                         getTable().getColumnModel().getColumn(i).setCellRenderer(renderer);

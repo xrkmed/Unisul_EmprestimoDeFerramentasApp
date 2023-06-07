@@ -202,11 +202,11 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "Telefone", "Endereço", "Empr. Abertos", "Empr. Atrasados"
+                "ID", "Nome", "Telefone", "Empr. Abertos", "Empr. Atrasados"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -233,11 +233,9 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             jTable2.getColumnModel().getColumn(2).setResizable(false);
             jTable2.getColumnModel().getColumn(2).setPreferredWidth(150);
             jTable2.getColumnModel().getColumn(3).setResizable(false);
-            jTable2.getColumnModel().getColumn(3).setPreferredWidth(400);
+            jTable2.getColumnModel().getColumn(3).setPreferredWidth(110);
             jTable2.getColumnModel().getColumn(4).setResizable(false);
             jTable2.getColumnModel().getColumn(4).setPreferredWidth(110);
-            jTable2.getColumnModel().getColumn(5).setResizable(false);
-            jTable2.getColumnModel().getColumn(5).setPreferredWidth(110);
         }
 
         jLayeredPane1.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
