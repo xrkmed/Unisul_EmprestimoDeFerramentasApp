@@ -194,13 +194,16 @@ public class ScreenFerramentas extends ScreenModel {
         try {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ToolModel toolsDel = ToolsDAO.getInstance().getTool(id);
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover a ferramenta " + toolsDel.getNome() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
-            if (dialogResult == JOptionPane.YES_OPTION) {
-                if (!toolsDel.isAvailable()) {
-                    JOptionPane.showMessageDialog(null, "Não é possível remover uma ferramenta que esta em uso por algum amigo.");
-                    return;
-                }
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover a ferramenta " + toolsDel.getNome() + "?", "Atenção", JOptionPane.YES_NO_OPTION);            
+            if(dialogResult == JOptionPane.NO_OPTION){
+                return;
             }
+            
+            if (!toolsDel.isAvailable()) {
+                JOptionPane.showMessageDialog(null, "Não é possível remover uma ferramenta que esta em uso por algum amigo.");
+                return;
+            }
+            
             ToolsDAO.getInstance().removeTool(toolsDel);
             carregarDados();
         } //        catch (ArrayIndexOutOfBoundsException e) {
