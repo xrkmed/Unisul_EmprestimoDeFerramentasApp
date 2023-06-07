@@ -611,7 +611,6 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                         for (Object cidade : LocalidadesDAO.obterCidades(selectEstado.getSelectedItem().toString())) {
                             selectCidade.addItem(cidade.toString());
                         }
-
                     }
                 });
                 thread.start();
@@ -622,6 +621,9 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                     selectCidade.addItem(cidade.toString());
                 }
             }
+
+            textBairro.setEditable(textBairro.getText().isEmpty());
+            textRua.setEditable(textBairro.getText().isEmpty());
         }
     }//GEN-LAST:event_selectEstadoActionPerformed
 

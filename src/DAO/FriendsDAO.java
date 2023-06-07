@@ -43,18 +43,35 @@ public class FriendsDAO {
             }
         }
 
-        int endId = _resAddress.getInt(1);
-        ResultSet _insertAmigo = DBQuery.insertOrUpdateQuery("INSERT INTO tb_amigos (nome, telefone) VALUES (?, ?);", nome.toUpperCase(), telefone.toUpperCase());
+        FriendModel _friend = null;
+        try{
+            DBQuery.startTransaction();
+	
+            int endId = _resAddress.getInt(1);
+            ResultSet _insertAmigo = DBQuery.insertOrUpdateQuery("INSERT INTO tb_amigos (nome, telefone) VALUES (?, ?);", nome.toUpperCase(), telefone.toUpperCase());
+    
+            if(_insertAmigo.next()){
+                _friend = new FriendModel(_insertAmigo.getInt(1), nome.toUpperCase(), address, telefone);
+                DBQuery.insertOrUpdateQuery("INSERT INTO amigo_has_endereco (amigo_id, endereco_id, numero, complemento) VALUES (?, ?, ?, ?)", _friend.getId(), endId, address.getNumber(), address.getComplemento());
+                address.setId(endId);
+            }
 
-        if(_insertAmigo.next()){
-            FriendModel _friend = new FriendModel(_insertAmigo.getInt(1), nome.toUpperCase(), address, telefone);
-            DBQuery.insertOrUpdateQuery("INSERT INTO amigo_has_endereco (amigo_id, endereco_id, numero, complemento) VALUES (?, ?, ?, ?)", _friend.getId(), endId, address.getNumber(), address.getComplemento());
-            address.setId(endId);
-
-            return _friend;
+            DBQuery.commitTransaction();
+        }catch(SQLException e){
+            try{
+                DBQuery.rollbackTransaction();   
+            }catch(SQLException ex){
+                throw new DatabaseResultQueryException(ex.getMessage());
+            }
+        }finally{
+            try{
+                DBQuery.endTransaction();
+            }catch(SQLException ex){
+                throw new DatabaseResultQueryException(ex.getMessage());
+            }
         }
 
-        return null;
+        return _friend;
     }
 
     public void removeFriend(FriendModel e) throws DatabaseResultQueryException {
@@ -63,7 +80,7 @@ public class FriendsDAO {
 
     public ArrayList<FriendModel> getFriends() throws DatabaseResultQueryException, SQLException {
         ArrayList<FriendModel> friends = new ArrayList<>();
-        ResultSet result = DBQuery.executeQuery("SELECT A.id, A.nome, A.telefone, AHE.numero, AHE.complemento, AHE.endereco_id AS endId, E.endereco, E.cep, B.bairro, CID.cidade, UF.uf FROM tb_amigos A LEFT JOIN amigo_has_endereco AHE ON AHE.amigo_id = A.id LEFT JOIN enderecos E ON E.id = AHE.endereco_id LEFT JOIN endereco_bairro B ON B.id = E.bairro_id LEFT JOIN endereco_cidade CID ON CID.id = B.cidade_id LEFT JOIN endereco_uf UF ON UF.id = CID.uf_id;");
+        ResultSet result = DBQuery.executeQuery("SELECT A.id, A.nome, A.telefone, AHE.numero, AHE.complemento, AHE.endereco_id AS endId, E.endereco, E.cep, B.bairro, CID.cidade, UF.uf FROM tb_amigos A LEFT JOIN amigo_has_endereco AHE ON AHE.amigo_id = A.id LEFT JOIN enderecos E ON E.id = AHE.endereco_id LEFT JOIN endereco_bairro B ON B.id = E.bairro_id LEFT JOIN endereco_cidade CID ON CID.id = E.cidade_id LEFT JOIN endereco_uf UF ON UF.id = E.uf_id;");
 
         while (result.next()) {
             AddressResource address = new AddressResource(result.getInt("endId"), result.getString("endereco"), result.getString("bairro"), result.getString("cidade"), result.getString("uf"), result.getInt("numero"), result.getString("complemento"), result.getInt("cep"));
@@ -74,7 +91,7 @@ public class FriendsDAO {
     }
 
     public FriendModel getFriend(int id) throws DatabaseResultQueryException, SQLException {
-        ResultSet result = DBQuery.executeQuery("SELECT A.id, A.nome, A.telefone, AHE.numero, AHE.complemento, AHE.endereco_id AS endId, E.endereco, E.cep, B.bairro, CID.cidade, UF.uf FROM tb_amigos A LEFT JOIN amigo_has_endereco AHE ON AHE.amigo_id = A.id LEFT JOIN enderecos E ON E.id = AHE.endereco_id LEFT JOIN endereco_bairro B ON B.id = E.bairro_id LEFT JOIN endereco_cidade CID ON CID.id = B.cidade_id LEFT JOIN endereco_uf UF ON UF.id = CID.uf_id WHERE A.id = ?", id);
+        ResultSet result = DBQuery.executeQuery("SELECT A.id, A.nome, A.telefone, AHE.numero, AHE.complemento, AHE.endereco_id AS endId, E.endereco, E.cep, B.bairro, CID.cidade, UF.uf FROM tb_amigos A LEFT JOIN amigo_has_endereco AHE ON AHE.amigo_id = A.id LEFT JOIN enderecos E ON E.id = AHE.endereco_id LEFT JOIN endereco_bairro B ON B.id = E.bairro_id LEFT JOIN endereco_cidade CID ON CID.id = E.cidade_id LEFT JOIN endereco_uf UF ON UF.id = E.uf_id WHERE A.id = ?", id);
 
         while (result.next()) {
             AddressResource address = new AddressResource(result.getInt("endId"), result.getString("endereco"), result.getString("bairro"), result.getString("cidade"), result.getString("uf"), result.getInt("numero"), result.getString("complemento"), result.getInt("cep"));
@@ -101,7 +118,7 @@ public class FriendsDAO {
 
     public ArrayList<Object[]> loadFriendsTabela() throws DatabaseResultQueryException, SQLException {
         ArrayList<Object[]> datasObject = new ArrayList<>();
-        ResultSet result = DBQuery.executeQuery("SELECT a.id AS ID, a.nome AS Nome, a.telefone AS Telefone, IFNULL(CONCAT(E.endereco, ', ', AHE.numero, ', ', B.bairro, ', ', CID.cidade, ', ', UF.uf, ' - CEP: ', E.cep, ' Complemento: ', AHE.complemento), 'Sem endereco') AS Endereco, COUNT(DISTINCT CASE WHEN em.dataFinalizado IS NULL THEN em.id END) AS `Emprestimos Abertos`, COUNT(DISTINCT CASE WHEN em.dataFinalizado IS NULL AND em.previsaoDataEntrega < CURDATE() THEN em.id END) AS `Emprestimos Atrasados` FROM tb_amigos AS a LEFT JOIN amigo_has_endereco AHE ON AHE.amigo_id = a.id LEFT JOIN enderecos E ON E.id = AHE.endereco_id LEFT JOIN endereco_bairro B ON B.id = E.bairro_id LEFT JOIN endereco_cidade CID ON CID.id = B.cidade_id LEFT JOIN endereco_uf UF ON UF.id = CID.uf_id LEFT JOIN tb_emprestimos AS em ON a.id = em.amigo_id GROUP BY a.id, a.nome, a.telefone, E.endereco, AHE.numero, B.bairro, CID.cidade, UF.uf, E.cep;");
+        ResultSet result = DBQuery.executeQuery("SELECT a.id AS ID, a.nome AS Nome, a.telefone AS Telefone, IFNULL(CONCAT(E.endereco, ', ', AHE.numero, ', ', B.bairro, ', ', CID.cidade, ', ', UF.uf, ' - CEP: ', E.cep, ' Complemento: ', AHE.complemento), 'Sem endereco') AS Endereco, COUNT(DISTINCT CASE WHEN em.dataFinalizado IS NULL THEN em.id END) AS `Emprestimos Abertos`, COUNT(DISTINCT CASE WHEN em.dataFinalizado IS NULL AND em.previsaoDataEntrega < CURDATE() THEN em.id END) AS `Emprestimos Atrasados` FROM tb_amigos AS a LEFT JOIN amigo_has_endereco AHE ON AHE.amigo_id = a.id LEFT JOIN enderecos E ON E.id = AHE.endereco_id LEFT JOIN endereco_bairro B ON B.id = E.bairro_id LEFT JOIN endereco_cidade CID ON CID.id = E.cidade_id LEFT JOIN endereco_uf UF ON UF.id = E.uf_id LEFT JOIN tb_emprestimos AS em ON a.id = em.amigo_id GROUP BY a.id, a.nome, a.telefone, E.endereco, AHE.numero, B.bairro, CID.cidade, UF.uf, E.cep;");
         while (result.next()) {
             Object[] data = {result.getInt("ID"), result.getString("Nome").toUpperCase(), PhoneValidResource.formatPhoneNumber(result.getLong("Telefone") + ""), result.getString("Endereco"), result.getInt("Emprestimos Abertos"), result.getInt("Emprestimos Atrasados")};
 

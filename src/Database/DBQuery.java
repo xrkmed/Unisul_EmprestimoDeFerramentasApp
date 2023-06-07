@@ -12,6 +12,22 @@ import Tests.Main;
 
 public class DBQuery {
 
+    public static void startTransaction() throws SQLException {
+        Database.getInstance().getConnection().setAutoCommit(false);
+    }
+
+    public static void commitTransaction() throws SQLException {
+        Database.getInstance().getConnection().commit();
+    }
+
+    public static void rollbackTransaction() throws SQLException {
+        Database.getInstance().getConnection().rollback();
+    }
+
+    public static void endTransaction() throws SQLException {
+        Database.getInstance().getConnection().setAutoCommit(true);
+    }
+
     public static ResultSet executeQuery(String query, Object... params) throws DatabaseResultQueryException {
         try {
             PreparedStatement statement = Database.getInstance().getConnection().prepareStatement(query);
@@ -20,7 +36,6 @@ public class DBQuery {
                 statement.setObject(i + 1, params[i]);
             }
 
-            // PEGAR A QUERY
             System.out.println(statement.toString());
 
             return statement.executeQuery();
@@ -36,9 +51,8 @@ public class DBQuery {
                 statement.setObject(i + 1, params[i]);
             }
 
-            // PEGAR A QUERY
             System.out.println(statement.toString());
-
+            
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
                 Main.tela.getTelaAtual().atualizarDados();
