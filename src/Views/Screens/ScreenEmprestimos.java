@@ -188,18 +188,6 @@ public class ScreenEmprestimos extends ScreenModel {
                 }
             });
 
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Nada selecionado vei");
-            e.printStackTrace();
-
-        } catch (DatabaseResultQueryException e) {
-            System.out.println("Talvez o banco de dados explodiu, mas não retornou nada");
-            e.printStackTrace();
-
-        } catch (SQLException e) {
-            System.out.println("Os comandos enviados SQL enviados tem algum problema");
-            e.printStackTrace();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
