@@ -5,6 +5,7 @@ import javax.swing.text.AbstractDocument;
 
 import Enums.ScreenSelectionType;
 import DAO.ToolsDAO;
+import Exceptions.DatabaseResultQueryException;
 import Model.ToolModel;
 import Resources.BRLFormat;
 import Model.ManufacturerModel;
@@ -303,7 +304,14 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "O valor da ferramenta deve ser um número!");
-        } catch (Exception e) {
+            return;
+            
+        }
+        catch(DatabaseResultQueryException e){
+        JOptionPane.showMessageDialog(null, "coloque no máximo de 22 caracteres para o nome da ferramenta");
+        }
+        catch (Exception e) {
+
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
