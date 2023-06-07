@@ -127,19 +127,55 @@ public class ToolsDAO {
     }
 
     public void updateManufacturer(int id, int manufacturerId) throws DatabaseResultQueryException {
-        DBQuery.insertOrUpdateQuery("DELETE FROM ferramenta_has_fabricante WHERE ferramenta_id = ?", id);
+        try{
+            DBQuery.startTransaction();
 
-        if(manufacturerId != -1){
-            DBQuery.insertOrUpdateQuery("INSERT INTO ferramenta_has_fabricante (ferramenta_id, fabricante_id) VALUES (?, ?)", id, manufacturerId);
+            DBQuery.insertOrUpdateQuery("DELETE FROM ferramenta_has_fabricante WHERE ferramenta_id = ?", id);
+
+            if(manufacturerId != -1){
+                DBQuery.insertOrUpdateQuery("INSERT INTO ferramenta_has_fabricante (ferramenta_id, fabricante_id) VALUES (?, ?)", id, manufacturerId);
+            }
+
+            DBQuery.commitTransaction();
+        }catch(SQLException e){
+            try{
+                DBQuery.rollbackTransaction();   
+            }catch(SQLException ex){
+                throw new DatabaseResultQueryException(ex.getMessage());
+            }
+        }finally{
+            try{
+                DBQuery.endTransaction();
+            }catch(SQLException ex){
+                throw new DatabaseResultQueryException(ex.getMessage());
+            }
         }
     }
 
     public void updateTool(Integer id, ToolModel reference) throws DatabaseResultQueryException {
-        DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET name = ?, price = ? WHERE id = ?;", reference.getNome(), reference.getPrice(), id);
-        DBQuery.insertOrUpdateQuery("DELETE FROM ferramenta_has_fabricante WHERE ferramenta_id = ?", id);
+        try{
+            DBQuery.startTransaction();
 
-        if(reference.getManufacturer() != null){
-            DBQuery.insertOrUpdateQuery("INSERT INTO ferramenta_has_fabricante (ferramenta_id, fabricante_id) VALUES (?, ?)", id, reference.getManufacturer().getId());
+            DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET name = ?, price = ? WHERE id = ?;", reference.getNome(), reference.getPrice(), id);
+            DBQuery.insertOrUpdateQuery("DELETE FROM ferramenta_has_fabricante WHERE ferramenta_id = ?", id);
+
+            if(reference.getManufacturer() != null){
+                DBQuery.insertOrUpdateQuery("INSERT INTO ferramenta_has_fabricante (ferramenta_id, fabricante_id) VALUES (?, ?)", id, reference.getManufacturer().getId());
+            }
+
+            DBQuery.commitTransaction();
+        }catch(SQLException e){
+            try{
+                DBQuery.rollbackTransaction();   
+            }catch(SQLException ex){
+                throw new DatabaseResultQueryException(ex.getMessage());
+            }
+        }finally{
+            try{
+                DBQuery.endTransaction();
+            }catch(SQLException ex){
+                throw new DatabaseResultQueryException(ex.getMessage());
+            }
         }
     }
 
