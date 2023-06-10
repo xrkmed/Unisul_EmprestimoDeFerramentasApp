@@ -27,14 +27,16 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         this.setTitle((screenType == ScreenSelectionType.SCREEN_TYPE_EDIT ? "Alterar" : "Visualizar") + " cadastro de " + selectedFriend.getName().toUpperCase());
         textNome.setText(selectedFriend.getName());
         textTelefone.setText(selectedFriend.getPhone());
-        //jButton2.setText("Cancelar alteração");
-        btnCriarEmprestimo.setEnabled(true);
-        btnVisualizarEmprestimos.setEnabled(true);
+      if(screenType == ScreenSelectionType.SCREEN_TYPE_VIEW){
+      btnCadastrar.setEnabled(false);
+      btnCriarEmprestimo.setEnabled(false);
+      textNome.setEditable(false);
+      textTelefone.setEditable(false);
+      }
     }
 
     private void configFrame() {
-        btnCriarEmprestimo.setEnabled(false);
-        btnVisualizarEmprestimos.setEnabled(false);
+    
         AbstractDocument document = (AbstractDocument) textTelefone.getDocument();
 
         document.setDocumentFilter(new PhoneDocument());
@@ -51,7 +53,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         textTelefone = new javax.swing.JTextField();
         jLayeredPane5 = new javax.swing.JLayeredPane();
         btnVisualizarEmprestimos = new javax.swing.JButton();
-        btnDeletar2 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         btnCadastrar = new javax.swing.JButton();
         btnCriarEmprestimo = new javax.swing.JButton();
@@ -69,7 +71,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
         textNome.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textNome.setToolTipText("Digite o nome completo do seu amigo");
-        textNome.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        textNome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         textNome.setInheritsPopupMenu(true);
         textNome.setName(""); // NOI18N
         textNome.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +90,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
         textTelefone.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         textTelefone.setToolTipText("Digite o telefone do seu amigo");
-        textTelefone.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        textTelefone.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         textTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textTelefoneActionPerformed(evt);
@@ -141,20 +143,20 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         btnVisualizarEmprestimos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/eye-custom.png"))); // NOI18N
         btnVisualizarEmprestimos.setToolTipText("Visualizar Empréstimos");
         btnVisualizarEmprestimos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        btnVisualizarEmprestimos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVisualizarEmprestimos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVisualizarEmprestimos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVisualizarEmprestimosActionPerformed(evt);
             }
         });
 
-        btnDeletar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-minus-custom.png"))); // NOI18N
-        btnDeletar2.setToolTipText("Cancelar");
-        btnDeletar2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        btnDeletar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDeletar2.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-minus-custom.png"))); // NOI18N
+        btnCancelar.setToolTipText("Cancelar");
+        btnCancelar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeletar2ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -167,7 +169,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-check-custom.png"))); // NOI18N
         btnCadastrar.setToolTipText("Salvar Cadastro");
         btnCadastrar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCadastrarMouseClicked(evt);
@@ -182,7 +184,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         btnCriarEmprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/plus-custom.png"))); // NOI18N
         btnCriarEmprestimo.setToolTipText("Criar Novo Empréstimo");
         btnCriarEmprestimo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        btnCriarEmprestimo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCriarEmprestimo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCriarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCriarEmprestimoActionPerformed(evt);
@@ -190,7 +192,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         });
 
         jLayeredPane5.setLayer(btnVisualizarEmprestimos, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane5.setLayer(btnDeletar2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane5.setLayer(btnCancelar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(btnCadastrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(btnCriarEmprestimo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -207,7 +209,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(btnVisualizarEmprestimos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
-                .addComponent(btnDeletar2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
@@ -217,7 +219,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
             .addGroup(jLayeredPane5Layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnDeletar2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVisualizarEmprestimos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -325,9 +327,9 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCadastrarMouseClicked
 
-    private void btnDeletar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletar2ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_btnDeletar2ActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnVisualizarEmprestimosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarEmprestimosActionPerformed
         if (selectedFriend != null) {
@@ -356,8 +358,8 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCriarEmprestimo;
-    private javax.swing.JButton btnDeletar2;
     private javax.swing.JButton btnVisualizarEmprestimos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
