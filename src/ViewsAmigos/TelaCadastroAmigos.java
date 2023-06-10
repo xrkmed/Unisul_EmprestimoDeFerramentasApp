@@ -29,6 +29,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         textTelefone.setText(selectedFriend.getPhone());
       if(screenType == ScreenSelectionType.SCREEN_TYPE_VIEW){
       btnCadastrar.setEnabled(false);
+      btnCriarEmprestimo.setEnabled(false);
       textNome.setEditable(false);
       textTelefone.setEditable(false);
       }
