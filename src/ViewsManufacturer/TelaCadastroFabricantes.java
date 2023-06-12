@@ -92,6 +92,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnFinalizarCadastro1 = new javax.swing.JButton();
+        bntAtribuirFerramenta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Fabricantes - Grupo Supimpa");
@@ -314,9 +315,14 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
             }
         });
 
+        bntAtribuirFerramenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/plus-custom.png"))); // NOI18N
+        bntAtribuirFerramenta.setToolTipText("Atribuir Ferramentas Ao Fabricante");
+        bntAtribuirFerramenta.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
         jLayeredPane5.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(btnCancelar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(btnFinalizarCadastro1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane5.setLayer(bntAtribuirFerramenta, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane5Layout = new javax.swing.GroupLayout(jLayeredPane5);
         jLayeredPane5.setLayout(jLayeredPane5Layout);
@@ -326,6 +332,8 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bntAtribuirFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(btnFinalizarCadastro1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -338,7 +346,8 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
                 .addGroup(jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(btnFinalizarCadastro1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bntAtribuirFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4))
         );
 
@@ -522,6 +531,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CNPJLabel;
+    private javax.swing.JButton bntAtribuirFerramenta;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnFinalizarCadastro1;
     private javax.swing.JButton btnVerificarFabricante;
