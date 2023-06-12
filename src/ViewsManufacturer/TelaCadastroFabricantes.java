@@ -9,6 +9,7 @@ import Exceptions.CNPJNotFound;
 import Documents.CNPJDocument;
 import Resources.CNPJResource;
 import Model.ManufacturerModel;
+import ViewsTool.TelaAtribuirFabricante;
 
 public class TelaCadastroFabricantes extends javax.swing.JFrame {
 
@@ -242,12 +243,9 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
                             .addComponent(textoTelefone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                             .addComponent(textoStatus, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(textoSituacao, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel9))
-                                .addGap(0, 0, 0))))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9)))
                     .addComponent(textoRazaoSocial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
         );
@@ -318,6 +316,11 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
         bntAtribuirFerramenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/plus-custom.png"))); // NOI18N
         bntAtribuirFerramenta.setToolTipText("Atribuir Ferramentas Ao Fabricante");
         bntAtribuirFerramenta.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        bntAtribuirFerramenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntAtribuirFerramentaActionPerformed(evt);
+            }
+        });
 
         jLayeredPane5.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(btnCancelar, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -520,6 +523,10 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
     private void textoTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoTelefoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textoTelefoneActionPerformed
+
+    private void bntAtribuirFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAtribuirFerramentaActionPerformed
+        new TelaAtribuirFabricante().setVisible(true);
+    }//GEN-LAST:event_bntAtribuirFerramentaActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

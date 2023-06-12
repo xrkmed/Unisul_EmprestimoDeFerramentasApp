@@ -85,8 +85,6 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="jLabel1" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" alignment="2" min="-2" pref="460" max="-2" attributes="0"/>
                       <Group type="102" alignment="2" attributes="0">
                           <Component id="canvas4" min="-2" pref="16" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -97,6 +95,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jScrollPane1" alignment="2" min="-2" pref="460" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               </Group>
@@ -190,7 +190,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="FERRAMENTAS SEM FABRICANTES"/>
+            <Property name="text" type="java.lang.String" value="Ferramentas Sem Fabricantes"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -236,14 +236,14 @@
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
                       <Group type="102" alignment="2" attributes="0">
-                          <Component id="canvas3" min="-2" pref="16" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="2" attributes="0">
                           <Component id="canvas5" min="-2" pref="16" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="2" attributes="0">
+                          <Component id="canvas3" min="-2" pref="16" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane2" alignment="2" min="-2" pref="460" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -340,7 +340,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="FERRAMENTAS DESTE FABRICANTE"/>
+            <Property name="text" type="java.lang.String" value="Ferramentas Desse Fabricante"/>
           </Properties>
         </Component>
       </SubComponents>

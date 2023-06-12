@@ -11,17 +11,17 @@ import DAO.ToolsDAO;
 import Model.ToolModel;
 import Model.ManufacturerModel;
 
-public class TelaPainelFerramentas extends javax.swing.JFrame {
+public class TelaAtribuirFabricante extends javax.swing.JFrame {
 
     private ToolModel selectedTool = null;
     private ManufacturerModel manufacturer = null;
 
-    public TelaPainelFerramentas() {
+    public TelaAtribuirFabricante() {
         initComponents();
         configFrame();
     }
 
-    public TelaPainelFerramentas(ManufacturerModel manufacturer) {
+    public TelaAtribuirFabricante(ManufacturerModel manufacturer) {
         this();
         this.manufacturer = manufacturer;
         this.setTitle("Ferramentas do Fabricante " + manufacturer.getName());
@@ -143,7 +143,7 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
         jLabel3.setText("Em uso por algum amigo");
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        jLabel1.setText("FERRAMENTAS SEM FABRICANTES");
+        jLabel1.setText("Ferramentas Sem Fabricantes");
 
         jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -159,8 +159,6 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addComponent(canvas4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -168,7 +166,9 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)))
+                        .addComponent(jLabel3))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(5, 5, 5))
         );
         jLayeredPane1Layout.setVerticalGroup(
@@ -244,7 +244,7 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
         canvas3.setBackground(new java.awt.Color(255, 255, 224));
 
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        jLabel2.setText("FERRAMENTAS DESTE FABRICANTE");
+        jLabel2.setText("Ferramentas Desse Fabricante");
 
         jLayeredPane2.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(canvas5, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -261,13 +261,13 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(canvas3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4))
-                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addComponent(canvas5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9))
+                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                        .addComponent(canvas3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(5, 5, 5))
@@ -430,7 +430,7 @@ public class TelaPainelFerramentas extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPainelFerramentas().setVisible(true);
+                new TelaAtribuirFabricante().setVisible(true);
             }
         });
     }
