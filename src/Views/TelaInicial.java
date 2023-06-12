@@ -244,7 +244,7 @@ public class TelaInicial extends javax.swing.JFrame {
         bntBuscar.setBorder(null);
         bntBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        comboFiltros.setModel(new javax.swing.DefaultComboBoxModel<>(new FiltrosModel[] { new FiltrosModel("")  }));
+        comboFiltros.setModel(new javax.swing.DefaultComboBoxModel<>(new Model.FiltrosModel[] { new Model.FiltrosModel("")  }));
         comboFiltros.setToolTipText("Selecione um filtro");
         comboFiltros.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         comboFiltros.addItemListener(new java.awt.event.ItemListener() {
@@ -718,7 +718,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btnExportar;
     private javax.swing.JButton btnVisualizar;
     private javax.swing.JTextField campoFiltroNome;
-    private javax.swing.JComboBox<FiltrosModel> comboFiltros;
+    private javax.swing.JComboBox<Model.FiltrosModel> comboFiltros;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;
