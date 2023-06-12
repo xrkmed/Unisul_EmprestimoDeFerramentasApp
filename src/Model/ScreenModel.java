@@ -111,9 +111,6 @@ public class ScreenModel {
     public final JComboBox<FiltrosModel> getFiltros() {
         return tela.getComboBox();
     }
-    public final JButton getBtnBuscar(){
-    return tela.getBtnBuscar();
-    }
     
     public final JTextField getCampoNomeFiltroLupa() {
     return tela.getCampoNomeFiltroNome();
