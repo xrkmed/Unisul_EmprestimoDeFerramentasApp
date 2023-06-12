@@ -120,7 +120,11 @@ public class ScreenEmprestimos extends ScreenModel {
                         continue;
                     }
                 }
-
+                if(!getCampoNomeFiltroLupa().getText().equals("")){        
+                    if(!data[1].toString().trim().contains(getCampoNomeFiltroLupa().getText().toUpperCase().trim())){
+                        continue;
+                    }
+                }
                 if (data[4].toString().contains("Finalizado em")) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightGreen);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {

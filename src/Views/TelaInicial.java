@@ -16,6 +16,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
@@ -67,7 +68,10 @@ public class TelaInicial extends javax.swing.JFrame {
     public JComboBox<FiltrosModel> getComboBox() {
         return comboFiltros;
     }
-
+    public JTextField getCampoNomeFiltroNome(){
+    return campoFiltroNome;
+    }
+    
     public JLabel getTitulo() {
         return labelListaNome;
     }
@@ -243,6 +247,11 @@ public class TelaInicial extends javax.swing.JFrame {
         bntBuscar.setToolTipText("Buscar");
         bntBuscar.setBorder(null);
         bntBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        bntBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntBuscarActionPerformed(evt);
+            }
+        });
 
         comboFiltros.setModel(new javax.swing.DefaultComboBoxModel<>(new Model.FiltrosModel[] { new Model.FiltrosModel("")  }));
         comboFiltros.setToolTipText("Selecione um filtro");
@@ -695,6 +704,10 @@ public class TelaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void bntBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBuscarActionPerformed
+telaAtual.carregarDados();
+    }//GEN-LAST:event_bntBuscarActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -744,4 +757,5 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JPopupMenu popOpcoes;
     private javax.swing.JTable tabelaPrincipal;
     // End of variables declaration//GEN-END:variables
+
 }

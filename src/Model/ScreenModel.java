@@ -10,6 +10,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import Model.FiltrosModel;
 import Views.TelaInicial;
+import javax.swing.JTextField;
 
 public class ScreenModel {
 
@@ -50,7 +51,7 @@ public class ScreenModel {
 
     public void carregarDados() {
     }
-
+    
     public void init() {
     }
 
@@ -110,7 +111,10 @@ public class ScreenModel {
     public final JComboBox<FiltrosModel> getFiltros() {
         return tela.getComboBox();
     }
-
+    
+    public final JTextField getCampoNomeFiltroLupa() {
+    return tela.getCampoNomeFiltroNome();
+    }
     public Object getSelectedValue() {
         return null;
     }
