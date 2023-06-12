@@ -169,7 +169,6 @@ public class ScreenEmprestimos extends ScreenModel {
             new TelaCadastroEmprestimo(selectedLoan, ScreenSelectionType.SCREEN_TYPE_EDIT).setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -204,7 +203,6 @@ public class ScreenEmprestimos extends ScreenModel {
             new TelaCadastroEmprestimo(selectedLoan, ScreenSelectionType.SCREEN_TYPE_VIEW).setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
