@@ -406,7 +406,7 @@ public class TelaAtribuirFabricante extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
 
-        try{
+        try {
             for (ToolModel tool : tools) {
                 if (!tool.isAvailable()) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
@@ -420,7 +420,7 @@ public class TelaAtribuirFabricante extends javax.swing.JFrame {
                     tool.getNome()
                 });
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao carregar os dados da tabela, contacte o administrador. \n\nDetalhes do erro: " + e.getMessage());
             e.printStackTrace();
         }

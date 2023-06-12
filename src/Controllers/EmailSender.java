@@ -14,7 +14,6 @@ import javax.mail.internet.MimeMultipart;
 public class EmailSender {
 
     //Sistema desativado por enquanto
-    
     private final static String host = "smtp.hostinger.com";
     private final static int port = 587;
     private final static String sender = "";

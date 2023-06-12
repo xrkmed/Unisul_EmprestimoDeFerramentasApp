@@ -12,7 +12,6 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
@@ -29,31 +28,30 @@ public class TelaInicial extends javax.swing.JFrame {
         initComponents();
         updateTela(new ScreenAmigos(this));
 
-
         menuEditar.setText(btnEditar.getToolTipText());
         menuDeletar.setText(btnDeletar.getToolTipText());
         menuVisualizar.setText(btnVisualizar.getToolTipText());
-        
+
         menuEditar.addActionListener(l -> {
-            if(telaAtual.getBtnEditar().getActionListeners().length > 0){
+            if (telaAtual.getBtnEditar().getActionListeners().length > 0) {
                 telaAtual.getBtnEditar().getActionListeners()[0].actionPerformed(null);
             }
         });
 
         menuDeletar.addActionListener(l -> {
-            if(telaAtual.getBtnDeletar().getActionListeners().length > 0){
+            if (telaAtual.getBtnDeletar().getActionListeners().length > 0) {
                 telaAtual.getBtnDeletar().getActionListeners()[0].actionPerformed(null);
             }
         });
 
         menuVisualizar.addActionListener(l -> {
-            if(telaAtual.getBtnVisualizar().getActionListeners().length > 0){
+            if (telaAtual.getBtnVisualizar().getActionListeners().length > 0) {
                 telaAtual.getBtnVisualizar().getActionListeners()[0].actionPerformed(null);
             }
         });
     }
 
-    public JPopupMenu getPopOpcoes(){
+    public JPopupMenu getPopOpcoes() {
         return popOpcoes;
     }
 
@@ -68,10 +66,11 @@ public class TelaInicial extends javax.swing.JFrame {
     public JComboBox<FiltrosModel> getComboBox() {
         return comboFiltros;
     }
-    public JTextField getCampoNomeFiltroNome(){
-    return campoFiltroNome;
+
+    public JTextField getCampoNomeFiltroNome() {
+        return campoFiltroNome;
     }
-    
+
     public JLabel getTitulo() {
         return labelListaNome;
     }
@@ -106,7 +105,7 @@ public class TelaInicial extends javax.swing.JFrame {
         btnEmprestimos.setBackground(new Color(205, 205, 205));
         bntFerramentas.setBackground(new Color(205, 205, 205));
         bntFabricantes.setBackground(new Color(205, 205, 205));
-        
+
         btnGoogleCalendar.setBackground(new Color(205, 205, 205));
 
         comboFiltros.setModel(e.get());
@@ -640,9 +639,9 @@ public class TelaInicial extends javax.swing.JFrame {
                 tabelaPrincipal.setRowSelectionInterval(row, row);
                 popOpcoes.show(tabelaPrincipal, evt.getX(), evt.getY());
             }
-        }else{
-            if(evt.getClickCount() == 2){
-                if(getBtnVisualizar().getActionListeners().length > 0){
+        } else {
+            if (evt.getClickCount() == 2) {
+                if (getBtnVisualizar().getActionListeners().length > 0) {
                     getBtnVisualizar().getActionListeners()[0].actionPerformed(null);
                 }
             }
@@ -658,20 +657,20 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_menuEditarActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        String mensagem = "Cores e seus significados:\n\n" +
-                "Fundo vermelho:\n" +
-                "- Linhas de tabela com fundo vermelho indicam que:\n" +
-                "   - Na tabela de emprestimos: Um empréstimo está atrasado;\n" +
-                "   - Na tabela de ferramenta: Uma ferramenta deveria ter sido devolvida;\n" +
-                "   - Na tabela de amigos: Um amigo está com um empréstimo atrasado;\n" +
-                "   - Na tabela de fabricante: Uma fabricante está com todas as ferramentas em uso.\n\n" +
-                "Fundo amarelo:\n" +
-                "- Linhas de tabela com fundo amarelo indicam que:\n" +
-                "   - Na tabela de empréstimos: este empréstimo ira vencer dentro de 7 dias.\n\n" +
-                "   - Na tabela de amigos: este amigo esta com pelo menos um emprestimo em aberto.\n\n" +
-                "Fundo laranja claro:\n" +
-                "- Linhas de tabela com fundo laranja claro indicam que:\n" +
-                "   - Na tabela de fabricante: A fabricante não tem nenhuma ferramenta cadastrada.";
+        String mensagem = "Cores e seus significados:\n\n"
+                + "Fundo vermelho:\n"
+                + "- Linhas de tabela com fundo vermelho indicam que:\n"
+                + "   - Na tabela de emprestimos: Um empréstimo está atrasado;\n"
+                + "   - Na tabela de ferramenta: Uma ferramenta deveria ter sido devolvida;\n"
+                + "   - Na tabela de amigos: Um amigo está com um empréstimo atrasado;\n"
+                + "   - Na tabela de fabricante: Uma fabricante está com todas as ferramentas em uso.\n\n"
+                + "Fundo amarelo:\n"
+                + "- Linhas de tabela com fundo amarelo indicam que:\n"
+                + "   - Na tabela de empréstimos: este empréstimo ira vencer dentro de 7 dias.\n\n"
+                + "   - Na tabela de amigos: este amigo esta com pelo menos um emprestimo em aberto.\n\n"
+                + "Fundo laranja claro:\n"
+                + "- Linhas de tabela com fundo laranja claro indicam que:\n"
+                + "   - Na tabela de fabricante: A fabricante não tem nenhuma ferramenta cadastrada.";
 
         JOptionPane.showMessageDialog(null, mensagem, "Legenda de Cores", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
@@ -685,7 +684,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void bntBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBuscarActionPerformed
-telaAtual.carregarDados();
+        telaAtual.carregarDados();
     }//GEN-LAST:event_bntBuscarActionPerformed
 
     public static void main(String args[]) {

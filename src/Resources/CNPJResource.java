@@ -5,7 +5,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-
 import Model.CNPJModel;
 import Exceptions.CNPJNotFound;
 

@@ -1,15 +1,11 @@
 package DAO;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import Database.DBQuery;
 import Exceptions.DatabaseResultQueryException;
 import Model.FriendModel;
