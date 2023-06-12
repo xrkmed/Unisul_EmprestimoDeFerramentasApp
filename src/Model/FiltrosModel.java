@@ -2,13 +2,10 @@ package Model;
 
 import Enums.Filtros;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.function.Function;
 
 public class FiltrosModel {
-    
-    //Classe pai de Filtros, as classes herdadas se encontram em Controllers.Filtros
 
+    //Classe pai de Filtros, as classes herdadas se encontram em Controllers.Filtros
     private final String filterName;
     private final Filtros type;
 
@@ -27,7 +24,7 @@ public class FiltrosModel {
         return false;
     }
 
-    public ArrayList<? extends Object> run(){
+    public ArrayList<? extends Object> run() {
         return null;
     }
 

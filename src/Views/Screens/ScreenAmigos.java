@@ -16,14 +16,12 @@ import Controllers.Filtros.FiltrosOrdenar;
 import Enums.ScreenSelectionType;
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
-import Exceptions.DatabaseResultQueryException;
 import Model.FriendModel;
 import Model.LoanModel;
 import Controllers.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsAmigos.TelaCadastroAmigos;
 import com.itextpdf.text.Paragraph;
-import java.sql.SQLException;
 
 public class ScreenAmigos extends ScreenModel {
 
@@ -128,8 +126,8 @@ public class ScreenAmigos extends ScreenModel {
                         continue;
                     }
                 }
-                if(!getCampoNomeFiltroLupa().getText().equals("")){        
-                    if(!data[1].toString().trim().contains(getCampoNomeFiltroLupa().getText().toUpperCase().trim())){
+                if (!getCampoNomeFiltroLupa().getText().equals("")) {
+                    if (!data[1].toString().trim().contains(getCampoNomeFiltroLupa().getText().toUpperCase().trim())) {
                         continue;
                     }
                 }
@@ -192,7 +190,7 @@ public class ScreenAmigos extends ScreenModel {
                 dao.removeFriend(friendsDel);
                 carregarDados();
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -68,7 +68,7 @@ public class ManufacturerDAO {
         return null;
     }
 
-    public void updateManufacturer(ManufacturerModel origin, ManufacturerModel updated) throws DatabaseResultQueryException{
+    public void updateManufacturer(ManufacturerModel origin, ManufacturerModel updated) throws DatabaseResultQueryException {
         DBQuery.insertOrUpdateQuery("UPDATE tb_fabricantes SET razao_social = ?, cnpj = ? WHERE id = ?", updated.getName().toUpperCase(), CNPJResource.returnCNPJUnformat(updated.getCNPJ()), origin.getId());
     }
 

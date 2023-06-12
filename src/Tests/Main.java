@@ -48,7 +48,4 @@ public class Main {
 - Alterar layout da tela menciona acima
 - Fazer "Integração" com Google Agendas
 - Remover telas de "Relatório" e telas repetidas
-
-
-
-*/
+ */

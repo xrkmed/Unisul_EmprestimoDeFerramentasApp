@@ -1,8 +1,6 @@
 package Controllers;
 
-import Views.TelaInicial;
 import javax.swing.JTable;
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.PageSize;
@@ -73,5 +71,5 @@ public class PDFEntity {
 
         document.close();
     }
-   
+
 }

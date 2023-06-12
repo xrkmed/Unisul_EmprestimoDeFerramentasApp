@@ -20,8 +20,8 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
         initComponents();
         configFrame();
     }
-    
-    public TelaCadastroFabricantes(ManufacturerModel selectedManufacturer, ScreenSelectionType screenType){
+
+    public TelaCadastroFabricantes(ManufacturerModel selectedManufacturer, ScreenSelectionType screenType) {
         this();
         this.selectedManufacturer = selectedManufacturer;
         textoNomeFantasia.setText(selectedManufacturer.getName());
@@ -29,7 +29,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
         CNPJLabel.setText(selectedManufacturer.getCNPJ());
         textoCNPJ.setText(selectedManufacturer.getCNPJ());
         jLabel14.setText("Dados do Fabricante");
-        try{
+        try {
             cnpjObject = CNPJResource.consultarCNPJ(CNPJResource.returnCNPJUnformat(textoCNPJ.getText()));
 
             textoEndereco.setText(cnpjObject.getSampleAddress());
@@ -39,7 +39,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
             textoCapitalSocial.setText("R$ " + cnpjObject.getCapitalSocial());
             textoSituacao.setText(cnpjObject.getSituacao());
             CNPJLabel.setText(cnpjObject.getCNPJ());
-        }catch(Exception e){
+        } catch (Exception e) {
             textoEndereco.setText("Não Informado");
             textoRazaoSocial.setText(textoNomeFantasia.getText());
             textoTelefone.setText("Não Informado");
@@ -462,18 +462,18 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
     private void btnFinalizarCadastro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCadastro1ActionPerformed
         if (cnpjObject != null && cnpjObject.getStatus().equals("OK")) {
             try {
-                if(selectedManufacturer == null){
+                if (selectedManufacturer == null) {
                     ManufacturerDAO.getInstance().addManufacturer(cnpjObject.getNome(), CNPJResource.returnCNPJUnformat(cnpjObject.getCNPJ()));
                     JOptionPane.showMessageDialog(null, "Fabricante " + cnpjObject.getNome() + " (" + cnpjObject.getCNPJ() + ") cadastrado com sucesso!");
-                }else{
+                } else {
                     ManufacturerModel _res = ManufacturerDAO.getInstance().getManufacturer(selectedManufacturer.getId());
                     _res.setCNPJ(CNPJResource.returnCNPJUnformat(cnpjObject.getCNPJ()));
                     _res.setName(cnpjObject.getNome());
-                    
+
                     ManufacturerDAO.getInstance().updateManufacturer(selectedManufacturer, _res);
                     JOptionPane.showMessageDialog(null, "Fabricante " + cnpjObject.getNome() + " alterado com sucesso!");
                 }
-                
+
                 this.dispose();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
@@ -490,14 +490,14 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
                     return;
                 }
 
-                if(selectedManufacturer == null){
+                if (selectedManufacturer == null) {
                     ManufacturerModel manufacturer = ManufacturerDAO.getInstance().addManufacturer(textoNomeFantasia.getText(), "00000000000000");
                     JOptionPane.showMessageDialog(null, "Fabricante " + manufacturer.getName() + " cadastrado com sucesso!");
-                }else{
+                } else {
                     ManufacturerModel _res = ManufacturerDAO.getInstance().getManufacturer(selectedManufacturer.getId());
                     _res.setCNPJ("00.000.000/0000-00");
                     _res.setName(textoNomeFantasia.getText());
-                    
+
                     ManufacturerDAO.getInstance().updateManufacturer(selectedManufacturer, _res);
                     JOptionPane.showMessageDialog(null, "Fabricante " + textoNomeFantasia.getText() + " alterado com sucesso!");
                 }
