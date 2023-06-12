@@ -185,7 +185,6 @@ public class ScreenFerramentas extends ScreenModel {
             new TelaCadastroFerramentas(selectedTool, ScreenSelectionType.SCREEN_TYPE_EDIT).setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -206,19 +205,7 @@ public class ScreenFerramentas extends ScreenModel {
             
             ToolsDAO.getInstance().removeTool(toolsDel);
             carregarDados();
-        } //        catch (ArrayIndexOutOfBoundsException e) {
-        //            JOptionPane.showMessageDialog(null, "Selecione alguma ferramenta primeiro");
-        //            e.printStackTrace();
-        //
-        //        } catch (DatabaseResultQueryException e) {
-        //            System.out.println("Talvez o banco de dados explodiu, mas não retornou nada");
-        //            e.printStackTrace();
-        //
-        //        } catch (SQLException e) {
-        //            System.out.println("Os comandos enviados SQL enviados tem algum problema");
-        //            e.printStackTrace();
-        //
-        //        }
+        } 
         catch (Exception e) {
             e.printStackTrace();
         }
@@ -231,7 +218,6 @@ public class ScreenFerramentas extends ScreenModel {
             new TelaCadastroFerramentas(selectedTool, ScreenSelectionType.SCREEN_TYPE_VIEW).setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
