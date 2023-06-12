@@ -124,6 +124,11 @@ public class ScreenFabricantes extends ScreenModel {
                         continue;
                     }
                 }
+                if(!getCampoNomeFiltroLupa().getText().equals("")){        
+                    if(!data[1].toString().trim().contains(getCampoNomeFiltroLupa().getText().toUpperCase().trim())){
+                        continue;
+                    }
+                }
 
                 if (Integer.parseInt(data[3].toString()) == Integer.parseInt(data[4].toString())) {
                     if (Integer.parseInt(data[3].toString()) > 0) {

@@ -128,6 +128,11 @@ public class ScreenAmigos extends ScreenModel {
                         continue;
                     }
                 }
+                if(!getCampoNomeFiltroLupa().getText().equals("")){        
+                    if(!data[1].toString().trim().contains(getCampoNomeFiltroLupa().getText().toUpperCase().trim())){
+                        continue;
+                    }
+                }
 
                 if (Integer.parseInt(data[3].toString()) > 0) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
