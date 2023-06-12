@@ -106,8 +106,8 @@ public class TelaInicial extends javax.swing.JFrame {
         btnEmprestimos.setBackground(new Color(205, 205, 205));
         bntFerramentas.setBackground(new Color(205, 205, 205));
         bntFabricantes.setBackground(new Color(205, 205, 205));
-        bntSeguranca.setBackground(new Color(205, 205, 205));
-        btnConfig.setBackground(new Color(205, 205, 205));
+        
+        btnGoogleCalendar.setBackground(new Color(205, 205, 205));
 
         comboFiltros.setModel(e.get());
         comboFiltros.setSelectedIndex(0);
@@ -157,12 +157,11 @@ public class TelaInicial extends javax.swing.JFrame {
         labelListaNome = new javax.swing.JLabel();
         btnExportar = new javax.swing.JButton();
         jLayeredPane3 = new javax.swing.JLayeredPane();
-        btnConfig = new javax.swing.JButton();
+        btnGoogleCalendar = new javax.swing.JButton();
         btnAmigos = new javax.swing.JButton();
         btnEmprestimos = new javax.swing.JButton();
         bntFerramentas = new javax.swing.JButton();
         bntFabricantes = new javax.swing.JButton();
-        bntSeguranca = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaPrincipal = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -268,7 +267,7 @@ public class TelaInicial extends javax.swing.JFrame {
         labelListaNome.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
         labelListaNome.setForeground(new java.awt.Color(255, 51, 51));
         labelListaNome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelListaNome.setText("Lista Amigos");
+        labelListaNome.setText("             ");
 
         btnExportar.setBackground(new java.awt.Color(205, 205, 205));
         btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-pdf-box-custom.png"))); // NOI18N
@@ -325,9 +324,9 @@ public class TelaInicial extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(campoFiltroNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVisualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnVisualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bntCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
@@ -338,14 +337,14 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jLayeredPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        btnConfig.setBackground(new java.awt.Color(205, 205, 205));
-        btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/cog-custom.png"))); // NOI18N
-        btnConfig.setToolTipText("Mais Opções");
-        btnConfig.setBorder(null);
-        btnConfig.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnConfig.addActionListener(new java.awt.event.ActionListener() {
+        btnGoogleCalendar.setBackground(new java.awt.Color(205, 205, 205));
+        btnGoogleCalendar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/calendar-account-custom.png"))); // NOI18N
+        btnGoogleCalendar.setToolTipText("Google Calendar");
+        btnGoogleCalendar.setBorder(null);
+        btnGoogleCalendar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnGoogleCalendar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfigActionPerformed(evt);
+                btnGoogleCalendarActionPerformed(evt);
             }
         });
 
@@ -398,23 +397,11 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        bntSeguranca.setBackground(new java.awt.Color(205, 205, 205));
-        bntSeguranca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/lock-open-custom.png"))); // NOI18N
-        bntSeguranca.setToolTipText("Segurança");
-        bntSeguranca.setBorder(null);
-        bntSeguranca.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        bntSeguranca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntSegurancaActionPerformed(evt);
-            }
-        });
-
-        jLayeredPane3.setLayer(btnConfig, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(btnGoogleCalendar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(btnAmigos, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(btnEmprestimos, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(bntFerramentas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(bntFabricantes, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(bntSeguranca, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
         jLayeredPane3.setLayout(jLayeredPane3Layout);
@@ -423,8 +410,7 @@ public class TelaInicial extends javax.swing.JFrame {
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bntSeguranca, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGoogleCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntFabricantes, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bntFerramentas, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEmprestimos, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -434,19 +420,17 @@ public class TelaInicial extends javax.swing.JFrame {
         jLayeredPane3Layout.setVerticalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(44, Short.MAX_VALUE)
                 .addComponent(btnAmigos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(btnEmprestimos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(bntFerramentas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(bntFabricantes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(bntSeguranca)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(btnConfig)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(btnGoogleCalendar)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         tabelaPrincipal.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
@@ -569,10 +553,10 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLayeredPane3)
                     .addComponent(jScrollPane1))
-                .addGap(15, 15, 15))
+                .addGap(10, 10, 10))
         );
 
         pack();
@@ -636,13 +620,9 @@ public class TelaInicial extends javax.swing.JFrame {
         new TelaPrincipalOld().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void bntSegurancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSegurancaActionPerformed
+    private void btnGoogleCalendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoogleCalendarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bntSegurancaActionPerformed
-
-    private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnConfigActionPerformed
+    }//GEN-LAST:event_btnGoogleCalendarActionPerformed
 
     private void comboFiltrosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboFiltrosItemStateChanged
         FiltrosModel selecionado = (FiltrosModel) comboFiltros.getSelectedItem();
@@ -722,13 +702,12 @@ telaAtual.carregarDados();
     private javax.swing.JButton bntCadastrar;
     private javax.swing.JButton bntFabricantes;
     private javax.swing.JButton bntFerramentas;
-    private javax.swing.JButton bntSeguranca;
     private javax.swing.JButton btnAmigos;
-    private javax.swing.JButton btnConfig;
     private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEmprestimos;
     private javax.swing.JButton btnExportar;
+    private javax.swing.JButton btnGoogleCalendar;
     private javax.swing.JButton btnVisualizar;
     private javax.swing.JTextField campoFiltroNome;
     private javax.swing.JComboBox<Model.FiltrosModel> comboFiltros;
