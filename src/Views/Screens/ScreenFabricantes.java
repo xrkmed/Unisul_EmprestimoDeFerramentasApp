@@ -10,7 +10,7 @@ import Controllers.ColorsRenderer;
 import Model.FiltrosModel;
 import Enums.Filtros;
 import Controllers.PDFEntity;
-import Enums.ScreenSelectionType;
+    import Enums.ScreenSelectionType;
 import Controllers.StatusRenderer;
 import Controllers.Filtros.FiltrosOrdenar;
 import DAO.ManufacturerDAO;
