@@ -356,11 +356,12 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             StatusRenderer renderer = new StatusRenderer();
             //statusRed.addHighlightedRow(1, Color.RED);
             ArrayList<Object[]> amigosData = FriendsDAO.getInstance().loadFriendsTabela();
-         
+            System.out.println(amigosData.get(0)[0].toString());
                 
             
 
             for (Object[] data : amigosData) {
+              
                     if(!textFiltrarNome.getText().equals("")){
                         if(!data[1].toString().trim().contains(textFiltrarNome.getText().toUpperCase().trim())){
                         continue;
@@ -376,14 +377,14 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
               
 
-                if (Integer.parseInt(data[4].toString()) > 0) {
+                if (Integer.parseInt(data[3].toString()) > 0) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                     for (int i = 0; i < jTable2.getColumnCount(); i++) {
                         jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
                     }
                 }
 
-                if (Integer.parseInt(data[5].toString()) > 0) {
+                if (Integer.parseInt(data[4].toString()) > 0) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
                     for (int i = 0; i < jTable2.getColumnCount(); i++) {
                         jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
