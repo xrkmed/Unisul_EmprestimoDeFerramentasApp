@@ -9,6 +9,7 @@ import Exceptions.CNPJNotFound;
 import Documents.CNPJDocument;
 import Resources.CNPJResource;
 import Model.ManufacturerModel;
+import ViewsTool.TelaPainelFerramentas;
 
 
 public class TelaCadastroFabricantes extends javax.swing.JFrame {
@@ -56,7 +57,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
             btnVerificarFabricante.setEnabled(true);
         } else {
             //aqui é a o tipo view 
-            bntAtribuirFerramenta.setVisible(true);
+//            bntAtribuirFerramenta.setVisible(true);
             btnFinalizarCadastro.setVisible(false);
 
             
@@ -324,6 +325,11 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
         bntAtribuirFerramenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/plus-custom.png"))); // NOI18N
         bntAtribuirFerramenta.setToolTipText("Atribuir Ferramentas Ao Fabricante");
         bntAtribuirFerramenta.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        bntAtribuirFerramenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntAtribuirFerramentaActionPerformed(evt);
+            }
+        });
 
         jLayeredPane5.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(btnCancelar, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -526,6 +532,10 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
 
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void bntAtribuirFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAtribuirFerramentaActionPerformed
+        new TelaPainelFerramentas(selectedManufacturer).setVisible(true);
+    }//GEN-LAST:event_bntAtribuirFerramentaActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
