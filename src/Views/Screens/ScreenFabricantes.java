@@ -144,7 +144,7 @@ public class ScreenFabricantes extends ScreenModel {
                 ((DefaultTableModel) getTable().getModel()).addRow(data);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar os dados da tabela: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro Ao Carregar Os Dados Da Tabela: " + e.getMessage());
         }
     }
 
@@ -159,6 +159,8 @@ public class ScreenFabricantes extends ScreenModel {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ManufacturerModel selectedManufacturer = ManufacturerDAO.getInstance().getManufacturer(id);
             new TelaCadastroFabricantes(selectedManufacturer, ScreenSelectionType.SCREEN_TYPE_EDIT).setVisible(true);
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "Selecione Um Fabricante Primeiro");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -170,10 +172,10 @@ public class ScreenFabricantes extends ScreenModel {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ManufacturerModel ManuDel = ManufacturerDAO.getInstance().getManufacturer(id);
             if (ManuDel != null) {
-                int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja remover o fabricante " + ManuDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
+                int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja Remover o Fabricante " + ManuDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
                 if (dialogResult == JOptionPane.YES_OPTION) {
                     if (!ToolsDAO.getInstance().getToolsByManufacturer(ManuDel.getId()).isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "Não é possível remover um fabricante que possui ferramentas cadastradas!");
+                        JOptionPane.showMessageDialog(null, "Não é Possível Remover Um Fabricante Que Possui Ferramentas Cadastradas!");
                         return;
                     }
 
@@ -210,10 +212,10 @@ public class ScreenFabricantes extends ScreenModel {
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
                     } catch (Exception e) {
                         e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente novamente mais tarde!");
+                        JOptionPane.showMessageDialog(null, "Não Foi Possível Exportar o PDF, Tente Novamente Mais Tarde!");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente selecionar um diretório válido!");
+                    JOptionPane.showMessageDialog(null, "Não Foi Possível Exportar o PDF, Tente Selecionar um Diretório Válido!");
                 }
             }
         });
