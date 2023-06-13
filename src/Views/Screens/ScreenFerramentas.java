@@ -168,7 +168,7 @@ public class ScreenFerramentas extends ScreenModel {
                 ((DefaultTableModel) getTable().getModel()).addRow(data);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar os dados da tabela: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao Carregar Os Dados Da Tabela: " + e.getMessage());
         }
     }
 
@@ -183,6 +183,8 @@ public class ScreenFerramentas extends ScreenModel {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ToolModel selectedTool = ToolsDAO.getInstance().getTool(id);
             new TelaCadastroFerramentas(selectedTool, ScreenSelectionType.SCREEN_TYPE_EDIT).setVisible(true);
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "Selecione Uma Ferramenta Primeiro");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -194,13 +196,13 @@ public class ScreenFerramentas extends ScreenModel {
         try {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ToolModel toolsDel = ToolsDAO.getInstance().getTool(id);
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover a ferramenta " + toolsDel.getNome() + "?", "Atenção", JOptionPane.YES_NO_OPTION);            
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja Realmente Remover a Ferramenta " + toolsDel.getNome() + "?", "Atenção", JOptionPane.YES_NO_OPTION);            
             if(dialogResult == JOptionPane.NO_OPTION){
                 return;
             }
             
             if (!toolsDel.isAvailable()) {
-                JOptionPane.showMessageDialog(null, "Não é possível remover uma ferramenta que esta em uso por algum amigo.");
+                JOptionPane.showMessageDialog(null, "Não é Possível Remover Uma Ferramenta Que Esta Em Uso Por Algum Amigo.");
                 return;
             }
             
@@ -246,13 +248,13 @@ public class ScreenFerramentas extends ScreenModel {
                         Paragraph paragraphRelatorio = PDFEntity.addParagraph("RELATÓRIO FERRAMENTAS", 10);
                         String fileName = "RelatorioFerramentas";
                         PDFEntity.export(directoryChooserFrame.getSelectedDirectory() + "/", fileName, getTable(), paragraphRelatorio);
-                        JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
+                        JOptionPane.showMessageDialog(null, "PDF Exportado Com Sucesso Em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
                     } catch (Exception e) {
                         e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Não foi possivel exportar o PDF, tente novamente mais tarde!");
+                        JOptionPane.showMessageDialog(null, "Não Foi Possível Exportar o PDF, Tente Novamente Mais Tarde!");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente selecionar um diretório válido!");
+                    JOptionPane.showMessageDialog(null, "Não Foi Possível Exportar o PDF, Tente Selecionar Um Diretório Válido!");
                 }
             }
         });

@@ -146,7 +146,7 @@ public class ScreenAmigos extends ScreenModel {
                 ((DefaultTableModel) getTable().getModel()).addRow(data);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar os dados da tabela: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro Ao Carregar Os Dados Da Tabela: " + e.getMessage());
         }
     }
 
@@ -162,7 +162,7 @@ public class ScreenAmigos extends ScreenModel {
             FriendModel selectedFriend = FriendsDAO.getInstance().getFriend(id);
             new TelaCadastroAmigos(selectedFriend, ScreenSelectionType.SCREEN_TYPE_EDIT).setVisible(true);
         } catch (IndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(null, "Selecione um amigo primeiro");
+            JOptionPane.showMessageDialog(null, "Selecione Um Amigo Primeiro");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -174,12 +174,12 @@ public class ScreenAmigos extends ScreenModel {
         try {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             FriendModel friendsDel = FriendsDAO.getInstance().getFriend(id);
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover o cadastro de " + friendsDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja Realmente Remover o Cadastro De " + friendsDel.getName() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
             if (dialogResult == JOptionPane.YES_OPTION) {
                 LoansDAO loansDAO = LoansDAO.getInstance();
                 for (LoanModel loan : loansDAO.getAllLoans()) {
                     if (loan.getFriend().getId() == friendsDel.getId() && loan.getReturned() == false) {
-                        JOptionPane.showMessageDialog(null, "Não é possível remover o cadastro de " + friendsDel.getName() + " pois ele possui empréstimos pendentes.");
+                        JOptionPane.showMessageDialog(null, "Não é Possível Remover o Cadastro De " + friendsDel.getName() + " Pois Ele Possui Empréstimos Pendentes.");
                         return;
                     }
                 }
@@ -216,10 +216,10 @@ public class ScreenAmigos extends ScreenModel {
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
                     } catch (Exception e) {
                         e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente novamente mais tarde!");
+                        JOptionPane.showMessageDialog(null, "Não Foi Possível Exportar o PDF, Tente Novamente Mais Tarde!");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente selecionar um diretório válido!");
+                    JOptionPane.showMessageDialog(null, "Não Foi Possível Exportar o PDF, Tente Selecionar Um Diretório Válido!");
                 }
             }
         });

@@ -70,7 +70,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         jLabel1.setText("Nome Completo:");
 
         textNome.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        textNome.setToolTipText("Digite o nome completo do seu amigo");
+        textNome.setToolTipText("Digite o Nome Completo Do Seu Amigo");
         textNome.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         textNome.setInheritsPopupMenu(true);
         textNome.setName(""); // NOI18N
@@ -89,7 +89,7 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         jLabel2.setText("Telefone:");
 
         textTelefone.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
-        textTelefone.setToolTipText("Digite o telefone do seu amigo");
+        textTelefone.setToolTipText("Digite o Telefone Do Seu Amigo");
         textTelefone.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         textTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

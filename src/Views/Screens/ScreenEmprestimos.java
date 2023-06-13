@@ -148,7 +148,7 @@ public class ScreenEmprestimos extends ScreenModel {
 
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar os dados da tabela: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro Ao Carregar Os Dados Da Tabela: " + e.getMessage());
         }
     }
 
@@ -163,6 +163,8 @@ public class ScreenEmprestimos extends ScreenModel {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             LoanModel selectedLoan = LoansDAO.getInstance().getLoan(id);
             new TelaCadastroEmprestimo(selectedLoan, ScreenSelectionType.SCREEN_TYPE_EDIT).setVisible(true);
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "Selecione um Empréstimo Primeiro");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -175,7 +177,7 @@ public class ScreenEmprestimos extends ScreenModel {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             LoanModel loan = LoansDAO.getInstance().getLoan(id);
             if (loan.getReturned()) {
-                JOptionPane.showMessageDialog(null, "Este emprestimo já foi finalizado!");
+                JOptionPane.showMessageDialog(null, "Este emprestimo Já Foi Finalizado!");
                 return;
             }
 
@@ -218,10 +220,10 @@ public class ScreenEmprestimos extends ScreenModel {
                         JOptionPane.showMessageDialog(null, "PDF Exportado com sucesso em: " + directoryChooserFrame.getSelectedDirectory() + "/" + fileName + ".pdf");
                     } catch (Exception e) {
                         e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente novamente mais tarde!");
+                        JOptionPane.showMessageDialog(null, "Não Foi Possível Exportar o PDF, Tente Novamente Mais Tarde!");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Não foi possível exportar o PDF, tente selecionar um diretório válido!");
+                    JOptionPane.showMessageDialog(null, "Não Foi Possível Exportar o PDF, Tente Selecionar Um Diretório Válido!");
                 }
             }
         });
@@ -307,7 +309,7 @@ public class ScreenEmprestimos extends ScreenModel {
 
                     }
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Erro ao carregar os dados da tabela: " + e.getMessage());
+                    JOptionPane.showMessageDialog(null, "Erro Ao Carregar Os Dados Da Tabela: " + e.getMessage());
                 }
 
                 return null;
