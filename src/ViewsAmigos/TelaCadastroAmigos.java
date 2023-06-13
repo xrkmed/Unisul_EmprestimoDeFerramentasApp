@@ -3,7 +3,6 @@ package ViewsAmigos;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
-
 import Enums.ScreenSelectionType;
 import DAO.FriendsDAO;
 import DAO.LoansDAO;
@@ -27,16 +26,16 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         this.setTitle((screenType == ScreenSelectionType.SCREEN_TYPE_EDIT ? "Alterar" : "Visualizar") + " cadastro de " + selectedFriend.getName().toUpperCase());
         textNome.setText(selectedFriend.getName());
         textTelefone.setText(selectedFriend.getPhone());
-      if(screenType == ScreenSelectionType.SCREEN_TYPE_VIEW){
-      btnCadastrar.setEnabled(false);
-      btnCriarEmprestimo.setEnabled(false);
-      textNome.setEditable(false);
-      textTelefone.setEditable(false);
-      }
+        if (screenType == ScreenSelectionType.SCREEN_TYPE_VIEW) {
+            btnCadastrar.setEnabled(false);
+            btnCriarEmprestimo.setEnabled(false);
+            textNome.setEditable(false);
+            textTelefone.setEditable(false);
+        }
     }
 
     private void configFrame() {
-    
+
         AbstractDocument document = (AbstractDocument) textTelefone.getDocument();
 
         document.setDocumentFilter(new PhoneDocument());

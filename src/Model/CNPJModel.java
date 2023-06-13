@@ -1,9 +1,8 @@
 package Model;
 
 public class CNPJModel {
-    
-    //Esta classe serve de retorno para a consulta api de CNPJ, retornando uma classe CNPJModel da consulta e integrando no JFrame.
 
+    //Esta classe serve de retorno para a consulta api de CNPJ, retornando uma classe CNPJModel da consulta e integrando no JFrame.
     private String nome;
     private String telefone;
     private double capitalSocial;

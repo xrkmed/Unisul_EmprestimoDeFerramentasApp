@@ -52,7 +52,7 @@ public class DBQuery {
             }
 
             System.out.println(statement.toString());
-            
+
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
                 Main.tela.getTelaAtual().atualizarDados();

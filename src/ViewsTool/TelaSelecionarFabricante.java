@@ -9,7 +9,6 @@ import DAO.ManufacturerDAO;
 import Resources.CNPJResource;
 import Model.ManufacturerModel;
 import ViewsManufacturer.TelaCadastroFabricantes;
-import ViewsTool.TelaCadastroFerramentas;
 
 public class TelaSelecionarFabricante extends javax.swing.JFrame {
 
@@ -365,7 +364,7 @@ public class TelaSelecionarFabricante extends javax.swing.JFrame {
             model.setRowCount(0);
 
             for (ManufacturerModel manufacturer : manufacturers) {
-                
+
                 if (textFiltrarNome.getText().trim().length() > 0) {
                     if (!manufacturer.getName().toUpperCase().contains(textFiltrarNome.getText().toUpperCase().trim())) {
                         continue;

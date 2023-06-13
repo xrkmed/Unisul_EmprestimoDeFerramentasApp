@@ -13,7 +13,6 @@ import Controllers.StatusRenderer;
 import Controllers.Filtros.FiltrosGerar;
 import Controllers.Filtros.FiltrosOrdenar;
 import DAO.LoansDAO;
-import Exceptions.DatabaseResultQueryException;
 import Model.LoanModel;
 import Controllers.DirectoryChooserFrame;
 import Views.TelaInicial;
@@ -22,8 +21,6 @@ import ViewsEmprestimo.TelaFinalizarEmprestimo;
 import com.itextpdf.text.Paragraph;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ScreenEmprestimos extends ScreenModel {
@@ -120,8 +117,8 @@ public class ScreenEmprestimos extends ScreenModel {
                         continue;
                     }
                 }
-                if(!getCampoNomeFiltroLupa().getText().equals("")){        
-                    if(!data[1].toString().trim().contains(getCampoNomeFiltroLupa().getText().toUpperCase().trim())){
+                if (!getCampoNomeFiltroLupa().getText().equals("")) {
+                    if (!data[1].toString().trim().contains(getCampoNomeFiltroLupa().getText().toUpperCase().trim())) {
                         continue;
                     }
                 }

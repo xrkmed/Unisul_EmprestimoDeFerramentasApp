@@ -14,15 +14,12 @@ import Enums.ScreenSelectionType;
 import Controllers.StatusRenderer;
 import Controllers.Filtros.FiltrosOrdenar;
 import DAO.ToolsDAO;
-import Exceptions.DatabaseResultQueryException;
 import Model.ToolModel;
 import Controllers.DirectoryChooserFrame;
 import Views.TelaInicial;
 import ViewsTool.TelaCadastroFerramentas;
 import com.itextpdf.text.Paragraph;
-
 import java.util.Date;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 public class ScreenFerramentas extends ScreenModel {
@@ -132,8 +129,8 @@ public class ScreenFerramentas extends ScreenModel {
                         continue;
                     }
                 }
-                if(!getCampoNomeFiltroLupa().getText().equals("")){        
-                    if(!data[1].toString().trim().contains(getCampoNomeFiltroLupa().getText().toUpperCase().trim())){
+                if (!getCampoNomeFiltroLupa().getText().equals("")) {
+                    if (!data[1].toString().trim().contains(getCampoNomeFiltroLupa().getText().toUpperCase().trim())) {
                         continue;
                     }
                 }
@@ -198,20 +195,19 @@ public class ScreenFerramentas extends ScreenModel {
         try {
             int id = (int) getTable().getValueAt(getTable().getSelectedRow(), 0);
             ToolModel toolsDel = ToolsDAO.getInstance().getTool(id);
-            int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover a ferramenta " + toolsDel.getNome() + "?", "Atenção", JOptionPane.YES_NO_OPTION);            
-            if(dialogResult == JOptionPane.NO_OPTION){
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Deseja realmente remover a ferramenta " + toolsDel.getNome() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
+            if (dialogResult == JOptionPane.NO_OPTION) {
                 return;
             }
-            
+
             if (!toolsDel.isAvailable()) {
                 JOptionPane.showMessageDialog(null, "Não é possível remover uma ferramenta que esta em uso por algum amigo.");
                 return;
             }
-            
+
             ToolsDAO.getInstance().removeTool(toolsDel);
             carregarDados();
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

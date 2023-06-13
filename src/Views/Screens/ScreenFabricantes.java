@@ -15,13 +15,11 @@ import Controllers.StatusRenderer;
 import Controllers.Filtros.FiltrosOrdenar;
 import DAO.ManufacturerDAO;
 import DAO.ToolsDAO;
-import Exceptions.DatabaseResultQueryException;
 import Controllers.DirectoryChooserFrame;
 import Model.ManufacturerModel;
 import Views.TelaInicial;
 import ViewsManufacturer.TelaCadastroFabricantes;
 import com.itextpdf.text.Paragraph;
-import java.sql.SQLException;
 
 public class ScreenFabricantes extends ScreenModel {
 
@@ -124,8 +122,8 @@ public class ScreenFabricantes extends ScreenModel {
                         continue;
                     }
                 }
-                if(!getCampoNomeFiltroLupa().getText().equals("")){        
-                    if(!data[1].toString().trim().contains(getCampoNomeFiltroLupa().getText().toUpperCase().trim())){
+                if (!getCampoNomeFiltroLupa().getText().equals("")) {
+                    if (!data[1].toString().trim().contains(getCampoNomeFiltroLupa().getText().toUpperCase().trim())) {
                         continue;
                     }
                 }
@@ -183,7 +181,7 @@ public class ScreenFabricantes extends ScreenModel {
                     carregarDados();
                 }
             }
-        }  catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

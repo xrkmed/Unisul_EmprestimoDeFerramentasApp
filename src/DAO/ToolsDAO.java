@@ -116,7 +116,7 @@ public class ToolsDAO {
     }
 
     public void updateManufacturer(int id, int manufacturerId) throws DatabaseResultQueryException {
-		DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET tb_ferramentas.fabricante_id = ? WHERE tb_ferramentas.id = ?", (manufacturerId != -1 ? manufacturerId : null), id);
+        DBQuery.insertOrUpdateQuery("UPDATE tb_ferramentas SET tb_ferramentas.fabricante_id = ? WHERE tb_ferramentas.id = ?", (manufacturerId != -1 ? manufacturerId : null), id);
     }
 
     public void updateTool(Integer id, ToolModel reference) throws DatabaseResultQueryException {
