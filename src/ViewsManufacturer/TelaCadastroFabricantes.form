@@ -329,12 +329,12 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="355" max="32767" attributes="0"/>
                   <Component id="bntAtribuirFerramenta" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="btnCancelar" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                  <Component id="btnFinalizarCadastro1" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnFinalizarCadastro" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -344,7 +344,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
-                      <Component id="btnFinalizarCadastro1" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="btnFinalizarCadastro" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="btnCancelar" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="jLabel14" alignment="2" min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="bntAtribuirFerramenta" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
@@ -389,7 +389,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnFinalizarCadastro1">
+        <Component class="javax.swing.JButton" name="btnFinalizarCadastro">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Liberation Sans" size="14" style="1"/>
@@ -409,7 +409,7 @@
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFinalizarCadastro1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFinalizarCadastroActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="bntAtribuirFerramenta">

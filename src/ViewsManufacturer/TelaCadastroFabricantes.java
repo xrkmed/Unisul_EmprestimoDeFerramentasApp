@@ -53,6 +53,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
             textoCNPJ.setEditable(true);
             btnVerificarFabricante.setEnabled(true);
         } else {
+            btnFinalizarCadastro1.setEnabled(false);
             textoNomeFantasia.setEditable(false);
             textoCNPJ.setEditable(false);
             btnVerificarFabricante.setEnabled(false);
@@ -60,6 +61,7 @@ public class TelaCadastroFabricantes extends javax.swing.JFrame {
     }
 
     private void configFrame() {
+        bntAtribuirFerramenta.setVisible(false);
         btnFinalizarCadastro1.setEnabled(true);
         btnCancelar.setEnabled(true);
         AbstractDocument document = (AbstractDocument) textoCNPJ.getDocument();
