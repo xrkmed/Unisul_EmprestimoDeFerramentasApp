@@ -22,7 +22,7 @@ public class PhoneResource {
         formattedText.append(phoneNumber.substring(6));
         return formattedText.toString();
     }
-    
+
     public static boolean verificarNomeCompleto(String nome) {
         return nome.length() > 3 && nome.length() <= 64 && nome.matches("^[a-zA-Z\\s]+$");
     }

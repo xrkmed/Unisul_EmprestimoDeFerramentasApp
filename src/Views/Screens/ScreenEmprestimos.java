@@ -13,7 +13,6 @@ import Controllers.StatusRenderer;
 import Controllers.Filtros.FiltrosGerar;
 import Controllers.Filtros.FiltrosOrdenar;
 import DAO.LoansDAO;
-import Exceptions.DatabaseResultQueryException;
 import Model.LoanModel;
 import Controllers.DirectoryChooserFrame;
 import Views.TelaInicial;
@@ -22,8 +21,6 @@ import ViewsEmprestimo.TelaFinalizarEmprestimo;
 import com.itextpdf.text.Paragraph;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ScreenEmprestimos extends ScreenModel {
@@ -120,7 +117,11 @@ public class ScreenEmprestimos extends ScreenModel {
                         continue;
                     }
                 }
-
+                if (!getCampoNomeFiltroLupa().getText().equals("")) {
+                    if (!data[1].toString().trim().contains(getCampoNomeFiltroLupa().getText().toUpperCase().trim())) {
+                        continue;
+                    }
+                }
                 if (data[4].toString().contains("Finalizado em")) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightGreen);
                     for (int i = 0; i < getTable().getColumnCount(); i++) {
@@ -167,7 +168,6 @@ public class ScreenEmprestimos extends ScreenModel {
             JOptionPane.showMessageDialog(null, "Selecione um Empréstimo Primeiro");
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -202,7 +202,6 @@ public class ScreenEmprestimos extends ScreenModel {
             new TelaCadastroEmprestimo(selectedLoan, ScreenSelectionType.SCREEN_TYPE_VIEW).setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 

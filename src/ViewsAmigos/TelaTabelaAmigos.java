@@ -1,7 +1,5 @@
 package ViewsAmigos;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -10,9 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import Controllers.ColorsRenderer;
 import Controllers.StatusRenderer;
 import DAO.FriendsDAO;
-import DAO.LoansDAO;
 import Model.FriendModel;
-import Model.LoanModel;
 import Resources.PhoneResource;
 
 public class TelaTabelaAmigos extends javax.swing.JFrame {
@@ -356,34 +352,29 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             StatusRenderer renderer = new StatusRenderer();
             //statusRed.addHighlightedRow(1, Color.RED);
             ArrayList<Object[]> amigosData = FriendsDAO.getInstance().loadFriendsTabela();
-         
-                
-            
+            System.out.println(amigosData.get(0)[0].toString());
 
             for (Object[] data : amigosData) {
-                    if(!textFiltrarNome.getText().equals("")){
-                        if(!data[1].toString().trim().contains(textFiltrarNome.getText().toUpperCase().trim())){
+
+                if (!textFiltrarNome.getText().equals("")) {
+                    if (!data[1].toString().trim().contains(textFiltrarNome.getText().toUpperCase().trim())) {
                         continue;
-                        }
                     }
-              
-                    renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.white);
-                    for (int i = 0; i < jTable2.getColumnCount(); i++) {
-                        jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
-                    }
-                
-               
+                }
 
-              
+                renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.white);
+                for (int i = 0; i < jTable2.getColumnCount(); i++) {
+                    jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
+                }
 
-                if (Integer.parseInt(data[4].toString()) > 0) {
+                if (Integer.parseInt(data[3].toString()) > 0) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightYellow);
                     for (int i = 0; i < jTable2.getColumnCount(); i++) {
                         jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
                     }
                 }
 
-                if (Integer.parseInt(data[5].toString()) > 0) {
+                if (Integer.parseInt(data[4].toString()) > 0) {
                     renderer.addHighlightedRow(model.getRowCount(), ColorsRenderer.lightRed);
                     for (int i = 0; i < jTable2.getColumnCount(); i++) {
                         jTable2.getColumnModel().getColumn(i).setCellRenderer(renderer);
@@ -423,7 +414,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
         if (selectedFriend != null) {
             String[] blackList = new String[]{"rogerio o caloteiro"};
-            
+
             //verifica se o selectedFriend tem emprestimos em aberto
             if (Integer.parseInt(jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString()) > 0) {
                 int confirmar = JOptionPane.showConfirmDialog(null, "O amigo selecionado possui empréstimos em aberto. Deseja continuar?", "Atenção", JOptionPane.YES_NO_OPTION);
@@ -432,15 +423,14 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                     return;
                 }
             }
-            
-            for(String obj : blackList){
-                if(jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString().equalsIgnoreCase(obj)){
-                   JOptionPane.showMessageDialog(null, "Rogério pilantra, me devendo a 10 anos. Pra ti eu não empresto não!");
-                   selectedFriend = null;
-                   return;
+
+            for (String obj : blackList) {
+                if (jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString().equalsIgnoreCase(obj)) {
+                    JOptionPane.showMessageDialog(null, "Rogério pilantra, me devendo a 10 anos. Pra ti eu não empresto não!");
+                    selectedFriend = null;
+                    return;
                 }
             }
-
 
             if (Integer.parseInt(jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString()) > 0) {
                 int confirmar = JOptionPane.showConfirmDialog(null, "O amigo selecionado possui empréstimos ATRASADOS!!!. Deseja continuar?", "Atenção", JOptionPane.YES_NO_OPTION);

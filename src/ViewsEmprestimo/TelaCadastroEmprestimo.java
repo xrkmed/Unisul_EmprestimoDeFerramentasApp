@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AbstractDocument;
-
 import Enums.ScreenSelectionType;
 import DAO.LoansDAO;
 import DAO.ToolsDAO;
@@ -52,7 +51,7 @@ public class TelaCadastroEmprestimo extends javax.swing.JFrame {
             jLabel3.setText("Alterar emprestimo");
             btnCadastrarEmprestimo.setText("Alterar emprestimo");
 
-            if(viewType == ScreenSelectionType.SCREEN_TYPE_VIEW){
+            if (viewType == ScreenSelectionType.SCREEN_TYPE_VIEW) {
                 textValorReceber.setEditable(false);
                 textDataDevolucao.setEditable(false);
                 btnSelecionarBeneficiado.setEnabled(false);

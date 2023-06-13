@@ -3,9 +3,6 @@ package DAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
-
 import Database.DBQuery;
 import Exceptions.DatabaseResultQueryException;
 import Model.FriendModel;
@@ -35,7 +32,7 @@ public class FriendsDAO {
 
         FriendModel _friend = null;
         ResultSet _insertAmigo = DBQuery.insertOrUpdateQuery("INSERT INTO tb_amigos (nome, telefone) VALUES (?, ?);", nome.toUpperCase(), telefone.toUpperCase());
-        if(_insertAmigo.next()){
+        if (_insertAmigo.next()) {
             _friend = new FriendModel(_insertAmigo.getInt(1), nome.toUpperCase(), telefone);
         }
 
@@ -69,10 +66,10 @@ public class FriendsDAO {
     }
 
     public void updateFriend(FriendModel target, FriendModel reference) throws DatabaseResultQueryException, SQLException {
-        if(!target.getName().equals(reference.getName()) || !target.getPhone().equals(reference.getPhone())){
+        if (!target.getName().equals(reference.getName()) || !target.getPhone().equals(reference.getPhone())) {
             DBQuery.insertOrUpdateQuery("UPDATE tb_amigos SET nome = ?, telefone = ? WHERE id = '" + target.getId() + "';", reference.getName(), reference.getPhone());
         }
-   }
+    }
 
     public ArrayList<Object[]> loadFriendsTabela() throws DatabaseResultQueryException, SQLException {
         ArrayList<Object[]> datasObject = new ArrayList<>();

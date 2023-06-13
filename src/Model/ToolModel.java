@@ -43,7 +43,7 @@ public class ToolModel {
     }
 
     public boolean isAvailable() throws DatabaseResultQueryException, SQLException {
-        return this.getLoan() == null; 
+        return this.getLoan() == null;
     }
 
     @Override

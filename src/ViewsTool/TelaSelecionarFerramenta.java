@@ -351,15 +351,12 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
             StatusRenderer statusRenderer = new StatusRenderer();
             //new Object[]{result.getInt("id"), "-", result.getString("name"), result.getString("razao_social"), BRLResource.PRICE_FORMATTER.format(result.getDouble("price")), result.getString("nome"), new SimpleDateFormat("dd/MM/yyyy").format(result.getDate("endDate").toString())});
             for (Object[] data : datas) {
-             
-                if ( textFiltrarNome.getText().trim().length() > 0) {
+
+                if (textFiltrarNome.getText().trim().length() > 0) {
                     if (!data[2].toString().toLowerCase().contains(textFiltrarNome.getText().toLowerCase())) {
                         continue;
                     }
                 }
-
-              
-                
 
                 if (!data[5].toString().equals("Disponivel")) {
                     continue;
@@ -419,7 +416,6 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
     private void btnCadastrarFerramentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFerramentaActionPerformed
         new TelaCadastroFerramentas().setVisible(true);
     }//GEN-LAST:event_btnCadastrarFerramentaActionPerformed
-
 
     public static void main(String args[]) {
 

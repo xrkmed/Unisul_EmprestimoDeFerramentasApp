@@ -15,13 +15,11 @@ import Controllers.StatusRenderer;
 import Controllers.Filtros.FiltrosOrdenar;
 import DAO.ManufacturerDAO;
 import DAO.ToolsDAO;
-import Exceptions.DatabaseResultQueryException;
 import Controllers.DirectoryChooserFrame;
 import Model.ManufacturerModel;
 import Views.TelaInicial;
 import ViewsManufacturer.TelaCadastroFabricantes;
 import com.itextpdf.text.Paragraph;
-import java.sql.SQLException;
 
 public class ScreenFabricantes extends ScreenModel {
 
@@ -124,6 +122,11 @@ public class ScreenFabricantes extends ScreenModel {
                         continue;
                     }
                 }
+                if (!getCampoNomeFiltroLupa().getText().equals("")) {
+                    if (!data[1].toString().trim().contains(getCampoNomeFiltroLupa().getText().toUpperCase().trim())) {
+                        continue;
+                    }
+                }
 
                 if (Integer.parseInt(data[3].toString()) == Integer.parseInt(data[4].toString())) {
                     if (Integer.parseInt(data[3].toString()) > 0) {
@@ -160,7 +163,6 @@ public class ScreenFabricantes extends ScreenModel {
             JOptionPane.showMessageDialog(null, "Selecione Um Fabricante Primeiro");
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -181,7 +183,7 @@ public class ScreenFabricantes extends ScreenModel {
                     carregarDados();
                 }
             }
-        }  catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -193,7 +195,6 @@ public class ScreenFabricantes extends ScreenModel {
             new TelaCadastroFabricantes(selectedManufacturer, ScreenSelectionType.SCREEN_TYPE_VIEW).setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 

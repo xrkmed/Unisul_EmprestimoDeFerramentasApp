@@ -174,11 +174,11 @@
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Component id="jLayeredPane1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jLayeredPane3" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -231,9 +231,9 @@
                       <Component id="jLabel1" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="campoFiltroNome" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="bntBuscar" alignment="2" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="btnVisualizar" alignment="2" pref="0" max="32767" attributes="0"/>
-                      <Component id="btnEditar" alignment="2" pref="0" max="32767" attributes="0"/>
-                      <Component id="btnDeletar" alignment="2" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnVisualizar" alignment="2" max="32767" attributes="0"/>
+                      <Component id="btnEditar" alignment="2" max="32767" attributes="0"/>
+                      <Component id="btnDeletar" alignment="2" max="32767" attributes="0"/>
                       <Component id="bntCadastrar" alignment="2" min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="comboFiltros" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -352,6 +352,9 @@
               <Color id="Default Cursor"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntBuscarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="comboFiltros">
           <Properties>
@@ -387,7 +390,7 @@
               <Color blue="33" green="33" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Lista Amigos"/>
+            <Property name="text" type="java.lang.String" value="             "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnExportar">
@@ -424,8 +427,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnConfig" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
-                      <Component id="bntSeguranca" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
+                      <Component id="btnGoogleCalendar" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
                       <Component id="bntFabricantes" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
                       <Component id="bntFerramentas" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
                       <Component id="btnEmprestimos" alignment="0" min="-2" pref="48" max="-2" attributes="0"/>
@@ -438,33 +440,31 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="44" max="32767" attributes="0"/>
                   <Component id="btnAmigos" max="-2" attributes="0"/>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
                   <Component id="btnEmprestimos" max="-2" attributes="0"/>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
                   <Component id="bntFerramentas" max="-2" attributes="0"/>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
                   <Component id="bntFabricantes" max="-2" attributes="0"/>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
-                  <Component id="bntSeguranca" max="-2" attributes="0"/>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
-                  <Component id="btnConfig" max="-2" attributes="0"/>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <Component id="btnGoogleCalendar" max="-2" attributes="0"/>
+                  <EmptySpace pref="44" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnConfig">
+        <Component class="javax.swing.JButton" name="btnGoogleCalendar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cd" green="cd" red="cd" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Views/Icons/cog-custom.png"/>
+              <Image iconType="3" name="/Views/Icons/calendar-account-custom.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Mais Op&#xe7;&#xf5;es"/>
+            <Property name="toolTipText" type="java.lang.String" value="Google Calendar"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
@@ -473,7 +473,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfigActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGoogleCalendarActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnAmigos">
@@ -555,26 +555,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntFabricantesActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="bntSeguranca">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cd" green="cd" red="cd" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Views/Icons/lock-open-custom.png"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Seguran&#xe7;a"/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntSegurancaActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

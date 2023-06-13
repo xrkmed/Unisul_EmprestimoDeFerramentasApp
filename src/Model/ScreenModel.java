@@ -8,8 +8,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
-import Model.FiltrosModel;
 import Views.TelaInicial;
+import javax.swing.JTextField;
 
 public class ScreenModel {
 
@@ -103,12 +103,16 @@ public class ScreenModel {
         return tela.getBtnExportar();
     }
 
-    public final JPopupMenu getPopOpcoes(){
+    public final JPopupMenu getPopOpcoes() {
         return tela.getPopOpcoes();
     }
 
     public final JComboBox<FiltrosModel> getFiltros() {
         return tela.getComboBox();
+    }
+
+    public final JTextField getCampoNomeFiltroLupa() {
+        return tela.getCampoNomeFiltroNome();
     }
 
     public Object getSelectedValue() {
