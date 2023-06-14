@@ -413,7 +413,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
         if (selectedFriend != null) {
-            String[] blackList = new String[]{"rogerio o caloteiro"};
+            String[] blackList = new String[]{"rogerio o caloteiro"}; //to vendo essa zuera
 
             //verifica se o selectedFriend tem emprestimos em aberto
             if (Integer.parseInt(jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString()) > 0) {
@@ -423,7 +423,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                     return;
                 }
             }
-
+            
             for (String obj : blackList) {
                 if (jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString().equalsIgnoreCase(obj)) {
                     JOptionPane.showMessageDialog(null, "Rogério pilantra, me devendo a 10 anos. Pra ti eu não empresto não!");
@@ -432,7 +432,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                 }
             }
 
-            if (Integer.parseInt(jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString()) > 0) {
+            if (Integer.parseInt(jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString()) > 0) {
                 int confirmar = JOptionPane.showConfirmDialog(null, "O amigo selecionado possui empréstimos ATRASADOS!!!. Deseja continuar?", "Atenção", JOptionPane.YES_NO_OPTION);
                 if (confirmar == JOptionPane.NO_OPTION) {
                     selectedFriend = null;
