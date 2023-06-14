@@ -350,10 +350,9 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
             selecionadoTelefone.setText("");
 
             StatusRenderer renderer = new StatusRenderer();
-            //statusRed.addHighlightedRow(1, Color.RED);
+ 
             ArrayList<Object[]> amigosData = FriendsDAO.getInstance().loadFriendsTabela();
-            System.out.println(amigosData.get(0)[0].toString());
-
+    
             for (Object[] data : amigosData) {
 
                 if (!textFiltrarNome.getText().equals("")) {
@@ -432,7 +431,7 @@ public class TelaTabelaAmigos extends javax.swing.JFrame {
                 }
             }
 
-            if (Integer.parseInt(jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString()) > 0) {
+            if (Integer.parseInt(jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString()) > 0) {
                 int confirmar = JOptionPane.showConfirmDialog(null, "O amigo selecionado possui empréstimos ATRASADOS!!!. Deseja continuar?", "Atenção", JOptionPane.YES_NO_OPTION);
                 if (confirmar == JOptionPane.NO_OPTION) {
                     selectedFriend = null;

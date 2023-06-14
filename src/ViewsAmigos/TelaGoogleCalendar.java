@@ -1,11 +1,30 @@
 package ViewsAmigos;
 
+import Model.FriendModel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import DAO.FriendsDAO;
+import Documents.DateDocument;
+import Documents.HourDocument;
+import Resources.PhoneResource;
+import javax.swing.text.AbstractDocument;
 public class TelaGoogleCalendar extends javax.swing.JFrame {
+
+    private ArrayList<FriendModel> selectedFriends = new ArrayList<>();
 
     public TelaGoogleCalendar() {
         initComponents();
+        configFrame();
     }
-
+    private void configFrame() {
+        AbstractDocument document = (AbstractDocument) textData.getDocument();
+        document.setDocumentFilter(new DateDocument());
+        document = (AbstractDocument) textHorario.getDocument();
+        document.setDocumentFilter(new HourDocument());
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -29,9 +48,9 @@ public class TelaGoogleCalendar extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        textNomeEvento = new javax.swing.JTextField();
+        textData = new javax.swing.JTextField();
+        textHorario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(null);
@@ -46,18 +65,38 @@ public class TelaGoogleCalendar extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-check-custom.png"))); // NOI18N
         jButton1.setToolTipText("Salvar");
         jButton1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/content-save-minus-custom.png"))); // NOI18N
         jButton2.setToolTipText("Cancelar");
         jButton2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/account-plus-custom.png"))); // NOI18N
         jButton3.setToolTipText("Adicionar Amigo");
         jButton3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/account-remove-custom.png"))); // NOI18N
         jButton4.setToolTipText("Remover Amigo");
         jButton4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLayeredPane5.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane5.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -208,9 +247,9 @@ public class TelaGoogleCalendar extends javax.swing.JFrame {
         jLayeredPane3.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jTextField2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jTextField3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(textNomeEvento, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(textData, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(textHorario, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
         jLayeredPane3.setLayout(jLayeredPane3Layout);
@@ -230,11 +269,11 @@ public class TelaGoogleCalendar extends javax.swing.JFrame {
                 .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane3Layout.createSequentialGroup()
                         .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(textHorario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                            .addComponent(textData, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(222, 222, 222))
                     .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                        .addComponent(jTextField1)
+                        .addComponent(textNomeEvento)
                         .addGap(10, 10, 10))))
         );
         jLayeredPane3Layout.setVerticalGroup(
@@ -251,11 +290,11 @@ public class TelaGoogleCalendar extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addComponent(jLabel7))
                     .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textNomeEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(textHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10))
         );
 
@@ -291,6 +330,62 @@ public class TelaGoogleCalendar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        TelaTabelaAmigos tela = new TelaTabelaAmigos(this);
+        tela.setVisible(true);
+
+        tela.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (tela.getSelectedFriend() != null) {
+                    if(selectedFriends.contains(tela.getSelectedFriend())){
+                        JOptionPane.showMessageDialog(null, "Se já colocou esse amigo na lista");
+                        return;
+                    }
+                    addFriend(tela.getSelectedFriend());
+                     loadValores();
+                }
+            }
+        });
+       
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try{
+        int friendId = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+        selectedFriends.remove(FriendsDAO.getInstance().getFriend(friendId));
+        loadValores();
+        }catch(Exception e){
+        e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(!selectedFriends.isEmpty() && !textData.getText().equals("") && !textHorario.getText().equals("") && !textNomeEvento.getText().equals("")){
+        JOptionPane.showMessageDialog(null, "evento criado:\n"+textNomeEvento.getText()+"\nem: "+textData.getText()+"\nas: "+textHorario.getText());
+        this.dispose();
+        }else if(selectedFriends.isEmpty()){
+            JOptionPane.showMessageDialog(null, "selecione no mínimo um amigo");
+        }else{
+        JOptionPane.showMessageDialog(null, "preencha todos os campos");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void loadValores() {
+        try {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+            for(FriendModel f: selectedFriends){
+                model.addRow(new Object[]{f.getId(),f.getName().toUpperCase(),PhoneResource.formatPhoneNumber(f.getPhone())});
+            }
+        } catch (Exception e) {
+        }
+    }
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -319,8 +414,14 @@ public class TelaGoogleCalendar extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField textData;
+    private javax.swing.JTextField textHorario;
+    private javax.swing.JTextField textNomeEvento;
     // End of variables declaration//GEN-END:variables
+
+    public void addFriend(FriendModel f) {
+        selectedFriends.add(f);
+    }
+
+    
 }
