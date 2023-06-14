@@ -8,6 +8,7 @@ import Views.Screens.ScreenEmprestimos;
 import Model.ScreenModel;
 import Views.Screens.ScreenFabricantes;
 import Views.Screens.ScreenFerramentas;
+import ViewsAmigos.TelaGoogleCalendar;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -620,7 +621,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnGoogleCalendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoogleCalendarActionPerformed
-        // TODO add your handling code here:
+        new TelaGoogleCalendar().setVisible(true);
     }//GEN-LAST:event_btnGoogleCalendarActionPerformed
 
     private void comboFiltrosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboFiltrosItemStateChanged
