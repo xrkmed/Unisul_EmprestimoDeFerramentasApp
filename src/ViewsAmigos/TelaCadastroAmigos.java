@@ -17,6 +17,8 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
     public TelaCadastroAmigos() {
         initComponents();
         configFrame();
+        btnCriarEmprestimo.setEnabled(false);
+        btnVisualizarEmprestimos.setEnabled(false);
 
     }
 
@@ -28,16 +30,18 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
         textTelefone.setText(selectedFriend.getPhone());
         if (screenType == ScreenSelectionType.SCREEN_TYPE_VIEW) {
             btnCadastrar.setEnabled(false);
-            btnCriarEmprestimo.setEnabled(false);
             textNome.setEditable(false);
             textTelefone.setEditable(false);
+        }else{
+        btnCriarEmprestimo.setEnabled(true);
+        btnVisualizarEmprestimos.setEnabled(true);
         }
+         btnVisualizarEmprestimos.setEnabled(true);
     }
 
     private void configFrame() {
-
+        
         AbstractDocument document = (AbstractDocument) textTelefone.getDocument();
-
         document.setDocumentFilter(new PhoneDocument());
     }
 
