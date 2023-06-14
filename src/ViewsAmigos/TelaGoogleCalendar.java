@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import DAO.FriendsDAO;
 import Documents.DateDocument;
+import Documents.HourDocument;
 import Resources.PhoneResource;
 import javax.swing.text.AbstractDocument;
 public class TelaGoogleCalendar extends javax.swing.JFrame {
@@ -21,6 +22,8 @@ public class TelaGoogleCalendar extends javax.swing.JFrame {
     private void configFrame() {
         AbstractDocument document = (AbstractDocument) textData.getDocument();
         document.setDocumentFilter(new DateDocument());
+        document = (AbstractDocument) textHorario.getDocument();
+        document.setDocumentFilter(new HourDocument());
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
