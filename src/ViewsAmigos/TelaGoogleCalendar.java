@@ -52,7 +52,7 @@ public class TelaGoogleCalendar extends javax.swing.JFrame {
         textData = new javax.swing.JTextField();
         textHorario = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(null);
         setResizable(false);
 
@@ -328,6 +328,7 @@ public class TelaGoogleCalendar extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -339,7 +340,6 @@ public class TelaGoogleCalendar extends javax.swing.JFrame {
             public void windowClosed(WindowEvent e) {
                 if (tela.getSelectedFriend() != null) {
                     if(selectedFriends.contains(tela.getSelectedFriend())){
-                        JOptionPane.showMessageDialog(null, "Se já colocou esse amigo na lista");
                         return;
                     }
                     addFriend(tela.getSelectedFriend());
@@ -351,27 +351,29 @@ public class TelaGoogleCalendar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try{
-        int friendId = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
-        selectedFriends.remove(FriendsDAO.getInstance().getFriend(friendId));
-        loadValores();
+            int friendId = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
+            selectedFriends.remove(FriendsDAO.getInstance().getFriend(friendId));
+            loadValores();
+        }catch(ArrayIndexOutOfBoundsException | NullPointerException e){
+            JOptionPane.showMessageDialog(null, "Selecione um amigo");
         }catch(Exception e){
-        e.printStackTrace();
+            e.printStackTrace();
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(!selectedFriends.isEmpty() && !textData.getText().equals("") && !textHorario.getText().equals("") && !textNomeEvento.getText().equals("")){
-        JOptionPane.showMessageDialog(null, "evento criado:\n"+textNomeEvento.getText()+"\nem: "+textData.getText()+"\nas: "+textHorario.getText());
+        JOptionPane.showMessageDialog(null, "[+] Evento criado com sucesso!\n"+textNomeEvento.getText()+"\nem: "+textData.getText()+"\nas: "+textHorario.getText());
         this.dispose();
         }else if(selectedFriends.isEmpty()){
-            JOptionPane.showMessageDialog(null, "selecione no mínimo um amigo");
+            JOptionPane.showMessageDialog(null, "Voce precisa selecionar no minimo um amigo.");
         }else{
-        JOptionPane.showMessageDialog(null, "preencha todos os campos");
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
