@@ -553,7 +553,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLayeredPane3)
                     .addComponent(jScrollPane1))
                 .addGap(10, 10, 10))
@@ -617,7 +617,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_bntCadastrarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new TelaPrincipalOld().setVisible(true);
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void btnGoogleCalendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoogleCalendarActionPerformed
