@@ -31,7 +31,7 @@ public class ColorsRenderer {
     public static final Color darkMagenta = new Color(139, 0, 139);
     public static final Color lightGreen = new Color(144, 238, 144);
     public static final Color lightBlue = new Color(173, 216, 230);
-    public static final Color lightRed = new Color(255, 57, 57);
+    public static final Color lightRed = new Color(255, 71, 71);
     public static final Color lightYellow = new Color(255, 255, 54);
     public static final Color lightOrange = new Color(255, 160, 122);
     public static final Color lightPurple = new Color(221, 160, 221);
