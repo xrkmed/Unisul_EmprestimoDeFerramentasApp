@@ -23,6 +23,7 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
     public TelaCadastroFerramentas(ToolModel tool, ScreenSelectionType viewType) {
         this();
         this.tool = tool;
+        
 
         this.setTitle("Alteraçao da ferramenta " + tool.getNome());
         this.textFerramentaNome.setText(tool.getNome());
@@ -37,12 +38,15 @@ public class TelaCadastroFerramentas extends javax.swing.JFrame {
         }
 
         if (viewType == ScreenSelectionType.SCREEN_TYPE_VIEW) {
+            jLabel14.setText("Visualizar ferramenta");
             this.textFerramentaNome.setEditable(false);
             this.textFerramentaValor.setEditable(false);
             this.btnSelectFabricante.setEnabled(false);
             this.btnRemoverFabricante.setEnabled(false);
             this.btnConcluirCad.setEnabled(false);
             this.btnCancelarCad.setText("Voltar");
+        }else{
+            jLabel14.setText("Alterar ferramenta");
         }
 
     }
