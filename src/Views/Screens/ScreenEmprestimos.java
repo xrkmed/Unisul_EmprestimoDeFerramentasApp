@@ -53,6 +53,7 @@ public class ScreenEmprestimos extends ScreenModel {
         getBtnDeletar().addActionListener(e -> {
             btnDeletar();
         });
+        getBtnDeletar().setToolTipText("finalizar empréstimo");
 
         getBtnVisualizar().addActionListener(e -> {
             btnVisualizar();
