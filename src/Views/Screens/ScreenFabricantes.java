@@ -53,6 +53,9 @@ public class ScreenFabricantes extends ScreenModel {
             btnDeletar();
         });
 
+        getBtnDeletar().setToolTipText("Deletar");
+        getBtnDeletar().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-document-remove-custom.png")));
+
         getBtnVisualizar().addActionListener(e -> {
             btnVisualizar();
         });
