@@ -52,6 +52,9 @@ public class ScreenModel {
     }
 
     public void init() {
+        getBtnDeletar().setToolTipText("deletar");
+        getBtnDeletar().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/file-document-remove-custom.png")));
+
     }
 
     public void atualizarDados() {
