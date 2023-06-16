@@ -40,6 +40,7 @@ public class ScreenFabricantes extends ScreenModel {
 
     @Override
     public void init() {
+        super.init();
         getBtnCadastro().addActionListener(e -> {
             btnCadastro();
         });

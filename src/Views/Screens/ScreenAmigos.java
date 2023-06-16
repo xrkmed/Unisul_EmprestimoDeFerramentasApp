@@ -47,6 +47,7 @@ public class ScreenAmigos extends ScreenModel {
 
     @Override
     public void init() {
+      super.init();
         getBtnCadastro().addActionListener(e -> {
             btnCadastro();
         });
