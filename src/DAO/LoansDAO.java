@@ -132,7 +132,7 @@ public class LoansDAO {
     }
 
     public ArrayList<Object[]> relatorioEmprestimos() throws DatabaseResultQueryException, SQLException, IOException, ClassNotFoundException {
-        ResultSet result = DBQuery.executeQuery("SELECT em.id AS emprestimo_id, em.dataFinalizado AS finalizadoData, em.observacoes, COUNT(fe.ferramenta_id) AS total_ferramentas, SUM(ferr.price) AS totalValorFerramentas, GROUP_CONCAT(ferr.name SEPARATOR ', ') AS ferramentas_emprestadas, em.valorEmprestimo AS valorRecebido, amigo.nome AS nome_amigo, em.startDate AS data_inicio, em.previsaoDataEntrega AS dataPrevisaoEntrega FROM tb_emprestimos AS em LEFT JOIN tb_ferramentas_emprestimo AS fe ON em.id = fe.emprestimo_id LEFT JOIN tb_ferramentas AS ferr ON fe.ferramenta_id = ferr.id LEFT JOIN tb_amigos AS amigo ON em.amigo_id = amigo.id GROUP BY em.id;");
+        ResultSet result = DBQuery.executeQuery("SELECT em.id AS emprestimo_id, em.dataFinalizado AS finalizadoData, em.observacoes, COUNT(fe.ferramenta_id) AS total_ferramentas, SUM(ferr.price) AS totalValorFerramentas, GROUP_CONCAT(ferr.name SEPARATOR ', ') AS ferramentas_emprestadas, em.valorEmprestimo AS valorRecebido, amigo.nome AS nome_amigo, em.startDate AS data_inicio, em.previsaoDataEntrega AS dataPrevisaoEntrega FROM tb_emprestimos AS em LEFT JOIN tb_ferramentas_emprestimo AS fe ON em.id = fe.emprestimo_id LEFT JOIN tb_ferramentas AS ferr ON fe.ferramenta_id = ferr.id LEFT JOIN tb_amigos AS amigo ON em.amigo_id = amigo.id WHERE em.dataFinalizado IS NOT NULL GROUP BY em.id;");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         ArrayList<Object[]> relatorio = new ArrayList<>();
         while (result.next()) {
