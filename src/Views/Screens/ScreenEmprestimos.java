@@ -53,7 +53,8 @@ public class ScreenEmprestimos extends ScreenModel {
         getBtnDeletar().addActionListener(e -> {
             btnDeletar();
         });
-        getBtnDeletar().setToolTipText("finalizar empréstimo");
+
+        getBtnDeletar().setToolTipText("Finalizar Empréstimo");
         getBtnDeletar().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/Icons/hand-okay-custom.png")));
 
         getBtnVisualizar().addActionListener(e -> {
