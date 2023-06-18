@@ -189,7 +189,7 @@ public class ScreenFerramentas extends ScreenModel {
             ToolModel selectedTool = ToolsDAO.getInstance().getTool(id);
             new TelaCadastroFerramentas(selectedTool, ScreenSelectionType.SCREEN_TYPE_EDIT).setVisible(true);
         } catch (IndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(null, "Selecione Uma Ferramenta Primeiro");
+            JOptionPane.showMessageDialog(null, "Voce deve selecionar uma ferramenta");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -168,7 +168,7 @@ public class ScreenAmigos extends ScreenModel {
             FriendModel selectedFriend = FriendsDAO.getInstance().getFriend(id);
             new TelaCadastroAmigos(selectedFriend, ScreenSelectionType.SCREEN_TYPE_EDIT).setVisible(true);
         } catch (IndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(null, "Selecione Um Amigo Primeiro");
+            JOptionPane.showMessageDialog(null, "Voce deve selecionar um amigo.");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.getMessage());

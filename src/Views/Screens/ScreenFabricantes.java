@@ -163,7 +163,7 @@ public class ScreenFabricantes extends ScreenModel {
             ManufacturerModel selectedManufacturer = ManufacturerDAO.getInstance().getManufacturer(id);
             new TelaCadastroFabricantes(selectedManufacturer, ScreenSelectionType.SCREEN_TYPE_EDIT).setVisible(true);
         } catch (IndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(null, "Selecione Um Fabricante Primeiro");
+            JOptionPane.showMessageDialog(null, "Voce deve selecionar um fabricante");
         } catch (Exception e) {
             e.printStackTrace();
         }
