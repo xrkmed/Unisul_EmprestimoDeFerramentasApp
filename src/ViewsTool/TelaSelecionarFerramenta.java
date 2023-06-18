@@ -372,6 +372,9 @@ public class TelaSelecionarFerramenta extends javax.swing.JFrame {
 
                 model.addRow(data);
             }
+            if(model.getRowCount() == 0){
+            JOptionPane.showMessageDialog(null, "nenhuma ferramenta para emprestar :(");
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
