@@ -342,9 +342,10 @@ public class TelaCadastroAmigos extends javax.swing.JFrame {
                 for (Object[] data : datas) {
                     mensagem += data[0] + " " + data[1] + " " + data[2] + " " + data[3] + " " + data[4] + " " + data[5] + " " + data[6] + " " + data[7] + "\n";
                     JOptionPane.showMessageDialog(null, mensagem);
-                    return;
                 }
-                JOptionPane.showMessageDialog(null, "não tem imprestimos ativos");
+				if(datas.size() == 0){
+					JOptionPane.showMessageDialog(null, "Nao existem emprestimos em aberto para este amigo!");
+				}
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }

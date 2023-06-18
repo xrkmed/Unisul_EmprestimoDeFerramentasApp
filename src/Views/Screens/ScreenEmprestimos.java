@@ -168,7 +168,7 @@ public class ScreenEmprestimos extends ScreenModel {
             LoanModel selectedLoan = LoansDAO.getInstance().getLoan(id);
             new TelaCadastroEmprestimo(selectedLoan, ScreenSelectionType.SCREEN_TYPE_EDIT).setVisible(true);
         } catch (IndexOutOfBoundsException e) {
-            JOptionPane.showMessageDialog(null, "Selecione um Empréstimo Primeiro");
+            JOptionPane.showMessageDialog(null, "Voce deve selecionar um empréstimo");
         } catch (Exception e) {
             e.printStackTrace();
         }
