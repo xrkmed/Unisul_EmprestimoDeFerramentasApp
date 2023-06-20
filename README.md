@@ -1,7 +1,9 @@
 # Projeto A3: Sistema de Empréstimo de Ferramentas
-<center>
+<div align="center" style="display: flex; flex-wrap: nowrap">
   <img src="https://cdn.iconscout.com/icon/free/png-256/java-60-1174953.png"  alt="Java logo"><img src="https://cdn.iconscout.com/icon/free/png-256/free-mysql-21-1174941.png?f=webp&w=256" alt="MySQL logo">
+</div>
 <br>
+<center>
 Este projeto é um sistema de empréstimo de ferramentas desenvolvido em Java e integrado com o banco de dados MySQL. Ele permite que os usuários cadastrem e gerenciem empréstimos de ferramentas, mantendo um registro organizado e acessível.</center>
 
 ## 🚀 Funcionamento
