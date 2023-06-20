@@ -45,7 +45,7 @@ git clone https://github.com/xrkmed/Unisul_EmprestimoDeFerramentasApp.git
 
 5. Configure as credenciais de acesso ao banco de dados no arquivo `config.properties`.
 
-6. Compile e execute a aplicação Java utilizando a sua IDE favorita ou através do comando:
+6. Compile e execute a aplicação Java utilizando a sua IDE favorita
 
 7. Agora você pode interagir com o sistema.
 
